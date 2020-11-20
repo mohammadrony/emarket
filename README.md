@@ -32,5 +32,6 @@ cd ../shop && npm run serve
 ```
 ### now this database and shop is available in you local server
 ### now open a browser and go to the link
-```http://localhost:8080```
+```
+http://localhost:8080```
 ## your shop server is live now
