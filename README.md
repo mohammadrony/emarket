@@ -8,7 +8,7 @@ CREATE DATABASE mydb
 ```
 git clone https://github.com/mohammadrony29/TopShop.git
 ```
-### check database configuration file for user password and database
+### check database configuration file for user, password and database
 ```
 cat database/src/config/config.js
 ```
