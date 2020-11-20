@@ -2,7 +2,7 @@
 A Vue js / Express js E-commerce application with MySQL in backend.
 ### install mysql server on your desktop
 ```
-create a database named mydb
+CREATE DATABASE mydb
 ``` 
 ### check the user, password, and database name from
 ```
