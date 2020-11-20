@@ -9,93 +9,12 @@
 		"isAdmin": true
 	},
 	{
-		"username": "Wilson",
-		"firstName": "T",
-		"lastName": "G",
-		"email": "at@Maurismolestiepharetra.com",
-		"password": "93603872",
-		"address": "United Kingdom (Great Britain)",
-		"isAdmin": false
-	},
-	{
-		"username": "Gardner",
-		"firstName": "H",
-		"lastName": "L",
-		"email": "amet@Inornare.co.uk",
-		"password": "45236001",
-		"address": "Bhutan",
-		"isAdmin": false
-	},
-	{
-		"username": "Gross",
-		"firstName": "Q",
-		"lastName": "P",
-		"email": "at.fringilla.purus@Vivamusnonlorem.net",
-		"password": "03080763",
-		"address": "Libya",
-		"isAdmin": false
-	},
-	{
-		"username": "Pugh",
-		"firstName": "H",
-		"lastName": "R",
-		"email": "magna.malesuada.vel@auctorveliteget.co.uk",
-		"password": "23912808",
-		"address": "Albania",
-		"isAdmin": false
-	},
-	{
-		"username": "Casey",
-		"firstName": "R",
-		"lastName": "M",
-		"email": "euismod@eu.ca",
-		"password": "54865916",
-		"address": "Saint Lucia",
-		"isAdmin": false
-	},
-	{
-		"username": "Montoya",
-		"firstName": "P",
-		"lastName": "W",
-		"email": "pede.Cum@massalobortisultrices.org",
-		"password": "69992700",
-		"address": "Maldives",
-		"isAdmin": false
-	},
-	{
-		"username": "Barnett",
-		"firstName": "O",
-		"lastName": "J",
-		"email": "Ut.tincidunt@ultricesDuisvolutpat.net",
-		"password": "29586920",
-		"address": "Mali",
-		"isAdmin": false
-	},
-	{
-		"username": "Ingram",
-		"firstName": "K",
-		"lastName": "P",
-		"email": "quis.tristique@ametornare.com",
-		"password": "56700134",
-		"address": "Cameroon",
-		"isAdmin": false
-	},
-	{
-		"username": "Acosta",
-		"firstName": "Q",
-		"lastName": "D",
-		"email": "mi.tempor@convallisantelectus.net",
-		"password": "62754269",
-		"address": "Colombia",
-		"isAdmin": false
-	},
-	{
-		"username": "Guerra",
-		"firstName": "V",
-		"lastName": "Q",
-		"email": "cursus.Nunc.mauris@atfringillapurus.com",
-		"password": "61670820",
-		"address": "Northern Mariana Islands",
+		"username": "ronyku",
+		"firstName": "Md.",
+		"lastName": "Rony",
+		"email": "rony@gmail.com",
+		"password": "12345678",
+		"address": "Dhaka, Bangladesh",
 		"isAdmin": false
 	}
 ]

@@ -8,5 +8,15 @@
         "UserId": 1,
         "ProductId": 2,
         "quantity": 1
+    },
+    {
+        "UserId": 2,
+        "ProductId": 3,
+        "quantity": 3
+    },
+    {
+        "UserId": 2,
+        "ProductId": 4,
+        "quantity": 2
     }
 ]
