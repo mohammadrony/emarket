@@ -2,11 +2,12 @@
 A Vue js / Express js E-commerce application with MySQL in backend.
 ### To run this project
 ### install mysql server on your desktop
-`create a database named mydb` 
+`
+create a database named mydb
+` 
 ### check the user, password, and database name from
 
 `cat database/src/config/config.js`
-### and modify this as you need
 ### now clone this repository on your file system
 `git clone https://github.com/mohammadrony29/TopShop.git`
 ### install server dependencies 
