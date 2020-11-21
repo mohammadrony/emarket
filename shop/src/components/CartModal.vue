@@ -25,12 +25,12 @@
       <div v-for="product in cartProducts" :key="product.id">
         <b-row>
           <b-col cols="3">
-            <img class="product-image" :src="product.image" alt="No Image" />
+            <img class="product-image" :src="product.Product.image" alt="No Image" />
           </b-col>
           <b-col cols="3">
-            {{ product.title }}
+            {{ product.Product.title }}
           </b-col>
-          <b-col cols="2"> {{ product.price * product.quantity }}৳ </b-col>
+          <b-col cols="2"> {{ product.Product.price * product.quantity }}৳ </b-col>
           <b-col cols="4">
             <div class="quantity-style">
               <b-button size="sm" variant="primary" @click="product.quantity++"
@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       cartProducts: null,
-      emptyCart: true
+      emptyCart: true,
     };
   },
   computed: {
@@ -77,14 +77,8 @@ export default {
   async mounted() {
     if (this.user != null) {
       try {
-        const cartProducts = (
-          await AddToCartService.getAllCartProduct({
-            userId: this.user.id,
-          })
-        ).data;
-        this.cartProducts = cartProducts;
-        if(this.cartProducts == null) this.emptyCart = true
-        else this.emptyCart = false
+        this.cartProducts = (await AddToCartService.getAllCartProduct()).data;
+        this.emptyCart = !this.cartProducts
       } catch (err) {
         console.log(err)
       }

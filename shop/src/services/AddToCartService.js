@@ -1,8 +1,8 @@
 import Api from "./Api"
 
 export default {
-    getAllCartProduct(credentials) {
-        return Api().get('cart/allProduct', {params: credentials})
+    getAllCartProduct() {
+        return Api().get('cart/allProduct')
     },
     getCartProduct(credentials) {
         return Api().get('cart/product', {params: credentials})
@@ -10,7 +10,7 @@ export default {
     addToCart(cartProduct) {
         return Api().post('cart/product', cartProduct)
     },
-    remove(cartProductId) {
-        return Api().delete(`cart/product/${cartProductId}`)
+    remove(productId) {
+        return Api().delete(`cart/product/${productId}`)
     }
 }

@@ -112,7 +112,6 @@
 </template>
 
 <script>
-import { fbase, fstore } from "../../firebase.js";
 export default {
   name: "AProfile",
   data() {
@@ -126,27 +125,7 @@ export default {
       }
     };
   },
-
-  firestore() {
-    var user = fbase.auth().currentUser;
-    return {
-      fstoreProfile: fstore.collection("profiles").doc(user.uid)
-    };
-  },
-
   methods: {
-    updateStoreProfile() {
-      const localProfile = this.fstoreProfile;
-      this.$firestore.fstoreProfile.update(localProfile);
-      this.$bvToast.toast("User Profile Updated Successfully", {
-        title: "Update",
-        variant: "dark",
-        toaster: "b-toaster-top-center",
-        noCloseButton: true,
-        solid: true
-      });
-    },
-
     updateSecretProfile() {
       console.log("authenticated profile update.");
     }

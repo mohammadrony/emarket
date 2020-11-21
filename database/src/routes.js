@@ -1,3 +1,4 @@
+const isAuthenticated = require('./policies/isAuthenticated')
 const CartsController = require("./controllers/CartsController")
 const ProductsController = require("./controllers/ProductsController")
 const AuthenticationController = require("./controllers/AuthenticationController")
@@ -22,11 +23,15 @@ module.exports = (app) => {
         ProductsController.deleteProduct)
     
     app.get("/cart/allProduct",
+        isAuthenticated,
         CartsController.getAllCartProduct)
     app.get("/cart/product",
+        isAuthenticated,
         CartsController.getCartProduct)
     app.post("/cart/product",
+        isAuthenticated,
         CartsController.addToCart)
-    app.delete("/cart/product/:cartProductId",
+    app.delete("/cart/product/:productId",
+        isAuthenticated,
         CartsController.remove)
 }

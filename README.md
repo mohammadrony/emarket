@@ -1,6 +1,7 @@
 # vue2-mysql-shop
 A Vue js / Express js E-commerce application with MySQL in backend.
-### install mysql server on your desktop
+At first install MySQL server in your pc
+### now create a database from mysql command prompt
 ```
 CREATE DATABASE mydb
 ``` 
@@ -14,7 +15,7 @@ cat database/src/config/config.js
 ```
 ### install server dependencies 
 ```
-cd TopShop/database && npm install
+cd database && npm install
 ```
 ### relative path from database folder
 ```
@@ -24,12 +25,11 @@ cd ../shop && npm install
 ```
 cd ../database && npm start
 ```
-### now all data will synchronize with the shop server properly
+### in another terminal run the following code
 ```
-cd ../shop && npm run serve
+cd shop && npm run serve
 ```
-### now open a browser and go to the link
+### change the directory in your way. consider it as a hint
 ```
 http://localhost:8080
 ```
-# your shop server is live now

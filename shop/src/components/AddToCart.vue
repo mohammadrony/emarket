@@ -35,20 +35,17 @@ export default {
       addedToCart: false,
       productName: this.title,
       productId: this.id,
-      productPrice: this.price,
-      cartProductId: null
+      productPrice: this.price
     };
   },
   async mounted() {
     if (this.user != null) {
       const cartProduct = (
         await AddToCartService.getCartProduct({
-          userId: this.user.id,
           productId: this.id
         })
       ).data;
       this.addedToCart = !!cartProduct;
-      if (cartProduct) this.cartProductId = cartProduct.id;
     }
   },
   methods: {
@@ -62,7 +59,6 @@ export default {
             })
           ).data;
           this.addedToCart = !!cartProduct;
-          if (cartProduct) this.cartProductId = cartProduct.id;
         } catch (err) {
           console.log(err);
         }
@@ -78,10 +74,9 @@ export default {
     },
     async remove() {
       try {
-        const cartProduct = (await AddToCartService.remove(this.cartProductId))
+        const cartProduct = (await AddToCartService.remove(this.id))
           .data;
         this.addedToCart = !cartProduct;
-        this.cartProductId = null;
       } catch (err) {
         console.log(err);
       }
