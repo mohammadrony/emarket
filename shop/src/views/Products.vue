@@ -58,52 +58,21 @@
         @input="pagination(paginate.currentPage)"
       ></b-pagination>
 
-      <b-modal
-        id="productDetails"
-        size="lg"
-        hide-footer
-        hide-header
-        hide-header-close
-      >
-        <div>
-          <carousel :perPage="1">
-            <slide>
-              <b-img
-                :src="product.image"
-                class="details-image"
-                width="765"
-              ></b-img>
-            </slide>
-          </carousel>
-          <b-container>
-            <b-row class="mt-2 d-flex justify-content-between" align-v="center">
-              <h2>{{ product.title }}</h2>
-              <h6>Price: {{ product.price }} taka</h6>
-            </b-row>
-            <b-row class="mt-2">
-              <b-badge variant="dark">{{ product.tags }}</b-badge>
-            </b-row>
-          </b-container>
-          <hr />
-          <div class="mt-2">
-            <h6>Description</h6>
-            <hr />
-            <p v-html="product.description"></p>
-          </div>
-        </div>
-      </b-modal>
+      <ProductDetails :product="product" />
     </b-container>
   </div>
 </template>
 
 <script>
 import AddToCart from "@/components/AddToCart.vue";
+import ProductDetails from "@/components/Modal/ProductDetails.vue";
 import ProductsService from "../services/ProductsService";
 
 export default {
   name: "Products",
   components: {
-    AddToCart
+    AddToCart,
+    ProductDetails,
   },
 
   data() {
@@ -117,8 +86,8 @@ export default {
       paginate: {
         currentPage: 1,
         perPage: 10,
-        rows: 1
-      }
+        rows: 1,
+      },
     };
   },
 
@@ -134,13 +103,12 @@ export default {
   methods: {
     search() {
       this.showSpinner = true;
-      const values = this.allProducts.filter(val => {
+      const values = this.allProducts.filter((val) => {
         return (
           val.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
           val.description
             .toLowerCase()
             .includes(this.searchText.toLowerCase()) ||
-          // val.price.toLowerCase().includes(this.searchText.toLowerCase()) ||
           val.tags.toLowerCase().includes(this.searchText.toLowerCase()) ||
           val.catagory.toLowerCase().includes(this.searchText.toLowerCase()) ||
           val.subCatagory.toLowerCase().includes(this.searchText.toLowerCase())
@@ -156,7 +124,6 @@ export default {
       this.pagination(currentPage);
     },
     showModal(doc) {
-      console.log(doc);
       this.product = doc;
       this.$bvModal.show("productDetails");
     },
@@ -167,8 +134,8 @@ export default {
         start,
         start + this.paginate.perPage
       );
-    }
-  }
+    },
+  },
 };
 </script>
 

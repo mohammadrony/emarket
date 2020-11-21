@@ -235,15 +235,13 @@
 
       <!-- Delete Confirmation Modal -->
       <!-- <b-container>
-                <b-modal id="deleteConfirmModal" hide-footer size="md" centered title="Are you sure?">
-
-                <div class="justify-content-center m-6">
-                    <b-button size="md" class="mr-3" variant="danger" @click="deleteConfirmed(product)">Yes, delete it!</b-button>
-                    <b-button size="md" variant="outline-primary" @click="notDeleteConfirmed(product)">Cancel</b-button>
-                </div>
-                
-                </b-modal>
-            </b-container> -->
+        <b-modal id="deleteConfirmModal" hide-footer size="md" centered title="Are you sure?">
+        <div class="justify-content-center m-6">
+          <b-button size="md" class="mr-3" variant="danger" @click="deleteConfirmed(product)">Yes, delete it!</b-button>
+          <b-button size="md" variant="outline-primary" @click="notDeleteConfirmed(product)">Cancel</b-button>
+        </div>
+        </b-modal>
+      </b-container> -->
     </b-container>
   </div>
 </template>
@@ -254,12 +252,10 @@ import { VueEditor } from "vue2-editor";
 export default {
   name: "AProducts",
   components: {
-    VueEditor
+    VueEditor,
   },
   data() {
     return {
-      // imported from products
-      // to display all product as a table and search product
       product: {},
       allProducts: null,
       displayProducts: null,
@@ -268,11 +264,8 @@ export default {
       paginate: {
         currentPage: 1,
         perPage: 15,
-        rows: 1
+        rows: 1,
       },
-
-      // this variables was in here
-      // working on the modal
       showSpinner: null,
       properties: {
         title: "",
@@ -281,14 +274,14 @@ export default {
         tags: "",
         image: "",
         catagory: "",
-        subCatagory: ""
+        subCatagory: "",
       },
       fields: ["Image", "Name", "Price (in taka)", "Edit/Delete"],
       products: {},
       mode: "",
       activeItem: "",
       error: null,
-      required: value => !!value || "Required."
+      required: (value) => !!value || "Required.",
     };
   },
 
@@ -311,7 +304,7 @@ export default {
       this.error = null;
 
       const requiredFieldsFilledIn = Object.keys(this.properties).every(
-        key => !!this.properties[key]
+        (key) => !!this.properties[key]
       );
 
       if (!requiredFieldsFilledIn) {
@@ -327,7 +320,7 @@ export default {
           variant: "dark",
           toaster: "b-toaster-top-center",
           noCloseButton: true,
-          solid: true
+          solid: true,
         });
       } catch (err) {
         console.log(err);
@@ -344,7 +337,7 @@ export default {
     async saveChanges() {
       this.error = null;
       const requiredFieldsFilledIn = Object.keys(this.properties).every(
-        key => !!this.properties[key]
+        (key) => !!this.properties[key]
       );
 
       if (!requiredFieldsFilledIn) {
@@ -360,7 +353,7 @@ export default {
           variant: "dark",
           toaster: "b-toaster-top-center",
           noCloseButton: true,
-          solid: true
+          solid: true,
         });
       } catch (err) {
         console.log(err);
@@ -376,7 +369,7 @@ export default {
           variant: "dark",
           toaster: "b-toaster-top-center",
           noCloseButton: true,
-          solid: true
+          solid: true,
         });
       } catch (err) {
         console.log(err);
@@ -394,13 +387,12 @@ export default {
     },
     search() {
       this.showSpinner = true;
-      const values = this.allProducts.filter(val => {
+      const values = this.allProducts.filter((val) => {
         return (
           val.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
           val.description
             .toLowerCase()
             .includes(this.searchText.toLowerCase()) ||
-          // val.price.toLowerCase().includes(this.searchText.toLowerCase()) ||
           val.tags.toLowerCase().includes(this.searchText.toLowerCase()) ||
           val.catagory.toLowerCase().includes(this.searchText.toLowerCase()) ||
           val.subCatagory.toLowerCase().includes(this.searchText.toLowerCase())
@@ -423,8 +415,8 @@ export default {
         start,
         start + this.paginate.perPage
       );
-    }
-  }
+    },
+  },
 };
 </script>
 

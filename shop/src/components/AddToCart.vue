@@ -19,7 +19,7 @@
 
 <script>
 import { mapState } from "vuex";
-import AddToCartService from "../services/AddToCartService";
+import AddToCartService from "@/services/AddToCartService";
 export default {
   name: "AddToCart",
   props: {

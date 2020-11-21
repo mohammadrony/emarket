@@ -61,10 +61,10 @@
 </template>
 
 <script>
-import Login from "./Login";
-import Register from "./Register";
-import CartModal from "./CartModal";
-import store from "../store";
+import Login from "./Modal/Login";
+import Register from "./Modal/Register";
+import CartModal from "./Modal/CartModal";
+import store from "@/store";
 
 export default {
   name: "TopHeader",
