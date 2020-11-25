@@ -4,9 +4,11 @@ module.exports = (sequelize , DataTypes) => {
         description:    DataTypes.TEXT,
         price:          DataTypes.INTEGER,
         tags:           DataTypes.STRING,
-        image:          DataTypes.STRING,
-        catagory:       DataTypes.STRING,
-        subCatagory:    DataTypes.STRING
+        image:          DataTypes.STRING
     })
+    Product.associate = function (models) {
+        Product.belongsTo(models.Category)
+        Product.belongsTo(models.SubCategory)
+    }
     return Product
 }

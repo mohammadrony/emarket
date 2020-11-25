@@ -9,6 +9,8 @@ const sequelize = new Sequelize(config.db.database, config.db.user, config.db.pa
 
 const db = {}
 db.User = require("./User")(sequelize, Sequelize.DataTypes);
+db.Category = require("./Category")(sequelize, Sequelize.DataTypes);
+db.SubCategory = require("./SubCategory")(sequelize, Sequelize.DataTypes);
 db.Product = require("./Product")(sequelize, Sequelize.DataTypes);
 db.Cart = require("./Cart")(sequelize, Sequelize.DataTypes);
 

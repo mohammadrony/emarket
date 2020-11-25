@@ -1,0 +1,34 @@
+[
+    {
+        "name": "First SubCategory",
+        "CategoryId": 1
+    },
+    {
+        "name": "Second SubCategory",
+        "CategoryId": 1
+    },
+    {
+        "name": "Third SubCategory",
+        "CategoryId": 2
+    },
+    {
+        "name": "Forth SubCategory",
+        "CategoryId": 2
+    },
+    {
+        "name": "Fifth SubCategory",
+        "CategoryId": 3
+    },
+    {
+        "name": "Sixth SubCategory",
+        "CategoryId": 3
+    },
+    {
+        "name": "Seventh SubCategory",
+        "CategoryId": 4
+    },
+    {
+        "name": "Eighth SubCategory",
+        "CategoryId": 4
+    }
+]

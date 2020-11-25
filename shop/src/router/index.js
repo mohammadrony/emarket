@@ -1,15 +1,16 @@
+import Test from "@/components/ProductCategorySidebar.vue";
 import Vue from "vue";
-import store from "../store"
+import store from "@/store"
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Products from "../views/Products.vue";
-import UserProfile from "../views/UserProfile.vue";
-import AboutUs from "../views/AboutUs.vue";
-import Admin from "../views/Admin.vue";
-import AOverview from "../views/AdminChildren/AOverview.vue";
-import AProducts from "../views/AdminChildren/AProducts.vue";
-import AOrders from "../views/AdminChildren/AOrders.vue";
-import AProfile from "../views/AdminChildren/AProfile.vue";
+import Home from "@/views/Home.vue";
+import Products from "@/views/Products.vue";
+import UserProfile from "@/views/UserProfile.vue";
+import AboutUs from "@/views/AboutUs.vue";
+import Admin from "@/views/Admin.vue";
+import AOverview from "@/views/AdminChildren/AOverview.vue";
+import AProducts from "@/views/AdminChildren/AProducts.vue";
+import AOrders from "@/views/AdminChildren/AOrders.vue";
+import AProfile from "@/views/AdminChildren/AProfile.vue";
 
 Vue.use(VueRouter);
 
@@ -18,6 +19,11 @@ const routes = [
     path: "/",
     name: "home",
     component: Home
+  },
+  {
+    path: "/test",
+    name: "test",
+    component: Test
   },
   {
     path: "/products",

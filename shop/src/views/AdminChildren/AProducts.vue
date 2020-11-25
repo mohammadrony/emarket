@@ -1,6 +1,6 @@
 <template>
-  <div class="a-products">
-    <b-container>
+  <div>
+    <!-- <b-container>
       <b-row align-v="center">
         <b-col>
           <h3>Products Page</h3>
@@ -14,44 +14,46 @@
         </b-col>
       </b-row>
       <hr />
-    </b-container>
-    <b-container class="mt-4">
-      <div>
-        <b-container>
-          <b-row>
-            <b-col cols="5">
-              <b-form-input
-                size="md"
-                class="mr-sm-2"
-                placeholder="Search here..."
-                v-model="searchText"
-                @keyup.enter="search"
-              >
-              </b-form-input>
-            </b-col>
-            <b-col cols="4">
-              <b-pagination
-                class=""
-                size="md"
-                v-model="paginate.currentPage"
-                :total-rows="paginate.rows"
-                :per-page="paginate.perPage"
-                @input="pagination(paginate.currentPage)"
-              ></b-pagination>
-            </b-col>
-            <b-col cols="3">
-              <b-button
-                @click="addProductModal"
-                block
-                size="md"
-                class="mb-3"
-                variant="primary"
-              >
-                Add Product
-              </b-button>
-            </b-col>
-          </b-row>
-        </b-container>
+    </b-container> -->
+    
+    <b-row>
+      <b-col cols="3">
+        <ProductCategorySidebar />
+      </b-col>
+      <b-col cols="8">
+        <b-row>
+          <b-col cols="5">
+            <b-form-input
+              size="md"
+              class="mr-sm-2"
+              placeholder="Search here..."
+              v-model="searchText"
+              @keyup.enter="search"
+            >
+            </b-form-input>
+          </b-col>
+          <b-col cols="4">
+            <b-pagination
+              class=""
+              size="md"
+              v-model="paginate.currentPage"
+              :total-rows="paginate.rows"
+              :per-page="paginate.perPage"
+              @input="pagination(paginate.currentPage)"
+            ></b-pagination>
+          </b-col>
+          <b-col cols="3">
+            <b-button
+              @click="addProductModal"
+              block
+              size="md"
+              class="mb-3"
+              variant="primary"
+            >
+              Add Product
+            </b-button>
+          </b-col>
+        </b-row>
 
         <div class="table-responsive">
           <hr />
@@ -116,143 +118,135 @@
         <div class="m-4 d-flex justify-content-center" v-if="showSpinner">
           <b-spinner variant="primary"></b-spinner>
         </div>
-      </div>
+      </b-col>
+    </b-row>
 
-      <!-- create or edit product modal -->
-      <div>
-        <b-modal
-          id="product-details"
-          size="xl"
-          hide-footer
-          title="Product Details"
-        >
-          <b-container>
-            <b-row>
-              <b-col cols="7">
-                <div class="form-group">
-                  <b-form-input
-                    required
-                    :rules="[required]"
-                    class="mb-2 mr-sm-2 mb-sm-0"
-                    placeholder="Products name"
-                    v-model="properties.title"
-                  >
-                  </b-form-input>
-                </div>
-                <div class="form-group">
-                  <vue-editor
-                    required
-                    :rules="[required]"
-                    v-model="properties.description"
-                  >
-                  </vue-editor>
-                </div>
-              </b-col>
-              <b-col cols="5">
-                <div class="form-group">
-                  <b-form-input
-                    required
-                    :rules="[required]"
-                    class="mb-2 mr-sm-2 mb-sm-0"
-                    placeholder="Add price"
-                    v-model="properties.price"
-                  >
-                  </b-form-input>
-                </div>
-                <div class="mb-3">
-                  <b-form-input
-                    required
-                    :rules="[required]"
-                    class="mb-2 mr-sm-2 mb-sm-0"
-                    placeholder="Add tag"
-                    v-model="properties.tags"
-                  >
-                  </b-form-input>
-                </div>
-                <b-row class="mb-3">
-                  <b-col>
-                    <b-form-input
-                      required
-                      :rules="[required]"
-                      v-model="properties.catagory"
-                      placeholder="Catagory"
-                    >
-                    </b-form-input>
-                  </b-col>
-                  <b-col>
-                    <b-form-input
-                      required
-                      :rules="[required]"
-                      v-model="properties.subCatagory"
-                      placeholder="Sub Catagory"
-                    >
-                    </b-form-input>
-                  </b-col>
-                </b-row>
-
-                <template>
-                  <b-form-input
-                    required
-                    :rules="[required]"
-                    v-model="properties.image"
-                    placeholder="Image URL"
-                  ></b-form-input>
-                </template>
-
-                <div class="form-group d-flex mt-1">
-                  <img width="80px" :src="properties.image" />
-                </div>
-              </b-col>
-            </b-row>
-            <div class="form-group">
-              <div
-                class="danger-alert d-flex justify-content-center mb-3"
-                v-if="error"
-              >
-                {{ error }}
+    <!-- create or edit product modal -->
+    <div>
+      <b-modal
+        id="product-details"
+        size="xl"
+        hide-footer
+        title="Product Details"
+      >
+        <b-container>
+          <b-row>
+            <b-col cols="7">
+              <div class="form-group">
+                <b-form-input
+                  required
+                  :rules="[required]"
+                  class="mb-2 mr-sm-2 mb-sm-0"
+                  placeholder="Products name"
+                  v-model="properties.title"
+                >
+                </b-form-input>
               </div>
-              <b-button
-                v-if="mode == 'create'"
-                @click="createProduct"
-                block
-                variant="primary"
-              >
-                Create Product
-              </b-button>
+              <div class="form-group">
+                <vue-editor
+                  required
+                  :rules="[required]"
+                  v-model="properties.description"
+                >
+                </vue-editor>
+              </div>
+            </b-col>
+            <b-col cols="5">
+              <div class="form-group">
+                <b-form-input
+                  required
+                  :rules="[required]"
+                  class="mb-2 mr-sm-2 mb-sm-0"
+                  placeholder="Add price"
+                  v-model="properties.price"
+                >
+                </b-form-input>
+              </div>
+              <div class="mb-3">
+                <b-form-input
+                  required
+                  :rules="[required]"
+                  class="mb-2 mr-sm-2 mb-sm-0"
+                  placeholder="Add tag"
+                  v-model="properties.tags"
+                >
+                </b-form-input>
+              </div>
+              <b-row class="mb-3">
+                <b-col>
+                  <b-form-input
+                    required
+                    :rules="[required]"
+                    v-model="properties.catagory"
+                    placeholder="Catagory"
+                  >
+                  </b-form-input>
+                </b-col>
+                <b-col>
+                  <b-form-input
+                    required
+                    :rules="[required]"
+                    v-model="properties.subCatagory"
+                    placeholder="Sub Catagory"
+                  >
+                  </b-form-input>
+                </b-col>
+              </b-row>
 
-              <b-button
-                v-if="mode == 'edit'"
-                @click="saveChanges"
-                block
-                variant="primary"
-              >
-                Apply Changes
-              </b-button>
+              <template>
+                <b-form-input
+                  required
+                  :rules="[required]"
+                  v-model="properties.image"
+                  placeholder="Image URL"
+                ></b-form-input>
+              </template>
+
+              <div class="form-group d-flex mt-1">
+                <img width="80px" :src="properties.image" />
+              </div>
+            </b-col>
+          </b-row>
+          <div class="form-group">
+            <div
+              class="danger-alert d-flex justify-content-center mb-3"
+              v-if="error"
+            >
+              {{ error }}
             </div>
-          </b-container>
-        </b-modal>
-      </div>
+            <b-button
+              v-if="mode == 'create'"
+              @click="createProduct"
+              block
+              variant="primary"
+            >
+              Create Product
+            </b-button>
 
-      <!-- Delete Confirmation Modal -->
-      <!-- <b-container>
-        <b-modal id="deleteConfirmModal" hide-footer size="md" centered title="Are you sure?">
-        <div class="justify-content-center m-6">
-          <b-button size="md" class="mr-3" variant="danger" @click="deleteConfirmed(product)">Yes, delete it!</b-button>
-          <b-button size="md" variant="outline-primary" @click="notDeleteConfirmed(product)">Cancel</b-button>
-        </div>
-        </b-modal>
-      </b-container> -->
-    </b-container>
+            <b-button
+              v-if="mode == 'edit'"
+              @click="saveChanges"
+              block
+              variant="primary"
+            >
+              Apply Changes
+            </b-button>
+          </div>
+        </b-container>
+      </b-modal>
+    </div>
   </div>
 </template>
 <script>
-import ProductsService from "../../services/ProductsService";
+import ProductsService from "@/services/ProductsService";
+import ProductCategorySidebar from "../../components/ProductCategorySidebar.vue";
 import { VueEditor } from "vue2-editor";
 
 export default {
   name: "AProducts",
   components: {
     VueEditor,
+    ProductCategorySidebar,
   },
   data() {
     return {
@@ -398,7 +392,6 @@ export default {
           val.subCatagory.toLowerCase().includes(this.searchText.toLowerCase())
         );
       });
-      console.log(values);
       this.displayProducts = values;
       this.showSpinner = false;
       this.updatePagination(values, 1);
