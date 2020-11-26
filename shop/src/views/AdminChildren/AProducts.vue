@@ -177,7 +177,7 @@
                   <b-form-input
                     required
                     :rules="[required]"
-                    v-model="properties.catagory"
+                    v-model="properties.CategoryId"
                     placeholder="Catagory"
                   >
                   </b-form-input>
@@ -186,7 +186,7 @@
                   <b-form-input
                     required
                     :rules="[required]"
-                    v-model="properties.subCatagory"
+                    v-model="properties.SubCategoryId"
                     placeholder="Sub Catagory"
                   >
                   </b-form-input>
@@ -238,6 +238,7 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 import ProductsService from "@/services/ProductsService";
 import ProductCategorySidebar from "../../components/ProductCategorySidebar.vue";
 import { VueEditor } from "vue2-editor";
@@ -252,7 +253,6 @@ export default {
     return {
       product: {},
       allProducts: null,
-      displayProducts: null,
       showProducts: {},
       searchText: "",
       paginate: {
@@ -267,8 +267,8 @@ export default {
         price: 0,
         tags: "",
         image: "",
-        catagory: "",
-        subCatagory: "",
+        CategoryId: 0,
+        SubCategoryId: 0,
       },
       fields: ["Image", "Name", "Price (in taka)", "Edit/Delete"],
       products: {},
@@ -278,13 +278,18 @@ export default {
       required: (value) => !!value || "Required.",
     };
   },
+  computed: {
+    ...mapState(["displayProducts"])
+  },
 
   async mounted() {
     this.showSpinner = true;
     this.allProducts = (await ProductsService.getAllProducts()).data;
     this.showProducts = this.allProducts;
     this.paginate.rows = this.showProducts.length;
-    this.displayProducts = this.allProducts.slice(0, this.paginate.perPage);
+    const displayProducts = this.allProducts.slice(0, this.paginate.perPage);
+    this.$store.dispatch("setAllProducts", this.allProducts)
+    this.$store.dispatch("setDisplayProducts", displayProducts)
     this.showSpinner = false;
   },
 
@@ -376,8 +381,8 @@ export default {
       this.properties.price = 0;
       this.properties.tags = "";
       this.properties.image = "";
-      this.properties.catagory = "";
-      this.properties.subCatagory = "";
+      this.properties.CategoryId = 0;
+      this.properties.SubCategoryId = 0;
     },
     search() {
       this.showSpinner = true;
@@ -387,12 +392,11 @@ export default {
           val.description
             .toLowerCase()
             .includes(this.searchText.toLowerCase()) ||
-          val.tags.toLowerCase().includes(this.searchText.toLowerCase()) ||
-          val.catagory.toLowerCase().includes(this.searchText.toLowerCase()) ||
-          val.subCatagory.toLowerCase().includes(this.searchText.toLowerCase())
+          val.tags.toLowerCase().includes(this.searchText.toLowerCase()) 
         );
       });
-      this.displayProducts = values;
+      const displayProducts = values;
+      this.$store.dispatch("setDisplayProducts", displayProducts)
       this.showSpinner = false;
       this.updatePagination(values, 1);
     },
@@ -404,10 +408,11 @@ export default {
     pagination(currentPage) {
       this.paginate.currentPage = currentPage;
       const start = (currentPage - 1) * this.paginate.perPage;
-      this.displayProducts = this.showProducts.slice(
+      const displayProducts = this.showProducts.slice(
         start,
         start + this.paginate.perPage
       );
+      this.$store.dispatch("setDisplayProducts", displayProducts)
     },
   },
 };

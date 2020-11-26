@@ -31,12 +31,15 @@
             >
 
             <div class="cart-icon">
-              <b-icon-cart2
-                v-b-modal.cart-products-modal
+              <b-button
+                to="/my-cart"
                 v-if="$store.state.userLoggedIn"
                 font-scale="1.5"
                 class="mr-2"
-              ></b-icon-cart2>
+                variant="info"
+              >
+              <b-icon-cart2></b-icon-cart2>
+              </b-button>
             </div>
             <b-nav-item-dropdown v-if="$store.state.userLoggedIn" right>
               <template #button-content>
@@ -55,7 +58,6 @@
 
       <Login />
       <Register />
-      <CartModal />
     </b-navbar>
   </div>
 </template>
@@ -63,12 +65,11 @@
 <script>
 import Login from "./Modal/Login";
 import Register from "./Modal/Register";
-import CartModal from "./Modal/CartModal";
 import store from "@/store";
 
 export default {
   name: "TopHeader",
-  components: { Login, Register, CartModal },
+  components: { Login, Register },
   data() {
     return {
       shop: store.state.shop

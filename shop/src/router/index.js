@@ -6,6 +6,8 @@ import Home from "@/views/Home.vue";
 import Products from "@/views/Products.vue";
 import UserProfile from "@/views/UserProfile.vue";
 import AboutUs from "@/views/AboutUs.vue";
+import MyCart from "@/views/MyCart.vue";
+import Checkout from "@/views/Checkout.vue";
 import Admin from "@/views/Admin.vue";
 import AOverview from "@/views/AdminChildren/AOverview.vue";
 import AProducts from "@/views/AdminChildren/AProducts.vue";
@@ -39,6 +41,16 @@ const routes = [
     path: "/about",
     name: "about-page",
     component: AboutUs
+  },
+  {
+    path: "/my-cart",
+    name: "my-cart",
+    component: MyCart
+  },
+  {
+    path: "/checkout",
+    name: "checkout",
+    component: Checkout
   },
   {
     path: "/admin",

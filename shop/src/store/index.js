@@ -4,7 +4,7 @@ import createPersistedState from "vuex-persistedstate"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  strict: true,
+  strict: false,
   plugins: [
     createPersistedState()
   ],
@@ -12,7 +12,6 @@ export default new Vuex.Store({
     shop: {
       name: "TopShop"
     },
-    
 
     //User
     token: null,
@@ -20,10 +19,11 @@ export default new Vuex.Store({
     admin: false,
     userLoggedIn: false,
 
+    //products
+    allProducts: null,
+    displayProducts: null
   },
   mutations: {
-
-
     //User
     SET_TOKEN(state, token) {
       state.token = token
@@ -40,17 +40,31 @@ export default new Vuex.Store({
       } else {
         state.admin = false
       }
+    },
+
+    //products
+    SET_ALL_PRODUCTS(state, allProducts) {
+      state.allProducts = allProducts
+    },
+    SET_DISPLAY_PRODUCTS(state, displayProducts) {
+      state.displayProducts = displayProducts
     }
   },
   actions: {
-
-
     //User
     setToken({commit}, token) {
       commit('SET_TOKEN', token)
     },
     setUser({commit}, user) {
       commit('SET_USER', user)
+    },
+
+    //products
+    setAllProducts({commit}, allProducts){
+      commit('SET_ALL_PRODUCTS', allProducts)
+    },
+    setDisplayProducts({commit}, displayProducts){
+      commit('SET_DISPLAY_PRODUCTS', displayProducts)
     }
   },
   modules: {}

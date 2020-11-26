@@ -6,10 +6,10 @@
     </div>
     <ul>
       <li v-for="category in categoryList" :key="category.id">
-        <a href="#">{{category.name}}</a>
+        <a @click="categorySelect(category)">{{category.name}}</a>
         <ul>
           <li v-for="(subCategory,index) in subCategoryList" :key="index">
-            <a href="#" v-if="category.id == subCategory.CategoryId">{{subCategory.name}}</a>
+            <a @click="subCategorySelect(subCategory)" v-if="category.id == subCategory.CategoryId">{{subCategory.name}}</a>
           </li>
         </ul>
       </li>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import CategoryService from "../services/CategoryService";
 import SubCategoryService from "../services/SubCategoryService";
 
@@ -30,11 +31,38 @@ export default {
       subCategoryList: null,
     }
   },
+  computed: {
+    ...mapState(["allProducts"])
+  },
+
   async mounted() {
     this.showSpinner = true;
     this.categoryList = (await CategoryService.getCategoryList()).data;
     this.subCategoryList = (await SubCategoryService.getSubCategoryList()).data;
     this.showSpinner = false;
+  },
+  methods: {
+    subCategorySelect(subCategory) {
+
+      const values = this.allProducts.filter((val) => {
+        return (
+          (val.CategoryId == subCategory.CategoryId) &&
+          (val.SubCategoryId == subCategory.id)
+        );
+      });
+      const displayProducts = values;
+      this.$store.dispatch("setDisplayProducts", displayProducts)
+
+    },
+    categorySelect(category) {
+
+      const values = this.allProducts.filter((val) => {
+        return (val.CategoryId == category.id);
+      });
+      const displayProducts = values;
+      this.$store.dispatch("setDisplayProducts", displayProducts)
+
+    }
   }
 };
 </script>
@@ -50,18 +78,18 @@ export default {
 .admin-product-catagory {
   height: 100%;
   left: 0;
-  background: #1b1b1b;
+  background: #292121;
   .text {
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
-    line-height: 65px;
+    line-height: 40px;
     text-align: center;
     background: #1e1e1e;
     letter-spacing: 1px;
   }
   ul {
-    background: #1b1b1b;
+    background: #2c2323;
     height: 100%;
     width: 100%;
     list-style: none;
@@ -69,17 +97,17 @@ export default {
       position: static;
       li {
         position: relative;
-        line-height: 42px;
+        line-height: 25px;
         border-bottom: none;
         a {
-          font-size: 17px;
+          font-size: 15px;
           color: #e6e6e6;
           padding-left: 80px;
         }
       }
     }
     li {
-      line-height: 60px;
+      line-height: 40px;
       border-bottom: 1px solid rgba(255,255,255,0.1);
       a {
         position: relative;

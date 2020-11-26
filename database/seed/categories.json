@@ -1,17 +1,22 @@
 [
     {
+        "id": 1,
         "name": "First Category"
     },
     {
+        "id": 2,
         "name": "Second Category"
     },
     {
+        "id": 3,
         "name": "Third Category"
     },
     {
+        "id": 4,
         "name": "Forth Category"
     },
     {
+        "id": 5,
         "name": "Fifth Category"
     }
 ]

@@ -44,6 +44,7 @@ module.exports = {
     try {
       userId = req.user.id
       productId = req.body.productId
+      quantity = req.body.quantity
       const cartProduct = await Cart.findOne({
         where: {
           UserId: userId,
@@ -57,7 +58,8 @@ module.exports = {
       }
       const newCartProduct = await Cart.create({
         UserId: userId,
-        ProductId: productId
+        ProductId: productId,
+        quantity: quantity
       })
       res.send(newCartProduct)
     } catch (err) {

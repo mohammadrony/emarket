@@ -55,7 +55,8 @@ export default {
           const cartProduct = (
             await AddToCartService.addToCart({
               userId: this.user.id,
-              productId: this.id
+              productId: this.id,
+              quantity: 1
             })
           ).data;
           this.addedToCart = !!cartProduct;
@@ -73,6 +74,7 @@ export default {
       }
     },
     async remove() {
+      console.log(this.id)
       try {
         const cartProduct = (await AddToCartService.remove(this.id))
           .data;

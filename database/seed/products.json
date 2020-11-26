@@ -5,8 +5,8 @@
         "price": 100,
         "tags": "tags",
         "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "catagory": "catagory",
-        "subCatagory": "subCatagory"
+        "CategoryId": 1,
+        "SubCategoryId": 1
     },
     {
         "title": "two",
@@ -14,8 +14,8 @@
         "price": 200,
         "tags": "tags",
         "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "catagory": "catagory",
-        "subCatagory": "subCatagory"
+        "CategoryId": 1,
+        "SubCategoryId": 2
     },
     {
         "title": "three",
@@ -23,8 +23,8 @@
         "price": 300,
         "tags": "tags",
         "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "catagory": "catagory",
-        "subCatagory": "subCatagory"
+        "CategoryId": 2,
+        "SubCategoryId": 3
     },
     {
         "title": "four",
@@ -32,8 +32,8 @@
         "price": 400,
         "tags": "tags",
         "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "catagory": "catagory",
-        "subCatagory": "subCatagory"
+        "CategoryId": 2,
+        "SubCategoryId": 4
     },
     {
         "title": "five",
@@ -41,8 +41,8 @@
         "price": 500,
         "tags": "tags",
         "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "catagory": "catagory",
-        "subCatagory": "subCatagory"
+        "CategoryId": 3,
+        "SubCategoryId": 5
     },
     {
         "title": "six",
@@ -50,7 +50,61 @@
         "price": 600,
         "tags": "tags",
         "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "catagory": "catagory",
-        "subCatagory": "subCatagory"
+        "CategoryId": 3,
+        "SubCategoryId": 6
+    },
+    {
+        "title": "seven",
+        "description": "first description",
+        "price": 100,
+        "tags": "tags",
+        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+        "CategoryId": 4,
+        "SubCategoryId": 7
+    },
+    {
+        "title": "eight",
+        "description": "second description",
+        "price": 200,
+        "tags": "tags",
+        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+        "CategoryId": 4,
+        "SubCategoryId": 8
+    },
+    {
+        "title": "nine",
+        "description": "third description",
+        "price": 300,
+        "tags": "tags",
+        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+        "CategoryId": 1,
+        "SubCategoryId": 1
+    },
+    {
+        "title": "ten",
+        "description": "forth description",
+        "price": 400,
+        "tags": "tags",
+        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+        "CategoryId": 1,
+        "SubCategoryId": 2
+    },
+    {
+        "title": "eleven",
+        "description": "fifth description",
+        "price": 500,
+        "tags": "tags",
+        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+        "CategoryId": 2,
+        "SubCategoryId": 3
+    },
+    {
+        "title": "twelve",
+        "description": "sixth description",
+        "price": 600,
+        "tags": "tags",
+        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+        "CategoryId": 2,
+        "SubCategoryId": 4
     }
 ]

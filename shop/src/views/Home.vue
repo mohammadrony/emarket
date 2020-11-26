@@ -83,28 +83,22 @@
       </b-row>
     </b-container>
 
-    <div class="footer mt-5">
-      <h1>Footer</h1>
-      <h1>Footer</h1>
-      <h1>Footer</h1>
-      <h1>Footer</h1>
-      <h1>Footer</h1>
-      <h1>Footer</h1>
-      <h1>Footer</h1>
-    </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import AddToCart from "@/components/AddToCart.vue";
+import Footer from "@/components/Footer.vue";
 import ProductDetails from "@/components/Modal/ProductDetails.vue";
 import ProductsService from "../services/ProductsService";
 export default {
   name: "Home",
   components: {
     AddToCart, 
-    ProductDetails
+    ProductDetails,
+    Footer
   },
   data() {
     return {
@@ -135,10 +129,6 @@ export default {
 }
 .first-element {
   background-color: #bebdbd;
-}
-.footer {
-  color: white;
-  background-color: darkslategray;
 }
 .spinner {
   height: 100%;

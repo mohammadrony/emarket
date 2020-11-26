@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import AddToCart from "@/components/AddToCart.vue";
 import ProductDetails from "@/components/Modal/ProductDetails.vue";
 import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
@@ -87,7 +88,6 @@ export default {
       showSpinner: null,
       product: {},
       allProducts: null,
-      displayProducts: null,
       showProducts: {},
       searchText: "",
       paginate: {
@@ -97,14 +97,18 @@ export default {
       },
     };
   },
-  
+  computed: {
+    ...mapState(["displayProducts"])
+  },
 
   async mounted() {
     this.showSpinner = true;
     this.allProducts = (await ProductsService.getAllProducts()).data;
     this.showProducts = this.allProducts;
     this.paginate.rows = this.showProducts.length;
-    this.displayProducts = this.allProducts.slice(0, this.paginate.perPage);
+    const displayProducts = this.allProducts.slice(0, this.paginate.perPage);
+    this.$store.dispatch("setAllProducts", this.allProducts)
+    this.$store.dispatch("setDisplayProducts", displayProducts)
     this.showSpinner = false;
   },
   methods: {
@@ -116,12 +120,12 @@ export default {
           val.description
             .toLowerCase()
             .includes(this.searchText.toLowerCase()) ||
-          val.tags.toLowerCase().includes(this.searchText.toLowerCase()) ||
-          val.catagory.toLowerCase().includes(this.searchText.toLowerCase()) ||
-          val.subCatagory.toLowerCase().includes(this.searchText.toLowerCase())
+          val.tags.toLowerCase().includes(this.searchText.toLowerCase())
         );
       });
-      this.displayProducts = values;
+      const displayProducts = values;
+      this.$store.dispatch("setDisplayProducts", displayProducts)
+
       this.showSpinner = false;
       this.updatePagination(values, 1);
     },
@@ -137,10 +141,12 @@ export default {
     pagination(currentPage) {
       this.paginate.currentPage = currentPage;
       const start = (currentPage - 1) * this.paginate.perPage;
-      this.displayProducts = this.showProducts.slice(
+      const displayProducts = this.showProducts.slice(
         start,
         start + this.paginate.perPage
       );
+      this.$store.dispatch("setDisplayProducts", displayProducts)
+
     },
   },
 };
