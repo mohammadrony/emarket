@@ -1,6 +1,5 @@
 <template>
   <div class="login">
-    <b-modal size="md" id="login-modal" hide-footer hide-header-close centered title="Sign in to Explore">
       <div class="tab-content" id="pills-tabContent">
       
         <div class="tab-pane fade show active" id="pills-signin" role="tabpanel" aria-labelledby="pills-signin-tab">
@@ -17,7 +16,6 @@
           </div>
         </div>
       </div>
-    </b-modal>
   </div>
 </template>
 

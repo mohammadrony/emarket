@@ -1,13 +1,5 @@
 <template>
   <div class="register">
-    <b-modal
-      size="lg"
-      id="register-modal"
-      hide-footer
-      hide-header-close
-      centered
-      title="Sign up to Explore"
-    >
       <div class="tab-content" id="pills-tabContent">
         <div
           class="tab-pane fade show active"
@@ -50,7 +42,6 @@
           </div>
         </div>
       </div>
-    </b-modal>
   </div>
 </template>
 

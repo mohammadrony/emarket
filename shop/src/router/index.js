@@ -4,7 +4,9 @@ import store from "@/store"
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Products from "@/views/Products.vue";
-import UserProfile from "@/views/UserProfile.vue";
+import Login from "@/views/UserControl/Login.vue";
+import Register from "@/views/UserControl/Register.vue";
+import UserProfile from "@/views/UserControl/UserProfile.vue";
 import AboutUs from "@/views/AboutUs.vue";
 import MyCart from "@/views/MyCart.vue";
 import Checkout from "@/views/Checkout.vue";
@@ -31,6 +33,16 @@ const routes = [
     path: "/products",
     name: "products",
     component: Products
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: Register
   },
   {
     path: "/user-profile",

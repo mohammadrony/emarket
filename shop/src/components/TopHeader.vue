@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div>
     <b-navbar toggleable="sm" type="dark" variant="info">
       <b-navbar-brand to="/">{{ shop.name }}</b-navbar-brand>
 
@@ -12,67 +12,57 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <b-nav-form @submit.prevent>
-            <b-button
-              v-if="!$store.state.userLoggedIn"
-              type="submit"
-              v-b-modal.login-modal
-              variant="outline-dark"
-              >Log in</b-button
-            >
+          <b-button
+            to="/login"
+            v-if="!$store.state.userLoggedIn"
+            variant="outline-dark"
+            >Log in</b-button
+          >
 
-            <b-button
-              v-if="!$store.state.userLoggedIn"
-              class="ml-2"
-              type="submit"
-              v-b-modal.register-modal
-              variant="dark"
-              >Register</b-button
-            >
+          <b-button
+            to="/register"
+            v-if="!$store.state.userLoggedIn"
+            class="ml-2"
+            variant="dark"
+            >Register</b-button
+          >
 
-            <div class="cart-icon">
-              <b-button
-                to="/my-cart"
-                v-if="$store.state.userLoggedIn"
-                font-scale="1.5"
-                class="mr-2"
-                variant="info"
-              >
+          <div class="cart-icon">
+            <b-button
+              to="/my-cart"
+              v-if="$store.state.userLoggedIn"
+              font-scale="1.5"
+              class="mr-2"
+              variant="info"
+            >
               <b-icon-cart2></b-icon-cart2>
-              </b-button>
-            </div>
-            <b-nav-item-dropdown v-if="$store.state.userLoggedIn" right>
-              <template #button-content>
-                <em>{{ $store.state.user.username }}</em>
-              </template>
-              <b-dropdown-item variant="info" to="/user-profile"
-                >Profile</b-dropdown-item
-              >
-              <b-dropdown-item variant="info" @click="logout()"
-                >Log Out</b-dropdown-item
-              >
-            </b-nav-item-dropdown>
-          </b-nav-form>
+            </b-button>
+          </div>
+          <b-nav-item-dropdown v-if="$store.state.userLoggedIn" right>
+            <template #button-content>
+              <em>{{ $store.state.user.username }}</em>
+            </template>
+            <b-dropdown-item variant="info" to="/user-profile"
+              >Profile</b-dropdown-item
+            >
+            <b-dropdown-item variant="info" @click="logout()"
+              >Log Out</b-dropdown-item
+            >
+          </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
-
-      <Login />
-      <Register />
     </b-navbar>
   </div>
 </template>
 
 <script>
-import Login from "./Modal/Login";
-import Register from "./Modal/Register";
 import store from "@/store";
 
 export default {
   name: "TopHeader",
-  components: { Login, Register },
   data() {
     return {
-      shop: store.state.shop
+      shop: store.state.shop,
     };
   },
   methods: {
@@ -80,26 +70,15 @@ export default {
       this.$store.dispatch("setToken", null);
       this.$store.dispatch("setUser", null);
       // location.reload(true);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
-#nav {
-  padding: 0;
-  padding-bottom: 40px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #ffffff;
-    }
-  }
+#nav a.router-link-exact-active {
+    color: #ffffff;
 }
-
 .cart-icon:hover {
   cursor: pointer;
   color: navy;
