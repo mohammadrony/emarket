@@ -72,7 +72,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["user"])
+    ...mapState(["User/user"])
   },
   async mounted() {
     if (this.user != null) {

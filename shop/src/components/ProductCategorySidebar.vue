@@ -1,12 +1,15 @@
 <template>
   <div class="admin-product-catagory" align="left">
     <div class="text">Categories</div>
+    <div v-if="showSpinner">
+      <b-spinner variant="primary"></b-spinner>
+    </div>
     <ul>
       <li v-for="category in categoryList" :key="category.id">
         <a href="#">{{category.name}}</a>
         <ul>
           <li v-for="(subCategory,index) in subCategoryList" :key="index">
-            <a href="#" v-if="category.id == subCategory.cat_id">{{subCategory.name}}</a>
+            <a href="#" v-if="category.id == subCategory.CategoryId">{{subCategory.name}}</a>
           </li>
         </ul>
       </li>
@@ -15,72 +18,23 @@
 </template>
 
 <script>
+import CategoryService from "../services/CategoryService";
+import SubCategoryService from "../services/SubCategoryService";
+
 export default {
   name: "AdminProductCatagory",
   data() {
     return {
-      categoryList: [
-        {
-          id: 1,
-          name: "chair"
-        },
-        {
-          id: 2,
-          name: "book"
-        },
-        {
-          id: 3,
-          name: "laptop"
-        },
-      ],
-      subCategoryList: [
-        {
-          id: 1,
-          cat_id:1,
-          name: "chair1"
-        },
-        {
-          id:2,
-          cat_id:1,
-          name: "chair2"
-        },
-        {
-          id: 3,
-          cat_id:2,
-          name: "book1"
-        },
-        {
-          id: 4,
-          cat_id:1,
-          name: "chair3"
-        },
-        {
-          id:5,
-          cat_id:1,
-          name: "chair4"
-        },
-        {
-          id: 6,
-          cat_id:2,
-          name: "book2"
-        },
-        {
-          id: 7,
-          cat_id:3,
-          name: "laptop1"
-        },
-        {
-          id:8,
-          cat_id:3,
-          name: "laptop2"
-        },
-        {
-          id: 9,
-          cat_id:3,
-          name: "laptop3"
-        }
-      ]
+      showSpinner: null,
+      categoryList: null,
+      subCategoryList: null,
     }
+  },
+  async mounted() {
+    this.showSpinner = true;
+    this.categoryList = (await CategoryService.getCategoryList()).data;
+    this.subCategoryList = (await SubCategoryService.getSubCategoryList()).data;
+    this.showSpinner = false;
   }
 };
 </script>

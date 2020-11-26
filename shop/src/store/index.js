@@ -12,13 +12,19 @@ export default new Vuex.Store({
     shop: {
       name: "TopShop"
     },
-    cartProducts: null,
+    
+
+    //User
     token: null,
     user: null,
     admin: false,
     userLoggedIn: false,
+
   },
   mutations: {
+
+
+    //User
     SET_TOKEN(state, token) {
       state.token = token
       if(token) {
@@ -27,7 +33,6 @@ export default new Vuex.Store({
         state.userLoggedIn = false
       }
     },
-
     SET_USER(state, user) {
       state.user = user
       if(user != null){
@@ -35,20 +40,17 @@ export default new Vuex.Store({
       } else {
         state.admin = false
       }
-    },
-    SET_CART_PRODUCTS(state, cartProducts) {
-      state.cartProducts = cartProducts
     }
   },
   actions: {
+
+
+    //User
     setToken({commit}, token) {
       commit('SET_TOKEN', token)
     },
     setUser({commit}, user) {
       commit('SET_USER', user)
-    },
-    setCartProducts({commit}, cartProducts) {
-      commit('SET_CART_PRODUCTS', cartProducts)
     }
   },
   modules: {}

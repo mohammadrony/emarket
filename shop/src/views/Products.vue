@@ -97,6 +97,7 @@ export default {
       },
     };
   },
+  
 
   async mounted() {
     this.showSpinner = true;
@@ -105,7 +106,6 @@ export default {
     this.paginate.rows = this.showProducts.length;
     this.displayProducts = this.allProducts.slice(0, this.paginate.perPage);
     this.showSpinner = false;
-    this.$store.dispatch("setCartProducts", this.displayProducts);
   },
   methods: {
     search() {
