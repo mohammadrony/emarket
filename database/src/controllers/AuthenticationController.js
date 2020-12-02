@@ -1,4 +1,3 @@
-
 const {User} = require('../models')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
@@ -9,7 +8,6 @@ function jwtSignUser (user) {
         expiresIn: ONE_WEEK
     })
 }
-
 
 module.exports = {
     async register (req, res) {

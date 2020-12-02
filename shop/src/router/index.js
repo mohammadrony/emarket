@@ -5,6 +5,7 @@ import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Products from "@/views/Products.vue";
 import Login from "@/views/UserControl/Login.vue";
+import ForgetPassword from "@/views/UserControl/ForgetPassword.vue";
 import Register from "@/views/UserControl/Register.vue";
 import UserProfile from "@/views/UserControl/UserProfile.vue";
 import AboutUs from "@/views/AboutUs.vue";
@@ -38,6 +39,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login
+  },
+  {
+    path: "/forget-password",
+    name: "forget-password",
+    component: ForgetPassword
   },
   {
     path: "/register",
@@ -103,13 +109,13 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   const admin = store.state.admin;
-  if(requiresAuth && !admin){
+  if (requiresAuth && !admin) {
     next("/");
   }
-  else if( requiresAuth && admin){
+  else if (requiresAuth && admin) {
     next();
   }
-  else{
+  else {
     next();
   }
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TopHeader></TopHeader>
     <!-- <b-container>
       <b-row align-v="center">
         <b-col>
@@ -15,7 +16,7 @@
       </b-row>
       <hr />
     </b-container> -->
-    
+
     <b-row>
       <b-col cols="3">
         <ProductCategorySidebar />
@@ -97,6 +98,7 @@
             </b-row>
             <hr />
           </div>
+          ../..
         </div>
         <div>
           <b-pagination
@@ -240,12 +242,14 @@
 <script>
 import { mapState } from "vuex";
 import ProductsService from "@/services/ProductsService";
-import ProductCategorySidebar from "../../components/ProductCategorySidebar.vue";
+import TopHeader from "@/components/TopHeader.vue";
+import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
 import { VueEditor } from "vue2-editor";
 
 export default {
   name: "AProducts",
   components: {
+    TopHeader,
     VueEditor,
     ProductCategorySidebar,
   },
@@ -279,7 +283,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["displayProducts"])
+    ...mapState(["displayProducts"]),
   },
 
   async mounted() {
@@ -288,8 +292,8 @@ export default {
     this.showProducts = this.allProducts;
     this.paginate.rows = this.showProducts.length;
     const displayProducts = this.allProducts.slice(0, this.paginate.perPage);
-    this.$store.dispatch("setAllProducts", this.allProducts)
-    this.$store.dispatch("setDisplayProducts", displayProducts)
+    this.$store.dispatch("setAllProducts", this.allProducts);
+    this.$store.dispatch("setDisplayProducts", displayProducts);
     this.showSpinner = false;
   },
 
@@ -392,11 +396,11 @@ export default {
           val.description
             .toLowerCase()
             .includes(this.searchText.toLowerCase()) ||
-          val.tags.toLowerCase().includes(this.searchText.toLowerCase()) 
+          val.tags.toLowerCase().includes(this.searchText.toLowerCase())
         );
       });
       const displayProducts = values;
-      this.$store.dispatch("setDisplayProducts", displayProducts)
+      this.$store.dispatch("setDisplayProducts", displayProducts);
       this.showSpinner = false;
       this.updatePagination(values, 1);
     },
@@ -412,7 +416,7 @@ export default {
         start,
         start + this.paginate.perPage
       );
-      this.$store.dispatch("setDisplayProducts", displayProducts)
+      this.$store.dispatch("setDisplayProducts", displayProducts);
     },
   },
 };

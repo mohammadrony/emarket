@@ -4,13 +4,13 @@ import createPersistedState from "vuex-persistedstate"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  strict: false,
+  strict: true,
   plugins: [
     createPersistedState()
   ],
   state: {
     shop: {
-      name: "TopShop"
+      name: "UShop"
     },
 
     //User

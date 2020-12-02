@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TopHeader></TopHeader>
     <b-row>
       <b-col cols="3">
         <ProductCategorySidebar />
@@ -18,24 +19,26 @@
         </div>
         <b-container v-for="(doc, index) in displayProducts" :key="index">
           <b-row class="item-background mt-4" align-v="center">
-            <b-col
-              ><h3>{{ index + 1 }}</h3></b-col
-            >
-            <b-col cols="2">
+            <b-col cols="3">
               <b-img
                 left
                 rounded
                 :src="doc.image"
-                style="width: 10rem"
+                class="product-image"
+                @click="showModal(doc)"
                 alt="image not added"
               ></b-img>
             </b-col>
-            <b-col class="mt-4" cols="6">
+            <b-col cols="2">
               <h4>{{ doc.title }}</h4>
+            </b-col>
+            <b-col cols="4">
               <p v-html="doc.description"></p>
             </b-col>
-            <b-col cols="3">
-              <h6>Price: {{ doc.price }}৳</h6>
+            <b-col cols="1">
+              <h6>{{ doc.price }}৳</h6>
+            </b-col>
+            <b-col>
               <AddToCart
                 :id="doc.id"
                 :title="doc.title"
@@ -70,6 +73,7 @@
 
 <script>
 import { mapState } from "vuex";
+import TopHeader from "@/components/TopHeader.vue";
 import AddToCart from "@/components/AddToCart.vue";
 import ProductDetails from "@/components/Modal/ProductDetails.vue";
 import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
@@ -78,6 +82,7 @@ import ProductsService from "../services/ProductsService";
 export default {
   name: "Products",
   components: {
+    TopHeader,
     AddToCart,
     ProductDetails,
     ProductCategorySidebar,
@@ -98,7 +103,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["displayProducts"])
+    ...mapState(["displayProducts"]),
   },
 
   async mounted() {
@@ -107,14 +112,14 @@ export default {
     this.showProducts = this.allProducts;
     this.paginate.rows = this.showProducts.length;
     const displayProducts = this.allProducts.slice(0, this.paginate.perPage);
-    this.$store.dispatch("setAllProducts", this.allProducts)
-    this.$store.dispatch("setDisplayProducts", displayProducts)
+    this.$store.dispatch("setAllProducts", this.allProducts);
+    this.$store.dispatch("setDisplayProducts", displayProducts);
     this.showSpinner = false;
   },
   methods: {
     search() {
       this.showSpinner = true;
-      const values = this.allProducts.filter((val) => {
+      const values = this.allProducts.filter(val => {
         return (
           val.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
           val.description
@@ -124,7 +129,7 @@ export default {
         );
       });
       const displayProducts = values;
-      this.$store.dispatch("setDisplayProducts", displayProducts)
+      this.$store.dispatch("setDisplayProducts", displayProducts);
 
       this.showSpinner = false;
       this.updatePagination(values, 1);
@@ -145,8 +150,7 @@ export default {
         start,
         start + this.paginate.perPage
       );
-      this.$store.dispatch("setDisplayProducts", displayProducts)
-
+      this.$store.dispatch("setDisplayProducts", displayProducts);
     },
   },
 };
@@ -161,5 +165,9 @@ export default {
 }
 .details-image {
   max-height: 30rem;
+}
+.product-image {
+  height: 10rem;
+  width: 10rem;
 }
 </style>

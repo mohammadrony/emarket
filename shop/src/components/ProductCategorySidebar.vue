@@ -6,10 +6,14 @@
     </div>
     <ul>
       <li v-for="category in categoryList" :key="category.id">
-        <a @click="categorySelect(category)">{{category.name}}</a>
+        <a @click="categorySelect(category)">{{ category.name }}</a>
         <ul>
-          <li v-for="(subCategory,index) in subCategoryList" :key="index">
-            <a @click="subCategorySelect(subCategory)" v-if="category.id == subCategory.CategoryId">{{subCategory.name}}</a>
+          <li v-for="(subCategory, index) in subCategoryList" :key="index">
+            <a
+              @click="subCategorySelect(subCategory)"
+              v-if="category.id == subCategory.CategoryId"
+              >{{ subCategory.name }}</a
+            >
           </li>
         </ul>
       </li>
@@ -29,10 +33,10 @@ export default {
       showSpinner: null,
       categoryList: null,
       subCategoryList: null,
-    }
+    };
   },
   computed: {
-    ...mapState(["allProducts"])
+    ...mapState(["allProducts"]),
   },
 
   async mounted() {
@@ -43,27 +47,23 @@ export default {
   },
   methods: {
     subCategorySelect(subCategory) {
-
       const values = this.allProducts.filter((val) => {
         return (
-          (val.CategoryId == subCategory.CategoryId) &&
-          (val.SubCategoryId == subCategory.id)
+          val.CategoryId == subCategory.CategoryId &&
+          val.SubCategoryId == subCategory.id
         );
       });
       const displayProducts = values;
-      this.$store.dispatch("setDisplayProducts", displayProducts)
-
+      this.$store.dispatch("setDisplayProducts", displayProducts);
     },
     categorySelect(category) {
-
       const values = this.allProducts.filter((val) => {
-        return (val.CategoryId == category.id);
+        return val.CategoryId == category.id;
       });
       const displayProducts = values;
-      this.$store.dispatch("setDisplayProducts", displayProducts)
-
-    }
-  }
+      this.$store.dispatch("setDisplayProducts", displayProducts);
+    },
+  },
 };
 </script>
 
@@ -108,7 +108,7 @@ export default {
     }
     li {
       line-height: 40px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       a {
         position: relative;
         color: white;
@@ -128,5 +128,4 @@ export default {
     }
   }
 }
-
 </style>

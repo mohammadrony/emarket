@@ -1,7 +1,7 @@
 <template>
-  <div class="">
+  <div id="footer">
     <div class="footer mt-5">
-      <!-- <p>Copyright 2020</p> -->
+      <p>Copyright 2020</p>
     </div>
   </div>
 </template>
@@ -13,8 +13,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.footer {
-  color: white;
-  background-color: darkslategray;
+#footer {
+   bottom: 0px;
 }
 </style>

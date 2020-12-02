@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-4" id="nav">
     <b-navbar toggleable="sm" type="dark" variant="info">
       <b-navbar-brand to="/">{{ shop.name }}</b-navbar-brand>
 
@@ -12,25 +12,14 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
-          <b-button
-            to="/login"
-            v-if="!$store.state.userLoggedIn"
-            variant="outline-dark"
+          <b-button to="/login" v-if="!userLoggedIn" variant="outline-light"
             >Log in</b-button
-          >
-
-          <b-button
-            to="/register"
-            v-if="!$store.state.userLoggedIn"
-            class="ml-2"
-            variant="dark"
-            >Register</b-button
           >
 
           <div class="cart-icon">
             <b-button
               to="/my-cart"
-              v-if="$store.state.userLoggedIn"
+              v-if="userLoggedIn"
               font-scale="1.5"
               class="mr-2"
               variant="info"
@@ -38,9 +27,12 @@
               <b-icon-cart2></b-icon-cart2>
             </b-button>
           </div>
-          <b-nav-item-dropdown v-if="$store.state.userLoggedIn" right>
+          <b-nav-item-dropdown v-if="userLoggedIn" right>
             <template #button-content>
-              <em>{{ $store.state.user.username }}</em>
+              <em v-if="user.username">{{ user.username }}</em>
+              <em v-if="!user.username"
+                >{{ user.firstName }} {{ user.lastName }}</em
+              >
             </template>
             <b-dropdown-item variant="info" to="/user-profile"
               >Profile</b-dropdown-item
@@ -56,28 +48,35 @@
 </template>
 
 <script>
-import store from "@/store";
+import { mapState } from "vuex";
 
 export default {
   name: "TopHeader",
   data() {
-    return {
-      shop: store.state.shop,
-    };
+    return {};
   },
+  computed: {
+    ...mapState(["user", "userLoggedIn", "shop"]),
+  },
+
   methods: {
     logout() {
       this.$store.dispatch("setToken", null);
       this.$store.dispatch("setUser", null);
-      // location.reload(true);
+      window.location.replace("/login");
+      location.reload(true);
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-#nav a.router-link-exact-active {
+#nav {
+  padding: 0;
+  margin: 0;
+  a.router-link-exact-active {
     color: #ffffff;
+  }
 }
 .cart-icon:hover {
   cursor: pointer;

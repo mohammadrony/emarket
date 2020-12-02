@@ -1,5 +1,6 @@
 <template>
   <div class="a-orders">
+    <TopHeader></TopHeader>
     <b-container>
       <b-row align-v="center">
         <b-col md="6">
@@ -20,8 +21,12 @@
 </template>
 
 <script>
+import TopHeader from "@/components/TopHeader.vue";
 export default {
-  name: "AOrders"
+  name: "AOrders",
+  components: {
+    TopHeader
+  }
 };
 </script>
 

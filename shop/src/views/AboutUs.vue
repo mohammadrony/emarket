@@ -1,12 +1,17 @@
 <template>
   <div class="aboutpage">
+    <TopHeader></TopHeader>
     <h1>About Us</h1>
   </div>
 </template>
 
 <script>
+import TopHeader from "@/components/TopHeader.vue";
 export default {
-  name: "AboutUs"
+  name: "AboutUs",
+  components: {
+    TopHeader
+  }
 };
 </script>
 

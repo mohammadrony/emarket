@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TopHeader></TopHeader>
     <b-container class="first-element">
       <b-row align-v="center">
         <b-col md="6" class="left-align">
@@ -89,13 +90,15 @@
 
 <script>
 // @ is an alias to /src
+import TopHeader from "@/components/TopHeader.vue";
 import AddToCart from "@/components/AddToCart.vue";
 import Footer from "@/components/Footer.vue";
 import ProductDetails from "@/components/Modal/ProductDetails.vue";
-import ProductsService from "../services/ProductsService";
+import ProductsService from "@/services/ProductsService";
 export default {
   name: "Home",
   components: {
+    TopHeader,
     AddToCart, 
     ProductDetails,
     Footer

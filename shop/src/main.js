@@ -3,7 +3,7 @@ import App from "./App.vue"
 import router from "./router"
 import store from "./store"
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import {sync} from 'vuex-router-sync'
+import { sync } from 'vuex-router-sync'
 import VueCarousel from 'vue-carousel'
 
 sync(store, router)
