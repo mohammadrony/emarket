@@ -44,7 +44,7 @@
                 :title="doc.title"
                 :price="doc.price"
               ></AddToCart>
-              <b-button class="m-2" @click="showModal(doc)" variant="info"
+              <b-button class="m-2" @click="setDisplayProduct(doc)" variant="info"
                 >Details</b-button
               >
             </b-col>
@@ -59,10 +59,10 @@
         <b-pagination
           class="mt-4"
           size="lg"
-          v-model="paginate.currentPage"
-          :total-rows="paginate.rows"
-          :per-page="paginate.perPage"
-          @input="pagination(paginate.currentPage)"
+          v-model="currentPage"
+          :total-rows="apCount"
+          :per-page="perPage"
+          @input="paginate(currentPage)"
         ></b-pagination>
 
         <ProductDetails :product="product" />
@@ -77,7 +77,7 @@ import TopHeader from "@/components/TopHeader.vue";
 import AddToCart from "@/components/AddToCart.vue";
 import ProductDetails from "@/components/Modal/ProductDetails.vue";
 import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
-import ProductsService from "../services/ProductsService";
+// import ProductsService from "../services/ProductsService";
 
 export default {
   name: "Products",
@@ -92,66 +92,37 @@ export default {
     return {
       showSpinner: null,
       product: {},
-      allProducts: null,
-      showProducts: {},
       searchText: "",
-      paginate: {
-        currentPage: 1,
-        perPage: 10,
-        rows: 1,
-      },
+      currentPage: 1,
+
     };
   },
   computed: {
-    ...mapState(["displayProducts"]),
+    ...mapState({
+      allProduct: state => state.Product.allProduct,
+      apCount: state => state.Product.apCount,
+      displayProducts: state => state.Product.displayProducts,
+      perPage: state => state.Product.perPage,
+      displayProduct: state => state.Product.displayProduct
+
+
+      
+    }),
   },
 
   async mounted() {
-    this.showSpinner = true;
-    this.allProducts = (await ProductsService.getAllProducts()).data;
-    this.showProducts = this.allProducts;
-    this.paginate.rows = this.showProducts.length;
-    const displayProducts = this.allProducts.slice(0, this.paginate.perPage);
-    this.$store.dispatch("setAllProducts", this.allProducts);
-    this.$store.dispatch("setDisplayProducts", displayProducts);
-    this.showSpinner = false;
+    this.$store.dispatch("Product/setAllProduct");
   },
   methods: {
     search() {
-      this.showSpinner = true;
-      const values = this.allProducts.filter(val => {
-        return (
-          val.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
-          val.description
-            .toLowerCase()
-            .includes(this.searchText.toLowerCase()) ||
-          val.tags.toLowerCase().includes(this.searchText.toLowerCase())
-        );
-      });
-      const displayProducts = values;
-      this.$store.dispatch("setDisplayProducts", displayProducts);
-
-      this.showSpinner = false;
-      this.updatePagination(values, 1);
+    this.$store.dispatch("Product/searchProduct", { text: this.searchText });
     },
-    updatePagination(showProducts, currentPage) {
-      this.showProducts = showProducts;
-      this.paginate.rows = showProducts.length;
-      this.pagination(currentPage);
+    setDisplayProduct(displayProduct) {
+      this.$store.dispatch("setDisplayProduct", displayProduct)
     },
-    showModal(doc) {
-      this.product = doc;
-      this.$bvModal.show("productDetails");
-    },
-    pagination(currentPage) {
-      this.paginate.currentPage = currentPage;
-      const start = (currentPage - 1) * this.paginate.perPage;
-      const displayProducts = this.showProducts.slice(
-        start,
-        start + this.paginate.perPage
-      );
-      this.$store.dispatch("setDisplayProducts", displayProducts);
-    },
+    paginate(currentPage){
+      this.$store.dispatch("Product/paginate", currentPage); 
+    }
   },
 };
 </script>

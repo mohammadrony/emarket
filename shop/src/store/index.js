@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate"
+import {ProductModule} from "./Product.js";
+import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -18,10 +19,6 @@ export default new Vuex.Store({
     user: null,
     admin: false,
     userLoggedIn: false,
-
-    //products
-    allProducts: null,
-    displayProducts: null
   },
   mutations: {
     //User
@@ -41,14 +38,6 @@ export default new Vuex.Store({
         state.admin = false
       }
     },
-
-    //products
-    SET_ALL_PRODUCTS(state, allProducts) {
-      state.allProducts = allProducts
-    },
-    SET_DISPLAY_PRODUCTS(state, displayProducts) {
-      state.displayProducts = displayProducts
-    }
   },
   actions: {
     //User
@@ -57,15 +46,9 @@ export default new Vuex.Store({
     },
     setUser({commit}, user) {
       commit('SET_USER', user)
-    },
-
-    //products
-    setAllProducts({commit}, allProducts){
-      commit('SET_ALL_PRODUCTS', allProducts)
-    },
-    setDisplayProducts({commit}, displayProducts){
-      commit('SET_DISPLAY_PRODUCTS', displayProducts)
     }
   },
-  modules: {}
+  modules: {
+    Product: ProductModule
+  }
 });
