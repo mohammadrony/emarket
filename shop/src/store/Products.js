@@ -1,6 +1,7 @@
 import ProductsService from "../services/ProductsService";
+import {ProductsView} from "./ProductsView.js";
 
-export const ProductModule = {
+export const ProductsModule = {
   namespaced: true,
 
   state: {
@@ -59,6 +60,9 @@ export const ProductModule = {
     },
 
   },
+  modules: {
+    ProductsView: ProductsView
+  }
 
 
 }

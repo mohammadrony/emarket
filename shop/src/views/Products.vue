@@ -99,11 +99,11 @@ export default {
   },
   computed: {
     ...mapState({
-      allProduct: state => state.Product.allProduct,
-      apCount: state => state.Product.apCount,
-      displayProducts: state => state.Product.displayProducts,
-      perPage: state => state.Product.perPage,
-      displayProduct: state => state.Product.displayProduct
+      allProduct: state => state.Products.allProduct,
+      apCount: state => state.Products.apCount,
+      displayProducts: state => state.Products.displayProducts,
+      perPage: state => state.Products.perPage,
+      displayProduct: state => state.Products.displayProduct
 
 
       
@@ -111,17 +111,17 @@ export default {
   },
 
   async mounted() {
-    this.$store.dispatch("Product/setAllProduct");
+    this.$store.dispatch("Products/setAllProduct");
   },
   methods: {
     search() {
-    this.$store.dispatch("Product/searchProduct", { text: this.searchText });
+    this.$store.dispatch("Products/searchProduct", { text: this.searchText });
     },
     setDisplayProduct(displayProduct) {
       this.$store.dispatch("setDisplayProduct", displayProduct)
     },
     paginate(currentPage){
-      this.$store.dispatch("Product/paginate", currentPage); 
+      this.$store.dispatch("Products/paginate", currentPage); 
     }
   },
 };
