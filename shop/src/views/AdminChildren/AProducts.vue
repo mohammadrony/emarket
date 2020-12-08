@@ -1,22 +1,6 @@
 <template>
   <div>
     <TopHeader></TopHeader>
-    <!-- <b-container>
-      <b-row align-v="center">
-        <b-col>
-          <h3>Products Page</h3>
-          <p>
-            Control your products visibility from here. Any product could
-            create, read, update, delete from this page.
-          </p>
-        </b-col>
-        <b-col>
-          <img src="/img/svg/products.svg" alt="" width="300" />
-        </b-col>
-      </b-row>
-      <hr />
-    </b-container> -->
-
     <b-row>
       <b-col cols="3">
         <ProductCategorySidebar />
@@ -35,12 +19,13 @@
           </b-col>
           <b-col cols="4">
             <b-pagination
+              v-if="this.apCount != 0"
               class=""
               size="md"
-              v-model="paginate.currentPage"
-              :total-rows="paginate.rows"
-              :per-page="paginate.perPage"
-              @input="pagination(paginate.currentPage)"
+              v-model="currentPage"
+              :total-rows="apCount"
+              :per-page="perPage"
+              @input="paginate(currentPage)"
             ></b-pagination>
           </b-col>
           <b-col cols="3">
@@ -58,19 +43,21 @@
 
         <div class="table-responsive">
           <hr />
-          <b-row>
-            <b-col> </b-col>
-            <b-col>
-              <strong>Name</strong>
-            </b-col>
-            <b-col>
-              <strong>Price</strong>
-            </b-col>
-            <b-col>
-              <strong>Modify</strong>
-            </b-col>
-          </b-row>
-          <hr />
+          <div v-if="this.apCount != 0">
+            <b-row>
+              <b-col> </b-col>
+              <b-col>
+                <strong>Name</strong>
+              </b-col>
+              <b-col>
+                <strong>Price</strong>
+              </b-col>
+              <b-col>
+                <strong>Modify</strong>
+              </b-col>
+            </b-row>
+            <hr />
+          </div>
 
           <div v-for="product in displayProducts" :key="product.id">
             <b-row>
@@ -98,19 +85,19 @@
             </b-row>
             <hr />
           </div>
-          ../..
         </div>
-        <div>
-          <b-pagination
-            class=""
-            size="lg"
-            v-model="paginate.currentPage"
-            :total-rows="paginate.rows"
-            :per-page="paginate.perPage"
-            @input="pagination(paginate.currentPage)"
-          ></b-pagination>
+        <div class="m-4 d-flex justify-content-center" v-if="this.apCount == 0">
+          <h3>Nothing found for this keyword.</h3>
         </div>
-
+        <b-pagination
+          v-if="this.apCount != 0"
+          class=""
+          size="lg"
+          v-model="currentPage"
+          :total-rows="apCount"
+          :per-page="perPage"
+          @input="paginate(currentPage)"
+        ></b-pagination>
         <div
           class="m-4 d-flex justify-content-center"
           v-if="paginate.rows == 0"
@@ -259,11 +246,7 @@ export default {
       allProducts: null,
       showProducts: {},
       searchText: "",
-      paginate: {
-        currentPage: 1,
-        perPage: 15,
-        rows: 1,
-      },
+      currentPage: 1,
       showSpinner: null,
       properties: {
         title: "",
@@ -283,18 +266,17 @@ export default {
     };
   },
   computed: {
-    ...mapState(["displayProducts"]),
+    ...mapState({
+      allProduct: (state) => state.Products.allProduct,
+      apCount: (state) => state.Products.apCount,
+      displayProducts: (state) => state.Products.displayProducts,
+      perPage: (state) => state.Products.perPage,
+      displayProduct: (state) => state.Products.displayProduct,
+    }),
   },
 
   async mounted() {
-    this.showSpinner = true;
-    this.allProducts = (await ProductsService.getAllProducts()).data;
-    this.showProducts = this.allProducts;
-    this.paginate.rows = this.showProducts.length;
-    const displayProducts = this.allProducts.slice(0, this.paginate.perPage);
-    this.$store.dispatch("setAllProducts", this.allProducts);
-    this.$store.dispatch("setDisplayProducts", displayProducts);
-    this.showSpinner = false;
+    this.$store.dispatch("Products/setAllProduct");
   },
 
   methods: {
@@ -389,34 +371,13 @@ export default {
       this.properties.SubCategoryId = 0;
     },
     search() {
-      this.showSpinner = true;
-      const values = this.allProducts.filter((val) => {
-        return (
-          val.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
-          val.description
-            .toLowerCase()
-            .includes(this.searchText.toLowerCase()) ||
-          val.tags.toLowerCase().includes(this.searchText.toLowerCase())
-        );
-      });
-      const displayProducts = values;
-      this.$store.dispatch("setDisplayProducts", displayProducts);
-      this.showSpinner = false;
-      this.updatePagination(values, 1);
+      this.$store.dispatch("Products/searchProduct", { text: this.searchText });
     },
-    updatePagination(showProducts, currentPage) {
-      this.showProducts = showProducts;
-      this.paginate.rows = showProducts.length;
-      this.pagination(currentPage);
-    },
-    pagination(currentPage) {
-      this.paginate.currentPage = currentPage;
-      const start = (currentPage - 1) * this.paginate.perPage;
-      const displayProducts = this.showProducts.slice(
-        start,
-        start + this.paginate.perPage
-      );
-      this.$store.dispatch("setDisplayProducts", displayProducts);
+    // setDisplayProduct(displayProduct) {
+    //   this.$store.dispatch("setDisplayProduct", displayProduct)
+    // },
+    paginate(currentPage) {
+      this.$store.dispatch("Products/paginate", currentPage);
     },
   },
 };

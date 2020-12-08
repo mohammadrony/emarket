@@ -75,29 +75,31 @@ const routes = [
     name: "admin",
     component: Admin,
     meta: { requiresAuth: true },
-    children: [
-      {
-        path: "overview",
-        name: "admin-overview",
-        component: AOverview
-      },
-      {
-        path: "products",
-        name: "admin-products",
-        component: AProducts
-      },
-      {
-        path: "orders",
-        name: "admin-orders",
-        component: AOrders
-      },
-      {
-        path: "profile",
-        name: "admin-profile",
-        component: AProfile
-      },
-    ]
-  }
+  },
+  {
+    path: "/admin/overview",
+    name: "admin-overview",
+    component: AOverview,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/admin/products",
+    name: "admin-products",
+    component: AProducts,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/admin/orders",
+    name: "admin-orders",
+    component: AOrders,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/admin/profile",
+    name: "admin-profile",
+    component: AProfile,
+    meta: { requiresAuth: true }
+  },
 ];
 
 const router = new VueRouter({

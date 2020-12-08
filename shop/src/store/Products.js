@@ -1,17 +1,20 @@
 import ProductsService from "../services/ProductsService";
-import {ProductsView} from "./ProductsView.js";
 
 export const ProductsModule = {
   namespaced: true,
 
   state: {
     allProduct: null,
+    allProductBackup: null,
     displayProducts: null,
     displayProduct: null,
     apCount: null,
     perPage: null
   },
   mutations: {
+    SET_ALL_PRODUCT_BACKUP(state, allProduct){
+      state.allProductBackup = allProduct;
+    },
     SET_ALL_PRODUCT(state, allProduct) {
       state.allProduct = allProduct;
       state.perPage = 5
@@ -32,6 +35,7 @@ export const ProductsModule = {
     },
     async setAllProduct({ commit, state }) {
       const allProduct = (await ProductsService.getAllProducts()).data;
+      commit("SET_ALL_PRODUCT_BACKUP", allProduct);
       commit("SET_ALL_PRODUCT", allProduct);
       commit("SET_AP_COUNT", allProduct.length);
       const displayProducts = allProduct.slice(0, state.perPage);
@@ -42,15 +46,18 @@ export const ProductsModule = {
       const displayProducts = state.allProduct.slice(start, start + state.perPage);
       commit("SET_DISPLAY_PRODUCTS", displayProducts);
     },
-    async searchProduct({ dispatch }, { text }) {
-      const allProduct = (await ProductsService.getAllProducts()).data;
-      const myProducts = allProduct.filter(val => {
+    async searchProduct({ commit, dispatch, state }, { text }) {
+      if(!state.allProductBackup){
+        const allProduct = (await ProductsService.getAllProducts()).data;
+        commit("SET_ALL_PRODUCT_BACKUP", allProduct);      
+      }
+      const myProducts = state.allProductBackup.filter(val => {
         return (
           val.title.toLowerCase().includes(text.toLowerCase()) ||
           val.description.toLowerCase().includes(text.toLowerCase()) ||
           val.tags.toLowerCase().includes(text.toLowerCase())
-        );
-      });
+          );
+        });
       dispatch("updatePagination", myProducts)
     },
     updatePagination({ commit, dispatch }, myProducts) {
@@ -61,8 +68,5 @@ export const ProductsModule = {
 
   },
   modules: {
-    ProductsView: ProductsView
   }
-
-
 }

@@ -1,18 +1,17 @@
 import ProductsService from "../services/ProductsService";
 
-export const ProductsView = {
+export const ProductsView  = {
   namespaced: true,
 
   state: {
-    allProduct: null,
+    // allProduct: null,
     displayProducts: null,
     displayProduct: null,
     apCount: null,
     perPage: null
   },
   mutations: {
-    SET_ALL_PRODUCT(state, allProduct) {
-      state.allProduct = allProduct;
+    SET_PER_PAGE(state) {
       state.perPage = 5
     },
     SET_DISPLAY_PRODUCTS(state, displayProducts) {

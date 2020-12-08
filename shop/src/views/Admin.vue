@@ -26,7 +26,6 @@
         </b-col>
       </b-row>
     </b-container>
-    <router-view />
   </div>
 </template>
 

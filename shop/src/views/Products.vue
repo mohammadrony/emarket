@@ -11,11 +11,16 @@
           class="mr-sm-2"
           placeholder="Search here..."
           v-model="searchText"
-          @keyup="search"
+          @keyup.enter="search"
         ></b-form-input>
-        <h1 class="mt-3 product-page-title">Find Your Desire</h1>
+        <h1 
+          v-if="this.apCount != 0"
+          class="mt-3 product-page-title"
+        >
+          Find
+        </h1>
         <div v-if="showSpinner">
-          <b-spinner variant="primary"></b-spinner>
+          <b-spinner class="m-5" variant="primary"></b-spinner>
         </div>
         <b-container v-for="(doc, index) in displayProducts" :key="index">
           <b-row class="item-background mt-4" align-v="center">
@@ -52,11 +57,12 @@
         </b-container>
         <div
           class="m-4 d-flex justify-content-center"
-          v-if="this.paginate.rows == 0"
+          v-if="this.apCount == 0"
         >
           <h3>Nothing found for this keyword.</h3>
         </div>
-        <b-pagination
+        <b-pagination 
+          v-if="this.apCount != 0"
           class="mt-4"
           size="lg"
           v-model="currentPage"
@@ -77,7 +83,6 @@ import TopHeader from "@/components/TopHeader.vue";
 import AddToCart from "@/components/AddToCart.vue";
 import ProductDetails from "@/components/Modal/ProductDetails.vue";
 import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
-// import ProductsService from "../services/ProductsService";
 
 export default {
   name: "Products",
@@ -104,14 +109,13 @@ export default {
       displayProducts: state => state.Products.displayProducts,
       perPage: state => state.Products.perPage,
       displayProduct: state => state.Products.displayProduct
-
-
-      
     }),
   },
 
   async mounted() {
+    this.showSpinner = true;
     this.$store.dispatch("Products/setAllProduct");
+    this.showSpinner = false;
   },
   methods: {
     search() {
