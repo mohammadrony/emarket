@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "name": "Samsung",
+    "SubCategoryId": 1
+  },
+  {
+    "id": 2,
+    "name": "Realme",
+    "SubCategoryId": 1
+  },
+  {
+    "id": 3,
+    "name": "Mi",
+    "SubCategoryId": 1
+  },
+  {
+    "id": 4,
+    "name": "Nokia",
+    "SubCategoryId": 1
+  },
+  {
+    "id": 5,
+    "name": "LG",
+    "SubCategoryId": 1
+  },
+  {
+    "id": 6,
+    "name": "Intex",
+    "SubCategoryId": 1
+  },
+  {
+    "id": 7,
+    "name": "Apple",
+    "SubCategoryId": 1
+  },
+  {
+    "id": 8,
+    "name": "Vivo",
+    "SubCategoryId": 1
+  },
+  {
+    "id": 9,
+    "name": "Asus",
+    "SubCategoryId": 1
+  },
+  {
+    "id": 10,
+    "name": "Gionee",
+    "SubCategoryId": 1
+  },
+  {
+    "id": 11,
+    "name": "Pixel",
+    "SubCategoryId": 1
+  },
+  {
+    "id": 12,
+    "name": "Mobile Charger",
+    "SubCategoryId": 2
+  },
+  {
+    "id": 13,
+    "name": "Mobile Cover",
+    "SubCategoryId": 2
+  },
+  {
+    "id": 14,
+    "name": "Power Bank",
+    "SubCategoryId": 2
+  },
+  {
+    "id": 15,
+    "name": "Memory Card",
+    "SubCategoryId": 2
+  },
+  {
+    "id": 16,
+    "name": "Data Cable",
+    "SubCategoryId": 2
+  },
+  {
+    "id": 17,
+    "name": "Screenguard",
+    "SubCategoryId": 2
+  },
+  {
+    "id": 18,
+    "name": "Headphones",
+    "SubCategoryId": 2
+  },
+  {
+    "id": 19,
+    "name": "External Hard Disk",
+    "SubCategoryId": 3
+  },
+  {
+    "id": 20,
+    "name": "Pendrive",
+    "SubCategoryId": 3
+  },
+  {
+    "id": 21,
+    "name": "Laptop Skins",
+    "SubCategoryId": 3
+  },
+  {
+    "id": 22,
+    "name": "Laptop Bags",
+    "SubCategoryId": 3
+  },
+  {
+    "id": 23,
+    "name": "Mouse",
+    "SubCategoryId": 3
+  },
+  {
+    "id": 24,
+    "name": "Keyboard",
+    "SubCategoryId": 3
+  },
+  {
+    "id": 25,
+    "name": "Samsung",
+    "SubCategoryId": 4
+  },
+  {
+    "id": 26,
+    "name": "LG",
+    "SubCategoryId": 4
+  },
+  {
+    "id": 27,
+    "name": "Sony",
+    "SubCategoryId": 4
+  },
+  {
+    "id": 28,
+    "name": "Micromax",
+    "SubCategoryId": 4
+  },
+  {
+    "id": 29,
+    "name": "Mi",
+    "SubCategoryId": 4
+  },
+  {
+    "id": 30,
+    "name": "Thomson",
+    "SubCategoryId": 4
+  },
+  {
+    "id": 31,
+    "name": "Fully Automatic Front",
+    "SubCategoryId": 5
+  },
+  {
+    "id": 32,
+    "name": "Semi Automatic Top",
+    "SubCategoryId": 5
+  },
+  {
+    "id": 33,
+    "name": "Fully Automatic Top",
+    "SubCategoryId": 5
+  }
+]

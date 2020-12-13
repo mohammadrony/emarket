@@ -22,35 +22,40 @@
         <div v-if="showSpinner">
           <b-spinner class="m-5" variant="primary"></b-spinner>
         </div>
-        <b-container v-for="(doc, index) in displayProducts" :key="index">
+        <b-container v-for="(product, index) in displayProducts" :key="index">
           <b-row class="item-background mt-4" align-v="center">
             <b-col cols="3">
               <b-img
                 left
                 rounded
-                :src="doc.image"
+                :src="product.image"
                 class="product-image"
-                @click="showModal(doc)"
+                @click="showModal(product)"
                 alt="image not added"
               ></b-img>
             </b-col>
             <b-col cols="2">
-              <h4>{{ doc.title }}</h4>
+              <h4>{{ product.title }}</h4>
             </b-col>
             <b-col cols="4">
-              <p v-html="doc.description"></p>
+              <p v-html="product.description"></p>
             </b-col>
             <b-col cols="1">
-              <h6>{{ doc.price }}৳</h6>
+              <h6>{{ product.price }}৳</h6>
             </b-col>
             <b-col>
               <AddToCart
-                :id="doc.id"
-                :title="doc.title"
-                :price="doc.price"
+                :id="product.id"
+                :title="product.title"
+                :price="product.price"
               ></AddToCart>
-              <b-button class="m-2" @click="setDisplayProduct(doc)" variant="info"
-                >Details</b-button
+              <b-button 
+                class="m-2" 
+                @click="viewProduct(product)" 
+                variant="info"
+                >
+                Details
+              </b-button
               >
             </b-col>
           </b-row>
@@ -70,8 +75,6 @@
           :per-page="perPage"
           @input="paginate(currentPage)"
         ></b-pagination>
-
-        <ProductDetails :product="product" />
       </b-col>
     </b-row>
   </div>
@@ -81,7 +84,6 @@
 import { mapState } from "vuex";
 import TopHeader from "@/components/TopHeader.vue";
 import AddToCart from "@/components/AddToCart.vue";
-import ProductDetails from "@/components/Modal/ProductDetails.vue";
 import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
 
 export default {
@@ -89,14 +91,12 @@ export default {
   components: {
     TopHeader,
     AddToCart,
-    ProductDetails,
     ProductCategorySidebar,
   },
 
   data() {
     return {
       showSpinner: null,
-      product: {},
       searchText: "",
       currentPage: 1,
 
@@ -108,7 +108,6 @@ export default {
       apCount: state => state.Products.apCount,
       displayProducts: state => state.Products.displayProducts,
       perPage: state => state.Products.perPage,
-      displayProduct: state => state.Products.displayProduct
     }),
   },
 
@@ -121,8 +120,13 @@ export default {
     search() {
     this.$store.dispatch("Products/searchProduct", { text: this.searchText });
     },
-    setDisplayProduct(displayProduct) {
-      this.$store.dispatch("setDisplayProduct", displayProduct)
+    viewProduct(product) {
+      this.$router.push({
+        name: 'product', 
+        params: {
+          productId: product.id
+        }
+      })
     },
     paginate(currentPage){
       this.$store.dispatch("Products/paginate", currentPage); 

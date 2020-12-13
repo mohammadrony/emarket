@@ -30,7 +30,8 @@ export const ProductsModule = {
     }
   },
   actions: {
-    setDisplayProduct({ commit }, displayProduct) {
+    async setDisplayProduct({ commit }, productId) {
+      const displayProduct = (await ProductsService.getProduct(productId)).data;
       commit("SET_DISPLAY_PRODUCT", displayProduct);
     },
     async setAllProduct({ commit, state }) {

@@ -1,6 +1,9 @@
 import Api from "./Api"
 
 export default {
+    getProduct(productId) {
+        return Api().get(`products/getProduct/${productId}`)
+    },
     getAllProducts() {
         return Api().get('products/getAllProducts')
     },

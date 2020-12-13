@@ -42,7 +42,8 @@ module.exports = {
   },
   async addToCart(req, res) {
     try {
-      userId = req.user.id
+      console.log(req.body)
+      userId = req.userId
       productId = req.body.productId
       quantity = req.body.quantity
       const cartProduct = await Cart.findOne({

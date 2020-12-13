@@ -1,110 +1,146 @@
 [
-    {
-        "title": "one",
-        "description": "first description",
-        "price": 100,
-        "tags": "tags",
-        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "CategoryId": 1,
-        "SubCategoryId": 1
-    },
-    {
-        "title": "two",
-        "description": "second description",
-        "price": 200,
-        "tags": "tags",
-        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "CategoryId": 1,
-        "SubCategoryId": 2
-    },
-    {
-        "title": "three",
-        "description": "third description",
-        "price": 300,
-        "tags": "tags",
-        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "CategoryId": 2,
-        "SubCategoryId": 3
-    },
-    {
-        "title": "four",
-        "description": "forth description",
-        "price": 400,
-        "tags": "tags",
-        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "CategoryId": 2,
-        "SubCategoryId": 4
-    },
-    {
-        "title": "five",
-        "description": "fifth description",
-        "price": 500,
-        "tags": "tags",
-        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "CategoryId": 3,
-        "SubCategoryId": 5
-    },
-    {
-        "title": "six",
-        "description": "sixth description",
-        "price": 600,
-        "tags": "tags",
-        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "CategoryId": 3,
-        "SubCategoryId": 6
-    },
-    {
-        "title": "seven",
-        "description": "first description",
-        "price": 100,
-        "tags": "tags",
-        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "CategoryId": 4,
-        "SubCategoryId": 7
-    },
-    {
-        "title": "eight",
-        "description": "second description",
-        "price": 200,
-        "tags": "tags",
-        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "CategoryId": 4,
-        "SubCategoryId": 8
-    },
-    {
-        "title": "nine",
-        "description": "third description",
-        "price": 300,
-        "tags": "tags",
-        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "CategoryId": 1,
-        "SubCategoryId": 1
-    },
-    {
-        "title": "ten",
-        "description": "forth description",
-        "price": 400,
-        "tags": "tags",
-        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "CategoryId": 1,
-        "SubCategoryId": 2
-    },
-    {
-        "title": "eleven",
-        "description": "fifth description",
-        "price": 500,
-        "tags": "tags",
-        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "CategoryId": 2,
-        "SubCategoryId": 3
-    },
-    {
-        "title": "twelve",
-        "description": "sixth description",
-        "price": 600,
-        "tags": "tags",
-        "image": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
-        "CategoryId": 2,
-        "SubCategoryId": 4
-    }
+  {
+    "id": 1,
+    "title": "Samsung Note 8",
+    "subtitle": "subtitle",
+    "description": "first description",
+    "price": 80000,
+    "tags": "tags",
+    "imageUrl": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "SubSubCategoryId": 1
+  },
+  {
+    "id": 2,
+    "title": "Samsung Note 8",
+    "subtitle": "subtitle",
+    "description": "second description",
+    "price": 80000,
+    "tags": "tags",
+    "imageUrl": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "SubSubCategoryId": 1
+  },
+  {
+    "id": 3,
+    "title": "Samsung Note 8",
+    "subtitle": "subtitle",
+    "description": "third description",
+    "price": 80000,
+    "tags": "tags",
+    "imageUrl": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "SubSubCategoryId": 1
+  },
+  {
+    "id": 4,
+    "title": "Samsung Note 8",
+    "subtitle": "subtitle",
+    "description": "forth description",
+    "price": 80000,
+    "tags": "tags",
+    "imageUrl": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "SubSubCategoryId": 1
+  },
+  {
+    "id": 5,
+    "title": "Samsung Note 8",
+    "subtitle": "subtitle",
+    "description": "fifth description",
+    "price": 80000,
+    "tags": "tags",
+    "imageUrl": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "SubSubCategoryId": 1
+  },
+  {
+    "id": 6,
+    "title": "Samsung Note 8",
+    "subtitle": "subtitle",
+    "description": "sixth description",
+    "price": 80000,
+    "tags": "tags",
+    "imageUrl": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "SubSubCategoryId": 1
+  },
+  {
+    "id": 7,
+    "title": "Samsung Note 8",
+    "subtitle": "subtitle",
+    "description": "first description",
+    "price": 80000,
+    "tags": "tags",
+    "imageUrl": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "SubSubCategoryId": 1
+  },
+  {
+    "id": 8,
+    "title": "Samsung Note 8",
+    "subtitle": "subtitle",
+    "description": "second description",
+    "price": 80000,
+    "tags": "tags",
+    "imageUrl": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "SubSubCategoryId": 1
+  },
+  {
+    "id": 9,
+    "title": "Samsung Note 8",
+    "subtitle": "subtitle",
+    "description": "third description",
+    "price": 80000,
+    "tags": "tags",
+    "imageUrl": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "SubSubCategoryId": 1
+  },
+  {
+    "id": 10,
+    "title": "Samsung Note 8",
+    "subtitle": "subtitle",
+    "description": "forth description",
+    "price": 80000,
+    "tags": "tags",
+    "imageUrl": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "SubSubCategoryId": 1
+  },
+  {
+    "id": 11,
+    "title": "Samsung Note 8",
+    "subtitle": "subtitle",
+    "description": "fifth description",
+    "price": 80000,
+    "tags": "tags",
+    "imageUrl": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "SubSubCategoryId": 1
+  },
+  {
+    "id": 12,
+    "title": "Realme C7",
+    "subtitle": "subtitle",
+    "description": "sixth description",
+    "price": 17000,
+    "tags": "tags",
+    "imageUrl": "https://nccumc.org/leadership/files/2018/02/A-New-Day-image_cropped.jpg.png",
+    "CategoryId": 1,
+    "SubCategoryId": 1,
+    "SubSubCategoryId": 2
+  }
 ]

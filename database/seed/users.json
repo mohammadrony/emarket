@@ -1,20 +1,24 @@
 [
-    {
-		"username": "rony1829",
-		"firstName": "Md.",
-		"lastName": "Rony",
-		"email": "ronyku1829@gmail.com",
-		"password": "12345678",
-		"address": "Bangladesh",
-		"isAdmin": true
-	},
-	{
-		"username": "ronyku",
-		"firstName": "Md.",
-		"lastName": "Rony",
-		"email": "rony@gmail.com",
-		"password": "12345678",
-		"address": "Dhaka, Bangladesh",
-		"isAdmin": false
-	}
+  {
+    "id": 1,
+    "username": "rony1829",
+    "firstName": "Md.",
+    "lastName": "Rony",
+    "imageUrl": "",
+    "email": "ronyku1829@gmail.com",
+    "password": "12345678",
+    "address": "Bangladesh",
+    "isAdmin": true
+  },
+  {
+    "id": 2,
+    "username": "ronyku",
+    "firstName": "Md.",
+    "lastName": "Rony",
+    "imageUrl": "",
+    "email": "rony@gmail.com",
+    "password": "12345678",
+    "address": "Dhaka, Bangladesh",
+    "isAdmin": false
+  }
 ]

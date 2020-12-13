@@ -1,22 +1,58 @@
 [
-    {
-        "id": 1,
-        "name": "First Category"
-    },
-    {
-        "id": 2,
-        "name": "Second Category"
-    },
-    {
-        "id": 3,
-        "name": "Third Category"
-    },
-    {
-        "id": 4,
-        "name": "Forth Category"
-    },
-    {
-        "id": 5,
-        "name": "Fifth Category"
-    }
+  {
+    "id": 1,
+    "name": "Electronics"
+  },
+  {
+    "id": 2,
+    "name": "TV & Multimedia"
+  },
+  {
+    "id": 3,
+    "name": "Home & Furniture"
+  },
+  {
+    "id": 4,
+    "name": "Sports & Books"
+  },
+  {
+    "id": 5,
+    "name": "Tools & Hardware"
+  },
+  {
+    "id": 6,
+    "name": "Clothes"
+  },
+  {
+    "id": 7,
+    "name": "Flowers"
+  },
+  {
+    "id": 8,
+    "name": "Accessories"
+  },
+  {
+    "id": 9,
+    "name": "Baby & Kids"
+  },
+  {
+    "id": 10,
+    "name": "Sports & Beauty"
+  },
+  {
+    "id": 11,
+    "name": "Car Appliances"
+  },
+  {
+    "id": 12,
+    "name": "Outdoors"
+  },
+  {
+    "id": 13,
+    "name": "Home Appliances"
+  },
+  {
+    "id": 14,
+    "name": "Health Products"
+  }
 ]

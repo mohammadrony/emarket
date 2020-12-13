@@ -183,16 +183,11 @@
               </b-row>
 
               <template>
-                <b-form-input
-                  required
-                  :rules="[required]"
-                  v-model="properties.image"
-                  placeholder="Image URL"
-                ></b-form-input>
+                <b-form-file v-model="properties.imageFile" class="mt-3" plain></b-form-file>
               </template>
 
               <div class="form-group d-flex mt-1">
-                <img width="80px" :src="properties.image" />
+                <img width="80px" :src="properties.imageFile" />
               </div>
             </b-col>
           </b-row>
@@ -253,7 +248,7 @@ export default {
         description: "",
         price: 0,
         tags: "",
-        image: "",
+        imageFile: null,
         CategoryId: 0,
         SubCategoryId: 0,
       },
@@ -366,7 +361,7 @@ export default {
       this.properties.description = "";
       this.properties.price = 0;
       this.properties.tags = "";
-      this.properties.image = "";
+      this.properties.imageFile = null;
       this.properties.CategoryId = 0;
       this.properties.SubCategoryId = 0;
     },
