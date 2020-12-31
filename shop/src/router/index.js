@@ -10,7 +10,8 @@ import ForgetPassword from "@/views/UserControl/ForgetPassword.vue";
 import Register from "@/views/UserControl/Register.vue";
 import UserProfile from "@/views/UserControl/UserProfile.vue";
 import AboutUs from "@/views/AboutUs.vue";
-import MyCart from "@/views/MyCart.vue";
+import CartView from "@/views/CartView.vue";
+import Wishlist from "@/views/Wishlist.vue";
 import Checkout from "@/views/Checkout.vue";
 import Admin from "@/views/Admin.vue";
 import AOverview from "@/views/AdminChildren/AOverview.vue";
@@ -37,7 +38,7 @@ const routes = [
     component: Products
   },
   {
-    path: "/products/:productId",
+    path: "/product/:productId",
     name: "product",
     component: ViewProduct
   },
@@ -67,9 +68,14 @@ const routes = [
     component: AboutUs
   },
   {
-    path: "/my-cart",
-    name: "my-cart",
-    component: MyCart
+    path: "/cart-view",
+    name: "cart-view",
+    component: CartView
+  },
+  {
+    path: "/wishlist",
+    name: "wishlist",
+    component: Wishlist
   },
   {
     path: "/checkout",

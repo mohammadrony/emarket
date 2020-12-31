@@ -1,211 +1,104 @@
 <template>
   <div>
-    <!-- <TopHeader></TopHeader> -->
-    <!-- <b-container class="first-element">
-      <b-row align-v="center">
-        <b-col md="6" class="left-align">
-          <h3>Website Title</h3>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Reiciendis, earum!
-          </p>
-          <b-button to="/" variant="info" class="m-3">Link</b-button>
-          <b-button to="/products" variant="outline-info">
-            Our Products
-          </b-button>
-        </b-col>
-        <b-col md="6">
-          <img src="/img/svg/graphic.svg" width="400" />
-        </b-col>
-      </b-row>
-    </b-container>
-
-    <b-container class="mt-5 home-products">
-      <div v-if="showSpinner" class="spinner">
-        <b-spinner variant="primary"></b-spinner>
-      </div>
-      <b-row>
-        <b-col v-for="product in displayProducts" :key="product.id">
-          <b-card img-top tag="article" style="max-width: 21rem" class="mb-2">
-            <b-card-img
-              class="card-image"
-              :src="product.image"
-              alt="Image Field"
-            ></b-card-img>
-
-            <h4 class="m-3">{{ product.title }}</h4>
-            <b-row>
-              <b-col></b-col>
-              <b-col>Price: {{ product.price }}</b-col>
-            </b-row>
-
-            <b-row>
-              <b-col cols="4">
-                <b-button class="m-2" @click="setDisplayProduct(doc)" variant="info"
-                  >Details</b-button
+    <TopHeader />
+    <b-row>
+      <div :class="{ 'col-3': sidebar_visible, 'col-1': !sidebar_visible }">
+        <ProductCategorySidebar v-if="sidebar_visible" />
+        <b-row class="text-right">
+          <b-col />
+          <b-col>
+            <b-button
+              title="Hide list"
+              v-if="sidebar_visible"
+              @click="sidebar_visible = false"
+              size="sm"
+            >
+              <b-icon scale="1.4" icon="x"></b-icon>
+            </b-button>
+            <b-button-toolbar v-if="!sidebar_visible">
+              <b-button-group class="ml-4">
+                <b-button
+                  @click="sidebar_visible = true"
+                  title="Show Categories"
                 >
-              </b-col>
-              <b-col cols="2" />
-              <b-col cols="6">
-                <AddToCart
-                  :id="product.id"
-                  :title="product.title"
-                  :price="product.price"
-                ></AddToCart>
-              </b-col>
-            </b-row>
-          </b-card>
-        </b-col>
-      </b-row>
-      <b-row class="mt-4" align-h="center">
-        <b-button variant="primary" size="lg" to="products"
-          >More Products</b-button
+                  <b-icon scale="1.4" icon="list"></b-icon>
+                </b-button>
+              </b-button-group>
+            </b-button-toolbar>
+          </b-col>
+          <b-col>
+            <b-button-toolbar> </b-button-toolbar>
+          </b-col>
+        </b-row>
+      </div>
+      <b-col :class="{ 'col-8': sidebar_visible, 'col-10': !sidebar_visible }">
+        <b-carousel
+          id="carousel-1"
+          v-model="slide"
+          :interval="4000"
+          controls
+          indicators
+          background="#ababab"
+          img-width="1024"
+          img-height="480"
+          style="text-shadow: 1px 1px 2px #333"
+          @sliding-start="onSlideStart"
+          @sliding-end="onSlideEnd"
         >
-      </b-row>
-    </b-container>
-    
-    <b-container class="first-element mt-5">
-      <b-row align-v="center">
-        <b-col md="6">
-          <img src="/img/pro/CSE_KU_logo.png" width="400" />
-        </b-col>
-        <b-col md="6" class="left-align">
-          <h3>Developers</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,
-            voluptas.
-          </p>
-          <b-button to="/about" variant="success" size="lg">
-            About Us
-          </b-button>
-        </b-col>
-      </b-row>
-    </b-container> -->
-    <div class="topbar">
-      <div class="container">
-        <div class="topleft">
-          <ul>
-            <li>
-              <a href="#">EN <i class="fas fa-caret-down"></i></a>
-              <ul>
-                <li><a href="#">RU</a></li>
-                <li><a href="#">EN</a></li>
-                <li><a href="#">FR</a></li>
-                <li><a href="#">AU</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">USD <i class="fas fa-caret-down"></i></a>
-              <ul>
-                <li><a href="#">AUS</a></li>
-                <li><a href="#">YEN</a></li>
-                <li><a href="#">INR</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+          <!-- Text slides with image -->
+          <b-carousel-slide
+            class="img-fluid w-100"
+            width="1024"
+            height="480"
+            img-src="http://localhost:8084/public/product-image/1.jpg"
+          ></b-carousel-slide>
 
-        <div class="topcenter">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Company Profile</a></li>
-            <li><a href="#">Payment Accept</a></li>
-            <li><a href="#">Delivery</a></li>
-            <li><a href="#">Contact Us</a></li>
-          </ul>
-        </div>
+          <!-- Slides with custom text -->
+          <b-carousel-slide>
+            <template #img>
+              <img
+                class="img-fluid w-100"
+                width="1024"
+                height="480"
+                src="http://localhost:8084/public/product-image/2.jpg"
+              />
+            </template>
+          </b-carousel-slide>
+        </b-carousel>
+        <b-row class="my-5 text-center">
+          <b-col>
+            <img src="../../public/assets/images/img1.jpg" />
+          </b-col>
+          <b-col>
+            <img src="../../public/assets/images/img2.jpg" />
+          </b-col>
+          <b-col>
+            <img src="../../public/assets/images/img3.jpg" />
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <img src="../../public/assets/images/banner.jpg" />
+          </b-col>
+        </b-row>
+      </b-col>
+      <b-col></b-col>
+    </b-row>
 
-        <div class="topright">
-          <ul>
-            <li>
-              <a href="#"><i class="fas fa-phone"></i> +000(546)454545</a>
-            </li>
-            <li>
-              <a href="#"
-                ><i class="fas fa-user"></i> My Profile
-                <i class="fas fa-caret-down"></i
-              ></a>
-              <ul class="myprofile-dropdown">
-                <li><a href="#">My Order</a></li>
-                <li><a href="#">My Wishlist</a></li>
-                <li><a href="#">Pending Request</a></li>
-                <li><a href="#">Delivered Order</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <!-- <div class="d-none d-lg-block">
+      <h1>hello world</h1>
     </div>
 
-    <div class="header">
-      <div class="container">
-        <div class="logo">
-          <img src="../../public/assets/images/logo.png" />
-        </div>
-        <div class="searchbar">
-          <form>
-            <input
-              type="search"
-              class="searchField"
-              placeholder="Search for products & brands"
-            />
-          </form>
-        </div>
-        <div class="headerright">
-          <ul>
-            <li>
-              <a href="#"><i class="fas fa-heart"></i> Wishlist</a>
-            </li>
-            <li>
-              <a href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
-            </li>
-            <li><b-button size="sm" variant="info" to="/login" class="signBtn">Login & Register</b-button></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <b-row>
+      <b-col cols="1" md="4"> ok </b-col>
+      <b-col cols="10" md="4"> abc </b-col>
+      <b-col cols="1" md="4"> def </b-col>
+    </b-row> -->
 
-    <div class="productContent">
-      <div class="container">
-        <ProductCategorySidebar />
-
-        <carousel
-          class="productSlider"
-          :perPage="topCarousel.perPage"
-          :autoplay="topCarousel.autoplay"
-          :autoplayTimeout="topCarousel.autoplayTimeout"
-          :autoplayHoverPause="topCarousel.autoplayHoverPause"
-          :centerMode="topCarousel.centerMode"
-          :speed="topCarousel.speed"
-          :loop="topCarousel.loop"
-        >
-          <slide>
-            <img src="../../public/assets/images/1.jpg" />
-          </slide>
-          <slide>
-            <img src="../../public/assets/images/2.jpg" />
-          </slide>
-        </carousel>
-
-        <div class="offer-card">
-          <img src="../../public/assets/images/img1.jpg" />
-        </div>
-        <div class="offer-card">
-          <img src="../../public/assets/images/img2.jpg" />
-        </div>
-        <div class="offer-card">
-          <img src="../../public/assets/images/img3.jpg" />
-        </div>
-      </div>
-    </div>
-
-    <!-- Banner Start -->
-    <div class="banner">
-      <div class="container">
-        <img src="../../public/assets/images/banner.jpg" alt="Banner" />
-      </div>
-    </div>
-    <!-- Banner End -->
+    <!-- <b-row>
+      <div :class="{ 'col-4': !myname, 'col-6': myname }">done</div>
+      <b-col cols="10">ok</b-col>
+    </b-row> -->
 
     <!-- Product Area Start -->
     <div class="product-area">
@@ -398,9 +291,7 @@
                 <i class="fas fa-dollar-sign"></i> 49
               </button>
             </div>
-            <button class="productViewBtn">
-              View Product
-            </button>
+            <button class="productViewBtn">View Product</button>
           </a>
         </div>
       </div>
@@ -411,17 +302,19 @@
     <div class="popularStores">
       <div class="container">
         <h3>Popular Stores</h3>
-        <div class="popularStoresInner">
-          <a href="#">Dolorsite</a>
-          <a href="#">Nostrum</a>
-          <a href="#">Dignissimos</a>
-          <a href="#">Temporibus</a>
-          <a href="#">Distinction</a>
-          <a href="#">Voluptam</a>
-          <a href="#">Similique</a>
-          <a href="#">Placeat</a>
-          <a href="#">Dismiss</a>
-        </div>
+        <b-row>
+          <div class="popularStoresInner">
+            <a href="#">Dolorsite</a>
+            <a href="#">Nostrum</a>
+            <a href="#">Dignissimos</a>
+            <a href="#">Temporibus</a>
+            <a href="#">Distinction</a>
+            <a href="#">Voluptam</a>
+            <a href="#">Similique</a>
+            <a href="#">Placeat</a>
+            <a href="#">Dismiss</a>
+          </div>
+        </b-row>
       </div>
     </div>
     <!-- Popular Store End -->
@@ -509,16 +402,16 @@
       <div class="container">
         <div class="col-3">
           <p>
-            <big>Address UK:</big><br />Adipisci cum reprehenderit asperiores
-            perferendis amet.
+            <big>Address Mirpur:</big><br />Adipisci cum reprehenderit
+            asperiores perferendis amet.
           </p>
           <p>
-            <big>Address US:</big><br />Ipsum repellat pariatur totam voluptas
-            asperiores
+            <big>Address Dhanmondi:</big><br />Ipsum repellat pariatur totam
+            voluptas asperiores
           </p>
           <p>
-            <big>Address UAE:</big><br />Reprehenderit asperiores perferendis
-            asperiores.
+            <big>Address Jessore:</big><br />Reprehenderit asperiores
+            perferendis asperiores.
           </p>
         </div>
         <div class="col-3">
@@ -557,14 +450,14 @@
 
     <div class="copyright">
       <div class="container">
-        <h5>&copy; 2019 eshopstore.com | Creator by johnsom</h5>
+        <h5>&copy; 2020 e-store.com</h5>
       </div>
     </div>
 
     <!-- Product View Box / Quick Product View Start -->
     <div class="productViewBox">
       <h3>Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3</h3>
-      <div class="productViewBox-closeBtn" @click="productViewBox-closeBtn">
+      <div class="productViewBox-closeBtn" @click="productViewBox - closeBtn">
         <i class="fas fa-times"></i>
       </div>
       <div class="productViewBoxImg">
@@ -600,7 +493,7 @@
 <script>
 // @ is an alias to /src
 import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
-// import TopHeader from "@/components/TopHeader.vue";
+import TopHeader from "@/components/TopHeader.vue";
 // import AddToCart from "@/components/AddToCart.vue";
 // import Footer from "@/components/Footer.vue";
 import ProductsService from "@/services/ProductsService";
@@ -608,20 +501,23 @@ export default {
   name: "Home",
   components: {
     ProductCategorySidebar,
-    // TopHeader,
+    TopHeader,
     // AddToCart,
     // Footer
   },
   data() {
     return {
-      topCarousel:{
-        perPage:  1,
+      sidebar_visible: true,
+      slide: 0,
+      sliding: null,
+      topCarousel: {
+        perPage: 1,
         autoplay: true,
         autoplayTimeout: 4000,
         autoplayHoverPause: false,
         centerMode: true,
         speed: 1000,
-        loop: true
+        loop: true,
       },
       showSpinner: null,
       product: {},
@@ -636,6 +532,12 @@ export default {
     this.showSpinner = false;
   },
   methods: {
+    onSlideStart() {
+      this.sliding = true;
+    },
+    onSlideEnd() {
+      this.sliding = false;
+    },
     setDisplayProduct(displayProduct) {
       this.$store.dispatch("Products/setDisplayProduct", displayProduct);
       window.location.replace("/details");

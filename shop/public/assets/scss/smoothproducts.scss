@@ -19,7 +19,7 @@ html, body {
 
 /* Element wrapper */
 
-.sp-wrap {
+.spSwap {
 	display: none;
 	line-height: 0;
 	font-size: 0;
@@ -169,7 +169,7 @@ html, body {
 /* Tweak styles for small viewports */
 
 @media screen and (max-width: 400px) {
-	.sp-wrap {
+	.spSwap {
 		margin: 0 0 15px 0;
 	}
 	#sp-prev, #sp-next {

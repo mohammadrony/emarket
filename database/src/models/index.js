@@ -16,6 +16,8 @@ db.SubCategory = require("./SubCategory")(sequelize, Sequelize.DataTypes);
 db.SubSubCategory = require("./SubSubCategory")(sequelize, Sequelize.DataTypes);
 db.Wishlist = require("./Wishlist")(sequelize, Sequelize.DataTypes);
 db.Product = require("./Product")(sequelize, Sequelize.DataTypes);
+db.Review = require("./Review")(sequelize, Sequelize.DataTypes);
+db.ReviewReply = require("./ReviewReply")(sequelize, Sequelize.DataTypes);
 db.Cart = require("./Cart")(sequelize, Sequelize.DataTypes);
 
 Object.keys(db).forEach((modelName) => {

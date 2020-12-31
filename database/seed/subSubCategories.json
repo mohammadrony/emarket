@@ -6,12 +6,12 @@
   },
   {
     "id": 2,
-    "name": "Realme",
+    "name": "Xiaomi",
     "SubCategoryId": 1
   },
   {
     "id": 3,
-    "name": "Mi",
+    "name": "Realme",
     "SubCategoryId": 1
   },
   {
@@ -21,12 +21,12 @@
   },
   {
     "id": 5,
-    "name": "LG",
+    "name": "Huawei",
     "SubCategoryId": 1
   },
   {
     "id": 6,
-    "name": "Intex",
+    "name": "oppo",
     "SubCategoryId": 1
   },
   {
@@ -41,17 +41,17 @@
   },
   {
     "id": 9,
-    "name": "Asus",
+    "name": "Pixel",
     "SubCategoryId": 1
   },
   {
     "id": 10,
-    "name": "Gionee",
+    "name": "Walton",
     "SubCategoryId": 1
   },
   {
     "id": 11,
-    "name": "Pixel",
+    "name": "LG",
     "SubCategoryId": 1
   },
   {

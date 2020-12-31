@@ -179,80 +179,17 @@ img{
 
 
 /*Categories Menu*/
-.productContent{
-	display: inline-block;
-	width: 100%;
-	float: left;
-	padding: 15px 0;
-	position: relative;
-}
-.productContent .productCategories{
-	width: 20%;
-	float: left;
-	padding: 7px 15px;
-	border-radius: 8px;
-	border: 1px solid #dfdcdc;
-}
-.productContent .productCategories ul li{
-	display: inline-block;
-	width: 100%;
-	float: left;
-	margin: 5px 0 10px;
-}
-.productContent .productCategories ul li a i.fa-caret-right{
-	margin-left: 5px;
-	color: #ffb524;
-	vertical-align: middle;
-	margin-top: -1px;
-}
-.productContent .productCategories ul li a{
-	display: inline-block;
-	padding: 5px 0;
-	text-decoration: none;
-	color: #333;
-	font-weight: 600;
-}
-.megamenu{
-	position: absolute;
-	width: 70.2%;
-	background-color: #fff;
-	border: 1px solid gainsboro;
-	left: 24.8%;
-	top: 2.5%;
-	min-height: 372px;
-	border-radius: 8px;
-	z-index: 9999;
-	display: none;	
-}
-.productContent .productCategories ul li ul{
-	max-width: 22%;
-	float: left;
-	padding: 15px;
-}
-.productContent .productCategories ul li ul h3{
-	font-size: 12px;
-	text-transform: uppercase;
-	font-weight: 700;
-	color: #333;
-	margin-bottom: 10px;
-}
-.productContent .productCategories ul li ul li{
-	margin: 0;
-	display: inline-block;
-	float: left;
-}
-.productContent .productCategories ul li ul li a{
-	color: #333;
-	font-size: 14px;
-	font-weight: 500;
-}
-.productContent .productCategories ul li ul li a:hover{
-	color: #ffdd05;
-}
+// productContent{
+// 	display: inline-block;
+// 	width: 100%;
+// 	float: left;
+// 	padding: 15px 0;
+// 	position: relative;
+// }
 
 
 /*Slider Style*/
-.productContent .productSlider{
+ .productSlider{
 	width: 78%;
 	float: right;
 	display: inline-block;
@@ -262,13 +199,15 @@ img{
 }
 .sliderInner{
 	width: 100%;
-	height: 365px;
+	height: 100%;	
+	// height: 365px;
 	display: inline-block;
 	padding: 5px;
 }
 .sliderInner img{
 	width: 100%;
-	height: 365px;
+	height: 100%;
+	// height: 365px;
 }
 .cycle-control{
 	position: absolute;
@@ -295,19 +234,19 @@ img{
 }
 
 /*Offer Card Style*/
-.offer-card{
-	width: 270px;
-	height: 200px;
-	display: inline-block;
-	margin-left: 25px;
-	margin-top: 15px;
-	border-radius: 4px;
-	overflow: hidden;
-}
-.offer-card img{
-	width: 100%;
-	height: 200px;
-}
+// .offer-card{
+// 	width: 270px;
+// 	height: 200px;
+// 	display: inline-block;
+// 	margin-left: 25px;
+// 	margin-top: 15px;
+// 	border-radius: 4px;
+	// overflow: hidden;
+// }
+// .offer-card img{
+// 	width: 100%;
+// 	height: 200px;
+// }
 
 
 /*Banner Style*/
@@ -324,8 +263,6 @@ img{
 
 /*Product Area Style*/
 .product-area{
-	width: 100%;
-	float: left;
 	display: inline-block;
 	padding: 25px 0;
 }
@@ -740,7 +677,7 @@ img{
 }
 .product-detail-right{
 	float: right;
-	width: 55%;
+	width: 100%;
 }
 .product-detail-right h3{
 	font-size: 22px;
@@ -814,7 +751,7 @@ img{
 	width: 50%;
 	float: left;
 }
-.product-detail .sp-wrap{
+.product-detail .spSwap{
 	max-width: 100%;
 }
 .product-detail-left img{

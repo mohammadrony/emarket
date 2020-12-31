@@ -11,9 +11,8 @@ export default new Vuex.Store({
   ],
   state: {
     shop: {
-      name: "UShop"
+      name: "e-store",
     },
-
     //User
     token: null,
     user: null,

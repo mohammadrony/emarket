@@ -13,6 +13,9 @@
     <script src="assets/js/jquery-3.3.1.min.js"></script>
     <script src="assets/js/jquery.cycle.js"></script>
     <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/smoothproducts.min.js"></script>
+
+    <!-- checkout viewproduct home-->
     <script>
       $("#sliderShuffle").cycle({
         next: '#next',
@@ -41,32 +44,17 @@
             nav:true
           }
         }
-
+    
       });
-
+    
       $(function(){
         $(".topbar ul li").click(function(){
           $(".topbar ul li").not(this).find("ul").slideUp();
           $(this).find("ul").slideToggle();
         });
-        $(".topbar ul li ul li, productCategories ul li .megamenu").click(function(e){
-          e.stopPropagation();	
-        });
-        $(".productCategories ul li").click(function(){
-          $(".productCategories ul li").not(this).find(".megamenu").hide();
-          $(this).find(".megamenu").toggle();
-        });
         $(".otherInfoBody").hide();
         $(".otherInfoHandle").click(function(){
           $(".otherInfoBody").slideToggle();
-        });
-        $(".signBtn").click(function(){
-          $("body").css("overflow", "hidden");
-          $(".loginBox").slideDown();
-        });
-        $(".closeBtn").click(function(){
-          $("body").css("overflow", "visible");
-          $(".loginBox").slideUp();
         });
         $(".productViewBtn").click(function(e){
           e.preventDefault();
@@ -77,8 +65,11 @@
           $("body").css("overflow", "visible");
           $(".productViewBox").slideUp();
         });
+    
+        // $(".spSwap").smoothproducts();
       });
     </script>
+
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>

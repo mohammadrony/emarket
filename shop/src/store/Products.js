@@ -17,7 +17,7 @@ export const ProductsModule = {
     },
     SET_ALL_PRODUCT(state, allProduct) {
       state.allProduct = allProduct;
-      state.perPage = 5
+      state.perPage = 20
     },
     SET_DISPLAY_PRODUCTS(state, displayProducts) {
       state.displayProducts = displayProducts;
@@ -30,10 +30,6 @@ export const ProductsModule = {
     }
   },
   actions: {
-    async setDisplayProduct({ commit }, productId) {
-      const displayProduct = (await ProductsService.getProduct(productId)).data;
-      commit("SET_DISPLAY_PRODUCT", displayProduct);
-    },
     async setAllProduct({ commit, state }) {
       const allProduct = (await ProductsService.getAllProducts()).data;
       commit("SET_ALL_PRODUCT_BACKUP", allProduct);
@@ -41,6 +37,10 @@ export const ProductsModule = {
       commit("SET_AP_COUNT", allProduct.length);
       const displayProducts = allProduct.slice(0, state.perPage);
       commit("SET_DISPLAY_PRODUCTS", displayProducts);
+    },
+    async setDisplayProduct({ commit }, productId) {
+      const displayProduct = (await ProductsService.getProduct(productId)).data;
+      commit("SET_DISPLAY_PRODUCT", displayProduct);
     },
     paginate({ commit, state }, currentPage) {
       const start = (currentPage - 1) * state.perPage;
