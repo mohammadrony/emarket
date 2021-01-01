@@ -23,7 +23,7 @@
         <b-col cols="3">
           <img
             class="product-image"
-            :src="product.Product.image"
+            :src="product.Product.image1"
             alt="No Image"
           />
         </b-col>
@@ -92,7 +92,6 @@ export default {
       try {
         this.cartProducts = (await AddToCartService.getAllCartProduct()).data;
         this.cartItems = this.cartProducts.length;
-        console.log(this.cartItems);
       } catch (err) {
         console.log(err);
       }

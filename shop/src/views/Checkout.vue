@@ -1,62 +1,12 @@
 <template>
   <div class="">
 	<!-- Topbar Start -->
-	<div class="topbar">
-		<div class="container">
-
-			<!-- Top Left -->
-			<div class="topleft">
-				<ul>
-					<li><a href="#">EN <i class="fas fa-caret-down"></i></a>
-						<ul>
-							<li><a href="#">RU</a></li>
-							<li><a href="#">EN</a></li>
-							<li><a href="#">FR</a></li>
-							<li><a href="#">AU</a></li>
-						</ul>
-					</li>
-					<li><a href="#">USD <i class="fas fa-caret-down"></i></a>
-						<ul>
-							<li><a href="#">AUS</a></li>
-							<li><a href="#">YEN</a></li>
-							<li><a href="#">INR</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-
-			<!-- Top Center -->
-			<div class="topcenter">
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Company Profile</a></li>
-					<li><a href="#">Payment Accept</a></li>
-					<li><a href="#">Delivery</a></li>
-					<li><a href="#">Contact Us</a></li>
-				</ul>
-			</div>
-
-			<!-- Top Right -->
-			<div class="topright">
-				<ul>
-					<li><a href="#"><i class="fas fa-phone"></i> +000(546)454545</a></li>
-					<li><a href="#"><i class="fas fa-user"></i> My Profile <i class="fas fa-caret-down"></i></a>
-						<ul class="myprofile-dropdown">
-							<li><a href="#">My Order</a></li>
-							<li><a href="#">My Wishlist</a></li>
-							<li><a href="#">Pending Request</a></li>
-							<li><a href="#">Delivered Order</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+	
 	<!-- Topbar End -->
 
-	
+	<TopHeader />
 	<!-- Header Start -->
-	<div class="header">
+	<!-- <div class="header">
 		<div class="container">
 			<div class="logo">
 				<img src="../../public/assets/images/logo.png">
@@ -74,7 +24,7 @@
 				</ul>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!-- Header End -->
 
 	<!-- Checkout Start -->
@@ -268,9 +218,11 @@
 </template>
 
 <script>
+import TopHeader from "@/components/TopHeader.vue";
 export default {
   name: "Checkout",
   components: {
+	  TopHeader,
   }
 };
 </script>
