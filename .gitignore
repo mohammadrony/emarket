@@ -1,25 +1,4 @@
 shop/node_modules/
 database/node_modules/
-
-shop/.DS_Store
-shop/dist
-
-
-# local env files
-shop/.env.local
-shop/.env.*.local
-
-# Log files
-shop/npm-debug.log*
-shop/yarn-debug.log*
-shop/yarn-error.log*
-shop/pnpm-debug.log*
-
-# Editor directories and files
-shop/.idea
-shop/.vscode
-shop/*.suo
-shop/*.ntvs*
-shop/*.njsproj
-shop/*.sln
-shop/*.sw?
+shop/.env
+database/.env

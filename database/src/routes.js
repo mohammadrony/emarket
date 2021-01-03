@@ -30,6 +30,7 @@ const ImageController = require("./controllers/ImageController")
 const CartsController = require("./controllers/CartsController")
 const WishlistController = require("./controllers/WishlistController")
 const ProductsController = require("./controllers/ProductsController")
+const CheckoutController = require("./controllers/CheckoutController")
 const CategoryController = require("./controllers/CategoryController")
 const SubCategoryController = require("./controllers/SubCategoryController")
 const SubSubCategoryController = require("./controllers/SubSubCategoryController")
@@ -43,6 +44,16 @@ module.exports = (app) => {
     AuthenticationController.register)
   app.post("/login",
     AuthenticationController.login)
+  app.post("/requestToken",
+    AuthenticationController.requestToken)
+  app.get("/verifyToken",
+    AuthenticationController.verifyToken)
+  app.post("/resetPassword",
+    AuthenticationController.resetPassword)
+
+  // checkout
+  app.post("/createCheckoutSession",
+    CheckoutController.createCheckoutSession)
 
   // category
   app.get("/category/getCategoryList",

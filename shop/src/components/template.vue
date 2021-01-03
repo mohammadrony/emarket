@@ -1,13 +1,19 @@
 <template>
-  <div class=""></div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: ""
+  name: "template",
+  components: {},
+  data() {
+    return {};
+  },
+  mounted() {},
+  methods: {},
+  computed: {},
 };
 </script>
 
-<style scoped lang="scss">
-
+<style lang="sass" scoped>
 </style>

@@ -71,7 +71,7 @@
 
 <script>
 import { mapState } from "vuex";
-import AddToCartService from "@/services/AddToCartService";
+import CartService from "@/services/CartService";
 import TopHeader from "@/components/TopHeader.vue";
 export default {
   name: "MyCart",
@@ -90,7 +90,7 @@ export default {
   async mounted() {
     if (this.user != null) {
       try {
-        this.cartProducts = (await AddToCartService.getAllCartProduct()).data;
+        this.cartProducts = (await CartService.getAllCartProduct()).data;
         this.cartItems = this.cartProducts.length;
       } catch (err) {
         console.log(err);
@@ -100,7 +100,7 @@ export default {
   methods: {
     async remove(product) {
       try {
-        const cartProduct = (await AddToCartService.remove(product.ProductId))
+        const cartProduct = (await CartService.remove(product.ProductId))
           .data;
         this.addedToCart = !cartProduct;
         location.reload(true);

@@ -10,6 +10,7 @@ import jQuery from 'jquery'
 global.$ = global.jQuery = jQuery
 sync(store, router)
 
+
 Vue.use(VueCarousel);
 Vue.use(IconsPlugin);
 Vue.use(BootstrapVue);

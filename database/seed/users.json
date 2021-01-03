@@ -7,6 +7,7 @@
     "imageUrl": "",
     "email": "ronyku1829@gmail.com",
     "password": "12345678",
+    "resetPasswordToken": "check",
     "address": "Bangladesh",
     "isAdmin": true
   },

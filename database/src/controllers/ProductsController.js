@@ -58,6 +58,7 @@ module.exports = {
 					id: req.body.id
 				}
 			})
+			// console.log(prod);
 			res.send(req.body)
 		} catch (err) {
 			res.status(500).send({

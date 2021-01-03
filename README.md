@@ -7,7 +7,7 @@ CREATE DATABASE mydb
 ``` 
 ### now clone the repository on your file system
 ```
-git clone https://github.com/mohammadrony29/Ushop.git
+git clone https://github.com/mohammadrony/e-store.git
 ```
 ### check database configuration file for user, password and database
 ```

@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     },
     password: DataTypes.STRING,
+    resetPasswordToken: DataTypes.STRING,
     address: DataTypes.STRING,
     isAdmin: DataTypes.BOOLEAN
   })

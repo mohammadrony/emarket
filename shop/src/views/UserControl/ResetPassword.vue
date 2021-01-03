@@ -8,66 +8,52 @@
             <div class="col-lg-5">
               <div class="card shadow-lg border-0 rounded-lg m-4">
                 <div class="card-header">
-                  <h3 class="text-center font-weight-light my-2">Login</h3>
+                  <h3 class="text-center font-weight-light my-2">
+                    Reset Password
+                  </h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body" v-if="tokenValidate">
                   <form>
                     <div class="form-group">
-                      <label class="small mb-1" for="inputEmailAddress"
-                        >Email</label
+                      <label class="small mb-1" for="newPasswordInput"
+                        >New Password</label
                       >
                       <input
                         class="form-control py-4"
-                        id="inputEmailAddress"
-                        type="email"
-                        v-model="email"
-                        placeholder="Enter email address"
+                        id="newPasswordInput"
+                        type="password"
+                        v-model="newPassword"
+                        placeholder="Enter New Password"
                       />
                     </div>
                     <div class="form-group">
-                      <label class="small mb-1" for="inputPassword"
-                        >Password</label
+                      <label class="small mb-1" for="confirmPasswordInput"
+                        >Confirm Password</label
                       >
                       <input
                         class="form-control py-4"
-                        id="inputPassword"
+                        id="confirmPasswordInput"
                         type="password"
-                        @keyup.enter="login"
-                        v-model="password"
-                        placeholder="Enter password"
+                        @keyup.enter="resetPass"
+                        v-model="confirmPassword"
+                        placeholder="Confirm password"
                       />
                     </div>
                     <div class="error" v-html="error"></div>
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          class="custom-control-input"
-                          id="rememberPasswordCheck"
-                          type="checkbox"
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="rememberPasswordCheck"
-                          >Remember password</label
-                        >
-                      </div>
-                    </div>
                     <div
-                      class="form-group d-flex align-items-center justify-content-between mt-1 mb-0"
+                      class="form-group d-flex align-items-center justify-content-right mt-1 mb-0"
                     >
-                      <a class="small" href="/forget-password"
-                        >Forgot Password?</a
-                      >
-                      <b-button variant="primary" @click="login"
-                        >Login</b-button
+                      <b-button
+                        class="mt-2"
+                        variant="primary"
+                        @click="resetPass"
+                        >Submit</b-button
                       >
                     </div>
                   </form>
                 </div>
-                <div class="card-footer text-center">
-                  <div class="small">
-                    <a href="/register">Need an account? Sign up!</a>
-                  </div>
+                <div class="card-body" v-if="!tokenValidate">
+                  <h6 class="error">Invalid Token Id.</h6>
                 </div>
               </div>
             </div>
@@ -93,41 +79,49 @@
 </template>
 
 <script>
-import AuthenticationService from "@/services/AuthenticationService";
+import AuthenticationService from "@/services/AuthenticationService.js";
 import store from "@/store";
 
 export default {
-  name: "Login",
+  name: "ResetPassword",
+  components: {},
   data() {
     return {
       shop: store.state.shop,
-      email: null,
-      password: null,
       error: null,
+      newPassword: null,
+      confirmPassword: null,
+      tokenValidate: true,
     };
   },
-
+  async mounted() {
+    const token = this.$store.state.route.params.token;
+    const response = await AuthenticationService.verifyToken(token);
+    if (response.data.token === token) {
+      this.tokenValidate = true;
+    }
+    console.log(this.tokenValidate);
+    console.log(response)
+  },
   methods: {
-    async login() {
-      try {
-        const response = await AuthenticationService.login({
-          email: this.email,
-          password: this.password,
-        });
-
-        this.$store.dispatch("setToken", response.data.token);
-        this.$store.dispatch("setUser", response.data.user);
-        window.location.replace("/");
-      } catch (error) {
-        console.log(error.response.data.error);
-        this.error = error.response.data.error;
+    async resetPass() {
+      console.log(this.newPassword, this.confirmPassword)
+      if (this.newPassword === this.confirmPassword) {
+        const response = await AuthenticationService.resetPassword({
+          newPassword: this.newPassword,
+        }).data;
+        console.log(response);
       }
     },
   },
+  computed: {},
 };
 </script>
 
 <style scoped lang="scss">
+#layoutAuthentication_footer {
+  margin-top: 120px;
+}
 .error {
   color: red;
 }

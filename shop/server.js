@@ -5,7 +5,7 @@ const enforce = require("express-sslify");
 
 const app = express();
 
-app.use(serveStatic(__dirname + "/shop/dist"));
+app.use(serveStatic(__dirname + "/dist"));
 app.use(history());
 app.use(enforce.HTTPS({ trustProtoHeader: true }));
 

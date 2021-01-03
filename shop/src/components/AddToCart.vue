@@ -19,7 +19,7 @@
 
 <script>
 import { mapState } from "vuex";
-import AddToCartService from "@/services/AddToCartService";
+import CartService from "@/services/CartService";
 export default {
   name: "AddToCart",
   props: {
@@ -41,7 +41,7 @@ export default {
   async mounted() {
     if (this.user != null) {
       const cartProduct = (
-        await AddToCartService.getCartProduct({
+        await CartService.getCartProduct({
           productId: this.id
         })
       ).data;
@@ -53,7 +53,7 @@ export default {
       if (this.user != null) {
         try {
           const cartProduct = (
-            await AddToCartService.addToCart({
+            await CartService.addToCart({
               userId: this.user.id,
               productId: this.id,
               quantity: 1
@@ -76,7 +76,7 @@ export default {
     async remove() {
       console.log(this.id)
       try {
-        const cartProduct = (await AddToCartService.remove(this.id))
+        const cartProduct = (await CartService.remove(this.id))
           .data;
         this.addedToCart = !cartProduct;
       } catch (err) {

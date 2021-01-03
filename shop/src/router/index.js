@@ -7,6 +7,7 @@ import Products from "@/views/Products.vue";
 import ViewProduct from "@/views/ViewProduct.vue";
 import Login from "@/views/UserControl/Login.vue";
 import ForgetPassword from "@/views/UserControl/ForgetPassword.vue";
+import ResetPassword from "@/views/UserControl/ResetPassword.vue";
 import Register from "@/views/UserControl/Register.vue";
 import UserProfile from "@/views/UserControl/UserProfile.vue";
 import AboutUs from "@/views/AboutUs.vue";
@@ -51,6 +52,11 @@ const routes = [
     path: "/forget-password",
     name: "forget-password",
     component: ForgetPassword
+  },
+  {
+    path: "/reset-password/:token",
+    name: "reset-password",
+    component: ResetPassword
   },
   {
     path: "/register",

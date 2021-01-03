@@ -24,6 +24,7 @@
                           >Email</label
                         >
                         <input
+                          v-model="email"
                           class="form-control py-4"
                           id="inputEmailAddress"
                           type="email"
@@ -31,12 +32,14 @@
                           placeholder="Enter email address"
                         />
                       </div>
+                      <div class="error" v-html="error"></div>
+
                       <div
                         class="form-group d-flex align-items-center justify-content-between mt-4 mb-0"
                       >
                         <a class="small" href="/login">Return to login</a>
-                        <a class="btn btn-primary" href="/login"
-                          >Reset Password</a
+                        <b-button variant="primary" @click="requestToken"
+                          >Reset Password</b-button
                         >
                       </div>
                     </form>
@@ -74,13 +77,37 @@
 
 <script>
 import store from "@/store";
+import AuthenticationService from "@/services/AuthenticationService";
 
 export default {
   name: "Password",
   data() {
     return {
+      email: null,
+      error: null,
       shop: store.state.shop,
     };
+  },
+  methods: {
+    async requestToken() {
+      try {
+        const response = await AuthenticationService.requestToken({
+          email: this.email,
+        });
+        console.log(response);
+        // this.$store.dispatch("setToken", response.data.token);
+        // this.$store.dispatch("setUser", response.data.user);
+        this.$router.push({
+          name: "reset-password",
+          params: {
+            token: response.data.token,
+          },
+        });
+      } catch (error) {
+        console.log(error.response.data.error);
+        this.error = error.response.data.error;
+      }
+    },
   },
 };
 </script>
