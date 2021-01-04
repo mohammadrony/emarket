@@ -14,7 +14,7 @@ module.exports = {
   },
   async setImage(req, res) {
     try {
-      req.body.imageUrl = req.file.path
+      req.body.image = req.file.path
       const image = await Image.create(req.body)
       res.send(image)
     } catch (err) {

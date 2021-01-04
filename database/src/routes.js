@@ -44,9 +44,12 @@ module.exports = (app) => {
     AuthenticationController.register)
   app.post("/login",
     AuthenticationController.login)
+  app.get("/user/:id",
+    isAuthenticated,
+    AuthenticationController.user)
   app.post("/requestToken",
     AuthenticationController.requestToken)
-  app.get("/verifyToken",
+  app.get("/verifyToken/:token",
     AuthenticationController.verifyToken)
   app.post("/resetPassword",
     AuthenticationController.resetPassword)

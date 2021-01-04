@@ -103,16 +103,17 @@
                 style="max-width: 15rem; max-height: 10rem"
                 alt="Image Not Found"
               ></b-card-img>
-              <h5>{{ product.title }}</h5>
-              <h6>{{ product.price }} ৳</h6>
-              <b-button
+              <a href="" @click="viewProduct(product)">{{ product.title }}</a>
+              <br>
+              <h6 class="mt-2">{{ product.price }} ৳</h6>
+              <!-- <b-button
                 class="mt-4"
                 @click="viewProduct(product)"
                 href="#"
                 block
                 variant="warning"
                 >View Details</b-button
-              >
+              > -->
             </b-card>
           </b-card-group>
         </b-row>
@@ -584,7 +585,6 @@ export default {
 
   async mounted() {
     this.showSpinner = true;
-    // this.$store.dispatch("Products/setAllProduct");
     this.showSpinner = false;
     var start = 0,
       limit = 5;

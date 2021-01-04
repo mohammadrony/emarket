@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TopHeader></TopHeader>
+    <ATopHeader></ATopHeader>
     <b-row>
       <b-col cols="3">
         <ProductCategorySidebar />
@@ -64,7 +64,7 @@
               <b-col>
                 <img
                   class="product-image"
-                  :src="product.image"
+                  :src="product.image1"
                   alt="No Image"
                 />
               </b-col>
@@ -151,16 +151,6 @@
                 >
                 </b-form-input>
               </div>
-              <div class="mb-3">
-                <b-form-input
-                  required
-                  :rules="[required]"
-                  class="mb-2 mr-sm-2 mb-sm-0"
-                  placeholder="Add tag"
-                  v-model="properties.tags"
-                >
-                </b-form-input>
-              </div>
               <b-row class="mb-3">
                 <b-col>
                   <b-form-input
@@ -224,14 +214,14 @@
 <script>
 import { mapState } from "vuex";
 import ProductsService from "@/services/ProductsService";
-import TopHeader from "@/components/TopHeader.vue";
+import ATopHeader from "@/components/Admins/ATopHeader.vue";
 import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
 import { VueEditor } from "vue2-editor";
 
 export default {
   name: "AProducts",
   components: {
-    TopHeader,
+    ATopHeader,
     VueEditor,
     ProductCategorySidebar,
   },

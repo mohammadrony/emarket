@@ -8,226 +8,241 @@
         <b-row align-h="center">
           <img
             class="mb-2"
-            
             height="400px"
             :src="current_image"
             alt="Image Not Found"
           />
         </b-row>
         <b-row>
-          <b-img height="90px" @click="current_image=displayProduct.image1" :src="displayProduct.image1"></b-img>
-          <b-img height="90px" @click="current_image=displayProduct.image2" :src="displayProduct.image2"></b-img>
-          <b-img height="90px" @click="current_image=displayProduct.image3" :src="displayProduct.image3"></b-img>
-          <b-img height="90px" @click="current_image=displayProduct.image4" :src="displayProduct.image4"></b-img>
-          <b-img height="90px" @click="current_image=displayProduct.image4" :src="displayProduct.image5"></b-img>
-          <!-- <b-img
-            class="mr-2"
-            v-for="image in images"
-            :key="image.id"
-            height="80px"
-            :src="image.link"
-            @click="image_change(image)"
-          ></b-img> -->
+          <b-img
+            height="90px"
+            @click="current_image = displayProduct.image1"
+            :src="displayProduct.image1"
+          ></b-img>
+          <b-img
+            height="90px"
+            @click="current_image = displayProduct.image2"
+            :src="displayProduct.image2"
+          ></b-img>
+          <b-img
+            height="90px"
+            @click="current_image = displayProduct.image3"
+            :src="displayProduct.image3"
+          ></b-img>
+          <b-img
+            height="90px"
+            @click="current_image = displayProduct.image4"
+            :src="displayProduct.image4"
+          ></b-img>
+          <b-img
+            height="90px"
+            @click="current_image = displayProduct.image4"
+            :src="displayProduct.image5"
+          ></b-img>
         </b-row>
       </b-col>
       <b-col cols="5">
-        <div class="product-detail-right">
-          <h3>
-            {{displayProduct.title}} <br /><small
-              >{{displayProduct.code}}</small
-            >
-          </h3>
-          <h5><b>Price : </b>{{displayProduct.price}} {{displayProduct.currency}}</h5>
+        <div class="">
+          <h3>{{ displayProduct.title }}</h3>
+          <h5>
+            <b>Price : </b>{{ displayProduct.price }}
+            {{ displayProduct.currency }}
+          </h5>
           <div v-html="displayProduct.subtitle"></div>
-          <a href="#" class="addtocart"
-            ><i class="fas fa-heart"></i> Add to Cart</a
-          >
-          <a href="#" class="writereview"
-            ><i class="fas fa-pen"></i> Write a review</a
-          >
-          <a href="#" class="buynow"
-            ><i class="fas fa-shopping-cart"></i> Buy Now</a
-          >
+          <div class="d-flex mt-5">
+            <div>
+              <AddToCart
+                :id="displayProduct.id"
+                :title="displayProduct.title"
+                :price="displayProduct.price"
+              ></AddToCart>
+            </div>
+            <div class="mt-2 ml-3">
+              <a href="#">
+                <b-icon-pen />&nbsp;<strong>Write a review</strong>
+              </a>
+            </div>
+          </div>
+          <b-row>
+            <b-col cols="8">
+              <b-button class="mt-3" size="lg" variant="success" block>
+                <b-icon-cart-fill />
+                Buy Now
+              </b-button>
+            </b-col>
+          </b-row>
         </div>
       </b-col>
       <b-col />
     </b-row>
     <b-row>
-      <!-- Product Detail Page Start -->
       <div class="product-detail">
         <div class="container">
-          <div class="product-detail-left">
-            <!-- <div class="sp-loading">
-            <img src="http://localhost:8084/public/product-image/sp-loading.gif" />
-            Loading Images
-          </div> -->
-          </div>
-
           <div class="product-detail-feature">
             <h3>Feature</h3>
-            <!-- <p>Brand : Apple</p>
-          <p>Bluetooth : Yes</p>
-          <p>Wifi : Yes</p>
-          <p>Webcam : Yes</p>
-          <p>Weight : 1.37kg</p>
-          <p>Dimensions : 304x212x14.9mm</p>
-          <p>Speakers : Yes</p>
-          <p>Microphone : Yes</p>
-          <p>Laptop Processor Code : 7360U</p>
-          <p>Laptop Processor Code : 2</p>
-          <p>Laptop Catch Size : 4M</p>
-          <p>Laptop Processor : Intel Core i7</p>
-          <p>Laptop Processor Frequency : 3.6 GHz</p>
-          <p>Laptop OS : MacOS sierra</p>
-          <p>Laptop Series : Macbook Pro</p>
-          <p>Laptop Purpose : Work, Multimedia</p>
-          <p>Laptop Keyboard Backlight : Yes</p>
-          <p>Laptop Hard Drive Capacity : 128GB</p>
-          <p>Laptop Hard Drive Type : SSD</p>
-          <p>Laptop RAM : 8GB</p>
-          <p>Laptop Screen Size : 13.3 inch</p>
-          <p>Laptop Screen Resolution : 2560x1600</p>
-          <p>Laptop LED Backlight : Yes</p>
-          <p>Matrix Type of Laptop Screen : IPS</p>
-          <p>Laptop Screen Cover : Glossy</p>
-          <p>Widescreen Laptop Screen : Yes</p>
-          <p>Video Card Manufacturer : Inter Iris Plus Graphics</p>
-          <p>Notebook Graphics Card Type : Inter</p> -->
             <div v-html="displayProduct.description"></div>
           </div>
         </div>
       </div>
     </b-row>
 
-    <!-- Product Detail Page End -->
     <b-row align-v="center">
       <b-col></b-col>
-      <b-col cols="3">
-        <div class="d-flex justify-content-left">
-          <div class="content text-center">
-            <div class="ratings">
-              <span class="product-rating">4.6</span><span>/5</span>
-              <div class="stars">
-                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-              </div>
-              <div class="rating-text">
-                <span>46 ratings & 15 reviews</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <b-col cols="3" class="text-center">
+        <b-card>
+          <br>
+          <span class="product-rating">4.6</span><span>/5</span>
+          <b-row>
+            <b-col cols=2></b-col>
+            <b-col cols=8>
+
+          <b-form-rating
+            readonly
+            value="4.6"
+            variant="primary"
+            class="mb-2"
+          ></b-form-rating>
+            </b-col>
+            <b-col cols=2></b-col>
+          </b-row>
+          <h6 class="mt-2">46 ratings & 15 reviews</h6>
+          <br>
+        </b-card>
       </b-col>
       <b-col cols="3" class="justify-content-center">
-        5<b-progress variant="success" value="75" class="mb-3"></b-progress>
-        4<b-progress variant="warning" value="60" class="mb-3"></b-progress>
-        3<b-progress variant="primary" value="50" class="mb-3"></b-progress>
-        2<b-progress variant="info" value="40" class="mb-3"></b-progress>
-        1<b-progress variant="danger" value="30" class="mb-3"></b-progress>
+        <b-progress variant="success" value="75" class="mb-3"></b-progress>
+        <b-progress variant="warning" value="60" class="mb-3"></b-progress>
+        <b-progress variant="primary" value="50" class="mb-3"></b-progress>
+        <b-progress variant="info" value="40" class="mb-3"></b-progress>
+        <b-progress variant="danger" value="30" class="mb-3"></b-progress>
       </b-col>
       <b-col></b-col>
     </b-row>
+    <hr />
     <b-row>
       <b-col></b-col>
-      <b-col cols="10">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-7">
-              <hr />
-              <div class="review-block">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <img
-                      src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
-                      class="img-rounded"
-                    />
-                    <div class="review-block-name">
-                      <a href="#">nktailor</a>
-                    </div>
-                    <div class="review-block-date">
-                      December 29, 2020<br />2 day ago
-                    </div>
-                  </div>
-                  <div class="col-sm-9">
-                    <b-form-rating
-                      readonly
-                      value="4"
-                      variant="primary"
-                      class="mb-2"
-                    ></b-form-rating>
-
-                    <div class="review-block-title">this was nice in buy</div>
-                    <div class="review-block-description">
-                      this was nice in buy. this was nice in buy. this was nice
-                      in buy. this was nice in buy this was nice in buy this was
-                      nice in buy this was nice in buy this was nice in buy
-                    </div>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <img
-                      src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
-                      class="img-rounded"
-                    />
-                    <div class="review-block-name">
-                      <a href="#">nktailor</a>
-                    </div>
-                    <div class="review-block-date">
-                      December 29, 2020<br />2 day ago
-                    </div>
-                  </div>
-                  <div class="col-sm-9">
-                    <b-form-rating
-                      readonly
-                      value="5"
-                      variant="primary"
-                      class="mb-2"
-                    ></b-form-rating>
-                    <div class="review-block-title">this was nice in buy</div>
-                    <div class="review-block-description">
-                      this was nice in buy. this was nice in buy. this was nice
-                      in buy. this was nice in buy this was nice in buy this was
-                      nice in buy this was nice in buy this was nice in buy
-                    </div>
-                  </div>
-                </div>
-                <hr />
-                <div class="row">
-                  <div class="col-sm-3">
-                    <img
-                      src="http://dummyimage.com/60x60/666/ffffff&text=No+Image"
-                      class="img-rounded"
-                    />
-                    <div class="review-block-name">
-                      <a href="#">nktailor</a>
-                    </div>
-                    <div class="review-block-date">
-                      December 29, 2020<br />2 day ago
-                    </div>
-                  </div>
-                  <div class="col-sm-9">
-                    <b-form-rating
-                      readonly
-                      value="5"
-                      variant="primary"
-                      class="mb-2"
-                    ></b-form-rating>
-
-                    <div class="review-block-title">this was nice in buy</div>
-                    <div class="review-block-description">
-                      this was nice in buy. this was nice in buy. this was nice
-                      in buy. this was nice in buy this was nice in buy this was
-                      nice in buy this was nice in buy this was nice in buy
-                    </div>
-                  </div>
-                </div>
+      <b-col cols="5">
+        <b-card class="mb-3" bg-variant="white" text-variant="dark">
+          <b-row>
+            <b-col cols="3">
+              <b-img
+                src="http://localhost:8084/public/user-image/default-man.png"
+                height="60px"
+                width="60px"
+              ></b-img>
+              <br />
+              <b-link class="mt-2">John Doe</b-link>
+              <br />
+              <b-text size="sm">December 29, 2020</b-text>
+            </b-col>
+            <b-col cols="9">
+              <b-row>
+                <b-col cols="7">
+                  <b-form-rating
+                    readonly
+                    value="4"
+                    variant="primary"
+                    class="mb-2"
+                  ></b-form-rating>
+                </b-col>
+              </b-row>
+              <div>
+                this was nice in buy. this was nice in buy. this was nice in
+                buy. this was nice in buy this was nice in buy this was nice in
+                buy this was nice in buy this was nice in buy
               </div>
-            </div>
+            </b-col>
+          </b-row>
+        </b-card>
+        <b-card class="mb-3" bg-variant="white" text-variant="dark">
+          <b-row>
+            <b-col cols="3">
+              <b-img
+                src="http://localhost:8084/public/user-image/default-man.png"
+                height="60px"
+                width="60px"
+              ></b-img>
+              <br />
+              <b-link class="mt-2">John Doe</b-link>
+              <br />
+              <b-text size="sm">December 29, 2020</b-text>
+            </b-col>
+            <b-col cols="9">
+              <b-row>
+                <b-col cols="7">
+                  <b-form-rating
+                    readonly
+                    value="4"
+                    variant="primary"
+                    class="mb-2"
+                  ></b-form-rating>
+                </b-col>
+              </b-row>
+              <div>
+                this was nice in buy. this was nice in buy. this was nice in
+                buy. this was nice in buy this was nice in buy this was nice in
+                buy this was nice in buy this was nice in buy
+              </div>
+            </b-col>
+          </b-row>
+        </b-card>
+        <b-card class="mb-3" bg-variant="white" text-variant="dark">
+          <b-row>
+            <b-col cols="3">
+              <b-img
+                src="http://localhost:8084/public/user-image/default-man.png"
+                height="60px"
+                width="60px"
+              ></b-img>
+              <br />
+              <b-link class="mt-2">John Doe</b-link>
+              <br />
+              <b-text size="sm">December 29, 2020</b-text>
+            </b-col>
+            <b-col cols="9">
+              <b-row>
+                <b-col cols="7">
+                  <b-form-rating
+                    readonly
+                    value="4"
+                    variant="primary"
+                    class="mb-2"
+                  ></b-form-rating>
+                </b-col>
+              </b-row>
+              <div>
+                this was nice in buy. this was nice in buy. this was nice in
+                buy. this was nice in buy this was nice in buy this was nice in
+                buy this was nice in buy this was nice in buy
+              </div>
+            </b-col>
+          </b-row>
+        </b-card>
+      </b-col>
+      <b-col cols="5">
+        <b-card>
+          <div class="mt-2 ml-3">
+            <a variant="primary">
+              <b-icon-pen />&nbsp;<strong>Write a review</strong>
+            </a>
           </div>
-        </div>
-        <!-- /container -->
+          <h6></h6>
+          <b-row>
+            <b-col cols="5">
+              <b-form-rating
+                value="2"
+                variant="primary"
+                class="my-4"
+              ></b-form-rating>
+            </b-col>
+          </b-row>
+          <b-form-textarea
+            placeholder="your comment here"
+            rows="3"
+            max-rows="8"
+          ></b-form-textarea>
+          <b-button class="mt-4" variant="primary">Submit</b-button>
+        </b-card>
       </b-col>
       <b-col></b-col>
     </b-row>
@@ -430,58 +445,31 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
+import ProductService from "@/services/ProductsService.js";
 import TopHeader from "@/components/TopHeader.vue";
+import AddToCart from "@/components/AddToCart.vue";
+import { mapState } from "vuex";
 export default {
   name: "ProductDetails",
   components: {
     TopHeader,
+    AddToCart,
   },
   data() {
     return {
       current_image: null,
-    //   // images: {
-    //   //   link1: "http://localhost:8084/public/product-image/1_tb.jpg",
-    //   //   link2: "http://localhost:8084/public/product-image/2_tb.jpg",
-    //   //   link3: "http://localhost:8084/public/product-image/3_tb.jpg",
-    //   // },
-    //   images: [
-    //     {
-    //       id: 1,
-    //       link: "http://localhost:8084/public/product-image/1_tb.jpg",
-    //     },
-    //     {
-    //       id: 2,
-    //       link: "http://localhost:8084/public/product-image/2_tb.jpg",
-    //     },
-    //     {
-    //       id: 3,
-    //       link: "http://localhost:8084/public/product-image/3_tb.jpg",
-    //     },
-    //   ],
-    //   feature:
-    //     "<div><div><h3> Software </h3></div><div ><div >OS</div><div >Android 9.0 (Pie); One UI</div></div><div ><h3> Hardware </h3></div><div ><div >Design</div></div><div ><div >weight</div><div >168 gm</div></div><div ><div >screen</div><div >6.3inch PLS TFT capacitive touchscreen, 16M colors, 97.4 cm2 (~84.9% screen-to-body ratio)</div></div><div ><div >dimension</div><div >155.3 x 73.9 x 7.9 mm</div></div><div ><div >protection</div><div >Corning Gorilla Glass (unspecified)</div></div><div ><div >resolution</div><div >1080 x 2340 pixels, 19.5:9 ratio (~409 ppi density)</div></div><div ><div >Memory</div></div><div ><div >expandable</div><div >1024 GB</div></div><div ><div >RAM</div><div >6 GB</div></div><div ><div >ROM</div><div >128 GB</div></div><div ><div >Processor</div></div><div ><div >number of cores</div><div >8 core</div></div><div ><div >SoC</div><div >Qualcomm SDM675 Snapdragon 675 (11 nm)</div></div><div ><div >CPU</div><div >Octa-core (2x2.0 GHz Kryo 460 Gold &amp; 6x1.7 GHz Kryo 460 Silver)</div></div><div ><div >GPU</div><div >Adreno 612</div></div><div ><div >Camera</div></div><div ><div >secondary</div><div >16 MP, f/2.0, HDR</div></div><div ><div >video</div><div >2160p@30fps, 1080p@30fps</div></div><div ><div >feature</div><div >LED flash, panorama, HDR</div></div><div ><div >primary</div><div >Triple: <br>32 MP, f/1.7, 0.8m, PDAF <br>8 MP, f/2.2, 12mm (ultrawide), 1.12m, PDAF<br>5 MP, f/2.2, depth sensor<br></div></div><div ><div >Battery</div></div><div ><div >capacity</div><div >3500mAh Li-Polymer (non-removable)</div></div><div ><div ><h3>Connectivity</h3></div></div><div ><div >Wi-Fi</div><div >Wi-Fi 802.11 a/b/g/n/ac, dual-band, Wi-Fi Direct, hotspot</div></div><div ><div >internet</div><div >2G/3G/4G</div></div><div ><div >USB</div><div >2.0, Type-C 1.0 reversible connector</div></div><div ><div >bluetooth</div><div >5.0, A2DP, LE</div></div><div ><div >Audio</div></div><div ><div >radio</div><div >FM Radio</div></div><div ><div >Others</div></div><div ><div ><h3>sensors</h3></div><div >Fingerprint (rear-mounted), accelerometer, gyro, proximity, compass</div></div><div ><div >general</div><div >Hybrid Dual SIM (Nano-SIM, dual stand-by)</div></div><div > Manufacturer </div><div ><div >first arrival</div><div >June, 2019</div></div><div ><div >Manufactured By</div><div >Samsung</div></div><div ><div >availability</div><div >available</div></div></div>",
-    //   sub_title:
-    //     "<h5><b>Brand : </b> Apple</h5><h5><b>Warranty : </b> 12 Months</h5><h5><b>Delivery of the city : </b> Free</h5><h5><b>Payment : </b> COD, Visa, Mastercard, Debit, Credit, Installation</h5><h5><b>Availability : </b> in Stock</h5>",
-    //   oldfeature:
-    //     "<p>Brand : Apple</p><p>Bluetooth : Yes</p><p>Wifi : Yes</p><p>Webcam : Yes</p><p>Weight : 1.37kg</p><p>Dimensions : 304x212x14.9mm</p><p>Speakers : Yes</p><p>Microphone : Yes</p><p>Laptop Processor Code : 7360U</p><p>Laptop Processor Code : 2</p><p>Laptop Catch Size : 4M</p><p>Laptop Processor : Intel Core i7</p><p>Laptop Processor Frequency : 3.6 GHz</p><p>Laptop OS : MacOS sierra</p><p>Laptop Series : Macbook Pro</p><p>Laptop Purpose : Work, Multimedia</p><p>Laptop Keyboard Backlight : Yes</p><p>Laptop Hard Drive Capacity : 128GB</p><p>Laptop Hard Drive Type : SSD</p><p>Laptop RAM : 8GB</p><p>Laptop Screen Size : 13.3 inch</p><p>Laptop Screen Resolution : 2560x1600</p><p>Laptop LED Backlight : Yes</p><p>Matrix Type of Laptop Screen : IPS</p><p>Laptop Screen Cover : Glossy</p><p>Widescreen Laptop Screen : Yes</p><p>Video Card Manufacturer : Inter Iris Plus Graphics</p><p>Notebook Graphics Card Type : Inter</p>",
+      displayProduct: null,
     };
   },
-  methods: {
-    image_change(image) {
-      this.current_image = image.link;
-    },
-  },
-  mounted() {
+  methods: {},
+  async mounted() {
     const productId = this.$store.state.route.params.productId;
-    this.$store.dispatch("Products/setDisplayProduct", productId);
-    this.current_image = this.displayProduct.image1; 
+    this.displayProduct = (await ProductService.getProduct(productId)).data;
+    this.current_image = this.displayProduct.image1;
   },
   computed: {
-    ...mapState({
-      displayProduct: (state) => state.Products.displayProduct,
-      
-    }),
+    ...mapState(["user"]),
   },
 };
 </script>

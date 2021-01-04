@@ -1,18 +1,22 @@
 <template>
   <div class="addtocart">
     <b-button
-      v-if="(!addedToCart && user) || !user"
+      size=""
+      v-if="!addedToCart"
       @click="addToCart"
-      class="mt-2"
-      variant="success"
-      >Add to Cart
+      variant="outline-primary"
+      >
+      <b-icon-cart-plus-fill/> 
+      Add to Cart
     </b-button>
     <b-button
-      v-if="user && addedToCart"
+      v-if="addedToCart"
       @click="remove"
       class="mt-2"
-      variant="dark"
-      >Added to Cart
+      variant="warning"
+      >
+        <b-icon-cart-x-fill/>
+        Remove
     </b-button>
   </div>
 </template>
@@ -45,6 +49,7 @@ export default {
           productId: this.id
         })
       ).data;
+      console.log(cartProduct)
       this.addedToCart = !!cartProduct;
     }
   },

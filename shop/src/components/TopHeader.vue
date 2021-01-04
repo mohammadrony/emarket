@@ -77,7 +77,7 @@
             ></b-form-input>
           </b-nav-form>
         </b-navbar-nav>
-        <b-navbar-nav>
+        <b-navbar-nav class="ml-auto" v-if="userLoggedIn">
           <b-nav-item to="/wishlist"
             ><div style="color: #000">
               <i class="fas fa-heart"></i> Wishlist
@@ -88,8 +88,23 @@
               <i class="fas fa-shopping-cart"></i> Cart
             </div></b-nav-item
           >
+          <b-nav-item>
+            <b-img height="35px" width="35px" :src="user.image"></b-img>
+          </b-nav-item>
+          <b-nav-item-dropdown right>
+            <template #button-content>
+              <em v-if="user.username" style="color: #fff">{{
+                user.username
+              }}</em>
+              <em v-if="!user.username" style="color: #fff"
+                >{{ user.firstName }} {{ user.lastName }}</em
+              >
+            </template>
+            <b-dropdown-item @click="userProfile()">Profile</b-dropdown-item>
+            <b-dropdown-item @click="logout()">Log Out</b-dropdown-item>
+          </b-nav-item-dropdown>
         </b-navbar-nav>
-        <b-navbar-nav>
+        <b-navbar-nav class="ml-auto" v-if="!userLoggedIn">
           <b-button pill variant="success" to="/login">
             Login & Register
           </b-button>
@@ -127,11 +142,19 @@ export default {
   },
 
   methods: {
+    userProfile() {
+
+      this.$router.push({
+        name: "profile",
+        params: {
+          userId: this.user.id,
+        },
+      });
+    },
     logout() {
       this.$store.dispatch("setToken", null);
       this.$store.dispatch("setUser", null);
-      window.location.replace("/login");
-      location.reload(true);
+      window.location.replace("/");
     },
     set_category(category) {
       this.search_category_id = category.id;

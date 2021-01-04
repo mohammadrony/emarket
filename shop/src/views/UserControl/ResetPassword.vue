@@ -96,8 +96,8 @@ export default {
   },
   async mounted() {
     const token = this.$store.state.route.params.token;
-    const response = await AuthenticationService.verifyToken(token);
-    if (response.data.token === token) {
+    const response = (await AuthenticationService.verifyToken(token)).data;
+    if (response.token === token) {
       this.tokenValidate = true;
     }
     console.log(this.tokenValidate);

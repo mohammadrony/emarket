@@ -1,4 +1,3 @@
-const config = require("../config/config")
 const { Product } = require('../models')
 
 module.exports = {
@@ -40,7 +39,7 @@ module.exports = {
 	},
 	async createProduct(req, res) {
 		try {
-			req.body.imageUrl = `http://localhost:${config.port}/public/product-image/1_big.jpg`
+			req.body.image = 'http://localhost:8084/public/product-image/1_big.jpg'
 			console.log(req)
 			const product = await Product.create(req.body)
 			res.send(product)
@@ -58,7 +57,6 @@ module.exports = {
 					id: req.body.id
 				}
 			})
-			// console.log(prod);
 			res.send(req.body)
 		} catch (err) {
 			res.status(500).send({
@@ -81,7 +79,6 @@ module.exports = {
 			}
 			await product.destroy()
 			res.send(product)
-
 		} catch (err) {
 			res.status(500).send({
 				error: 'An error occured when trying to delete a product.'

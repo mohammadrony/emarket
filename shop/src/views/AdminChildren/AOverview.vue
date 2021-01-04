@@ -1,6 +1,6 @@
 <template>
   <div class="a-overview">
-    <TopHeader></TopHeader>
+    <ATopHeader></ATopHeader>
     <b-container>
       <b-row align-v="center">
         <b-col md="6">
@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import TopHeader from "@/components/TopHeader.vue";
+import ATopHeader from "@/components/Admins/ATopHeader.vue";
 export default {
   name: "AOverview",
   components: {
-    TopHeader
+    ATopHeader
   }
 };
 </script>

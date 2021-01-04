@@ -19,6 +19,7 @@ import AOverview from "@/views/AdminChildren/AOverview.vue";
 import AProducts from "@/views/AdminChildren/AProducts.vue";
 import AOrders from "@/views/AdminChildren/AOrders.vue";
 import AProfile from "@/views/AdminChildren/AProfile.vue";
+import Unauthorized from "@/views/ErrorPage/Unauthorized.vue";
 
 Vue.use(VueRouter);
 
@@ -64,8 +65,8 @@ const routes = [
     component: Register
   },
   {
-    path: "/user-profile",
-    name: "user-profile",
+    path: "/profile/:userId",
+    name: "profile",
     component: UserProfile
   },
   {
@@ -118,6 +119,11 @@ const routes = [
     component: AProfile,
     meta: { requiresAuth: true }
   },
+  {
+    path: "/error/401",
+    name: "unauthorized",
+    component: Unauthorized
+  }
 ];
 
 const router = new VueRouter({
@@ -130,7 +136,7 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   const admin = store.state.admin;
   if (requiresAuth && !admin) {
-    next("/");
+    next("/error/401");
   }
   else if (requiresAuth && admin) {
     next();
@@ -138,21 +144,19 @@ router.beforeEach((to, from, next) => {
   else {
     next();
   }
-
-
-  // if (to.matched.some(record => record.meta.requiresAuth)) {
-
-  //   if (!auth.loggedIn()) {
-  //     next({
-  //       path: '/login',
-  //       query: { redirect: to.fullPath }
-  //     })
-  //   } else {
-  //     next()
-  //   }
-  // } else {
-  //   next() 
-  // }
+  
+// if (to.matched.some(record => record.meta.requiresAuth)) {
+//   if (!auth.loggedIn()) {
+//     next({
+//       path: '/login',
+//       query: { redirect: to.fullPath }
+//     })
+//   } else {
+//     next()
+//   }
+// } else {
+//   next() 
+// }
 })
 
 export default router;

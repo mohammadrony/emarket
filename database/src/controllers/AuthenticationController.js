@@ -56,12 +56,30 @@ module.exports = {
             })
         }
     },
-
+    async user(req, res) {
+        try {
+            const userId = req.params.id;
+            const user = await User.findOne({
+                where: {
+                    id: userId
+                }
+            })
+            if(!user){
+                return res.status(403).send({
+                    error: "User not found."
+                })
+            }
+            res.send(user)
+        } catch(err) {
+            res.status(500).send({
+                error: "An error occured when trying to get an user."
+            })
+        }
+    },
     async requestToken(req, res) {
         try {
             var buf = crypto.randomBytes(20);
             var token = buf.toString('hex');
-            req.body.resetPasswordToken = token;
             const user = { email: req.body.email, resetPasswordToken: token };
             await User.update(user, {
                 where: {
@@ -110,13 +128,13 @@ module.exports = {
     },
     async verifyToken(req, res) {
         try {
-            const token = req.body.token
+            const token = req.params.token
             const user = await User.findOne({
                 where: {
                     resetPasswordToken: token
                 }
             });
-            if (!user) {
+            if (!user) { 
                 return res.status(403).send({
                     error: "Invalid token no."
                 })

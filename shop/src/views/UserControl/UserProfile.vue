@@ -10,7 +10,7 @@
               rounded="circle"
               height="50"
               width="50"
-              src="https://picsum.photos/300/150/?image=41"
+              :src="user.profileImage"
             ></b-img>
             <h3 class="mt-2">John</h3>
             <h6>Personal settings</h6>
@@ -32,17 +32,10 @@
             placeholder="First Name"
           ></b-form-input>
 
-          <label class="sr-only" for="last-name"
-            >Username</label
-          >
-          <b-input-group  class="mb-2 mb-sm-0">
-            <b-form-input
-              id="lastname"
-              placeholder="Last Name"
-            ></b-form-input>
+          <label class="sr-only" for="last-name">Username</label>
+          <b-input-group class="mb-2 mb-sm-0">
+            <b-form-input id="lastname" placeholder="Last Name"></b-form-input>
           </b-input-group>
-
-
         </b-form>
 
         <b-form-group id="input-group-2" label="Username" label-for="input-2">
@@ -93,7 +86,7 @@
           rounded="circle"
           height="250"
           width="250"
-          src="https://picsum.photos/300/150/?image=41"
+          :src="user.profileImage"
         ></b-img>
       </b-col>
       <b-col cols="1"></b-col>
@@ -103,10 +96,28 @@
 
 <script>
 import TopHeader from "@/components/TopHeader.vue";
+import AuthenticationService from "@/services/AuthenticationService.js";
+// import CartService from "@/services/CartService.js";
 export default {
   name: "UserProfile",
   components: {
     TopHeader,
+  },
+  data() {
+    return {
+      user: {
+        profileImage: "http://localhost:8084/public/user-image/default-man.png",
+      },
+    };
+  },
+  async mounted() {
+    try {
+      const userId = this.$store.state.route.params.userId;
+      this.user = (await AuthenticationService.user(userId)).data;
+      console.log(this.user);
+    } catch(error) {
+      console.log(error)
+    }
   },
 };
 </script>

@@ -85,6 +85,36 @@
       <b-col></b-col>
     </b-row>
 
+    <b-row class="mt-5">
+      <b-col></b-col>
+      <b-col cols=10>
+        <b-row
+          align-v="center"
+          v-for="(productlist, index) in displayProduct"
+          :key="index"
+        >
+          <b-card-group deck>
+            <b-card
+              v-for="(product, index) in productlist"
+              :key="index"
+              img-top
+              style="max-width: 18rem"
+              class="mb-4"
+            >
+              <b-card-img
+                :src="product.image1"
+                style="max-width: 15rem; max-height: 10rem"
+                alt="Image Not Found"
+              ></b-card-img>
+              <a href="" @click="viewProduct(product)">{{ product.title }}</a>
+              <br />
+              <h6 class="mt-2">{{ product.price }} ৳</h6>
+            </b-card>
+          </b-card-group>
+        </b-row>
+      </b-col>
+      <b-col></b-col>
+    </b-row>
     <!-- <div class="d-none d-lg-block">
       <h1>hello world</h1>
     </div>
@@ -94,17 +124,14 @@
       <b-col cols="10" md="4"> abc </b-col>
       <b-col cols="1" md="4"> def </b-col>
     </b-row> -->
-
     <!-- <b-row>
       <div :class="{ 'col-4': !myname, 'col-6': myname }">done</div>
       <b-col cols="10">ok</b-col>
     </b-row> -->
-
     <!-- Product Area Start -->
-    <div class="product-area">
+    <!-- <div class="product-area">
       <div class="container">
         <h3>Top Selling Products</h3>
-
         <div class="col-3">
           <a href="#">
             <img src="../../public/assets/images/product-img1.jpg" alt="" />
@@ -120,7 +147,6 @@
             <button class="productViewBtn">View Product</button>
           </a>
         </div>
-
         <div class="col-3">
           <a href="#">
             <img src="../../public/assets/images/product-img2.jpg" alt="" />
@@ -136,7 +162,6 @@
             <button class="productViewBtn">View Product</button>
           </a>
         </div>
-
         <div class="col-3">
           <a href="#">
             <img src="../../public/assets/images/product-img3.jpg" alt="" />
@@ -152,7 +177,6 @@
             <button class="productViewBtn">View Product</button>
           </a>
         </div>
-
         <div class="col-3">
           <a href="#">
             <img src="../../public/assets/images/product-img4.jpg" alt="" />
@@ -168,7 +192,6 @@
             <button class="productViewBtn">View Product</button>
           </a>
         </div>
-
         <div class="col-3">
           <a href="#">
             <img src="../../public/assets/images/product-img4.jpg" alt="" />
@@ -184,7 +207,6 @@
             <button class="productViewBtn">View Product</button>
           </a>
         </div>
-
         <div class="col-3">
           <a href="#">
             <img src="../../public/assets/images/product-img3.jpg" alt="" />
@@ -200,7 +222,6 @@
             <button class="productViewBtn">View Product</button>
           </a>
         </div>
-
         <div class="col-3">
           <a href="#">
             <img src="../../public/assets/images/product-img1.jpg" alt="" />
@@ -216,7 +237,6 @@
             <button class="productViewBtn">View Product</button>
           </a>
         </div>
-
         <div class="col-3">
           <a href="#">
             <img src="../../public/assets/images/product-img2.jpg" alt="" />
@@ -232,7 +252,6 @@
             <button class="productViewBtn">View Product</button>
           </a>
         </div>
-
         <h3>New 2019 Fresh Stock</h3>
         <div class="col-3">
           <a href="#">
@@ -295,11 +314,11 @@
           </a>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Product Area End -->
 
     <!-- Popular Store Start -->
-    <div class="popularStores">
+    <div id="google" class="popularStores">
       <div class="container">
         <h3>Popular Stores</h3>
         <b-row>
@@ -397,111 +416,26 @@
     </div>
     <!-- Other Information end -->
 
-    <!-- Footer Start -->
-    <div class="footer">
-      <div class="container">
-        <div class="col-3">
-          <p>
-            <big>Address Mirpur:</big><br />Adipisci cum reprehenderit
-            asperiores perferendis amet.
-          </p>
-          <p>
-            <big>Address Dhanmondi:</big><br />Ipsum repellat pariatur totam
-            voluptas asperiores
-          </p>
-          <p>
-            <big>Address Jessore:</big><br />Reprehenderit asperiores
-            perferendis asperiores.
-          </p>
-        </div>
-        <div class="col-3">
-          <ul>
-            <li><a href="#">Contact Anywhere</a></li>
-            <li><a href="#">Easy payment Method</a></li>
-            <li><a href="#">Fast Shipping</a></li>
-            <li><a href="#">Our New Brand</a></li>
-            <li><a href="#">Catalog</a></li>
-          </ul>
-        </div>
-        <div class="col-3">
-          <ul>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Jobs</a></li>
-            <li><a href="#">Corpoprative Clients</a></li>
-            <li><a href="#">Our Partner</a></li>
-            <li><a href="#">Terms of use</a></li>
-            <li><a href="#">Advertise with us</a></li>
-            <li><a href="#">Compare bank</a></li>
-          </ul>
-        </div>
-        <div class="col-3">
-          <ul>
-            <li><a href="#">Warranty</a></li>
-            <li><a href="#">Check in</a></li>
-            <li><a href="#">How to place order</a></li>
-            <li><a href="#">Exchange and return</a></li>
-            <li><a href="#">Installation</a></li>
-            <li><a href="#">Quality of services</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!-- Footer End -->
+    <Footer />
 
-    <div class="copyright">
-      <div class="container">
-        <h5>&copy; 2020 e-store.com</h5>
-      </div>
-    </div>
-
-    <!-- Product View Box / Quick Product View Start -->
-    <div class="productViewBox">
-      <h3>Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3</h3>
-      <div class="productViewBox-closeBtn" @click="productViewBox - closeBtn">
-        <i class="fas fa-times"></i>
-      </div>
-      <div class="productViewBoxImg">
-        <img src="../../public/assets/images/img1.jpg" />
-      </div>
-      <div class="productViewBoxDetail">
-        <h5><b>Price : </b> <i class="fas fa-dollar-sign"></i> 598</h5>
-        <h5><b>Brand : </b> Apple</h5>
-        <h5><b>Warranty : </b> 12 Months</h5>
-        <h5><b>Delivery of the city : </b> Free</h5>
-        <h5>
-          <b>Payment : </b> COD, Visa, Mastercard, Debit, Credit, Installation
-        </h5>
-        <h5><b>Availability : </b> in Stock</h5>
-        <h5><b>Product Code : </b> GA000006488</h5>
-        <a href="#" class="addtocart"
-          ><i class="fas fa-heart"></i> Add to Cart</a
-        >
-        <a href="#" class="writereview"
-          ><i class="fas fa-pen"></i> Write a review</a
-        >
-        <a href="#" class="buynow"
-          ><i class="fas fa-shopping-cart"></i> Buy Now</a
-        >
-      </div>
-    </div>
-    <!-- Product View Box / Quick Product View End -->
-
-    <!-- <Footer /> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import { mapState } from "vuex";
 import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
 import TopHeader from "@/components/TopHeader.vue";
+import Footer from '@/components/Footer.vue';
 // import AddToCart from "@/components/AddToCart.vue";
 // import Footer from "@/components/Footer.vue";
-import ProductsService from "@/services/ProductsService";
+// import ProductsService from "@/services/ProductsService";
 export default {
   name: "Home",
   components: {
     ProductCategorySidebar,
     TopHeader,
+    Footer,
     // AddToCart,
     // Footer
   },
@@ -522,14 +456,29 @@ export default {
       showSpinner: null,
       product: {},
       homeProducts: null,
-      displayProducts: null,
+      displayProduct: [],
     };
   },
+  computed: {
+    ...mapState({
+      allProduct: (state) => state.Products.allProduct,
+      apCount: (state) => state.Products.apCount,
+      displayProducts: (state) => state.Products.displayProducts,
+      perPage: (state) => state.Products.perPage,
+    }),
+  },
   async mounted() {
-    this.showSpinner = true;
-    this.homeProducts = (await ProductsService.getHomeProducts()).data;
-    this.displayProducts = this.homeProducts;
-    this.showSpinner = false;
+    // this.showSpinner = true;
+    // this.homeProducts = (await ProductsService.getHomeProducts()).data;
+    // this.displayProducts = this.homeProducts;
+    // this.showSpinner = false;
+    var start = 0,
+      limit = 5;
+    for (start = 0; start < this.displayProducts.length; start += limit) {
+      this.displayProduct.push(
+        this.displayProducts.slice(start, start + limit)
+      );
+    }
   },
   methods: {
     onSlideStart() {
@@ -538,9 +487,13 @@ export default {
     onSlideEnd() {
       this.sliding = false;
     },
-    setDisplayProduct(displayProduct) {
-      this.$store.dispatch("Products/setDisplayProduct", displayProduct);
-      window.location.replace("/details");
+    viewProduct(product) {
+      this.$router.push({
+        name: "product",
+        params: {
+          productId: product.id,
+        },
+      });
     },
   },
 };

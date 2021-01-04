@@ -1,17 +1,29 @@
 <template>
-  <div></div>
+  <div>
+    
+  </div>
 </template>
 
 <script>
 export default {
   name: "template",
-  components: {},
-  data() {
-    return {};
+  components: {
+    
   },
-  mounted() {},
-  methods: {},
-  computed: {},
+  data() {
+    return {
+      
+    };
+  },
+  mounted() {
+    
+  },
+  methods: {
+    
+  },
+  computed: {
+    
+  },
 };
 </script>
 

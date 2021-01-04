@@ -1,6 +1,6 @@
 <template>
   <div class="a-profile">
-    <TopHeader></TopHeader>
+    <ATopHeader></ATopHeader>
     <b-container>
       <b-row align-v="center">
         <b-col>
@@ -113,11 +113,11 @@
 </template>
 
 <script>
-import TopHeader from "@/components/TopHeader.vue";
+import ATopHeader from "@/components/Admins/ATopHeader.vue";
 export default {
   name: "AProfile",
   components: {
-    TopHeader
+    ATopHeader
   },
   data() {
     return {

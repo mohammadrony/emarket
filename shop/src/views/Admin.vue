@@ -1,6 +1,6 @@
 <template>
   <div class="admin">
-    <TopHeader></TopHeader>
+    <ATopHeader></ATopHeader>
     <b-container class="mb-5">
       <b-row>
         <b-col>
@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import TopHeader from "@/components/TopHeader.vue";
+import ATopHeader from "@/components/Admins/ATopHeader.vue";
 export default {
   name: "Admin",
   components: {
-    TopHeader
+    ATopHeader
   }
 };
 </script>

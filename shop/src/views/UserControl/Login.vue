@@ -114,10 +114,14 @@ export default {
           email: this.email,
           password: this.password,
         });
-
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);
-        window.location.replace("/");
+        if(response.data.user.isAdmin){
+          window.location.replace("/admin");
+        }
+        else {
+          window.location.replace("/");
+        }
       } catch (error) {
         console.log(error.response.data.error);
         this.error = error.response.data.error;

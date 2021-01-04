@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     type: DataTypes.STRING,
-    imageUrl: DataTypes.STRING
+    image: DataTypes.STRING
   })
   Image.associate = function (models) {
     Image.belongsTo(models.User)
