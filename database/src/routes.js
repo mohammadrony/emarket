@@ -20,7 +20,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 1024 * 1024 * 5
+    fileSize: 1024 * 1024 * 10
   },
   fileFilter: fileFilter
 });
@@ -96,7 +96,7 @@ module.exports = (app) => {
   app.get("/products/getHomeProducts",
     ProductsController.getHomeProducts)
   app.post("/products/createProduct",
-    upload.single('imageFile'),
+    upload.single('image1'),
     ProductsController.createProduct)
   app.put("/products/updateProduct",
     ProductsController.updateProduct)

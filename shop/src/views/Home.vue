@@ -5,7 +5,6 @@
       <div :class="{ 'col-3': sidebar_visible, 'col-1': !sidebar_visible }">
         <ProductCategorySidebar v-if="sidebar_visible" />
         <b-row class="text-right">
-          <b-col />
           <b-col>
             <b-button
               title="Hide list"
@@ -26,9 +25,6 @@
               </b-button-group>
             </b-button-toolbar>
           </b-col>
-          <b-col>
-            <b-button-toolbar> </b-button-toolbar>
-          </b-col>
         </b-row>
       </div>
       <b-col :class="{ 'col-8': sidebar_visible, 'col-10': !sidebar_visible }">
@@ -45,379 +41,308 @@
           @sliding-start="onSlideStart"
           @sliding-end="onSlideEnd"
         >
-          <!-- Text slides with image -->
           <b-carousel-slide
-            class="img-fluid w-100"
-            width="1024"
-            height="480"
-            img-src="http://localhost:8084/public/product-image/1.jpg"
-          ></b-carousel-slide>
-
-          <!-- Slides with custom text -->
+            caption="A New Online Shop Experience."
+            text="Hello"
+          >
+            <template #img>
+              <img
+                class="img-fluid w-100"
+                src="http://localhost:8084/public/display-images/home_slider_1.jpg"
+              />
+            </template>
+          </b-carousel-slide>
           <b-carousel-slide>
             <template #img>
               <img
                 class="img-fluid w-100"
-                width="1024"
-                height="480"
-                src="http://localhost:8084/public/product-image/2.jpg"
+                src="http://localhost:8084/public/display-images/home_slider_0.jpg"
               />
             </template>
           </b-carousel-slide>
         </b-carousel>
-        <b-row class="my-5 text-center">
+        <b-row class="mt-5">
           <b-col>
-            <img src="../../public/assets/images/img1.jpg" />
+            <b-img
+              @click="advertise"
+              src="http://localhost:8084/public/display-images/mac-mini.png"
+            ></b-img>
           </b-col>
           <b-col>
-            <img src="../../public/assets/images/img2.jpg" />
+            <b-img
+              @click="advertise"
+              src="http://localhost:8084/public/display-images/ipad-2020.jpeg"
+            ></b-img>
           </b-col>
           <b-col>
-            <img src="../../public/assets/images/img3.jpg" />
+            <b-img
+              @click="advertise"
+              src="http://localhost:8084/public/display-images/razer-opus.jpeg"
+            ></b-img>
+          </b-col>
+          <b-col>
+            <b-img
+              @click="advertise"
+              src="http://localhost:8084/public/display-images/p120.jpeg"
+            ></b-img>
           </b-col>
         </b-row>
-        <b-row>
+        <b-row class="mt-5">
           <b-col>
-            <img src="../../public/assets/images/banner.jpg" />
+            <b-img
+              @click="banner"
+              src="http://localhost:8084/public/display-images/smart-watches.jpeg"
+            ></b-img>
           </b-col>
-        </b-row>
-      </b-col>
-      <b-col></b-col>
-    </b-row>
-
-    <b-row class="mt-5">
-      <b-col></b-col>
-      <b-col cols=10>
-        <b-row
-          align-v="center"
-          v-for="(productlist, index) in displayProduct"
-          :key="index"
-        >
-          <b-card-group deck>
-            <b-card
-              v-for="(product, index) in productlist"
-              :key="index"
-              img-top
-              style="max-width: 18rem"
-              class="mb-4"
-            >
-              <b-card-img
-                :src="product.image1"
-                style="max-width: 15rem; max-height: 10rem"
-                alt="Image Not Found"
-              ></b-card-img>
-              <a href="" @click="viewProduct(product)">{{ product.title }}</a>
-              <br />
-              <h6 class="mt-2">{{ product.price }} ৳</h6>
-            </b-card>
-          </b-card-group>
+          <b-col>
+            <b-img
+              @click="banner"
+              src="http://localhost:8084/public/display-images/lenovo-yoga.jpeg"
+            ></b-img>
+          </b-col>
         </b-row>
       </b-col>
-      <b-col></b-col>
     </b-row>
-    <!-- <div class="d-none d-lg-block">
-      <h1>hello world</h1>
-    </div>
+    <b-container>
+      <b-row id="top-sell" class="mt-5">
+        <b-col>
+          <h3>Top Selling Products</h3>
+          <hr />
+          <b-row class="mt-3">
+            <b-col>
+              <b-card>
+                <b-card-img
+                  class="mb-3"
+                  src="http://localhost:8084/public/product-image/1_big.jpg"
+                ></b-card-img>
+                <b-link to="/products/2"
+                  ><h5>Mac Laptop Next Generation</h5></b-link
+                >
+                <h6>344 ৳</h6>
+              </b-card>
+            </b-col>
+            <b-col>
+              <b-card>
+                <b-card-img
+                  class="mb-3"
+                  src="http://localhost:8084/public/product-image/1_big.jpg"
+                ></b-card-img>
+                <b-link to="/products/2"
+                  ><h5>Mac Laptop Next Generation</h5></b-link
+                >
+                <h6>344 ৳</h6>
+              </b-card>
+            </b-col>
+            <b-col>
+              <b-card>
+                <b-card-img
+                  class="mb-3"
+                  src="http://localhost:8084/public/product-image/1_big.jpg"
+                ></b-card-img>
+                <b-link to="/products/2"
+                  ><h5>Mac Laptop Next Generation</h5></b-link
+                >
+                <h6>344 ৳</h6>
+              </b-card>
+            </b-col>
+            <b-col>
+              <b-card>
+                <b-card-img
+                  class="mb-3"
+                  src="http://localhost:8084/public/product-image/1_big.jpg"
+                ></b-card-img>
+                <b-link to="/products/2"
+                  ><h5>Mac Laptop Next Generation</h5></b-link
+                >
+                <h6>344 ৳</h6>
+              </b-card>
+            </b-col>
+          </b-row>
+          <b-row class="mt-3">
+            <b-col>
+              <b-card>
+                <b-card-img
+                  class="mb-3"
+                  src="http://localhost:8084/public/product-image/1_big.jpg"
+                ></b-card-img>
+                <b-link to="/products/2"
+                  ><h5>Mac Laptop Next Generation</h5></b-link
+                >
+                <h6>344 ৳</h6>
+              </b-card>
+            </b-col>
+            <b-col>
+              <b-card>
+                <b-card-img
+                  class="mb-3"
+                  src="http://localhost:8084/public/product-image/1_big.jpg"
+                ></b-card-img>
+                <b-link to="/products/2"
+                  ><h5>Mac Laptop Next Generation</h5></b-link
+                >
+                <h6>344 ৳</h6>
+              </b-card>
+            </b-col>
+            <b-col>
+              <b-card>
+                <b-card-img
+                  class="mb-3"
+                  src="http://localhost:8084/public/product-image/1_big.jpg"
+                ></b-card-img>
+                <b-link to="/products/2"
+                  ><h5>Mac Laptop Next Generation</h5></b-link
+                >
+                <h6>344 ৳</h6>
+              </b-card>
+            </b-col>
+            <b-col>
+              <b-card>
+                <b-card-img
+                  class="mb-3"
+                  src="http://localhost:8084/public/product-image/1_big.jpg"
+                ></b-card-img>
+                <b-link to="/products/2"
+                  ><h5>Mac Laptop Next Generation</h5></b-link
+                >
+                <h6>344 ৳</h6>
+              </b-card>
+            </b-col>
+          </b-row>
+          <h3 id="new-items" class="mt-5">New 2020 Fresh Stock</h3>
+          <hr />
+          <b-row class="mt-3">
+            <b-col>
+              <b-card>
+                <b-card-img
+                  class="mb-3"
+                  src="http://localhost:8084/public/product-image/1_big.jpg"
+                ></b-card-img>
+                <b-link to="/products/2"
+                  ><h5>Mac Laptop Next Generation</h5></b-link
+                >
+                <h6>344 ৳</h6>
+              </b-card>
+            </b-col>
+            <b-col>
+              <b-card>
+                <b-card-img
+                  class="mb-3"
+                  src="http://localhost:8084/public/product-image/1_big.jpg"
+                ></b-card-img>
+                <b-link to="/products/2"
+                  ><h5>Mac Laptop Next Generation</h5></b-link
+                >
+                <h6>344 ৳</h6>
+              </b-card>
+            </b-col>
+            <b-col>
+              <b-card>
+                <b-card-img
+                  class="mb-3"
+                  src="http://localhost:8084/public/product-image/1_big.jpg"
+                ></b-card-img>
+                <b-link to="/products/2"
+                  ><h5>Mac Laptop Next Generation</h5></b-link
+                >
+                <h6>344 ৳</h6>
+              </b-card>
+            </b-col>
+            <b-col>
+              <b-card>
+                <b-card-img
+                  class="mb-3"
+                  src="http://localhost:8084/public/product-image/1_big.jpg"
+                ></b-card-img>
+                <b-link to="/products/2"
+                  ><h5>Mac Laptop Next Generation</h5></b-link
+                >
+                <h6>344 ৳</h6>
+              </b-card>
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
+      <b-row class="mt-4">
+        <b-col>
+          <hr />
+          <b-row id="customer-support" align-v="center">
+            <b-col class="text-center">
+              <b-card class="m-4">
+                <b-img
+                  height="125"
+                  src="http://localhost:8084/public/display-icons/fast-delivery-icon.png"
+                ></b-img>
+                <br />
+                <h5 class="mt-1">
+                  <a style="text-decoration: none" href="#customer-support"
+                    >Fast Delivery</a
+                  >
+                </h5>
+              </b-card>
+            </b-col>
 
-    <b-row>
-      <b-col cols="1" md="4"> ok </b-col>
-      <b-col cols="10" md="4"> abc </b-col>
-      <b-col cols="1" md="4"> def </b-col>
-    </b-row> -->
-    <!-- <b-row>
-      <div :class="{ 'col-4': !myname, 'col-6': myname }">done</div>
-      <b-col cols="10">ok</b-col>
-    </b-row> -->
-    <!-- Product Area Start -->
-    <!-- <div class="product-area">
-      <div class="container">
-        <h3>Top Selling Products</h3>
-        <div class="col-3">
-          <a href="#">
-            <img src="../../public/assets/images/product-img1.jpg" alt="" />
-            <div class="caption">
-              <big>Code : GA00006488</big>
-              <h4>
-                Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-              </h4>
-              <button class="price">
-                <i class="fas fa-dollar-sign"></i> 999
-              </button>
-            </div>
-            <button class="productViewBtn">View Product</button>
-          </a>
-        </div>
-        <div class="col-3">
-          <a href="#">
-            <img src="../../public/assets/images/product-img2.jpg" alt="" />
-            <div class="caption">
-              <big>Code : GA00006488</big>
-              <h4>
-                Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-              </h4>
-              <button class="price">
-                <i class="fas fa-dollar-sign"></i> 255
-              </button>
-            </div>
-            <button class="productViewBtn">View Product</button>
-          </a>
-        </div>
-        <div class="col-3">
-          <a href="#">
-            <img src="../../public/assets/images/product-img3.jpg" alt="" />
-            <div class="caption">
-              <big>Code : GA00006488</big>
-              <h4>
-                Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-              </h4>
-              <button class="price">
-                <i class="fas fa-dollar-sign"></i> 444
-              </button>
-            </div>
-            <button class="productViewBtn">View Product</button>
-          </a>
-        </div>
-        <div class="col-3">
-          <a href="#">
-            <img src="../../public/assets/images/product-img4.jpg" alt="" />
-            <div class="caption">
-              <big>Code : GA00006488</big>
-              <h4>
-                Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-              </h4>
-              <button class="price">
-                <i class="fas fa-dollar-sign"></i> 598
-              </button>
-            </div>
-            <button class="productViewBtn">View Product</button>
-          </a>
-        </div>
-        <div class="col-3">
-          <a href="#">
-            <img src="../../public/assets/images/product-img4.jpg" alt="" />
-            <div class="caption">
-              <big>Code : GA00006488</big>
-              <h4>
-                Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-              </h4>
-              <button class="price">
-                <i class="fas fa-dollar-sign"></i> 999
-              </button>
-            </div>
-            <button class="productViewBtn">View Product</button>
-          </a>
-        </div>
-        <div class="col-3">
-          <a href="#">
-            <img src="../../public/assets/images/product-img3.jpg" alt="" />
-            <div class="caption">
-              <big>Code : GA00006488</big>
-              <h4>
-                Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-              </h4>
-              <button class="price">
-                <i class="fas fa-dollar-sign"></i> 255
-              </button>
-            </div>
-            <button class="productViewBtn">View Product</button>
-          </a>
-        </div>
-        <div class="col-3">
-          <a href="#">
-            <img src="../../public/assets/images/product-img1.jpg" alt="" />
-            <div class="caption">
-              <big>Code : GA00006488</big>
-              <h4>
-                Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-              </h4>
-              <button class="price">
-                <i class="fas fa-dollar-sign"></i> 444
-              </button>
-            </div>
-            <button class="productViewBtn">View Product</button>
-          </a>
-        </div>
-        <div class="col-3">
-          <a href="#">
-            <img src="../../public/assets/images/product-img2.jpg" alt="" />
-            <div class="caption">
-              <big>Code : GA00006488</big>
-              <h4>
-                Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-              </h4>
-              <button class="price">
-                <i class="fas fa-dollar-sign"></i> 598
-              </button>
-            </div>
-            <button class="productViewBtn">View Product</button>
-          </a>
-        </div>
-        <h3>New 2019 Fresh Stock</h3>
-        <div class="col-3">
-          <a href="#">
-            <img src="../../public/assets/images/product-img5.jpg" />
-            <div class="caption">
-              <big>Code : GA00006488</big>
-              <h4>
-                Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-              </h4>
-              <button class="price">
-                <i class="fas fa-dollar-sign"></i> 49
-              </button>
-            </div>
-            <button class="productViewBtn">View Product</button>
-          </a>
-        </div>
-        <div class="col-3">
-          <a href="#">
-            <img src="../../public/assets/images/product-img6.jpg" />
-            <div class="caption">
-              <big>Code : GA00006488</big>
-              <h4>
-                Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-              </h4>
-              <button class="price">
-                <i class="fas fa-dollar-sign"></i> 49
-              </button>
-            </div>
-            <button class="productViewBtn">View Product</button>
-          </a>
-        </div>
-        <div class="col-3">
-          <a href="#">
-            <img src="../../public/assets/images/product-img7.jpg" />
-            <div class="caption">
-              <big>Code : GA00006488</big>
-              <h4>
-                Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-              </h4>
-              <button class="price">
-                <i class="fas fa-dollar-sign"></i> 49
-              </button>
-            </div>
-            <button class="productViewBtn">View Product</button>
-          </a>
-        </div>
-        <div class="col-3">
-          <a href="#">
-            <img src="../../public/assets/images/product-img8.jpg" />
-            <div class="caption">
-              <big>Code : GA00006488</big>
-              <h4>
-                Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-              </h4>
-              <button class="price">
-                <i class="fas fa-dollar-sign"></i> 49
-              </button>
-            </div>
-            <button class="productViewBtn">View Product</button>
-          </a>
-        </div>
-      </div>
-    </div> -->
-    <!-- Product Area End -->
+            <b-col class="text-center">
+              <b-card class="m-4">
+                <b-img
+                  height="125"
+                  src="http://localhost:8084/public/display-icons/card-payment-icon.png"
+                ></b-img>
+                <br />
+                <h5 class="mt-1">
+                  <a style="text-decoration: none" href="#customer-support"
+                    >Easy Payment</a
+                  >
+                </h5>
+              </b-card>
+            </b-col>
 
-    <!-- Popular Store Start -->
-    <div id="google" class="popularStores">
-      <div class="container">
-        <h3>Popular Stores</h3>
-        <b-row>
-          <div class="popularStoresInner">
-            <a href="#">Dolorsite</a>
-            <a href="#">Nostrum</a>
-            <a href="#">Dignissimos</a>
-            <a href="#">Temporibus</a>
-            <a href="#">Distinction</a>
-            <a href="#">Voluptam</a>
-            <a href="#">Similique</a>
-            <a href="#">Placeat</a>
-            <a href="#">Dismiss</a>
-          </div>
-        </b-row>
-      </div>
-    </div>
-    <!-- Popular Store End -->
-
-    <!-- Greatest Offer News Start -->
-    <div class="news">
-      <div class="container">
-        <h3>Greatest Offer News</h3>
-        <div class="owl-carousel">
-          <div class="item">
-            <img src="../../public/assets/images/product-img9.jpg" />
-          </div>
-          <div class="item">
-            <img src="../../public/assets/images/product-img10.jpg" />
-          </div>
-          <div class="item">
-            <img src="../../public/assets/images/product-img11.jpg" />
-          </div>
-          <div class="item">
-            <img src="../../public/assets/images/product-img12.jpg" />
-          </div>
-          <div class="item">
-            <img src="../../public/assets/images/product-img10.jpg" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Greatest Offer News End -->
-
-    <!-- Support Section start-->
-    <div class="support">
-      <div class="container">
-        <a href="#">
-          <img src="../../public/assets/images/icon1.png" />
-          <h5>Fast Delivery</h5>
-        </a>
-        <a href="#">
-          <img src="../../public/assets/images/icon2.png" />
-          <h5>Support 24 Hours</h5>
-        </a>
-        <a href="#">
-          <img src="../../public/assets/images/icon3.png" />
-          <h5>Easy Payment Method</h5>
-        </a>
-        <a href="#">
-          <img src="../../public/assets/images/icon4.png" />
-          <h5>Sell on e-store</h5>
-        </a>
-      </div>
-    </div>
-    <!-- Support Section end-->
-
-    <!-- Other Information start -->
-    <div class="otherInfo">
-      <div class="container">
-        <h3 class="otherInfoHandle">
-          Consectetur adipisicing elit exercitationem
-        </h3>
-        <div class="otherInfoBody">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui
-            exercitationem, iste necessitatibus ex ea quaerat itaque numquam
-            neque ad velit, aspernatur sunt culpa placeat iusto dolore
-            molestias, porro ab perspiciatis.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
-            voluptatibus perspiciatis, dolor inventore dicta ut pariatur
-            cupiditate blanditiis deleniti necessitatibus suscipit magnam,
-            reiciendis tenetur ratione, doloribus vero hic minima asperiores.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum
-            repellat pariatur totam voluptas quos asperiores cupiditate,
-            nesciunt quis unde doloremque nostrum beatae ex, ut. Adipisci cum
-            reprehenderit asperiores perferendis amet.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!-- Other Information end -->
-
-    <Footer />
-
+            <b-col class="text-center">
+              <b-card class="m-4">
+                <b-img
+                  height="125"
+                  src="http://localhost:8084/public/display-icons/online-support-icon.png"
+                ></b-img>
+                <br />
+                <h5 class="mt-1">
+                  <a style="text-decoration: none" href="#customer-support"
+                    >Support 24 Hours</a
+                  >
+                </h5>
+              </b-card>
+            </b-col>
+          </b-row>
+          <hr />
+          <b-row id="newsletter" class="pt-4">
+            <b-col class="text-center">
+              <p style="font-size: 34px">Subscribe to our newsletter</p>
+              <p>
+                Get the latest news on sublime electronics by just subscribing
+                here.
+              </p>
+              <b-row>
+                <b-col cols="3"></b-col>
+                <b-col cols="6">
+                  <b-form-input
+                    class="mt-4"
+                    size="lg"
+                    placeholder="Email Address"
+                  ></b-form-input>
+                </b-col>
+                <b-col cols="3"></b-col>
+              </b-row>
+              <b-button
+                class="mt-5 px-5"
+                size="lg"
+                variant="outline-info"
+                href="#newsletter"
+                >Subscribe</b-button
+              >
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
+    </b-container>
+    <Footer class="pt-4 mt-4" />
   </div>
 </template>
 
@@ -426,9 +351,8 @@
 import { mapState } from "vuex";
 import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
 import TopHeader from "@/components/TopHeader.vue";
-import Footer from '@/components/Footer.vue';
+import Footer from "@/components/Footer.vue";
 // import AddToCart from "@/components/AddToCart.vue";
-// import Footer from "@/components/Footer.vue";
 // import ProductsService from "@/services/ProductsService";
 export default {
   name: "Home",
@@ -437,7 +361,6 @@ export default {
     TopHeader,
     Footer,
     // AddToCart,
-    // Footer
   },
   data() {
     return {
@@ -481,6 +404,12 @@ export default {
     }
   },
   methods: {
+    advertise() {
+      window.location.replace("/products");
+    },
+    banner() {
+      window.location.replace("/product/4");
+    },
     onSlideStart() {
       this.sliding = true;
     },
@@ -500,6 +429,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.avds_background {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
 .left-align {
   text-align: left;
 }

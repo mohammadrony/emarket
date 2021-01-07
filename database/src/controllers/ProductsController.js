@@ -39,12 +39,10 @@ module.exports = {
 	},
 	async createProduct(req, res) {
 		try {
-			req.body.image = 'http://localhost:8084/public/product-image/1_big.jpg'
-			console.log(req)
+			console.log("file", req.file,"body",req.body)
 			const product = await Product.create(req.body)
 			res.send(product)
 		} catch (err) {
-			console.log(req.body)
 			res.status(500).send({
 				error: 'An error occured when trying to create a product.'
 			})

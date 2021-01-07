@@ -28,12 +28,12 @@
           <label class="sr-only" for="first-name">Name</label>
           <b-form-input
             id="first-name"
-            class="mb-2 mr-sm-2 mb-sm-0"
+            class="mb-2"
             placeholder="First Name"
           ></b-form-input>
 
           <label class="sr-only" for="last-name">Username</label>
-          <b-input-group class="mb-2 mb-sm-0">
+          <b-input-group class="mb-2">
             <b-form-input id="lastname" placeholder="Last Name"></b-form-input>
           </b-input-group>
         </b-form>

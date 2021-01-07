@@ -17,6 +17,7 @@ import Checkout from "@/views/Checkout.vue";
 import Admin from "@/views/Admin.vue";
 import AOverview from "@/views/AdminChildren/AOverview.vue";
 import AProducts from "@/views/AdminChildren/AProducts.vue";
+import AddProduct from "@/views/AdminChildren/AddProduct.vue";
 import AOrders from "@/views/AdminChildren/AOrders.vue";
 import AProfile from "@/views/AdminChildren/AProfile.vue";
 import Unauthorized from "@/views/ErrorPage/Unauthorized.vue";
@@ -105,6 +106,12 @@ const routes = [
     path: "/admin/products",
     name: "admin-products",
     component: AProducts,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/admin/add-product",
+    name: "add-product",
+    component: AddProduct,
     meta: { requiresAuth: true }
   },
   {

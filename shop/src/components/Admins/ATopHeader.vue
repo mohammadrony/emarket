@@ -19,7 +19,7 @@
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item>
-            <b-img height="35px" width="35px" :src="user.image"></b-img>
+            <b-img height="35px" width="35px" :src="user.profileImage"></b-img>
           </b-nav-item>
           <b-nav-item-dropdown right>
             <template #button-content>

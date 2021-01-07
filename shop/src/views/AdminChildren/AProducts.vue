@@ -30,7 +30,7 @@
           </b-col>
           <b-col cols="3">
             <b-button
-              @click="addProductModal"
+              to="/admin/add-product"
               block
               size="md"
               class="mb-3"

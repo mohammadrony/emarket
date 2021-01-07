@@ -6,7 +6,7 @@ export const ProductsModule = {
   state: {
     allProduct: null,
     allProductBackup: null,
-    displayProducts: null,
+    displayProducts: [],
     displayProduct: null,
     apCount: null,
     perPage: null

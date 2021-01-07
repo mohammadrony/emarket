@@ -55,9 +55,9 @@
 
 <script>
 import { mapState } from "vuex";
-import CategoryService from "../services/CategoryService";
-import SubCategoryService from "../services/SubCategoryService";
-import SubSubCategoryService from "../services/SubSubCategoryService";
+import CategoryService from "@/services/CategoryService";
+import SubCategoryService from "@/services/SubCategoryService";
+import SubSubCategoryService from "@/services/SubSubCategoryService";
 
 export default {
   name: "ProductCategorySidebar",

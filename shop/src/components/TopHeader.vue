@@ -89,7 +89,7 @@
             </div></b-nav-item
           >
           <b-nav-item>
-            <b-img height="35px" width="35px" :src="user.image"></b-img>
+            <b-img height="35px" width="35px" :src="user.profileImage"></b-img>
           </b-nav-item>
           <b-nav-item-dropdown right>
             <template #button-content>

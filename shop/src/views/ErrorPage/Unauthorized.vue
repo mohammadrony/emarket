@@ -1,7 +1,7 @@
 <template>
   <div>
     <TopHeader/>
-    <b-row align-h="center" class="m-5 p-5">
+    <b-row align-h="center" class="mb-5 p-5">
       <div class="text-center">
         <a style="font-size: 100px"> 401</a>
         <h4>Unauthorized Page</h4>
