@@ -96,7 +96,7 @@ module.exports = (app) => {
   app.get("/products/getHomeProducts",
     ProductsController.getHomeProducts)
   app.post("/products/createProduct",
-    upload.single('image1'),
+    upload.array("imageField",10),
     ProductsController.createProduct)
   app.put("/products/updateProduct",
     ProductsController.updateProduct)

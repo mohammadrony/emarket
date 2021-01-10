@@ -58,7 +58,7 @@
               ></AddToCart>
             </div>
             <div class="mt-2 ml-3">
-              <a href="#">
+              <a href="#write_review">
                 <b-icon-pen />&nbsp;<strong>Write a review</strong>
               </a>
             </div>
@@ -120,7 +120,7 @@
     <hr />
     <b-row>
       <b-col></b-col>
-      <b-col cols="5">
+      <b-col cols="5" id="write_review">
         <b-card class="mb-3" bg-variant="white" text-variant="dark">
           <b-row>
             <b-col cols="3">

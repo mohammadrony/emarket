@@ -36,13 +36,13 @@ module.exports = {
             })
             if (!user) {
                 return res.status(403).send({
-                    error: 'Incorrect email or password!'
+                    error: 'Incorrect login information.'
                 })
             }
             const correctPassword = password === user.password
             if (!correctPassword) {
                 return res.status(403).send({
-                    error: 'Incorrect email or password!'
+                    error: 'Incorrect login information.'
                 })
             }
             userJson = user.toJSON()
@@ -59,6 +59,7 @@ module.exports = {
     async user(req, res) {
         try {
             const userId = req.params.id;
+            // const userId2 = req.user.id;     // is to check authenticated user send request or not
             const user = await User.findOne({
                 where: {
                     id: userId

@@ -1,6 +1,7 @@
 <template>
   <div>
     <TopHeader></TopHeader>
+
     <!-- <b-col cols="8"> -->
     <!-- <b-form-input
       size="lg"
@@ -56,6 +57,7 @@
             </b-col>
           </b-row>
         </b-container> -->
+    <b-button variant="info" @click="loadSomething">Submit</b-button>
     <b-row>
       <div :class="{ 'col-3': sidebar_visible, 'col-1': !sidebar_visible }">
         <ProductCategorySidebar v-if="sidebar_visible" />
@@ -85,28 +87,30 @@
         </b-row>
       </div>
       <b-col :class="{ 'col-8': sidebar_visible, 'col-10': !sidebar_visible }">
-        <b-row
-          align-v="center"
-          v-for="(productlist, index) in displayProduct"
-          :key="index"
-        >
-          <b-card-group deck>
-            <b-card
-              v-for="(product, index) in productlist"
-              :key="index"
-              img-top
-              style="max-width: 18rem"
-              class="mb-4"
-            >
-              <b-card-img
-                :src="product.image1"
-                style="max-width: 15rem; max-height: 10rem"
-                alt="Image Not Found"
-              ></b-card-img>
-              <a href="" @click="viewProduct(product)">{{ product.title }}</a>
-              <br>
-              <h6 class="mt-2">{{ product.price }} ৳</h6>
-              <!-- <b-button
+        <b-row>
+          <b-col
+            cols="4"
+            v-for="(product, index) in displayProducts"
+            :key="index"
+          >
+            <b-card-group deck>
+              <b-card img-top style="max-width: 25rem" class="mb-4">
+                <b-card-img
+                  :src="product.image1"
+                  style="max-width: 25rem; max-height: 25rem"
+                  alt="Image Not Found"
+                ></b-card-img>
+                <a href="" @click="viewProduct(product)">{{ product.title }}</a>
+                <br />
+                <h6 class="mt-2">{{ product.price }} ৳</h6>
+                <AddToCart
+                  class="mt-4"
+                  size="sm"
+                  :id="product.id"
+                  :title="product.title"
+                  :price="product.price"
+                ></AddToCart>
+                <!-- <b-button
                 class="mt-4"
                 @click="viewProduct(product)"
                 href="#"
@@ -114,8 +118,9 @@
                 variant="warning"
                 >View Details</b-button
               > -->
-            </b-card>
-          </b-card-group>
+              </b-card>
+            </b-card-group>
+          </b-col>
         </b-row>
 
         <!-- <div class="product-area">
@@ -137,431 +142,49 @@
             </div>
           </div>
         </div> -->
+        <hr>
+        <b-row class="mt-3" align-v="center">
+          <b-col>
+            <b-pagination
+              v-if="this.apCount != 0"
+              size=""
+              v-model="currentPage"
+              :total-rows="apCount"
+              :per-page="perPage"
+              @input="paginate(currentPage)"
+            ></b-pagination>
+          </b-col>
+          <b-col></b-col>
+          <b-col>
+            <h6>SHOWING {{(currentPage-1)*perPage+1}} TO {{currentPage*perPage}} OF {{apCount}} ({{Math.ceil(apCount/perPage)}} PAGES)</h6>
+          </b-col>
+        </b-row>
       </b-col>
       <b-col></b-col>
     </b-row>
-    <!-- Product Area Start -->
-    <!-- <b-row>
-      <b-col></b-col>
-      <b-col cols="10">
-        
-      </b-col>
-      <b-col></b-col>
-    </b-row> -->
-    <!-- <div class="product-area">
-          <div class="container">
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img1.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 999
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-            
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img2.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 255
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img3.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 444
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img4.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 598
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img4.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 999
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img3.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 255
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img1.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 444
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img2.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 598
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img5.jpg" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 49
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img6.jpg" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 49
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img7.jpg" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 49
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img8.jpg" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 49
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img1.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 999
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img2.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 255
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img3.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 444
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img4.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 598
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img4.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 999
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img3.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 255
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img1.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 444
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img2.jpg" alt="" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 598
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img5.jpg" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 49
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img6.jpg" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 49
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img7.jpg" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 49
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-            <div class="col-3">
-              <a href="#">
-                <img src="../../public/assets/images/product-img8.jpg" />
-                <div class="caption">
-                  <big>Code : GA00006488</big>
-                  <h4>
-                    Apple Macbook Pro MQ032 14.5' Inter Core i7 5550U 8GB DDR3
-                  </h4>
-                  <button class="price">
-                    <i class="fas fa-dollar-sign"></i> 49
-                  </button>
-                </div>
-                <button class="productViewBtn">View Product</button>
-              </a>
-            </div>
-            
-          </div>
-          
-        </div> -->
-
+    <b-container v-if="this.apCount == 0">
+      <h3>Nothing Found!!!</h3>
+    </b-container>
     <div class="m-4 d-flex justify-content-center" v-if="this.apCount == 0">
       <h3>Nothing found for this keyword.</h3>
     </div>
-    <!-- </b-col> -->
-    <!-- <b-pagination
-          v-if="this.apCount != 0"
-          class="m-4"
-          size="lg"
-          v-model="currentPage"
-          :total-rows="apCount"
-          :per-page="perPage"
-          @input="paginate(currentPage)"
-        ></b-pagination> -->
-    <!-- </b-row> -->
+    <Footer />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import TopHeader from "@/components/TopHeader.vue";
-// import AddToCart from "@/components/AddToCart.vue";
+import AddToCart from "@/components/AddToCart.vue";
+import Footer from "@/components/Footer.vue";
 import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
 
 export default {
   name: "Products",
   components: {
     TopHeader,
-    // AddToCart,
+    AddToCart,
+    Footer,
     ProductCategorySidebar,
   },
 
@@ -569,7 +192,7 @@ export default {
     return {
       displayProduct: [],
       sidebar_visible: true,
-      showSpinner: null,
+      // showSpinner: null,
       searchText: "",
       currentPage: 1,
     };
@@ -584,20 +207,28 @@ export default {
   },
 
   async mounted() {
-    this.showSpinner = true;
-    this.showSpinner = false;
-    var start = 0,
-      limit = 5;
-    for (start = 0; start < this.displayProducts.length; start += limit) {
-      this.displayProduct.push(this.displayProducts.slice(
-        start,
-        start + limit
-      ));
-    }
+    await this.$store.dispatch("Products/setAllProduct");
+    await this.$store.dispatch("Products/resetSearchParameter");
+    // this.showSpinner = true;
+    // this.showSpinner = false;
+    // var start = 0,
+    //   limit = 5;
+    // for (start = 0; start < this.displayProducts.length; start += limit) {
+    //   this.displayProduct.push(
+    //     this.displayProducts.slice(start, start + limit)
+    //   );
+    // }
   },
   methods: {
-    search() {
-      this.$store.dispatch("Products/searchProduct", { text: this.searchText });
+    ok() {
+      console.log("hello there");
+    },
+    // search() {
+    //   this.$store.dispatch("Products/searchProduct", { text: this.searchText });
+    // },
+    loadSomething() {
+      // this.$store.dispatch("Products/getAllBackupProduct");
+      console.log(this.$store.state.Products.displayProducts);
     },
     viewProduct(product) {
       this.$router.push({

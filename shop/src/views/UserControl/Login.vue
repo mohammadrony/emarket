@@ -1,125 +1,105 @@
 <template>
-  <div id="layoutAuthentication">
-    <a class="m-4 logo abbr" href="/">{{ shop.name }}</a>
-    <div id="layoutAuthentication_content">
-      <main>
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-5">
-              <div class="card shadow-lg border-0 rounded-lg m-4">
-                <div class="card-header">
-                  <h3 class="text-center font-weight-light my-2">Login</h3>
-                </div>
-                <div class="card-body">
-                  <form>
-                    <div class="form-group">
-                      <label class="small mb-1" for="inputEmailAddress"
-                        >Email</label
-                      >
-                      <input
-                        class="form-control py-4"
-                        id="inputEmailAddress"
-                        type="email"
-                        v-model="email"
-                        placeholder="Enter email address"
-                      />
-                    </div>
-                    <div class="form-group">
-                      <label class="small mb-1" for="inputPassword"
-                        >Password</label
-                      >
-                      <input
-                        class="form-control py-4"
-                        id="inputPassword"
-                        type="password"
-                        @keyup.enter="login"
-                        v-model="password"
-                        placeholder="Enter password"
-                      />
-                    </div>
-                    <div class="error" v-html="error"></div>
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox">
-                        <input
-                          class="custom-control-input"
-                          id="rememberPasswordCheck"
-                          type="checkbox"
-                        />
-                        <label
-                          class="custom-control-label"
-                          for="rememberPasswordCheck"
-                          >Remember password</label
-                        >
-                      </div>
-                    </div>
-                    <div
-                      class="form-group d-flex align-items-center justify-content-between mt-1 mb-0"
-                    >
-                      <a class="small" href="/forget-password"
-                        >Forgot Password?</a
-                      >
-                      <b-button variant="primary" @click="login"
-                        >Login</b-button
-                      >
-                    </div>
-                  </form>
-                </div>
-                <div class="card-footer text-center">
-                  <div class="small">
-                    <a href="/register">Need an account? Sign up!</a>
-                  </div>
-                </div>
+  <div>
+    <TopHeader />
+    <b-container>
+      <!-- <b-row class="mt-4">
+        <b-col class="text-center">
+          <h3>Login</h3>
+        </b-col>
+      </b-row> -->
+      <b-row class="mt-5" align-h="center">
+        <b-col cols="5">
+          <b-card >
+            <b-card-header class="pt-3">
+              <b-row align-h="center"><h2>Login</h2></b-row>
+            </b-card-header>
+            <b-form class="mt-3">
+              <b-form-group
+                id="input-group-email"
+                label="Email"
+                label-for="input-email"
+                description="We'll never share your email with anyone else."
+              >
+                <b-form-input
+                  v-model="email"
+                  id="input-email"
+                  type="email"
+                  @keyup.enter="login"
+                  placeholder="Enter email address"
+                  required
+                ></b-form-input>
+              </b-form-group>
+
+              <b-form-group
+                id="input-group-password"
+                label="Password"
+                label-for="input-password"
+              >
+                <b-form-input
+                  v-model="password"
+                  id="input-password"
+                  type="password"
+                  @keyup.enter="login"
+                  placeholder="Enter password"
+                  required
+                ></b-form-input>
+              </b-form-group>
+              <h6 style="color: #f00">
+                {{ error }}
+              </h6>
+              <div
+                class="form-group d-flex align-items-center justify-content-between mt-1 mb-0"
+              >
+                <a class="small" href="/forget-password">Forgot Password?</a>
+                <b-button variant="primary" @click="login">Login</b-button>
               </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-    <div id="layoutAuthentication_footer">
-      <footer class="py-4 bg-light mt-5">
-        <div class="container-fluid">
-          <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Your Website 2020</div>
-            <div>
-              <a href="#">Privacy Policy</a>
-              &middot;
-              <a href="#">Terms &amp; Conditions</a>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
+            </b-form>
+            <hr />
+            <small><a href="/register">Need an account? Sign up!</a></small>
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-container>
+    <Footer class="mt-5" />
   </div>
 </template>
 
 <script>
 import AuthenticationService from "@/services/AuthenticationService";
+import TopHeader from "@/components/TopHeader.vue";
+import Footer from "@/components/Footer.vue";
 import store from "@/store";
 
 export default {
   name: "Login",
+  components: {
+    TopHeader,
+    Footer,
+  },
   data() {
     return {
       shop: store.state.shop,
-      email: null,
-      password: null,
+      email: "",
+      password: "",
       error: null,
     };
   },
-
   methods: {
     async login() {
       try {
+        if (!this.email || !this.password) {
+          this.error = "Provide login information.";
+          return;
+        }
         const response = await AuthenticationService.login({
           email: this.email,
           password: this.password,
         });
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);
-        if(response.data.user.isAdmin){
+        if (response.data.user.isAdmin) {
           window.location.replace("/admin");
-        }
-        else {
+        } else {
           window.location.replace("/");
         }
       } catch (error) {

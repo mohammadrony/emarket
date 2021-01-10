@@ -1,23 +1,22 @@
 <template>
   <div class="addtocart">
     <b-button
-      size=""
-      v-if="!addedToCart"
+      :size="size"
       @click="addToCart"
       variant="outline-primary"
-      >
-      <b-icon-cart-plus-fill/> 
+    >
+      <b-icon-cart-plus-fill />
       Add to Cart
     </b-button>
-    <b-button
+    <!-- <b-button
+      :size="size"
       v-if="addedToCart"
-      @click="remove"
       class="mt-2"
-      variant="warning"
-      >
-        <b-icon-cart-x-fill/>
-        Remove
-    </b-button>
+      variant="outline-primary"
+    >
+      <b-icon-cart-plus-fill />
+      Add to Cart
+    </b-button> -->
   </div>
 </template>
 
@@ -27,29 +26,30 @@ import CartService from "@/services/CartService";
 export default {
   name: "AddToCart",
   props: {
+    size: String,
     id: Number,
     title: String,
-    price: Number
+    price: Number,
   },
   computed: {
-    ...mapState(["user"])
+    ...mapState(["user"]),
   },
   data() {
     return {
       addedToCart: false,
       productName: this.title,
       productId: this.id,
-      productPrice: this.price
+      productPrice: this.price,
     };
   },
   async mounted() {
     if (this.user != null) {
       const cartProduct = (
         await CartService.getCartProduct({
-          productId: this.id
+          productId: this.id,
         })
       ).data;
-      console.log(cartProduct)
+      // console.log(cartProduct);
       this.addedToCart = !!cartProduct;
     }
   },
@@ -61,34 +61,40 @@ export default {
             await CartService.addToCart({
               userId: this.user.id,
               productId: this.id,
-              quantity: 1
+              quantity: 1,
             })
           ).data;
           this.addedToCart = !!cartProduct;
+          this.$bvToast.toast("This product is Added to cart", {
+            title: "Add to Cart",
+            variant: "info",
+            toaster: "b-toaster-top-center",
+            noCloseButton: true,
+            solid: true,
+          });
         } catch (err) {
           console.log(err);
         }
       } else {
         this.$bvToast.toast("Please Log in to Add Product in Cart", {
           title: "Add to Cart Failed",
-          variant: "info",
+          variant: "warning",
           toaster: "b-toaster-top-center",
           noCloseButton: true,
-          solid: true
+          solid: true,
         });
       }
     },
     async remove() {
-      console.log(this.id)
+      console.log(this.id);
       try {
-        const cartProduct = (await CartService.remove(this.id))
-          .data;
+        const cartProduct = (await CartService.remove(this.id)).data;
         this.addedToCart = !cartProduct;
       } catch (err) {
         console.log(err);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped></style>

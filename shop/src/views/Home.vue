@@ -1,6 +1,145 @@
 <template>
   <div>
     <TopHeader />
+    <div style="background-color: #17a2b8">
+      <b-row align-v="center" class="text-center">
+        <b-col>
+          <b-button
+            class="ml-4"
+            variant="transparent"
+            v-b-toggle.categorycollapse
+          >
+            <b-icon variant="white" icon="chevron-double-down"></b-icon>
+          </b-button>
+        </b-col>
+        <b-col cols="10">
+          <b-row>
+            <b-col
+              cols="2"
+              v-for="category in categoryListRow1"
+              :key="category.id"
+            >
+              <b-dropdown
+                size="sm"
+                split
+                @click="searchCategoryId(category.id)"
+                id="dropdown-category"
+                :text="category.name"
+                variant="info"
+                block
+                menu-class="category-menu"
+              >
+                <div
+                  v-for="subCategory in subCategoryList"
+                  :key="subCategory.id"
+                >
+                  <b-dropdown
+                    class="mx-2"
+                    v-if="category.id == subCategory.CategoryId"
+                    size="sm"
+                    id="dropdown-2"
+                    variant="transparent"
+                    dropright
+                    :text="subCategory.name"
+                  >
+                    <b-dropdown-item
+                      @click="searchSubCategoryId(subCategory.id)"
+                    >
+                      <b-icon icon="cursor-fill" scale="0.5"></b-icon>
+                      All {{ subCategory.name }}</b-dropdown-item
+                    >
+                    <div
+                      v-for="subSubCategory in subSubCategoryList"
+                      :key="subSubCategory.id"
+                    >
+                      <b-dropdown-item
+                        @click="searchSubSubCategoryId(subSubCategory.id)"
+                        style="margin-right: 20px"
+                        v-if="
+                          subCategory.id == subSubCategory.SubCategoryId &&
+                          subCategory.CategoryId == category.id
+                        "
+                        href="#"
+                      >
+                        <b-icon icon="cursor-fill" scale="0.5"></b-icon>
+                        {{ subSubCategory.name }}
+                      </b-dropdown-item>
+                    </div>
+                  </b-dropdown>
+                </div>
+              </b-dropdown>
+            </b-col>
+          </b-row>
+        </b-col>
+
+        <b-col>
+          <b-button variant="transparent" v-b-toggle.categorycollapse>
+            <b-icon variant="white" icon="chevron-double-down"></b-icon>
+          </b-button>
+        </b-col>
+      </b-row>
+      <b-container>
+        <b-collapse visible id="categorycollapse">
+          <b-row class="pb-2">
+            <b-col
+              cols="2"
+              v-for="category in categoryListRow2"
+              :key="category.id"
+            >
+              <b-dropdown
+                class="mb-1"
+                size="sm"
+                @click="searchCategoryId(category.id)"
+                split
+                id="dropdown-category"
+                :text="category.name"
+                variant="info"
+                block
+                menu-class="category-menu"
+              >
+                <div
+                  v-for="subCategory in subCategoryList"
+                  :key="subCategory.id"
+                >
+                  <b-dropdown
+                    v-if="category.id == subCategory.CategoryId"
+                    size="sm"
+                    id="dropdown-2"
+                    variant="transparent"
+                    dropright
+                    :text="subCategory.name"
+                  >
+                    <b-dropdown-item
+                      @click="searchSubCategoryId(subCategory.id)"
+                    >
+                      <b-icon icon="cursor-fill" scale="0.5"></b-icon>
+                      All {{ subCategory.name }}</b-dropdown-item
+                    >
+                    <div
+                      v-for="subSubCategory in subSubCategoryList"
+                      :key="subSubCategory.id"
+                    >
+                      <b-dropdown-item
+                        @click="searchSubSubCategoryId(subSubCategory.id)"
+                        style="margin-right: 20px"
+                        v-if="
+                          subCategory.id == subSubCategory.SubCategoryId &&
+                          subCategory.CategoryId == category.id
+                        "
+                        href="#"
+                      >
+                        <b-icon icon="cursor-fill" scale="0.5"></b-icon>
+                        {{ subSubCategory.name }}
+                      </b-dropdown-item>
+                    </div>
+                  </b-dropdown>
+                </div>
+              </b-dropdown>
+            </b-col>
+          </b-row>
+        </b-collapse>
+      </b-container>
+    </div>
     <b-row>
       <div :class="{ 'col-3': sidebar_visible, 'col-1': !sidebar_visible }">
         <ProductCategorySidebar v-if="sidebar_visible" />
@@ -354,6 +493,9 @@ import TopHeader from "@/components/TopHeader.vue";
 import Footer from "@/components/Footer.vue";
 // import AddToCart from "@/components/AddToCart.vue";
 // import ProductsService from "@/services/ProductsService";
+import CategoryService from "@/services/CategoryService";
+import SubCategoryService from "@/services/SubCategoryService";
+import SubSubCategoryService from "@/services/SubSubCategoryService";
 export default {
   name: "Home",
   components: {
@@ -364,6 +506,12 @@ export default {
   },
   data() {
     return {
+      categoryeachRow: 6,
+      categoryList: null,
+      categoryListRow1: null,
+      categoryListRow2: null,
+      subCategoryList: null,
+      subSubCategoryList: null,
       sidebar_visible: true,
       slide: 0,
       sliding: null,
@@ -391,6 +539,17 @@ export default {
     }),
   },
   async mounted() {
+    this.categoryList = (await CategoryService.getCategoryList()).data;
+    this.subCategoryList = (await SubCategoryService.getSubCategoryList()).data;
+    this.subSubCategoryList = (
+      await SubSubCategoryService.getSubSubCategoryList()
+    ).data;
+
+    this.categoryListRow1 = this.categoryList.slice(0, this.categoryeachRow);
+    this.categoryListRow2 = this.categoryList.slice(
+      this.categoryeachRow,
+      this.categoryList.length
+    );
     // this.showSpinner = true;
     // this.homeProducts = (await ProductsService.getHomeProducts()).data;
     // this.displayProducts = this.homeProducts;
@@ -402,8 +561,36 @@ export default {
         this.displayProducts.slice(start, start + limit)
       );
     }
+    this.$root.$on("bv::dropdown::show", (bvEvent) => {
+      if (bvEvent.componentId === "dropdown-2") {
+        this.isDropdown2Visible = true;
+      }
+    });
+    this.$root.$on("bv::dropdown::hide", (bvEvent) => {
+      if (bvEvent.componentId === "dropdown-2") {
+        this.isDropdown2Visible = false;
+      }
+      if (this.isDropdown2Visible) {
+        bvEvent.preventDefault();
+      }
+    });
   },
   methods: {
+    searchCategoryId(categoryId) {
+      this.$store.dispatch("Products/setSearchCategoryId", categoryId);
+      window.location.replace("/products");
+    },
+    searchSubCategoryId(subCategoryId) {
+      this.$store.dispatch("Products/setSearchSubCategoryId", subCategoryId);
+      window.location.replace("/products");
+    },
+    searchSubSubCategoryId(subSubCategoryId) {
+      this.$store.dispatch(
+        "Products/setSearchSubSubCategoryId",
+        subSubCategoryId
+      );
+      window.location.replace("/products");
+    },
     advertise() {
       window.location.replace("/products");
     },
@@ -429,6 +616,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.category-menu {
+  width: 150%;
+  padding-left: 40px;
+}
 .avds_background {
   width: 100%;
   height: 100%;

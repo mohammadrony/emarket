@@ -1,4 +1,4 @@
-const { Product } = require('../models')
+const { Product, Category, SubCategory, SubSubCategory } = require('../models')
 
 module.exports = {
 	async getProduct(req, res) {
@@ -17,7 +17,14 @@ module.exports = {
 	},
 	async getAllProducts(req, res) {
 		try {
-			const products = await Product.findAll()
+			const products = await Product.findAll({
+				include: [
+					// { all: true }
+					{ model: Category },
+					{ model: SubCategory },
+					{ model: SubSubCategory }
+				]
+			});
 			res.send(products)
 		} catch (err) {
 			res.status(500).send({
@@ -39,7 +46,35 @@ module.exports = {
 	},
 	async createProduct(req, res) {
 		try {
-			console.log("file", req.file,"body",req.body)
+			req.body.image1 = "http://localhost:8084/" + req.files[0].path
+			if (req.files[1]) {
+				req.body.image2 = "http://localhost:8084/" + req.files[1].path
+			}
+			if (req.files[2]) {
+				req.body.image3 = "http://localhost:8084/" + req.files[2].path
+			}
+			if (req.files[3]) {
+				req.body.image4 = "http://localhost:8084/" + req.files[3].path
+			}
+			if (req.files[4]) {
+				req.body.image5 = "http://localhost:8084/" + req.files[4].path
+			}
+			if (req.files[5]) {
+				req.body.image6 = "http://localhost:8084/" + req.files[5].path
+			}
+			if (req.files[6]) {
+				req.body.image7 = "http://localhost:8084/" + req.files[6].path
+			}
+			if (req.files[7]) {
+				req.body.image8 = "http://localhost:8084/" + req.files[7].path
+			}
+			if (req.files[8]) {
+				req.body.image9 = "http://localhost:8084/" + req.files[8].path
+			}
+			if (req.files[9]) {
+				req.body.image10 = "http://localhost:8084/" + req.files[9].path
+			}
+			req.body.sales = 0
 			const product = await Product.create(req.body)
 			res.send(product)
 		} catch (err) {

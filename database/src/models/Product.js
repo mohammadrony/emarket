@@ -17,7 +17,12 @@ module.exports = (sequelize, DataTypes) => {
     image2:           DataTypes.STRING,
     image3:           DataTypes.STRING,
     image4:           DataTypes.STRING,
-    image5:           DataTypes.STRING
+    image5:           DataTypes.STRING,
+    image6:           DataTypes.STRING,
+    image7:           DataTypes.STRING,
+    image8:           DataTypes.STRING,
+    image9:           DataTypes.STRING,
+    image10:          DataTypes.STRING,
   })
   Product.associate = function (models) {
     Product.belongsTo(models.Category)

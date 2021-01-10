@@ -78,7 +78,7 @@
               >
                 <b-form-file
                   id="input-images"
-                  placeholder="Upto 5 image"
+                  placeholder="Upto 10 image"
                   required
                   multiple
                   @change="onFileChange"
@@ -89,11 +89,9 @@
               }}</b-alert>
               <div id="preview">
                 <b-row class="mt-2">
-                  <b-col><img :src="img1" /></b-col>
-                  <b-col><img :src="img2" /></b-col>
-                  <b-col><img :src="img3" /></b-col>
-                  <b-col><img :src="img4" /></b-col>
-                  <b-col><img :src="img5" /></b-col>
+                  <b-col cols="3" v-for="(img, index) in dispImg" :key="index"
+                    >{{ index + 1 }} <b-img :src="img"
+                  /></b-col>
                 </b-row>
               </div>
               <b-form-group class="mt-2" label="Product Category">
@@ -106,14 +104,6 @@
                       block
                       menu-class="w-100"
                     >
-                      <!-- <ul>
-                        <li v-for="category in categoryList" :key="category.id">
-                          <div class="list-item mb-2 ml-4">
-                          <a style="color: #000" @click="set_category(category)" href="#">{{ category.name }}</a>
-                          </div>
-                        </li>
-                      </ul> -->
-
                       <b-dropdown-item
                         v-for="category in categoryList"
                         :key="category.id"
@@ -121,13 +111,6 @@
                       >
                         <a>{{ category.name }}</a>
                       </b-dropdown-item>
-                      <!-- <b-button-toolbar>
-                          <b-button-group>
-                            <b-button>
-                              <b-icon icon="pen"></b-icon>
-                            </b-button>
-                          </b-button-group>
-                        </b-button-toolbar> -->
                     </b-dropdown>
                   </b-col>
                   <b-col cols="1"><h6 class="mt-2">or</h6></b-col>
@@ -282,6 +265,7 @@ export default {
   },
   data() {
     return {
+      images: [],
       categoryList: null,
       subCategoryList: null,
       subSubCategoryList: null,
@@ -298,24 +282,17 @@ export default {
         subtitle: null,
         description: null,
         currency: "USD",
-        image1: null,
-        image2: null,
-        image3: null,
-        image4: null,
-        image5: null,
         CategoryId: null,
         SubCategoryId: null,
         SubSubCategoryId: null,
       },
-      errorCountImage: "Only First 5 image will be recorded.",
+      errorCountImage:
+        "You are not allowed to add more than 10 image for this product.",
+      max_input_img: 10,
       imageAlert: null,
       errorFieldRequired: "Please fill in all required field.",
       allFieldRequired: null,
-      img1: null,
-      img2: null,
-      img3: null,
-      img4: null,
-      img5: null,
+      dispImg: [],
     };
   },
   async mounted() {
@@ -327,6 +304,17 @@ export default {
   },
   methods: {
     async createNewProduct() {
+      var formData = new FormData();
+      var fieldName;
+      for (fieldName in this.product) {
+        formData.append(fieldName, this.product[fieldName]);
+        console.log(fieldName, this.product[fieldName]);
+      }
+      var i;
+      for (i = 0; i < this.images.length; i++) {
+        if (i < this.max_input_img)
+          formData.append("imageField", this.images[i]);
+      }
       // this.error = null;
       // const requiredFieldsFilledIn = Object.keys(this.properties).every(
       //   (key) => !!this.properties[key]
@@ -337,9 +325,7 @@ export default {
       // }
 
       try {
-        const response = (
-          await ProductsService.createProduct({ image1: this.product.image1 })
-        ).data;
+        const response = (await ProductsService.createProduct(formData)).data;
         console.log(response);
         this.$bvToast.toast("Product Added Successfully", {
           title: "Update",
@@ -386,30 +372,19 @@ export default {
       this.product.SubSubCategoryId = subSubCategory.id;
     },
     onFileChange() {
-      if (event.target.files.length > 5) {
+      this.images = event.target.files;
+
+      if (this.images.length > this.max_input_img) {
         this.imageAlert = true;
       } else {
         this.imageAlert = false;
       }
-      // console.log(event.target.files)
-      this.img1 = URL.createObjectURL(event.target.files[0]);
-      this.product.image1 = event.target.files[0];
-      // if (event.target.files[1]) {
-      //   this.product.image2 = event.target.files[1];
-      //   this.img2 = URL.createObjectURL(event.target.files[1]);
-      // }
-      // if (event.target.files[2]) {
-      //   this.product.image3 = event.target.files[2];
-      //   this.img3 = URL.createObjectURL(event.target.files[2]);
-      // }
-      // if (event.target.files[3]) {
-      //   this.product.image4 = event.target.files[3];
-      //   this.img4 = URL.createObjectURL(event.target.files[3]);
-      // }
-      // if (event.target.files[4]) {
-      //   this.product.image5 = event.target.files[4];
-      //   this.img5 = URL.createObjectURL(event.target.files[4]);
-      // }
+      var i;
+
+      for (i = 0; i < this.images.length; i++) {
+        if (i < this.max_input_img)
+          this.dispImg[i] = URL.createObjectURL(this.images[i]);
+      }
     },
   },
   computed: {},

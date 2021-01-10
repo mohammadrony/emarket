@@ -10,9 +10,7 @@ module.exports = {
           UserId: userId
         },
         include: [
-          {
-            model: Product
-          }
+          { model: Product}
         ]
       })
       res.send(cartProducts)
@@ -42,21 +40,21 @@ module.exports = {
   },
   async addToCart(req, res) {
     try {
-      console.log(req.body)
-      userId = req.userId
+      userId = req.user.id
       productId = req.body.productId
       quantity = req.body.quantity
-      const cartProduct = await Cart.findOne({
-        where: {
-          UserId: userId,
-          ProductId: productId
-        }
-      })
-      if (cartProduct) {
-        return res.status(400).send({
-          error: 'This item is already in your cart'
-        })
-      }
+      // const cartProduct = await Cart.findOne({
+      //   where: {
+      //     UserId: userId,
+      //     ProductId: productId
+      //   }
+      // })
+      // console.log("hello",cartProduct)
+      // if (cartProduct) {
+      //   return res.status(400).send({
+      //     error: 'This item is already in your cart'
+      //   })
+      // }
       const newCartProduct = await Cart.create({
         UserId: userId,
         ProductId: productId,

@@ -46,77 +46,85 @@
     </b-navbar>
   </div> -->
   <div>
-    <b-navbar toggleable="md" type="dark" variant="info">
-      <b-navbar-brand href="/">
-        <img src="../../public/assets/images/e-store.png" />
-      </b-navbar-brand>
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav class="mr-auto">
-          <b-dropdown
-            id="dropdown-right"
-            :text="search_category"
-            variant="success"
-            class="ml-4"
-          >
-            <b-dropdown-item
-              variant="dark"
-              @click="set_category(category)"
-              v-for="category in categoryList"
-              :key="category.id"
-              >{{ category.name }}</b-dropdown-item
-            >
-          </b-dropdown>
-
-          <b-nav-form>
-            <b-form-input
-              class="mr-sm-2 searchField"
-              v-model="searchText"
-              @keyup.enter="search"
-              placeholder="Search for products & brands"
-            ></b-form-input>
-          </b-nav-form>
-        </b-navbar-nav>
-        <b-navbar-nav class="ml-auto" v-if="userLoggedIn">
-          <b-nav-item to="/wishlist"
-            ><div style="color: #000">
-              <i class="fas fa-heart"></i> Wishlist
-            </div></b-nav-item
-          >
-          <b-nav-item to="/cart-view"
-            ><div style="color: #000">
-              <i class="fas fa-shopping-cart"></i> Cart
-            </div></b-nav-item
-          >
-          <b-nav-item>
-            <b-img height="35px" width="35px" :src="user.profileImage"></b-img>
-          </b-nav-item>
-          <b-nav-item-dropdown right>
-            <template #button-content>
-              <em v-if="user.username" style="color: #fff">{{
-                user.username
-              }}</em>
-              <em v-if="!user.username" style="color: #fff"
-                >{{ user.firstName }} {{ user.lastName }}</em
+    <b-row>
+      <b-col>
+        <b-navbar class="py-3" toggleable="md" type="dark" style="background-color: #00283A">
+          <b-navbar-brand href="/">
+            <img src="../../public/assets/images/e-store.png" />
+          </b-navbar-brand>
+          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+          <b-collapse id="nav-collapse" is-nav>
+            <b-navbar-nav class="mr-auto">
+              <b-dropdown
+                id="dropdown-right"
+                :text="search_category"
+                style="background-color: #fff"
+                variant="transparent"
+                class="ml-4"
               >
-            </template>
-            <b-dropdown-item @click="userProfile()">Profile</b-dropdown-item>
-            <b-dropdown-item @click="logout()">Log Out</b-dropdown-item>
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
-        <b-navbar-nav class="ml-auto" v-if="!userLoggedIn">
-          <b-button pill variant="success" to="/login">
-            Login & Register
-          </b-button>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
+                <b-dropdown-item
+                  variant="dark"
+                  @click="set_category(category)"
+                  v-for="category in categoryList"
+                  :key="category.id"
+                  >{{ category.name }}</b-dropdown-item
+                >
+              </b-dropdown>
 
-    <div class="row mb">
-      <b-row>
-        <b-icon icon="list" scale="2" v-b-toggle.categoryList></b-icon>
-      </b-row>
-    </div>
+              <b-nav-form v-on:submit.prevent="search">
+                <b-form-input
+                  class="mr-sm-2 searchField"
+                  v-model="searchText"
+                  placeholder="Search for products & brands"
+                ></b-form-input>
+              </b-nav-form>
+            </b-navbar-nav>
+            <b-navbar-nav class="ml-auto" v-if="userLoggedIn">
+              <b-nav-item to="/wishlist"
+                ><div style="color: #000">
+                  <i class="fas fa-heart"></i> Wishlist
+                </div></b-nav-item
+              >
+              <b-nav-item to="/cart-view"
+                ><div style="color: #000">
+                  <i class="fas fa-shopping-cart"></i> Cart
+                </div></b-nav-item
+              >
+              <b-nav-item>
+                <b-img
+                  height="35px"
+                  width="35px"
+                  :src="user.profileImage"
+                ></b-img>
+              </b-nav-item>
+              <b-nav-item-dropdown right>
+                <template #button-content>
+                  <em v-if="user.username" style="color: #fff">{{
+                    user.username
+                  }}</em>
+                  <em v-if="!user.username" style="color: #fff"
+                    >{{ user.firstName }} {{ user.lastName }}</em
+                  >
+                </template>
+                <b-dropdown-item v-if="user.isAdmin" to="/admin"
+                  >Admin Panel</b-dropdown-item
+                >
+                <b-dropdown-item @click="userProfile()"
+                  >Profile</b-dropdown-item
+                >
+                <b-dropdown-item @click="logout()">Log Out</b-dropdown-item>
+              </b-nav-item-dropdown>
+            </b-navbar-nav>
+            <b-navbar-nav class="ml-auto" v-if="!userLoggedIn">
+              <b-button pill variant="success" to="/login">
+                Login & Register
+              </b-button>
+            </b-navbar-nav>
+          </b-collapse>
+        </b-navbar>
+      </b-col>
+    </b-row>
+    <hr class="m-0" style="background-color: #000" />
   </div>
 </template>
 
@@ -134,16 +142,24 @@ export default {
     };
   },
   async mounted() {
+    this.searchText = this.$store.state.Products.searchParameter.text;
     this.categoryList = (await CategoryService.getCategoryList()).data;
     this.categoryList.unshift({ id: 0, name: "All Categories" });
   },
   computed: {
-    ...mapState(["user", "userLoggedIn", "shop"]),
+    ...mapState({
+      shop: (state) => state.shop,
+      user: (state) => state.user,
+      userLoggedIn: (state) => state.userLoggedIn,
+    }),
+    // ...mapState(["user", "userLoggedIn", "shop",]),
   },
 
   methods: {
+    ok() {
+      console.log("hello there");
+    },
     userProfile() {
-
       this.$router.push({
         name: "profile",
         params: {
@@ -161,9 +177,13 @@ export default {
       this.search_category = category.name;
     },
     search() {
-      this.$store.dispatch("Products/searchProduct", { text: this.searchText });
+      // console.log(this.$store.state.)
+      this.$store.dispatch("Products/setSearchText", this.searchText);
+      // this.$store.dispatch("Products/searchProduct", { text: this.searchText });
+      // if (window.location.pathname != "/products") {
+      // console.log("here", this.$store.state.Products.searchParameter.text)
       window.location.replace("/products");
-
+      // }
     },
   },
 };

@@ -13,14 +13,12 @@ export default new Vuex.Store({
     shop: {
       name: "e-store",
     },
-    //User
     token: null,
     user: null,
     admin: false,
     userLoggedIn: false,
   },
   mutations: {
-    //User
     SET_TOKEN(state, token) {
       state.token = token
       if(token) {
@@ -39,7 +37,6 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    //User
     setToken({commit}, token) {
       commit('SET_TOKEN', token)
     },

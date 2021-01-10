@@ -57,29 +57,6 @@
             required
           ></b-form-input>
         </b-form-group>
-
-        <!-- <b-form
-          inline
-          id="input-group-1"
-          label="Email address:"
-          label-for="input-1"
-          description="We'll never share your email with anyone else."
-        >
-          <label for="text-password">Password</label>
-          <b-form-input
-            id="input-1"
-            type="email"
-            placeholder="Enter email"
-            required
-          ></b-form-input>
-          <b-input-group class="ml-4">
-            <label for="text-password">Password</label>
-            <b-form-input
-              id="inline-form-input-username"
-              placeholder="Username"
-            ></b-form-input>
-          </b-input-group>
-        </b-form> -->
       </b-col>
       <b-col cols="3">
         <b-img
@@ -97,7 +74,6 @@
 <script>
 import TopHeader from "@/components/TopHeader.vue";
 import AuthenticationService from "@/services/AuthenticationService.js";
-// import CartService from "@/services/CartService.js";
 export default {
   name: "UserProfile",
   components: {
