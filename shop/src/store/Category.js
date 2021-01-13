@@ -17,17 +17,7 @@ export const CategoryModule = {
         },
         SET_SUB_SUB_CATEGORY_LIST(state, subSubCategoryList) {
             state.subSubCategoryList = subSubCategoryList;
-        },
-        // ADD_NEW_CATEGORY(state, category){
-        //     state.categoryList.push(category)
-        // },
-        // ADD_NEW_SUB_CATEGORY(state, subCategory){
-        //     state.subCategoryList.push(subCategory)
-        // },
-        // ADD_NEW_SUB_SUB_CATEGORY(state, subSubCategory){
-        //     state.subSubCategoryList.push(subSubCategory)
-        // },
-
+        }
     },
     actions: {
         async setFullCategoryList({ commit }) {
@@ -41,42 +31,6 @@ export const CategoryModule = {
             commit("SET_SUB_SUB_CATEGORY_LIST", subSubCategoryList);
             return categoryList;
         },
-        async getCategoryId({ state, dispatch }, categoryName) {
-            if (state.categoryList == null) {
-                await dispatch("setFullCategoryList");
-            }
-            const index = state.categoryList.findIndex(category => category.name === categoryName)
-            if (index != -1) {
-                return state.categoryList[index].id;
-            } else {
-                return 0;
-            }
-        },
-        async getSubCategoryId({ state, dispatch }, subCategoryName) {
-            if (state.subCategoryList == null) {
-                await dispatch("setFullCategoryList");
-            }
-            const index = state.subCategoryList.findIndex(subCategory => subCategory.name === subCategoryName)
-            if (index != -1) {
-                return state.subCategoryList[index].id;
-            } else {
-                return 0;
-            }
-
-        },
-        async getSubSubCategoryId({ state, dispatch }, subSubCategoryName) {
-            if (state.subSubCategoryList == null) {
-                await dispatch("setFullCategoryList");
-            }
-            const index = state.subSubCategoryList.findIndex(subSubCategory => subSubCategory.name === subSubCategoryName)
-            if (index != -1) {
-                return state.subSubCategoryList[index].id;
-            } else {
-                return 0;
-            }
-
-        },
-
     },
     modules: {
 

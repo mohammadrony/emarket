@@ -38,7 +38,7 @@ const SubCategoryController = require("./controllers/SubCategoryController")
 const SubSubCategoryController = require("./controllers/SubSubCategoryController")
 const AuthenticationController = require("./controllers/AuthenticationController")
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy');
-const { default: CategoryService } = require('../../shop/src/services/CategoryService');
+const Product = require('./models/Product');
 
 module.exports = (app) => {
   // user
@@ -121,14 +121,16 @@ module.exports = (app) => {
     ReviewReplyController.deleteReviewReply)
 
   // product
-  app.get("/products/getProduct/:productId",
-    ProductsController.getProduct)
   app.get("/products/getAllProducts",
     ProductsController.getAllProducts)
   app.get("/products/topSellProduct/:limit",
     ProductsController.topSellProduct)
   app.get("/products/newAddProduct/:limit",
     ProductsController.newAddProduct)
+  app.get("/products/getProduct/:productId",
+    ProductsController.getProduct)
+  app.get("/products/getRecommendation/:subSubCategoryId/:limit",
+    ProductsController.getRecommendation)
   app.post("/products/createProduct",
     upload.array("imageField", 10),
     ProductsController.createProduct)

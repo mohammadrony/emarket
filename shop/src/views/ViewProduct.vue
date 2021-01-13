@@ -86,168 +86,8 @@
     </b-row>
 
     <Review />
-
-    <b-container>
-      <b-row id="top-sell" class="mt-5">
-        <b-col>
-          <h3>You May Also Like</h3>
-          <hr />
-          <b-row class="mt-3">
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-          </b-row>
-          <b-row class="mt-3">
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-          </b-row>
-          <h3 id="new-items" class="mt-5">New 2020 Fresh Stock</h3>
-          <hr />
-          <b-row class="mt-3">
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-          </b-row>
-        </b-col>
-      </b-row>
-    </b-container>
-    <Footer class="mt-4 pt-4" />
+    <Recommendation :subSubCategoryId="displayProduct.subSubCategoryId" />
+    <Footer />
   </div>
 </template>
 
@@ -257,6 +97,7 @@ import ProductsService from "@/services/ProductsService.js";
 import TopHeader from "@/components/TopHeader.vue";
 import AddToCart from "@/components/AddToCart.vue";
 import Review from "@/components/ViewProduct/Review.vue";
+import Recommendation from "@/components/ViewProduct/Recommendation.vue";
 import Footer from "@/components/Footer.vue";
 import { mapState } from "vuex";
 export default {
@@ -265,6 +106,7 @@ export default {
     TopHeader,
     AddToCart,
     Review,
+    Recommendation,
     Footer,
   },
   data() {

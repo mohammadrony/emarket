@@ -1,12 +1,12 @@
 <template>
   <div>
     <b-container class="mt-5">
-      <b-row>
+      <b-row v-if="topSellProduct">
         <b-col>
-          <h3>{{ newAddViewTitle }}</h3>
+          <h3>{{ topSellViewTitle }}</h3>
           <hr />
           <b-row>
-            <b-col cols="3" v-for="product in newAddProduct" :key="product.id">
+            <b-col cols="3" v-for="product in topSellProduct" :key="product.id">
               <b-card deck class="mt-4">
                 <b-card-img class="mb-3" :src="product.image1"></b-card-img>
                 <b-link @click="gotoProduct(product)"
@@ -25,18 +25,18 @@
 <script>
 import ProductsService from "@/services/ProductsService";
 export default {
-  name: "NewAddProduct",
+  name: "TopSellProduct",
   components: {},
   data() {
     return {
-      newAddProduct: null,
-      newAddLimit: 4,
-      newAddViewTitle: "New 2021 Fresh Stock",
+      topSellProduct: null,
+      topSellLimit: 8,
+      topSellViewTitle: "Top Selling Products",
     };
   },
   async mounted() {
-    this.newAddProduct = (
-      await ProductsService.newAddProduct(this.newAddLimit)
+    this.topSellProduct = (
+      await ProductsService.topSellProduct(this.topSellLimit)
     ).data;
   },
   methods: {

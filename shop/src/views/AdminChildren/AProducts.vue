@@ -215,7 +215,7 @@
 import { mapState } from "vuex";
 import ProductsService from "@/services/ProductsService";
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
-import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
+import ProductCategorySidebar from "@/components/Products/ProductCategorySidebar.vue";
 import { VueEditor } from "vue2-editor";
 
 export default {

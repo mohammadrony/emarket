@@ -14,12 +14,12 @@
 <script>
 // @ is an alias to /src
 import TopHeader from "@/components/TopHeader.vue";
-import SecondHeader from "@/components/Homes/SecondHeader.vue";
-import TopCarousel from "@/components/Homes/TopCarousel.vue";
-import Advertise from "@/components/Homes/Advertise.vue";
-import TopSellProduct from "@/components/Homes/TopSellProduct.vue";
-import NewAddProduct from "@/components/Homes/NewAddProduct.vue";
-import Support from "@/components/Homes/Support.vue";
+import SecondHeader from "@/components/Home/SecondHeader.vue";
+import TopCarousel from "@/components/Home/TopCarousel.vue";
+import Advertise from "@/components/Home/Advertise.vue";
+import TopSellProduct from "@/components/Home/TopSellProduct.vue";
+import NewAddProduct from "@/components/Home/NewAddProduct.vue";
+import Support from "@/components/Home/Support.vue";
 import Footer from "@/components/Footer.vue";
 export default {
   name: "Home",

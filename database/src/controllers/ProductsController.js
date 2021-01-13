@@ -1,21 +1,6 @@
 const { Product, Category, SubCategory, SubSubCategory } = require('../models')
 
 module.exports = {
-	async getProduct(req, res) {
-		try {
-			console.log(req.body)
-			const product = await Product.findOne({
-				where: {
-					id: req.params.productId
-				}
-			})
-			res.send(product)
-		} catch (err) {
-			res.status(500).send({
-				error: 'An error occured when trying to fetch a product.'
-			})
-		}
-	},
 	async getAllProducts(req, res) {
 		try {
 			const products = await Product.findAll({
@@ -60,6 +45,37 @@ module.exports = {
 		} catch (err) {
 			res.status(500).send({
 				error: 'An error occured when trying to fetch recently added products.'
+			})
+		}
+	},
+	async getRecommendation(req, res) {
+		try {
+			const recommendation = await Product.findAll({
+				where: {
+					SubSubCategoryId: req.params.subSubCategoryId
+				},
+				limit: parseInt(req.params.limit),
+				order: [['createdAt', 'ASC']],
+				attributes: ['id', 'title', 'price', 'currency', 'sales', 'image1', 'CategoryId', 'SubCategoryId', 'SubSubCategoryId']
+			})
+			res.send(recommendation)
+		} catch (err) {
+			res.status(500).send({
+				error: "An error occured when trying to fetch recommended products"
+			})
+		}
+	},
+	async getProduct(req, res) {
+		try {
+			const product = await Product.findOne({
+				where: {
+					id: req.params.productId
+				}
+			})
+			res.send(product)
+		} catch (err) {
+			res.status(500).send({
+				error: 'An error occured when trying to fetch a product.'
 			})
 		}
 	},

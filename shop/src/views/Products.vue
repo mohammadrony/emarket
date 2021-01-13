@@ -95,10 +95,10 @@
 <script>
 import { mapState } from "vuex";
 import TopHeader from "@/components/TopHeader.vue";
-import ProductsNavbar from "@/components/ProductsNavbar.vue";
+import ProductsNavbar from "@/components/Products/ProductsNavbar.vue";
+import ProductCategorySidebar from "@/components/Products/ProductCategorySidebar.vue";
 import AddToCart from "@/components/AddToCart.vue";
 import Footer from "@/components/Footer.vue";
-import ProductCategorySidebar from "@/components/ProductCategorySidebar.vue";
 import CategoryService from "@/services/CategoryService.js";
 import SubCategoryService from "@/services/SubCategoryService.js";
 import SubSubCategoryService from "@/services/SubSubCategoryService.js";
@@ -175,7 +175,6 @@ export default {
       const hi = parseInt(route.query.hi);
       this.searchParameter.query.hi = hi;
     }
-
 
     await this.$store.dispatch(
       "Products/setSearchParameter",
