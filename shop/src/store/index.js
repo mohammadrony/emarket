@@ -15,6 +15,7 @@ export default new Vuex.Store({
     },
     token: null,
     user: null,
+    userId: 0,
     admin: false,
     userLoggedIn: false,
   },
@@ -31,8 +32,10 @@ export default new Vuex.Store({
       state.user = user
       if(user != null){
         state.admin = user.isAdmin
+        state.userId = user.id
       } else {
         state.admin = false
+        state.userId = 0
       }
     },
   },

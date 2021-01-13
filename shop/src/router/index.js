@@ -1,4 +1,3 @@
-import Test from "@/components/ProductCategorySidebar.vue";
 import Vue from "vue";
 import store from "@/store"
 import VueRouter from "vue-router";
@@ -31,12 +30,22 @@ const routes = [
     component: Home
   },
   {
-    path: "/test",
-    name: "test",
-    component: Test
+    path: "/products",
+    name: "products",
+    component: Products
   },
   {
-    path: "/products",
+    path: "/products/:category",
+    name: "products",
+    component: Products
+  },
+  {
+    path: "/products/:category/:subCategory",
+    name: "products",
+    component: Products
+  },
+  {
+    path: "/products/:category/:subCategory/:subSubCategory",
     name: "products",
     component: Products
   },

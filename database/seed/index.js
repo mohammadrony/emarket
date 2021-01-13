@@ -1,4 +1,4 @@
-const { sequelize, User, Category, SubCategory, SubSubCategory, Product, Cart } = require('../src/models')
+const { sequelize, User, Category, SubCategory, SubSubCategory, Product,Review,ReviewReply, Cart } = require('../src/models')
 
 const Promise = require('bluebird')
 const users = require('./users.json')
@@ -6,6 +6,8 @@ const categories = require('./categories.json')
 const subCategories = require('./subCategories.json')
 const subSubCategories = require('./subSubCategories.json')
 const products = require('./products.json')
+const reviews = require('./reviews.json')
+const reviewReplies = require('./reviewReplies.json')
 const cartProducts = require('./cartProducts.json')
 
 sequelize.sync({ force: true })
@@ -33,6 +35,16 @@ sequelize.sync({ force: true })
 		await Promise.all(
 			products.map(product => {
 				Product.create(product)
+			})
+		)
+		await Promise.all(
+			reviews.map(review => {
+				Review.create(review)
+			})
+		)
+		await Promise.all(
+			reviewReplies.map(reply => {
+				ReviewReply.create(reply)
 			})
 		)
 		await Promise.all(

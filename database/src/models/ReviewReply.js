@@ -6,10 +6,10 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey:     true,
         autoIncrement:  true
       },
-      reply:            DataTypes.STRING,
-      image1:           DataTypes.STRING
+      comment:          DataTypes.STRING,
     })
     ReviewReply.associate = function (models) {
+      ReviewReply.belongsTo(models.User)
       ReviewReply.belongsTo(models.Review)
     }
     return ReviewReply

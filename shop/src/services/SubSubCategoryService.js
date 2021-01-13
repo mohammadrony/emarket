@@ -1,6 +1,9 @@
 import Api from "./Api"
 
 export default {
+    getSubSubCategoryByName(name) {
+        return Api().get(`category/getSubSubCategoryByName/:${name}`)
+    },
     getSubSubCategoryList() {
         return Api().get('subSubCategory/getSubSubCategoryList')
     },

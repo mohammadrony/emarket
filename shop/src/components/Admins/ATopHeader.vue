@@ -62,7 +62,10 @@ export default {
     },
   },
   computed: {
-    ...mapState(["user", "userLoggedIn"]),
+    ...mapState({
+      user: (state) => state.user,
+      userLoggedIn: (state) => state.userLoggedIn,
+    })
   },
 };
 </script>

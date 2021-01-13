@@ -2,7 +2,7 @@
   {
     "id": 1,
     "username": "rony1829",
-    "firstName": "Md.",
+    "firstName": "Mohammad",
     "lastName": "Rony",
     "profileImage": "http://localhost:8084/public/user-image/default-man.png",
     "email": "ronyku1829@gmail.com",
@@ -20,6 +20,72 @@
     "email": "rony@gmail.com",
     "password": "12345678",
     "address": "Dhaka, Bangladesh",
+    "isAdmin": false
+  },
+  {
+    "id": 3,
+    "username": "mukit224",
+    "firstName": "Mukit",
+    "lastName": "Pranto",
+    "profileImage": "http://localhost:8084/public/user-image/default-man.png",
+    "email": "mukit@gmail.com",
+    "password": "12345678",
+    "address": "Shariatpur, Bangladesh",
+    "isAdmin": false
+  },
+  {
+    "id": 4,
+    "username": "mehedi222",
+    "firstName": "Mehedi",
+    "lastName": "Shanto",
+    "profileImage": "http://localhost:8084/public/user-image/default-man.png",
+    "email": "shanto@gmail.com",
+    "password": "12345678",
+    "address": "Bagerhat, Bangladesh",
+    "isAdmin": false
+  },
+  {
+    "id": 5,
+    "username": "nuhash_ak4",
+    "firstName": "Nuhash",
+    "lastName": "Mortoza",
+    "profileImage": "http://localhost:8084/public/user-image/default-man.png",
+    "email": "nuhash@gmail.com",
+    "password": "12345678",
+    "address": "Dhaka, Bangladesh",
+    "isAdmin": false
+  },
+  {
+    "id": 6,
+    "username": "sajid39",
+    "firstName": "Rayhan",
+    "lastName": "Sajid",
+    "profileImage": "http://localhost:8084/public/user-image/default-man.png",
+    "email": "sajid@gmail.com",
+    "password": "12345678",
+    "address": "Comilla, Bangladesh",
+    "isAdmin": false
+  },
+  {
+    "id": 7,
+    "username": "moon968",
+    "firstName": "Hasan",
+    "lastName": "Moon",
+    "profileImage": "http://localhost:8084/public/user-image/default-man.png",
+    "email": "moon@gmail.com",
+    "password": "12345678",
+    "address": "Gazipur, Bangladesh",
+    "isAdmin": false
+  },
+  {
+    "id": 7,
+    "username": "rafin22",
+    "firstName": "Rafin",
+    "lastName": "Hasan",
+    "profileImage": "http://localhost:8084/public/user-image/default-man.png",
+    "email": "rafin@gmail.com",
+    "password": "12345678",
+    "address": "Khulna, Bangladesh",
     "isAdmin": false
   }
 ]

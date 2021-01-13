@@ -6,7 +6,10 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    name: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      unique: true
+    }
   })
   SubCategory.associate = function (models) {
     SubCategory.belongsTo(models.Category)

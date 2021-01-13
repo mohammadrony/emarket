@@ -28,14 +28,17 @@ const upload = multer({
 const isAuthenticated = require('./policies/isAuthenticated')
 const ImageController = require("./controllers/ImageController")
 const CartsController = require("./controllers/CartsController")
+const ReviewController = require("./controllers/ReviewController")
 const WishlistController = require("./controllers/WishlistController")
 const ProductsController = require("./controllers/ProductsController")
 const CheckoutController = require("./controllers/CheckoutController")
 const CategoryController = require("./controllers/CategoryController")
+const ReviewReplyController = require("./controllers/ReviewReplyController")
 const SubCategoryController = require("./controllers/SubCategoryController")
 const SubSubCategoryController = require("./controllers/SubSubCategoryController")
 const AuthenticationController = require("./controllers/AuthenticationController")
-const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
+const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy');
+const { default: CategoryService } = require('../../shop/src/services/CategoryService');
 
 module.exports = (app) => {
   // user
@@ -59,6 +62,8 @@ module.exports = (app) => {
     CheckoutController.createCheckoutSession)
 
   // category
+  app.get("/category/getCategoryByName/:name",
+    CategoryController.getCategoryByName)
   app.get("/category/getCategoryList",
     CategoryController.getCategoryList)
   app.post("/category/createCategory",
@@ -69,6 +74,8 @@ module.exports = (app) => {
     CategoryController.deleteCategory)
 
   // sub category
+  app.get("/category/getSubCategoryByName/:name",
+    SubCategoryController.getSubCategoryByName)
   app.get("/subCategory/getSubCategoryList",
     SubCategoryController.getSubCategoryList)
   app.post("/subCategory/createSubCategory",
@@ -79,6 +86,8 @@ module.exports = (app) => {
     SubCategoryController.deleteSubCategory)
 
   // sub sub Category
+  app.get("/category/getSubSubCategoryByName/:name",
+    SubSubCategoryController.getSubSubCategoryByName)
   app.get("/subSubCategory/getSubSubCategoryList",
     SubSubCategoryController.getSubSubCategoryList)
   app.post("/subSubCategory/createSubSubCategory",
@@ -88,15 +97,40 @@ module.exports = (app) => {
   app.delete("/subSubCategory/deleteSubSubCategory/:subSubCategoryId",
     SubSubCategoryController.deleteSubSubCategory)
 
+  // review
+  app.get("/review/getReviewList/:productId",
+    ReviewController.getReviewList)
+  app.post("/review/createReview",
+    isAuthenticated,
+    ReviewController.createReview)
+  app.put("/review/updateReview",
+    isAuthenticated,
+    ReviewController.updateReview)
+  app.delete("/review/deleteReview/:reviewId",
+    isAuthenticated,
+    ReviewController.deleteReview)
+
+  // review reply
+  app.get("/reviewReply/getReviewReplyList/:reviewId",
+    ReviewReplyController.getReviewReplyList)
+  app.post("/reviewReply/createReviewReply",
+    ReviewReplyController.createReviewReply)
+  app.put("/reviewReply/updateReviewReply",
+    ReviewReplyController.updateReviewReply)
+  app.delete("/reviewReply/deleteReviewReply/:reviewReplyId",
+    ReviewReplyController.deleteReviewReply)
+
   // product
   app.get("/products/getProduct/:productId",
     ProductsController.getProduct)
   app.get("/products/getAllProducts",
     ProductsController.getAllProducts)
-  app.get("/products/getHomeProducts",
-    ProductsController.getHomeProducts)
+  app.get("/products/topSellProduct/:limit",
+    ProductsController.topSellProduct)
+  app.get("/products/newAddProduct/:limit",
+    ProductsController.newAddProduct)
   app.post("/products/createProduct",
-    upload.array("imageField",10),
+    upload.array("imageField", 10),
     ProductsController.createProduct)
   app.put("/products/updateProduct",
     ProductsController.updateProduct)

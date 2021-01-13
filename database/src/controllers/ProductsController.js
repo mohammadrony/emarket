@@ -3,6 +3,7 @@ const { Product, Category, SubCategory, SubSubCategory } = require('../models')
 module.exports = {
 	async getProduct(req, res) {
 		try {
+			console.log(req.body)
 			const product = await Product.findOne({
 				where: {
 					id: req.params.productId
@@ -32,15 +33,33 @@ module.exports = {
 			})
 		}
 	},
-	async getHomeProducts(req, res) {
+	async topSellProduct(req, res) {
 		try {
+			const limit = req.params.limit;
 			const products = await Product.findAll({
-				limit: 3
-			})
+				limit: parseInt(limit),
+				order: [['sales', 'DESC']],
+				attributes: ['id', 'title', 'price', 'currency', 'sales', 'image1', 'CategoryId', 'SubCategoryId', 'SubSubCategoryId'],
+			});
 			res.send(products)
 		} catch (err) {
 			res.status(500).send({
-				error: 'An error occured when trying to fetch the products.'
+				error: 'An error occured when trying to fetch top sell products.'
+			})
+		}
+	},
+	async newAddProduct(req, res) {
+		try {
+			const limit = req.params.limit;
+			const products = await Product.findAll({
+				limit: parseInt(limit),
+				order: [['createdAt', 'ASC']],
+				attributes: ['id', 'title', 'price', 'currency', 'sales', 'image1', 'CategoryId', 'SubCategoryId', 'SubSubCategoryId']
+			});
+			res.send(products)
+		} catch (err) {
+			res.status(500).send({
+				error: 'An error occured when trying to fetch recently added products.'
 			})
 		}
 	},
@@ -99,7 +118,8 @@ module.exports = {
 	},
 	async deleteProduct(req, res) {
 		try {
-			const { productId } = req.params
+			const productId = req.params.productId
+			console.log(productId)
 			const product = await Product.findOne({
 				where: {
 					id: productId

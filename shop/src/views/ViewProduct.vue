@@ -1,7 +1,6 @@
 <template>
   <div class="product-details">
     <TopHeader />
-
     <b-row class="mt-5">
       <b-col />
       <b-col cols="5">
@@ -86,165 +85,7 @@
       </div>
     </b-row>
 
-    <b-row align-v="center">
-      <b-col></b-col>
-      <b-col cols="3" class="text-center">
-        <b-card>
-          <br />
-          <span class="product-rating">4.6</span><span>/5</span>
-          <b-row>
-            <b-col cols="2"></b-col>
-            <b-col cols="8">
-              <b-form-rating
-                readonly
-                value="4.6"
-                variant="primary"
-                class="mb-2"
-              ></b-form-rating>
-            </b-col>
-            <b-col cols="2"></b-col>
-          </b-row>
-          <h6 class="mt-2">46 ratings & 15 reviews</h6>
-          <br />
-        </b-card>
-      </b-col>
-      <b-col cols="3" class="justify-content-center">
-        <b-progress variant="success" value="75" class="mb-3"></b-progress>
-        <b-progress variant="warning" value="60" class="mb-3"></b-progress>
-        <b-progress variant="primary" value="50" class="mb-3"></b-progress>
-        <b-progress variant="info" value="40" class="mb-3"></b-progress>
-        <b-progress variant="danger" value="30" class="mb-3"></b-progress>
-      </b-col>
-      <b-col></b-col>
-    </b-row>
-    <hr />
-    <b-row>
-      <b-col></b-col>
-      <b-col cols="5" id="write_review">
-        <b-card class="mb-3" bg-variant="white" text-variant="dark">
-          <b-row>
-            <b-col cols="3">
-              <b-img
-                src="http://localhost:8084/public/user-image/default-man.png"
-                height="60px"
-                width="60px"
-              ></b-img>
-              <br />
-              <b-link class="mt-2">John Doe</b-link>
-              <br />
-              <b-text size="sm">December 29, 2020</b-text>
-            </b-col>
-            <b-col cols="9">
-              <b-row>
-                <b-col cols="7">
-                  <b-form-rating
-                    readonly
-                    value="4"
-                    variant="primary"
-                    class="mb-2"
-                  ></b-form-rating>
-                </b-col>
-              </b-row>
-              <div>
-                this was nice in buy. this was nice in buy. this was nice in
-                buy. this was nice in buy this was nice in buy this was nice in
-                buy this was nice in buy this was nice in buy
-              </div>
-            </b-col>
-          </b-row>
-        </b-card>
-        <b-card class="mb-3" bg-variant="white" text-variant="dark">
-          <b-row>
-            <b-col cols="3">
-              <b-img
-                src="http://localhost:8084/public/user-image/default-man.png"
-                height="60px"
-                width="60px"
-              ></b-img>
-              <br />
-              <b-link class="mt-2">John Doe</b-link>
-              <br />
-              <b-text size="sm">December 29, 2020</b-text>
-            </b-col>
-            <b-col cols="9">
-              <b-row>
-                <b-col cols="7">
-                  <b-form-rating
-                    readonly
-                    value="4"
-                    variant="primary"
-                    class="mb-2"
-                  ></b-form-rating>
-                </b-col>
-              </b-row>
-              <div>
-                this was nice in buy. this was nice in buy. this was nice in
-                buy. this was nice in buy this was nice in buy this was nice in
-                buy this was nice in buy this was nice in buy
-              </div>
-            </b-col>
-          </b-row>
-        </b-card>
-        <b-card class="mb-3" bg-variant="white" text-variant="dark">
-          <b-row>
-            <b-col cols="3">
-              <b-img
-                src="http://localhost:8084/public/user-image/default-man.png"
-                height="60px"
-                width="60px"
-              ></b-img>
-              <br />
-              <b-link class="mt-2">John Doe</b-link>
-              <br />
-              <b-text size="sm">December 29, 2020</b-text>
-            </b-col>
-            <b-col cols="9">
-              <b-row>
-                <b-col cols="7">
-                  <b-form-rating
-                    readonly
-                    value="4"
-                    variant="primary"
-                    class="mb-2"
-                  ></b-form-rating>
-                </b-col>
-              </b-row>
-              <div>
-                this was nice in buy. this was nice in buy. this was nice in
-                buy. this was nice in buy this was nice in buy this was nice in
-                buy this was nice in buy this was nice in buy
-              </div>
-            </b-col>
-          </b-row>
-        </b-card>
-      </b-col>
-      <b-col cols="5">
-        <b-card>
-          <div class="mt-2 ml-3">
-            <a variant="primary">
-              <b-icon-pen />&nbsp;<strong>Write a review</strong>
-            </a>
-          </div>
-          <h6></h6>
-          <b-row>
-            <b-col cols="5">
-              <b-form-rating
-                value="2"
-                variant="primary"
-                class="my-4"
-              ></b-form-rating>
-            </b-col>
-          </b-row>
-          <b-form-textarea
-            placeholder="your comment here"
-            rows="3"
-            max-rows="8"
-          ></b-form-textarea>
-          <b-button class="mt-4" variant="primary">Submit</b-button>
-        </b-card>
-      </b-col>
-      <b-col></b-col>
-    </b-row>
+    <Review />
 
     <b-container>
       <b-row id="top-sell" class="mt-5">
@@ -406,38 +247,42 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer class="mt-4 pt-4"/>
+    <Footer class="mt-4 pt-4" />
   </div>
 </template>
 
 <script>
 // import { mapState } from "vuex";
-import ProductService from "@/services/ProductsService.js";
+import ProductsService from "@/services/ProductsService.js";
 import TopHeader from "@/components/TopHeader.vue";
 import AddToCart from "@/components/AddToCart.vue";
+import Review from "@/components/ViewProduct/Review.vue";
 import Footer from "@/components/Footer.vue";
 import { mapState } from "vuex";
 export default {
-  name: "ProductDetails",
+  name: "ViewProduct",
   components: {
     TopHeader,
     AddToCart,
+    Review,
     Footer,
   },
   data() {
     return {
       current_image: null,
-      displayProduct: null,
+      displayProduct: {},
     };
   },
   methods: {},
   async mounted() {
     const productId = this.$store.state.route.params.productId;
-    this.displayProduct = (await ProductService.getProduct(productId)).data;
+    this.displayProduct = (await ProductsService.getProduct(productId)).data;
     this.current_image = this.displayProduct.image1;
   },
   computed: {
-    ...mapState(["user"]),
+    ...mapState({
+      user: (state) => state.user,
+    }),
   },
 };
 </script>

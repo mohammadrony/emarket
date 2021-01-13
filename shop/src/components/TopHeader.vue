@@ -1,54 +1,13 @@
 <template>
-  <!-- <div class="mb-4" id="nav">
-    <b-navbar toggleable="sm" type="dark" variant="info">
-      <b-navbar-brand to="/">{{ shop.name }}</b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item to="/products">Products</b-nav-item>
-          <b-nav-item to="/about">About Us</b-nav-item>
-        </b-navbar-nav>
-
-        <b-navbar-nav class="ml-auto">
-          <b-button to="/login" v-if="!userLoggedIn" variant="outline-light"
-            >Log in</b-button
-          >
-
-          <div class="cart-icon">
-            <b-button
-              to="/my-cart"
-              v-if="userLoggedIn"
-              font-scale="1.5"
-              class="mr-2"
-              variant="info"
-            >
-              <b-icon-cart2></b-icon-cart2>
-            </b-button>
-          </div>
-          <b-nav-item-dropdown v-if="userLoggedIn" right>
-            <template #button-content>
-              <em v-if="user.username">{{ user.username }}</em>
-              <em v-if="!user.username"
-                >{{ user.firstName }} {{ user.lastName }}</em
-              >
-            </template>
-            <b-dropdown-item variant="info" to="/user-profile"
-              >Profile</b-dropdown-item
-            >
-            <b-dropdown-item variant="info" @click="logout()"
-              >Log Out</b-dropdown-item
-            >
-          </b-nav-item-dropdown>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-  </div> -->
   <div>
     <b-row>
       <b-col>
-        <b-navbar class="py-3" toggleable="md" type="dark" style="background-color: #00283A">
+        <b-navbar
+          class="py-3"
+          toggleable="lg"
+          type="dark"
+          style="background-color: #00283a"
+        >
           <b-navbar-brand href="/">
             <img src="../../public/assets/images/e-store.png" />
           </b-navbar-brand>
@@ -60,7 +19,7 @@
                 :text="search_category"
                 style="background-color: #fff"
                 variant="transparent"
-                class="ml-4"
+                class="mr-auto"
               >
                 <b-dropdown-item
                   variant="dark"
@@ -74,22 +33,25 @@
               <b-nav-form v-on:submit.prevent="search">
                 <b-form-input
                   class="mr-sm-2 searchField"
-                  v-model="searchText"
+                  v-model="searchTxt"
                   placeholder="Search for products & brands"
                 ></b-form-input>
               </b-nav-form>
             </b-navbar-nav>
-            <b-navbar-nav class="ml-auto" v-if="userLoggedIn">
-              <b-nav-item to="/wishlist"
-                ><div style="color: #000">
-                  <i class="fas fa-heart"></i> Wishlist
-                </div></b-nav-item
+
+            <b-navbar-nav class="ml-auto">
+              <b-nav-item to="wishlist"
+                ><div><i class="fas fa-heart"></i> Wishlist</div></b-nav-item
               >
-              <b-nav-item to="/cart-view"
-                ><div style="color: #000">
+            </b-navbar-nav>
+            <b-navbar-nav>
+              <b-nav-item class="mr-auto" to="/cart-view"
+                ><div>
                   <i class="fas fa-shopping-cart"></i> Cart
                 </div></b-nav-item
               >
+            </b-navbar-nav>
+            <b-navbar-nav v-if="userLoggedIn">
               <b-nav-item>
                 <b-img
                   height="35px"
@@ -97,6 +59,8 @@
                   :src="user.profileImage"
                 ></b-img>
               </b-nav-item>
+            </b-navbar-nav>
+            <b-navbar-nav v-if="userLoggedIn">
               <b-nav-item-dropdown right>
                 <template #button-content>
                   <em v-if="user.username" style="color: #fff">{{
@@ -115,7 +79,8 @@
                 <b-dropdown-item @click="logout()">Log Out</b-dropdown-item>
               </b-nav-item-dropdown>
             </b-navbar-nav>
-            <b-navbar-nav class="ml-auto" v-if="!userLoggedIn">
+
+            <b-navbar-nav v-if="!userLoggedIn">
               <b-button pill variant="success" to="/login">
                 Login & Register
               </b-button>
@@ -130,32 +95,54 @@
 
 <script>
 import { mapState } from "vuex";
-import CategoryService from "../services/CategoryService";
+import CategoryService from "@/services/CategoryService.js";
 export default {
   name: "TopHeader",
   data() {
     return {
-      searchText: null,
+      shop: null,
+      cList: false,
+      categoryList: null,
+      searchTxt: "",
       search_category_id: 0,
       search_category: "All Category",
-      categoryList: null,
     };
   },
   async mounted() {
-    this.searchText = this.$store.state.Products.searchParameter.text;
+    this.shop = this.$store.state.shop;
+    const route = this.$store.state.route;
+    if (route.query.q) this.searchTxt = route.query.q;
+    if (this.cList == false) {
+      this.categoryList = await this.$store.dispatch(
+        "Products/Category/setFullCategoryList"
+      );
+      if (this.categoryList) this.cList = true;
+    }
     this.categoryList = (await CategoryService.getCategoryList()).data;
-    this.categoryList.unshift({ id: 0, name: "All Categories" });
+    const defaultCategory = { id: 0, name: "All Category" };
+    this.categoryList.unshift(defaultCategory);
   },
   computed: {
     ...mapState({
-      shop: (state) => state.shop,
       user: (state) => state.user,
       userLoggedIn: (state) => state.userLoggedIn,
     }),
-    // ...mapState(["user", "userLoggedIn", "shop",]),
   },
 
   methods: {
+    wishlist() {
+      if (!this.userLoggedIn) {
+        this.$bvToast.toast("Sign in to check your wishlist", {
+          title: "Wishlist",
+          variant: "primary",
+          toaster: "b-toaster-top-center",
+          noCloseButton: false,
+          solid: true,
+        });
+      } else {
+        window.location.replace("/wishlist");
+      }
+    },
     ok() {
       console.log("hello there");
     },
@@ -177,13 +164,17 @@ export default {
       this.search_category = category.name;
     },
     search() {
-      // console.log(this.$store.state.)
-      this.$store.dispatch("Products/setSearchText", this.searchText);
-      // this.$store.dispatch("Products/searchProduct", { text: this.searchText });
-      // if (window.location.pathname != "/products") {
-      // console.log("here", this.$store.state.Products.searchParameter.text)
-      window.location.replace("/products");
-      // }
+      this.$store.dispatch("Products/setSearchText", this.searchTxt);
+      var location = "products";
+      if (this.search_category_id != 0) {
+        const category = this.search_category;
+        location += "/" + category;
+      }
+      if (this.searchTxt != "") {
+        const text = this.searchTxt;
+        location += "?q=" + text;
+        window.location.replace(location);
+      }
     },
   },
 };

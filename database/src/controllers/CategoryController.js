@@ -1,8 +1,23 @@
 const { Category } = require('../models')
 
 module.exports = {
+	async getCategoryByName(req, res) {
+		try {
+			const categoryName = req.params.name;
+			const category = await Category.findOne({
+				where: {
+					name: categoryName
+				}
+			})
+			res.send(category)
+		} catch (err) {
+			res.status(500).send({
+				error: 'An error occured when trying to fetch a category.'
+			})
+		}
+	},
 	async getCategoryList(req, res) {
-		try {	
+		try {
 			const categories = await Category.findAll()
 			res.send(categories)
 		} catch (err) {
@@ -14,6 +29,7 @@ module.exports = {
 	async createCategory(req, res) {
 		try {
 			const category = await Category.create(req.body)
+			console.log(category, req.body)
 			res.send(category)
 		} catch (err) {
 			res.status(500).send({

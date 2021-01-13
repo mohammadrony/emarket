@@ -6,10 +6,9 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    name: DataTypes.STRING,
-    visible: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
+    name: {
+      type: DataTypes.STRING,
+      unique: true
     }
   })
   return Category

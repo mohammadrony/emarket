@@ -1,19 +1,21 @@
 import ProductsService from "../services/ProductsService";
+import { CategoryModule } from "./Category.js";
+import { CartModule } from "./Cart.js";
 
 export const ProductsModule = {
   namespaced: true,
 
   state: {
-    allProduct: null,         // before display product paginate will be over this object
-    allBackupProduct: null,   // all product will be here
-    displayProducts: null,    // specific product into the pagination
+    allProduct: null,
+    allBackupProduct: null,
+    displayProducts: null,
     apCount: null,
     perPage: null,
     searchParameter: {
       text: "",
-      CategoryId: 0,
-      SubCategoryId: 0,
-      SubSubCategoryId: 0,
+      categoryId: 0,
+      subCategoryId: 0,
+      subSubCategoryId: 0,
       lowestPrice: 0,
       maximumPrice: 1000000000,
     }
@@ -36,13 +38,13 @@ export const ProductsModule = {
       state.searchParameter.text = searchText;
     },
     SET_SEARCH_CATEGORY_ID(state, categoryId) {
-      state.searchParameter.CategoryId = categoryId;
+      state.searchParameter.categoryId = categoryId;
     },
     SET_SEARCH_SUB_CATEGORY_ID(state, subCategoryId) {
-      state.searchParameter.SubCategoryId = subCategoryId;
+      state.searchParameter.subCategoryId = subCategoryId;
     },
     SET_SEARCH_SUB_SUB_CATEGORY_ID(state, subSubCategoryId) {
-      state.searchParameter.SubSubCategoryId = subSubCategoryId;
+      state.searchParameter.subSubCategoryId = subSubCategoryId;
     },
     SET_LOWEST_PRICE(state, lowestPrice) {
       state.searchParameter.lowestPrice = lowestPrice;
@@ -62,6 +64,26 @@ export const ProductsModule = {
       commit("SET_MAXIMUM_PRICE", 1000000000);
 
     },
+    setSearchParameter({ commit, dispatch }, searchParameter) {
+      if (searchParameter.param.subSubCategoryId) {
+        dispatch("setSearchSubSubCategoryId", searchParameter.param.subSubCategoryId)
+      }
+      else if (searchParameter.param.subCategoryId) {
+        dispatch("setSearchSubCategoryId", searchParameter.param.subCategoryId)
+      }
+      else if (searchParameter.param.categoryId) {
+        dispatch("setSearchCategoryId", searchParameter.param.categoryId)
+      }
+      if (searchParameter.query.q) {
+        commit("SET_SEARCH_TEXT", searchParameter.query.q)
+      }
+      if (searchParameter.query.lo) {
+        commit("SET_LOWEST_PRICE", searchParameter.query.lo)
+      }
+      if (searchParameter.query.hi) {
+        commit("SET_MAXIMUM_PRICE", searchParameter.query.hi)
+      }
+    },
     setSearchText({ commit }, searchText) {
       commit("SET_SEARCH_TEXT", searchText);
     },
@@ -80,11 +102,11 @@ export const ProductsModule = {
       commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
       commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", subSubCategoryId);
     },
-    setSearchLowestPrice({commit}, lowestPrice){
-      commit("SET_SEARCH_LOWEST_PRICE", lowestPrice);
+    setLowestPrice({ commit }, lowestPrice) {
+      commit("SET_LOWEST_PRICE", lowestPrice);
     },
-    setSearchMaximumPrice({commit}, maximumPrice){
-      commit("SET_SEARCH_MAXIMUM_PRICE", maximumPrice);
+    setMaximumPrice({ commit }, maximumPrice) {
+      commit("SET_MAXIMUM_PRICE", maximumPrice);
     },
     async getAllBackupProduct({ commit, state }) {
       if (!state.allBackupProduct) {
@@ -93,68 +115,48 @@ export const ProductsModule = {
       }
       return state.allBackupProduct;
     },
-    async setAllProduct({ commit, state, dispatch }) {
+    async setAllProduct({ commit, dispatch }) {
       const allProduct = await dispatch("filterProducts");
       commit("SET_ALL_PRODUCT", allProduct);
       commit("SET_AP_COUNT", allProduct.length);
-      const displayProducts = allProduct.slice(0, state.perPage);
-      commit("SET_DISPLAY_PRODUCTS", displayProducts);
-
-      // console.log("displayProducts",state.displayProducts)
-      // dispatch("paginate", { currentPage: 1 });
+      dispatch("paginate", { currentPage: 1 });
     },
+
     paginate({ commit, state }, currentPage) {
       const start = (currentPage - 1) * state.perPage;
       const displayProducts = state.allProduct.slice(start, start + state.perPage);
       commit("SET_DISPLAY_PRODUCTS", displayProducts);
     },
-    // async categoryOfProduct({ dispatch }, { categId, subCategId, subSubCategId }) {
-    //   const allBackupProduct = await dispatch("getAllBackupProduct");
-
-    // },
     async filterProducts({ state, dispatch }) {
       var allProduct = await dispatch("getAllBackupProduct");
-      // var allProduct = null;
-      if (state.searchParameter.CategoryId != 0) {
+      if (state.searchParameter.categoryId != 0) {
         allProduct = allProduct.filter(val => {
           return (
-            val.CategoryId == state.searchParameter.CategoryId);
+            val.CategoryId == state.searchParameter.categoryId);
         });
-        // dispatch("updatePagination", allProduct)
       }
-      else if (state.searchParameter.SubCategoryId) {
+      else if (state.searchParameter.subCategoryId != 0) {
         allProduct = allProduct.filter(val => {
           return (
-            val.SubCategoryId == state.searchParameter.SubCategoryId);
+            val.SubCategoryId == state.searchParameter.subCategoryId);
         });
-        // dispatch("updatePagination", allProduct)
       }
-      else if (state.searchParameter.SubSubCategoryId) {
+      else if (state.searchParameter.subSubCategoryId != 0) {
         allProduct = allProduct.filter(val => {
           return (
-            val.SubSubCategoryId == state.searchParameter.SubSubCategoryId);
+            val.SubSubCategoryId == state.searchParameter.subSubCategoryId);
         });
-        // dispatch("updatePagination", allProduct)
       }
       allProduct = allProduct.filter(val => {
         return (
-          val.title.toLowerCase().includes(state.searchParameter.text.toLowerCase()) ||
-          val.subtitle.toLowerCase().includes(state.searchParameter.text.toLowerCase()) ||
-          val.Category.name.toLowerCase().includes(state.searchParameter.text.toLowerCase()) ||
-          val.SubCategory.name.toLowerCase().includes(state.searchParameter.text.toLowerCase()) ||
-          val.SubSubCategory.name.toLowerCase().includes(state.searchParameter.text.toLowerCase())
+          val.title.toLowerCase().includes(state.searchParameter.text.toLowerCase())
         );
       });
       return allProduct;
-      // dispatch("updatePagination", allProduct)
     },
-    // updatePagination({ commit, dispatch }, allProduct) {
-    //   commit("SET_ALL_PRODUCT", allProduct);
-    //   commit("SET_AP_COUNT", allProduct.length);
-    //   dispatch("paginate", { currentPage: 1 });
-    // },
-
   },
   modules: {
+    Category: CategoryModule,
+    Cart: CartModule,
   }
 }

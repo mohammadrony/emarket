@@ -1,6 +1,9 @@
 import Api from "./Api"
 
 export default {
+    getCategoryByName(name) {
+        return Api().get(`category/getCategoryByName/:${name}`)
+    },
     getCategoryList() {
         return Api().get('category/getCategoryList')
     },

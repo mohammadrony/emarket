@@ -1,5 +1,5 @@
 <template>
-  <div id="Footer">
+  <div class="mt-5">
     <b-row class="py-5" style="background:#555">
       <b-col cols=10></b-col>
       <b-col cols=2>

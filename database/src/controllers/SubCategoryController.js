@@ -1,6 +1,21 @@
 const { SubCategory } = require('../models')
 
 module.exports = {
+	async getSubCategoryByName(req, res) {
+		try {
+			const subCategoryName = req.params.name;
+			const subCategory = await SubCategory.findOne({
+				where: {
+					name: subCategoryName
+				}
+			})
+			res.send(subCategory)
+		} catch (err) {
+			res.status(500).send({
+				error: 'An error occured when trying to fetch a sub category.'
+			})
+		}
+	},
 	async getSubCategoryList(req, res) {
 		try {	
 			const subCategories = await SubCategory.findAll()
@@ -14,6 +29,9 @@ module.exports = {
 	async createSubCategory(req, res) {
 		try {
 			const subCategory = await SubCategory.create(req.body)
+			console.log("----------------------------")
+			console.log(req.body)
+			console.log("----------------------------")
 			res.send(subCategory)
 		} catch (err) {
 			res.status(500).send({
@@ -37,7 +55,7 @@ module.exports = {
 	},
 	async deleteSubCategory(req, res) {
 		try {
-			const { subCategoryId } = req.params
+			const subCategoryId = req.params.subCategoryId
 			const subCategory = await SubCategory.findOne({
 				where: {
 					id: subCategoryId

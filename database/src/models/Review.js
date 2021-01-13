@@ -8,11 +8,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       rating:           DataTypes.INTEGER,
       comment:          DataTypes.STRING,
-      image1:           DataTypes.STRING,
-      image2:           DataTypes.STRING,
-      image3:           DataTypes.STRING
     })
     Review.associate = function (models) {
+      Review.belongsTo(models.User)
       Review.belongsTo(models.Product)
     }
     return Review
