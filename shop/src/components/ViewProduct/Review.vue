@@ -268,16 +268,6 @@
               </b-col>
             </b-row>
             <h6>Review</h6>
-            <b-form-group>
-              <b-form-textarea
-                @keyup="loginAlert = true"
-                class="mb-4"
-                v-model="comment"
-                placeholder="Write a review"
-                rows="3"
-                max-rows="8"
-              ></b-form-textarea>
-            </b-form-group>
             <b-alert variant="warning" v-if="reviewAlert">{{
               reviewAlert
             }}</b-alert>
@@ -285,6 +275,17 @@
             <b-alert variant="warning" :show="loginAlert && !userLoggedIn">
               <a href="#"> Sign in to write a review </a>
             </b-alert>
+            <b-form-group>
+              <b-form-textarea
+                @keyup="loginAlert = true"
+                class="mb-3"
+                v-model="comment"
+                placeholder="Write a review"
+                rows="3"
+                max-rows="8"
+              ></b-form-textarea>
+            </b-form-group>
+
             <b-button variant="primary" disabled v-if="!userLoggedIn"
               >Submit</b-button
             >
