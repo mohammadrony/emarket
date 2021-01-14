@@ -50,19 +50,25 @@
                 <h6 class="mt-2">
                   {{ product.amount }} {{ product.currency }}
                 </h6>
-                <b-row class="mt-4">
-                  <b-col>
-                    <AddToCart
-                      class=""
-                      btn_size="sm"
-                      :id="product.id"
-                      :curr="product.currency"
-                      :image="product.image1"
-                      :title="product.title"
-                      :amount="product.amount"
-                    ></AddToCart>
-                  </b-col>
-                </b-row>
+                <AddToCart
+                  class="mt-2"
+                  btn_size="sm"
+                  :id="product.id"
+                  :curr="product.currency"
+                  :image="product.image1"
+                  :title="product.title"
+                  :amount="product.amount"
+                ></AddToCart>
+                <b-button
+                  v-if="admin"
+                  class="mt-2"
+                  @click="deleteProduct(product)"
+                  size="sm"
+                  variant="danger"
+                >
+                  <b-icon icon="trash"></b-icon>
+                  Delete
+                </b-button>
               </b-card>
             </b-card-group>
           </b-col>
@@ -105,6 +111,7 @@ import ProductsNavbar from "@/components/Products/ProductsNavbar.vue";
 import ProductCategorySidebar from "@/components/Products/ProductCategorySidebar.vue";
 import AddToCart from "@/components/AddToCart.vue";
 import Footer from "@/components/Footer.vue";
+import productsService from "@/services/ProductsService.js";
 import CategoryService from "@/services/CategoryService.js";
 import SubCategoryService from "@/services/SubCategoryService.js";
 import SubSubCategoryService from "@/services/SubSubCategoryService.js";
@@ -120,6 +127,7 @@ export default {
 
   data() {
     return {
+      admin: null,
       componentKey: 0,
       categoryList: null,
       subCategoryList: null,
@@ -151,6 +159,7 @@ export default {
   },
 
   async mounted() {
+    this.admin = this.$store.state.admin;
     const route = this.$store.state.route;
 
     if (route.params.subSubCategory) {
@@ -208,6 +217,11 @@ export default {
   methods: {
     forceRerender() {
       this.componentKey += 1;
+    },
+    async deleteProduct(product) {
+      await productsService.deleteProduct(product.id);
+      await this.$store.dispatch("Products/setAllBackupProduct");
+      window.location.reload();
     },
     viewProduct(product) {
       this.$router.push({

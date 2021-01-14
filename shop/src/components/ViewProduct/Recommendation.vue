@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="mt-5">
+    <!-- <b-container class="mt-5">
       <b-row v-if="recommendation">
         <b-col>
           <h3>{{ recommendationTitle }}</h3>
@@ -18,7 +18,7 @@
           </b-row>
         </b-col>
       </b-row>
-    </b-container>
+    </b-container> -->
   </div>
 </template>
 

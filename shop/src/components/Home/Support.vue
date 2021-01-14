@@ -51,7 +51,7 @@
             </b-col>
           </b-row>
           <hr />
-          <b-row id="newsletter" class="pt-4">
+          <!-- <b-row id="newsletter" class="pt-4">
             <b-col class="text-center">
               <p style="font-size: 34px">Subscribe to our newsletter</p>
               <p>
@@ -77,7 +77,7 @@
                 >Subscribe</b-button
               >
             </b-col>
-          </b-row>
+          </b-row> -->
         </b-col>
       </b-row>
     </b-container>

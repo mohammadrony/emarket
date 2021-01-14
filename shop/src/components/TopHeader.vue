@@ -39,11 +39,11 @@
               </b-nav-form>
             </b-navbar-nav>
 
-            <b-navbar-nav class="ml-auto">
+            <!-- <b-navbar-nav class="ml-auto">
               <b-nav-item to="wishlist"
                 ><div><i class="fas fa-heart"></i> Wishlist</div></b-nav-item
               >
-            </b-navbar-nav>
+            </b-navbar-nav> -->
             <b-navbar-nav>
               <b-nav-item class="mr-auto" to="/cart-view"
                 ><div>
@@ -70,9 +70,9 @@
                     >{{ user.firstName }} {{ user.lastName }}</em
                   >
                 </template>
-                <b-dropdown-item v-if="user.isAdmin" to="/admin"
+                <!-- <b-dropdown-item v-if="user.isAdmin" to="/admin"
                   >Admin Panel</b-dropdown-item
-                >
+                > -->
                 <b-dropdown-item @click="userProfile()"
                   >Profile</b-dropdown-item
                 >
