@@ -7,7 +7,7 @@
     "profileImage": "http://localhost:8084/public/user-image/default-man.png",
     "email": "ronyku1829@gmail.com",
     "password": "12345678",
-    "resetPasswordToken": "check",
+    "resetPasswordToken": "",
     "address": "Bangladesh",
     "isAdmin": true
   },

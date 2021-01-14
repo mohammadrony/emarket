@@ -1,7 +1,7 @@
 export const CartModule = {
     namespaced: true,
     state: {
-        cartProducts: [],
+        cartProducts: []
     },
     mutations: {
         ADD_CART_ITEM(state, newItem) {

@@ -17,7 +17,7 @@ module.exports = {
 		}
 	},
 	async getSubCategoryList(req, res) {
-		try {	
+		try {
 			const subCategories = await SubCategory.findAll()
 			res.send(subCategories)
 		} catch (err) {

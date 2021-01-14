@@ -7,7 +7,7 @@ const subCategories = require('./subCategories.json')
 const subSubCategories = require('./subSubCategories.json')
 const products = require('./products.json')
 const reviews = require('./reviews.json')
-const reviewReplies = require('./reviewReplies.json')
+// const reviewReplies = require('./reviewReplies.json')
 const cartProducts = require('./cartProducts.json')
 
 sequelize.sync({ force: true })
@@ -42,11 +42,11 @@ sequelize.sync({ force: true })
 				Review.create(review)
 			})
 		)
-		await Promise.all(
-			reviewReplies.map(reply => {
-				ReviewReply.create(reply)
-			})
-		)
+		// await Promise.all(
+		// 	reviewReplies.map(reply => {
+		// 		ReviewReply.create(reply)
+		// 	})
+		// )
 		await Promise.all(
 			cartProducts.map(cartProduct => {
 				Cart.create(cartProduct)

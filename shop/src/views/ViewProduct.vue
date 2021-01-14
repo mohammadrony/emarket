@@ -44,27 +44,30 @@
         <div class="">
           <h3>{{ displayProduct.title }}</h3>
           <h5>
-            <b>Price : </b>{{ displayProduct.price }}
+            <b>Amount : </b>{{ displayProduct.amount }}
             {{ displayProduct.currency }}
           </h5>
           <div v-html="displayProduct.subtitle"></div>
           <div class="d-flex mt-5">
             <div>
               <AddToCart
+                btn_size="sm"
                 :id="displayProduct.id"
+                :curr="displayProduct.currency"
+                :image="displayProduct.image1"
                 :title="displayProduct.title"
-                :price="displayProduct.price"
+                :amount="displayProduct.amount"
               ></AddToCart>
             </div>
             <div class="mt-2 ml-3">
-              <a href="#write_review">
+              <a href="#review_section">
                 <b-icon-pen />&nbsp;<strong>Write a review</strong>
               </a>
             </div>
           </div>
           <b-row>
             <b-col cols="8">
-              <b-button class="mt-3" size="lg" variant="success" block>
+              <b-button @click="buyNow" class="mt-3" size="lg" variant="success" block>
                 <b-icon-cart-fill />
                 Buy Now
               </b-button>
@@ -86,7 +89,8 @@
     </b-row>
 
     <Review />
-    <Recommendation :subSubCategoryId="displayProduct.subSubCategoryId" />
+    <Recommendation :subSubCatId="displayProduct.SubSubCategoryId">
+    </Recommendation>
     <Footer />
   </div>
 </template>
@@ -115,10 +119,28 @@ export default {
       displayProduct: {},
     };
   },
-  methods: {},
+  methods: {
+    async buyNow() {
+      const buyProduct = {
+        productId: this.productId,
+        amount: this.amount,
+        currency: this.currency,
+        quantity: 1,
+        title: this.title,
+        image: this.image,
+      };
+      await this.$store.dispatch(
+        "Products/Cart/addToCart",
+        buyProduct
+      );
+      window.location.replace("/checkout");
+      
+    },
+  },
   async mounted() {
     const productId = this.$store.state.route.params.productId;
     this.displayProduct = (await ProductsService.getProduct(productId)).data;
+    // console.log(this.displayProduct.SubSubCategoryId)
     this.current_image = this.displayProduct.image1;
   },
   computed: {

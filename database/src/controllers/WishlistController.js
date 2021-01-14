@@ -2,19 +2,16 @@ const _ = require('lodash')
 const { Wishlist, Product } = require('../models')
 
 module.exports = {
-  async getUserWishlist(req, res) {
+  async getWishlist(req, res) {
     try {
       const userId = req.user.id
+      console.log(req.user.id)
       const wishlist = await Wishlist.findAll({
         where: {
           UserId: userId
-        },
-        include: [
-          {
-            model: Product
-          }
-        ]
+        }
       })
+      console.log(wishlist)
       res.send(wishlist)
 
     } catch (err) {
@@ -23,17 +20,17 @@ module.exports = {
       })
     }
   },
-  async getOne(req, res) {
+  async getWishlistById(req, res) {
     try {
       const userId = req.user.id
-      const { productId } = req.query
-      const wishlistProduct = await Wishlist.findOne({
+      const { productId } = req.params
+      const wishlistItem = await Wishlist.findOne({
         where: {
           UserId: userId,
           ProductId: productId
         }
       })
-      res.send(wishlistProduct)
+      res.send(wishlistItem)
     } catch (err) {
       res.status(500).send({
         error: 'An error occured when trying to fetch wishlist item.'
@@ -45,24 +42,12 @@ module.exports = {
       console.log(req.body)
       userId = req.userId
       productId = req.body.productId
-      quantity = req.body.quantity
-      const wishlistProduct = await Wishlist.findOne({
-        where: {
-          UserId: userId,
-          ProductId: productId
-        }
-      })
-      if (wishlistProduct) {
-        return res.status(400).send({
-          error: 'This item is already in your wishlist'
-        })
-      }
-      const newWishlistProduct = await Wishlist.create({
+
+      const wishlistItem = await Wishlist.create({
         UserId: userId,
-        ProductId: productId,
-        quantity: quantity
+        ProductId: productId
       })
-      res.send(newWishlistProduct)
+      res.send(wishlistItem)
     } catch (err) {
       res.status(500).send({
         error: 'An error occured when trying to add wishlist item.'

@@ -9,7 +9,7 @@
       </b-row> -->
       <b-row class="mt-5" align-h="center">
         <b-col cols="5">
-          <b-card >
+          <b-card>
             <b-card-header class="pt-3">
               <b-row align-h="center"><h2>Login</h2></b-row>
             </b-card-header>
@@ -97,11 +97,11 @@ export default {
         });
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);
-        if (response.data.user.isAdmin) {
-          window.location.replace("/admin");
-        } else {
-          window.location.replace("/");
-        }
+        // if (response.data.user.isAdmin) {
+        //   window.location.replace("/admin");
+        // } else {
+        window.location.replace("/");
+        // }
       } catch (error) {
         console.log(error.response.data.error);
         this.error = error.response.data.error;

@@ -14,8 +14,9 @@ export default {
   props: {
     btn_size: String,
     id: Number,
+    curr: String,
     title: String,
-    price: Number,
+    amount: Number,
     image: String,
   },
   computed: {
@@ -27,7 +28,8 @@ export default {
     return {
       productName: this.title,
       productId: this.id,
-      productPrice: this.price,
+      currency: this.curr,
+      productamount: this.amount,
     };
   },
   mounted() {},
@@ -35,7 +37,8 @@ export default {
     async addToCart() {
       const cartItem = {
         productId: this.productId,
-        price: this.price,
+        amount: this.amount,
+        currency: this.currency,
         quantity: 1,
         title: this.title,
         image: this.image,

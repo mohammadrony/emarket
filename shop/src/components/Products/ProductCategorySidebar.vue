@@ -337,7 +337,6 @@ export default {
       newSubCategory: null,
       newSubSubCategory: null,
       sidebarList: null,
-      searchParameter: this.$store.state.Products.searchParameter,
       categoryList: this.$store.state.Products.Category.categoryList,
       subCategoryList: this.$store.state.Products.Category.subCategoryList,
       subSubCategoryList: this.$store.state.Products.Category
@@ -347,50 +346,69 @@ export default {
   computed: {
     ...mapState({
       admin: (state) => state.admin,
+      searchParameter: (state) => state.Products.searchParameter,
     }),
   },
 
   async mounted() {
-    this.categoryList = this.categoryList.map((obj) => ({
-      ...obj,
-      mode: 0,
-    }));
-    this.subCategoryList = this.subCategoryList.map((obj) => ({
-      ...obj,
-      mode: 0,
-    }));
-    this.subSubCategoryList = this.subSubCategoryList.map((obj) => ({
-      ...obj,
-      mode: 0,
-    }));
-    console.log(this.searchParameter)
     if (this.searchParameter.subSubCategoryId != 0) {
       this.sidebarList = "none";
     } else if (this.searchParameter.subCategoryId != 0) {
+      this.subSubCategoryList = (
+        await SubSubCategoryService.getSubSubCategoryList()
+      ).data;
       this.sidebarList = "subSubCategory";
+      this.subSubCategoryList = this.subSubCategoryList.map((obj) => ({
+        ...obj,
+        mode: 0,
+      }));
     } else if (this.searchParameter.categoryId != 0) {
+      this.subCategoryList = (
+        await SubCategoryService.getSubCategoryList()
+      ).data;
       this.sidebarList = "subCategory";
+      this.subCategoryList = this.subCategoryList.map((obj) => ({
+        ...obj,
+        mode: 0,
+      }));
     } else {
+      this.categoryList = (await CategoryService.getCategoryList()).data;
       this.sidebarList = "category";
+      this.categoryList = this.categoryList.map((obj) => ({
+        ...obj,
+        mode: 0,
+      }));
     }
   },
   methods: {
     categorySelect(category) {
-      const route = '/products/'+category.name
+      const route = "/products/" + category.name;
       window.location.replace(route);
     },
     subCategorySelect(subCategory) {
-      const category = this.categoryList.find(obj => obj.id == subCategory.CategoryId);
-      const route = ('/products/' + category.name +'/'+ subCategory.name)
+      const category = this.categoryList.find(
+        (obj) => obj.id == subCategory.CategoryId
+      );
+      const route = "/products/" + category.name + "/" + subCategory.name;
       window.location.replace(route);
     },
     subSubCategorySelect(subSubCategory) {
-      const subCategory = this.subCategoryList.find(obj => obj.id == subSubCategory.SubCategoryId);
-      const category = this.categoryList.find(obj => obj.id == subCategory.CategoryId);
-      const route = ('/products/' + category.name+'/' + subCategory.name+'/'+subSubCategory.name)
+      const subCategory = this.subCategoryList.find(
+        (obj) => obj.id == subSubCategory.SubCategoryId
+      );
+      const category = this.categoryList.find(
+        (obj) => obj.id == subCategory.CategoryId
+      );
+      const route =
+        "/products/" +
+        category.name +
+        "/" +
+        subCategory.name +
+        "/" +
+        subSubCategory.name;
       window.location.replace(route);
     },
-    
+
     async createNewCateg() {
       try {
         const newCategory = (
@@ -541,7 +559,7 @@ export default {
 
 <style scoped lang="scss">
 .productCategories {
-  overflow-inline: hidden;
+  overflow-block: hidden;
   float: left;
   padding: 10px 0px 50px 50px;
 }

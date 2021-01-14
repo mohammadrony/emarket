@@ -24,7 +24,7 @@ module.exports = {
 			const products = await Product.findAll({
 				limit: parseInt(limit),
 				order: [['sales', 'DESC']],
-				attributes: ['id', 'title', 'price', 'currency', 'sales', 'image1', 'CategoryId', 'SubCategoryId', 'SubSubCategoryId'],
+				attributes: ['id', 'title', 'amount', 'currency', 'sales', 'image1', 'CategoryId', 'SubCategoryId', 'SubSubCategoryId'],
 			});
 			res.send(products)
 		} catch (err) {
@@ -39,7 +39,7 @@ module.exports = {
 			const products = await Product.findAll({
 				limit: parseInt(limit),
 				order: [['createdAt', 'ASC']],
-				attributes: ['id', 'title', 'price', 'currency', 'sales', 'image1', 'CategoryId', 'SubCategoryId', 'SubSubCategoryId']
+				attributes: ['id', 'title', 'amount', 'currency', 'sales', 'image1', 'CategoryId', 'SubCategoryId', 'SubSubCategoryId']
 			});
 			res.send(products)
 		} catch (err) {
@@ -55,8 +55,8 @@ module.exports = {
 					SubSubCategoryId: req.params.subSubCategoryId
 				},
 				limit: parseInt(req.params.limit),
-				order: [['createdAt', 'ASC']],
-				attributes: ['id', 'title', 'price', 'currency', 'sales', 'image1', 'CategoryId', 'SubCategoryId', 'SubSubCategoryId']
+				order: [['createdAt', 'DESC']],
+				attributes: ['id', 'title', 'amount', 'currency', 'sales', 'image1', 'CategoryId', 'SubCategoryId', 'SubSubCategoryId']
 			})
 			res.send(recommendation)
 		} catch (err) {

@@ -40,6 +40,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
+
     setToken({commit}, token) {
       commit('SET_TOKEN', token)
     },

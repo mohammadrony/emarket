@@ -25,6 +25,23 @@
                 {{ subSubCategory.name }}
                 <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
               </b-nav-item>
+                <b-button :to="{ name: 'add-product'}" v-if="admin" class="ml-5" size="md" variant="outline-dark">
+                  <b-icon class="mr-2" icon="plus-square"></b-icon>
+                  Add New Product
+                </b-button>
+            </b-navbar-nav>
+            <b-navbar-nav class="ml-auto">
+              <b-nav-form @submit.prevent="search">
+                <b-form-input
+                  v-model="searchText"
+                  size="sm"
+                  class="mr-sm-2"
+                  placeholder="Search here"
+                ></b-form-input>
+                <b-button @click="search" variant="white">
+                  <b-icon icon="search"></b-icon
+                ></b-button>
+              </b-nav-form>
             </b-navbar-nav>
           </b-collapse>
         </b-navbar>
@@ -43,14 +60,18 @@ export default {
   components: {},
   data() {
     return {
-      route: null,
+      admin: null,
+      searchText: null,
       category: null,
       subCategory: null,
       subSubCategory: null,
     };
   },
   async mounted() {
+    this.admin = this.$store.state.admin
     const route = this.$store.state.route;
+    if (route.query.q) this.searchText = route.query.q;
+
     if (route.params.subSubCategory) {
       this.subSubCategory = (
         await SubSubCategoryService.getSubSubCategoryByName(
@@ -70,6 +91,12 @@ export default {
     }
   },
   methods: {
+    search() {
+      if (this.searchText != null) {
+        const path = this.$store.state.route.path + "?q=" + this.searchText;
+        window.location.replace(path);
+      }
+    },
     async productHome() {
       await this.$store.dispatch("Products/resetSearchParameter");
       window.location.replace("/products");

@@ -13,6 +13,8 @@ import AboutUs from "@/views/AboutUs.vue";
 import CartView from "@/views/CartView.vue";
 import Wishlist from "@/views/Wishlist.vue";
 import Checkout from "@/views/Checkout.vue";
+import SuccessPayment from "@/views/Payment/SuccessPayment.vue";
+import CancelPayment from "@/views/Payment/CancelPayment.vue";
 import Admin from "@/views/Admin.vue";
 import AOverview from "@/views/AdminChildren/AOverview.vue";
 import AProducts from "@/views/AdminChildren/AProducts.vue";
@@ -95,9 +97,25 @@ const routes = [
     component: Wishlist
   },
   {
+    path: "/success-payment",
+    name: "success-payment",
+    component: SuccessPayment
+  },
+  {
+    path: "/cancel-payment",
+    name: "/cancel-payment",
+    component: CancelPayment
+  },
+  {
     path: "/checkout",
     name: "checkout",
     component: Checkout
+  },
+  {
+    path: "/add-product",
+    name: "add-product",
+    component: AddProduct,
+    meta: { requiresAuth: true }
   },
   {
     path: "/admin",
@@ -115,12 +133,6 @@ const routes = [
     path: "/admin/products",
     name: "admin-products",
     component: AProducts,
-    meta: { requiresAuth: true }
-  },
-  {
-    path: "/admin/add-product",
-    name: "add-product",
-    component: AddProduct,
     meta: { requiresAuth: true }
   },
   {
@@ -160,19 +172,19 @@ router.beforeEach((to, from, next) => {
   else {
     next();
   }
-  
-// if (to.matched.some(record => record.meta.requiresAuth)) {
-//   if (!auth.loggedIn()) {
-//     next({
-//       path: '/login',
-//       query: { redirect: to.fullPath }
-//     })
-//   } else {
-//     next()
-//   }
-// } else {
-//   next() 
-// }
+
+  // if (to.matched.some(record => record.meta.requiresAuth)) {
+  //   if (!auth.loggedIn()) {
+  //     next({
+  //       path: '/login',
+  //       query: { redirect: to.fullPath }
+  //     })
+  //   } else {
+  //     next()
+  //   }
+  // } else {
+  //   next() 
+  // }
 })
 
 export default router;

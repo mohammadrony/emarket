@@ -14,10 +14,10 @@
         <b-col cols="3">
           <strong>Item</strong>
         </b-col>
-        <b-col cols="3">
-          <strong>Price</strong>
+        <b-col cols="2">
+          <strong>Amount</strong>
         </b-col>
-        <b-col cols="3">
+        <b-col cols="4">
           <strong>Quantity</strong>
         </b-col>
       </b-row>
@@ -32,8 +32,8 @@
               {{ product.title }}
             </b-link>
           </b-col>
-          <b-col cols="3"> {{ product.price * product.quantity }} $</b-col>
-          <b-col cols="3">
+          <b-col cols="2"> {{ product.amount * product.quantity }} $</b-col>
+          <b-col cols="4">
             <div class="quantity-style">
               <b-button
                 size="sm"
@@ -42,7 +42,7 @@
                 >+
               </b-button>
               <a class="ml-4">{{ product.quantity }}</a>
-              <b-button size="sm" class="ml-4" @click="quantityDec(product)"
+              <b-button size="sm" variant="warning" class="ml-4" @click="quantityDec(product)"
                 >-</b-button
               >
               <b-button
@@ -64,7 +64,7 @@
           <b-col cols="2">
             <b-card>
               <b-card-title>Total</b-card-title>
-              <b-card-text>{{ totalPrice }} $</b-card-text>
+              <b-card-text>{{ totalAmount }} $</b-card-text>
             </b-card>
           </b-col>
         </b-row>
@@ -100,8 +100,6 @@ export default {
   },
   data() {
     return {
-      // cartProducts: [],
-      // cartItems: null,
     };
   },
   computed: {
@@ -112,12 +110,12 @@ export default {
     cartItemCount: function () {
       return this.cartProducts.length;
     },
-    totalPrice: function () {
-      var i, price = 0;
+    totalAmount: function () {
+      var i, amount = 0;
       for (i = 0; i < this.cartProducts.length; i++) {
-        price += this.cartProducts[i].price * this.cartProducts[i].quantity;
+        amount += this.cartProducts[i].amount * this.cartProducts[i].quantity;
       }
-      return price;
+      return amount;
     },
   },
   methods: {

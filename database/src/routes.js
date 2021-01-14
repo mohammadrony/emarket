@@ -74,7 +74,7 @@ module.exports = (app) => {
     CategoryController.deleteCategory)
 
   // sub category
-  app.get("/category/getSubCategoryByName/:name",
+  app.get("/subCategory/getSubCategoryByName/:name",
     SubCategoryController.getSubCategoryByName)
   app.get("/subCategory/getSubCategoryList",
     SubCategoryController.getSubCategoryList)
@@ -86,7 +86,7 @@ module.exports = (app) => {
     SubCategoryController.deleteSubCategory)
 
   // sub sub Category
-  app.get("/category/getSubSubCategoryByName/:name",
+  app.get("/subSubCategory/getSubSubCategoryByName/:name",
     SubSubCategoryController.getSubSubCategoryByName)
   app.get("/subSubCategory/getSubSubCategoryList",
     SubSubCategoryController.getSubSubCategoryList)
@@ -154,12 +154,12 @@ module.exports = (app) => {
     CartsController.remove)
 
   // wishlist
-  app.get("/wishlist/user",
+  app.get("/wishlist",
     isAuthenticated,
-    WishlistController.getUserWishlist)
-  app.get("/wishlist/one",
+    WishlistController.getWishlist)
+  app.get("/wishlist/:productId",
     isAuthenticated,
-    WishlistController.getOne)
+    WishlistController.getWishlistById)
   app.post("/wishlist/add",
     isAuthenticated,
     WishlistController.addToWishlist)

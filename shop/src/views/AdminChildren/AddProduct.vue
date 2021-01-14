@@ -25,14 +25,14 @@
               <b-row>
                 <b-col>
                   <b-form-group
-                    id="input-group-price"
+                    id="input-group-amount"
                     label="Price"
-                    label-for="input-price"
+                    label-for="input-amount"
                   >
                     <b-form-input
-                      id="input-price"
-                      v-model="product.price"
-                      placeholder="Amount"
+                      id="input-amount"
+                      v-model="product.amount"
+                      placeholder="Price"
                       required
                     >
                     </b-form-input>
@@ -115,12 +115,11 @@
                   </b-col>
                   <b-col cols="1"><h6 class="mt-2">or</h6></b-col>
                   <b-col cols="6">
-                    <b-form-group>
+                    <b-form-group @submit.prevent="addNewCategory">
                       <b-form-input
                         id="input-category"
                         v-model="newCategory"
                         placeholder="Add New Category"
-                        @keyup.enter="addNewCategory"
                       >
                       </b-form-input>
                     </b-form-group>
@@ -150,13 +149,12 @@
                   </b-col>
                   <b-col cols="1"><h6 class="mt-2">or</h6></b-col>
                   <b-col cols="6">
-                    <b-form-group>
+                    <b-form-group @submit.prevent="addNewSubCategory">
                       <b-form-input
                         id="input-sub-category"
                         v-model="newSubCategory"
                         :disabled="!product.CategoryId"
                         placeholder="Add New Sub Category"
-                        @keyup.enter="addNewSubCategory"
                       >
                       </b-form-input>
                     </b-form-group>
@@ -189,13 +187,12 @@
                   </b-col>
                   <b-col cols="1"><h6 class="mt-2">or</h6></b-col>
                   <b-col cols="6">
-                    <b-form-group>
+                    <b-form-group @submit.prevent="addNewSubSubCategory">
                       <b-form-input
                         id="input-sub-sub-category"
                         v-model="newSubSubCategory"
                         :disabled="!product.SubCategoryId"
                         placeholder="Add New Sub Sub Category"
-                        @keyup.enter="addNewSubSubCategory"
                       >
                       </b-form-input>
                     </b-form-group>
@@ -275,10 +272,11 @@ export default {
       newCategory: null,
       newSubCategory: null,
       newSubSubCategory: null,
+      backupProduct: null,
       product: {
         code: null,
         title: null,
-        price: null,
+        amount: null,
         subtitle: null,
         description: null,
         currency: "USD",
@@ -296,6 +294,7 @@ export default {
     };
   },
   async mounted() {
+    this.backupProduct = this.product;
     this.categoryList = (await CategoryService.getCategoryList()).data;
     this.subCategoryList = (await SubCategoryService.getSubCategoryList()).data;
     this.subSubCategoryList = (
@@ -303,6 +302,9 @@ export default {
     ).data;
   },
   methods: {
+    reset() {
+      this.product = this.backupProduct
+    },
     async createNewProduct() {
       var formData = new FormData();
       var fieldName;
@@ -315,18 +317,11 @@ export default {
         if (i < this.max_input_img)
           formData.append("imageField", this.images[i]);
       }
-      // this.error = null;
-      // const requiredFieldsFilledIn = Object.keys(this.properties).every(
-      //   (key) => !!this.properties[key]
-      // );
-      // if (!requiredFieldsFilledIn) {
-      //   this.error = "Please fill in all the required fields.";
-      //   return;
-      // }
-
       try {
         const response = (await ProductsService.createProduct(formData)).data;
+        await this.$store.dispatch("Products/setAllBackupProduct")
         console.log(response);
+        window.location.reload();
         this.$bvToast.toast("Product Added Successfully", {
           title: "Update",
           variant: "dark",
@@ -338,21 +333,57 @@ export default {
         console.log(err);
       }
     },
-    addNewCategory() {
-      if (this.newCategory) {
-        console.log("have to work");
+
+    async addNewCategory() {
+      try {
+        const newCategory = (
+          await CategoryService.createCategory({ name: this.newCategory })
+        ).data;
+        console.log("new category", newCategory);
+        this.categoryList = await this.$store.dispatch(
+          "Products/Category/setFullCategoryList"
+        );
+        window.location.reload();
+      } catch (err) {
+        console.log("error create categ", err);
       }
     },
-    addNewSubCategory() {
-      if (this.newSubCategory) {
-        console.log("have to work");
+    async addNewSubCategory() {
+      try {
+        const newSubCategory = (
+          await SubCategoryService.createSubCategory({
+            name: this.newSubCategory,
+            CategoryId: this.product.CategoryId,
+          })
+        ).data;
+
+        console.log("new sub category", newSubCategory);
+        this.categoryList = await this.$store.dispatch(
+          "Products/Category/setFullCategoryList"
+        );
+        window.location.reload();
+      } catch (err) {
+        console.log("error create sub categ", err);
       }
     },
-    addNewSubSubCategory() {
-      if (this.newSubSubCategory) {
-        console.log("have to work");
+    async addNewSubSubCategory() {
+      try {
+        const newSubSubCategory = (
+          await SubSubCategoryService.createSubSubCategory({
+            name: this.newSubCategory,
+            SubCategoryId: this.product.SubCategoryId,
+          })
+        ).data;
+        console.log("new sub sub category", newSubSubCategory);
+        this.categoryList = await this.$store.dispatch(
+          "Products/Category/setFullCategoryList"
+        );
+        window.location.reload();
+      } catch (err) {
+        console.log("error create sub sub categ", err);
       }
     },
+
     set_category(category) {
       this.selectedCategory = category.name;
       this.selectedSubCategory = "Sub Category";

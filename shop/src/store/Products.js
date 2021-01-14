@@ -16,8 +16,8 @@ export const ProductsModule = {
       categoryId: 0,
       subCategoryId: 0,
       subSubCategoryId: 0,
-      lowestPrice: 0,
-      maximumPrice: 1000000000,
+      lowestAmount: 0,
+      maximumAmount: 1000000000,
     }
   },
   mutations: {
@@ -26,7 +26,7 @@ export const ProductsModule = {
     },
     SET_ALL_PRODUCT(state, allProduct) {
       state.allProduct = allProduct;
-      state.perPage = 5
+      state.perPage = 9
     },
     SET_DISPLAY_PRODUCTS(state, displayProducts) {
       state.displayProducts = displayProducts;
@@ -46,11 +46,11 @@ export const ProductsModule = {
     SET_SEARCH_SUB_SUB_CATEGORY_ID(state, subSubCategoryId) {
       state.searchParameter.subSubCategoryId = subSubCategoryId;
     },
-    SET_LOWEST_PRICE(state, lowestPrice) {
-      state.searchParameter.lowestPrice = lowestPrice;
+    SET_LOWEST_AMOUNT(state, lowestAmount) {
+      state.searchParameter.lowestAmount = lowestAmount;
     },
-    SET_MAXIMUM_PRICE(state, maximumPrice) {
-      state.searchParameter.maximumPrice = maximumPrice;
+    SET_MAXIMUM_AMOUNT(state, maximumAmount) {
+      state.searchParameter.maximumAmount = maximumAmount;
     }
 
   },
@@ -60,8 +60,8 @@ export const ProductsModule = {
       commit("SET_SEARCH_CATEGORY_ID", 0);
       commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
       commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", 0);
-      commit("SET_LOWEST_PRICE", 0);
-      commit("SET_MAXIMUM_PRICE", 1000000000);
+      commit("SET_LOWEST_AMOUNT", 0);
+      commit("SET_MAXIMUM_AMOUNT", 1000000000);
 
     },
     setSearchParameter({ commit, dispatch }, searchParameter) {
@@ -78,10 +78,10 @@ export const ProductsModule = {
         commit("SET_SEARCH_TEXT", searchParameter.query.q)
       }
       if (searchParameter.query.lo) {
-        commit("SET_LOWEST_PRICE", searchParameter.query.lo)
+        commit("SET_LOWEST_AMOUNT", searchParameter.query.lo)
       }
       if (searchParameter.query.hi) {
-        commit("SET_MAXIMUM_PRICE", searchParameter.query.hi)
+        commit("SET_MAXIMUM_AMOUNT", searchParameter.query.hi)
       }
     },
     setSearchText({ commit }, searchText) {
@@ -102,24 +102,28 @@ export const ProductsModule = {
       commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
       commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", subSubCategoryId);
     },
-    setLowestPrice({ commit }, lowestPrice) {
-      commit("SET_LOWEST_PRICE", lowestPrice);
+    setLowestAmount({ commit }, lowestAmount) {
+      commit("SET_LOWEST_AMOUNT", lowestAmount);
     },
-    setMaximumPrice({ commit }, maximumPrice) {
-      commit("SET_MAXIMUM_PRICE", maximumPrice);
+    setMaximumAmount({ commit }, maximumAmount) {
+      commit("SET_MAXIMUM_AMOUNT", maximumAmount);
     },
-    async getAllBackupProduct({ commit, state }) {
+    async setAllBackupProduct({ commit }) {
+      const allProduct = (await ProductsService.getAllProducts()).data;
+      commit("SET_ALL_BACKUP_PRODUCT", allProduct)
+    },
+    async getAllBackupProduct({ dispatch, state }) {
       if (!state.allBackupProduct) {
-        const allProduct = (await ProductsService.getAllProducts()).data;
-        commit("SET_ALL_BACKUP_PRODUCT", allProduct)
+        await dispatch("setAllBackupProduct")
       }
       return state.allBackupProduct;
     },
-    async setAllProduct({ commit, dispatch }) {
+    async setAllProduct({ commit, state, dispatch }) {
       const allProduct = await dispatch("filterProducts");
       commit("SET_ALL_PRODUCT", allProduct);
       commit("SET_AP_COUNT", allProduct.length);
-      dispatch("paginate", { currentPage: 1 });
+      const displayProducts = allProduct.slice(0, state.perPage);
+      commit("SET_DISPLAY_PRODUCTS", displayProducts)
     },
 
     paginate({ commit, state }, currentPage) {

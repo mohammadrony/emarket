@@ -12,7 +12,7 @@
                 <b-link @click="gotoProduct(product)"
                   ><h5>{{ product.title }}</h5></b-link
                 >
-                <h6>{{ product.price }} {{ product.currency }}</h6>
+                <h6>{{ product.amount }} {{ product.currency }}</h6>
               </b-card>
             </b-col>
           </b-row>

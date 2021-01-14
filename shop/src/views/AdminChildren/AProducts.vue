@@ -30,7 +30,7 @@
           </b-col>
           <b-col cols="3">
             <b-button
-              to="/admin/add-product"
+              :to="{ name: 'add-product'}"
               block
               size="md"
               class="mb-3"
@@ -50,7 +50,7 @@
                 <strong>Name</strong>
               </b-col>
               <b-col>
-                <strong>Price</strong>
+                <strong>Amount</strong>
               </b-col>
               <b-col>
                 <strong>Modify</strong>
@@ -71,7 +71,7 @@
               <b-col>
                 {{ product.title }}
               </b-col>
-              <b-col> {{ product.price }}৳ </b-col>
+              <b-col>{{ product.Amount }} {{product.currency}}</b-col>
               <b-col>
                 <div>
                   <b-button variant="primary" @click="editProduct(product)"
@@ -146,8 +146,8 @@
                   required
                   :rules="[required]"
                   class="mb-2 mr-sm-2 mb-sm-0"
-                  placeholder="Add price"
-                  v-model="properties.price"
+                  placeholder="Add amount"
+                  v-model="properties.amount"
                 >
                 </b-form-input>
               </div>
@@ -236,13 +236,13 @@ export default {
       properties: {
         title: "",
         description: "",
-        price: 0,
+        amount: 0,
         tags: "",
         imageFile: null,
         CategoryId: 0,
         SubCategoryId: 0,
       },
-      fields: ["Image", "Name", "Price (in taka)", "Edit/Delete"],
+      fields: ["Image", "Name", "Amount", "Edit/Delete"],
       products: {},
       mode: "",
       activeItem: "",
@@ -349,7 +349,7 @@ export default {
     resetProductProperties() {
       this.properties.title = "";
       this.properties.description = "";
-      this.properties.price = 0;
+      this.properties.amount = 0;
       this.properties.tags = "";
       this.properties.imageFile = null;
       this.properties.CategoryId = 0;

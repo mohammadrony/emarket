@@ -110,8 +110,6 @@ export default {
   },
   async mounted() {
     this.shop = this.$store.state.shop;
-    const route = this.$store.state.route;
-    if (route.query.q) this.searchTxt = route.query.q;
     if (this.cList == false) {
       this.categoryList = await this.$store.dispatch(
         "Products/Category/setFullCategoryList"
@@ -143,9 +141,6 @@ export default {
         window.location.replace("/wishlist");
       }
     },
-    ok() {
-      console.log("hello there");
-    },
     userProfile() {
       this.$router.push({
         name: "profile",
@@ -164,16 +159,16 @@ export default {
       this.search_category = category.name;
     },
     search() {
-      this.$store.dispatch("Products/setSearchText", this.searchTxt);
-      var location = "products";
+      this.$store.dispatch("/Products/setSearchText", this.searchTxt);
+      var route = "/products";
       if (this.search_category_id != 0) {
         const category = this.search_category;
-        location += "/" + category;
+        route += "/" + category;
       }
       if (this.searchTxt != "") {
         const text = this.searchTxt;
-        location += "?q=" + text;
-        window.location.replace(location);
+        route += "?q=" + text;
+        window.location.replace(route);
       }
     },
   },

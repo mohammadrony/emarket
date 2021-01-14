@@ -12,173 +12,13 @@
                 <b-link @click="gotoProduct(product)"
                   ><h5>{{ product.title }}</h5></b-link
                 >
-                <h6>{{ product.price }} {{ product.currency }}</h6>
+                <h6>{{ product.amount }} {{ product.currency }}</h6>
               </b-card>
             </b-col>
           </b-row>
         </b-col>
       </b-row>
     </b-container>
-    <!-- <b-container>
-      <b-row id="top-sell" class="mt-5">
-        <b-col>
-          <h3>You May Also Like</h3>
-          <hr />
-          <b-row class="mt-3">
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-          </b-row>
-          <b-row class="mt-3">
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-          </b-row>
-          <h3 id="new-items" class="mt-5">New 2020 Fresh Stock</h3>
-          <hr />
-          <b-row class="mt-3">
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-            <b-col>
-              <b-card>
-                <b-card-img
-                  class="mb-3"
-                  src="http://localhost:8084/public/product-image/1_big.jpg"
-                ></b-card-img>
-                <b-link to="/products/2"
-                  ><h5>Mac Laptop Next Generation</h5></b-link
-                >
-                <h6>344 ৳</h6>
-              </b-card>
-            </b-col>
-          </b-row>
-        </b-col>
-      </b-row>
-    </b-container> -->
   </div>
 </template>
 
@@ -187,23 +27,33 @@ import ProductsService from "@/services/ProductsService.js";
 export default {
   name: "Name",
   props: {
-    subSubCategoryId: Number,
+    subSubCatId: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
   },
   components: {},
   data() {
     return {
       limit: 8,
+      subSubCategoryId: this.subSubCatId,
       recommendation: null,
       recommendationTitle: "You May Also Like",
     };
   },
   async mounted() {
-    this.recommendation = (
-      await ProductsService.getRecommendation({
-        subSubCategoryId: this.subSubCategoryId,
-        limit: this.limit,
-      })
-    ).data;
+    console.log(this.subSubCategoryId);
+    try {
+      this.recommendation = (
+        await ProductsService.getRecommendation({
+          subSubCategoryId: this.subSubCategoryId,
+          limit: this.limit,
+        })
+      ).data;
+    } catch (error) {
+      console.log("get recommendation error", error);
+    }
   },
   methods: {},
   computed: {},

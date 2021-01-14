@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container id="review_section">
       <b-row align-v="center">
         <b-col></b-col>
         <b-col cols="4" class="text-center">
@@ -129,7 +129,7 @@
 
       <hr />
       <b-row>
-        <b-col cols="6" id="write_review">
+        <b-col cols="6">
           <h4>Customer Review</h4>
           <hr />
           <div v-for="review in reviewList" :key="review.id" class="mb-2">
@@ -369,7 +369,6 @@ export default {
     };
   },
   async mounted() {
-    console.log(this.userId);
     this.productId = this.$store.state.route.params.productId;
     this.reviewList = (await ReviewService.getReviewList(this.productId)).data;
     var i;

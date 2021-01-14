@@ -1,17 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
-    const ProductPrice = sequelize.define('ProductPrice', {
+    const ProductAmount = sequelize.define('ProductAmount', {
       id: {
         type:           DataTypes.INTEGER,
         allowNull:      false,
         primaryKey:     true,
         autoIncrement:  true
       },
-      buyingPrice:      DataTypes.INTEGER,
-      previousPrice:    DataTypes.INTEGER,
+      buyingAmount:      DataTypes.INTEGER,
+      previousAmount:    DataTypes.INTEGER,
       discount:         DataTypes.INTEGER,
     })
-    ProductPrice.associate = function (models) {
-      ProductPrice.belongsTo(models.Product)
+    ProductAmount.associate = function (models) {
+      ProductAmount.belongsTo(models.Product)
     }
-    return ProductPrice
+    return ProductAmount
   }

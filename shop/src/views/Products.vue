@@ -1,10 +1,10 @@
 <template>
   <div>
     <TopHeader />
-    <ProductsNavbar />
+    <ProductsNavbar :key="componentKey" />
     <b-row class="mt-4">
       <div :class="{ 'col-3': sidebar_visible, 'col-1': !sidebar_visible }">
-        <ProductCategorySidebar v-if="sidebar_visible" />
+        <ProductCategorySidebar v-if="sidebar_visible" :key="componentKey" />
         <b-row class="text-right">
           <b-col />
           <b-col v-if="sidebar">
@@ -47,23 +47,29 @@
                 ></b-card-img>
                 <a href="" @click="viewProduct(product)">{{ product.title }}</a>
                 <br />
-                <h6 class="mt-2">{{ product.price }} ৳</h6>
-                <AddToCart
-                  class="mt-4"
-                  btn_size="sm"
-                  :id="product.id"
-                  :image="product.image1"
-                  :title="product.title"
-                  :price="product.price"
-                ></AddToCart>
+                <h6 class="mt-2">
+                  {{ product.amount }} {{ product.currency }}
+                </h6>
+                <b-row class="mt-4">
+                  <b-col>
+                    <AddToCart
+                      class=""
+                      btn_size="sm"
+                      :id="product.id"
+                      :curr="product.currency"
+                      :image="product.image1"
+                      :title="product.title"
+                      :amount="product.amount"
+                    ></AddToCart>
+                  </b-col>
+                </b-row>
               </b-card>
             </b-card-group>
           </b-col>
         </b-row>
-        <b-row class="my-5 py-5" v-if="this.apCount == 0">
-          <h3>Nothing found from the store.!!!</h3>
+        <b-row class="mt-3" v-if="this.apCount == 0">
+          <h5>There is no product that matches the search criteria!!!</h5>
         </b-row>
-        <hr />
         <b-row v-if="this.apCount != 0" class="mt-3" align-v="center">
           <b-col>
             <b-pagination
@@ -114,6 +120,7 @@ export default {
 
   data() {
     return {
+      componentKey: 0,
       categoryList: null,
       subCategoryList: null,
       subSubCategoryList: null,
@@ -145,23 +152,38 @@ export default {
 
   async mounted() {
     const route = this.$store.state.route;
+
     if (route.params.subSubCategory) {
-      const subSubCategory = (
-        await SubSubCategoryService.getSubSubCategoryByName(
-          route.params.subSubCategory
-        )
-      ).data;
-      this.searchParameter.param.subSubCategoryId = subSubCategory.id;
+      try {
+        const subSubCategory = (
+          await SubSubCategoryService.getSubSubCategoryByName(
+            route.params.subSubCategory
+          )
+        ).data;
+        this.searchParameter.param.subSubCategoryId = subSubCategory.id;
+      } catch (error) {
+        console.log("error get sub sub cat id by name", error);
+      }
     } else if (route.params.subCategory) {
-      const subCategory = (
-        await SubCategoryService.getSubCategoryByName(route.params.subCategory)
-      ).data;
-      this.searchParameter.param.subCategoryId = subCategory.id;
+      try {
+        const subCategory = (
+          await SubCategoryService.getSubCategoryByName(
+            route.params.subCategory
+          )
+        ).data;
+        this.searchParameter.param.subCategoryId = subCategory.id;
+      } catch (error) {
+        console.log("error get sub cat id by name", error);
+      }
     } else if (route.params.category) {
-      const category = (
-        await CategoryService.getCategoryByName(route.params.category)
-      ).data;
-      this.searchParameter.param.categoryId = category.id;
+      try {
+        const category = (
+          await CategoryService.getCategoryByName(route.params.category)
+        ).data;
+        this.searchParameter.param.categoryId = category.id;
+      } catch (error) {
+        console.log("error get cat id by name", error);
+      }
     }
     if (route.query.q) {
       const str = route.query.q;
@@ -175,6 +197,7 @@ export default {
       const hi = parseInt(route.query.hi);
       this.searchParameter.query.hi = hi;
     }
+    this.forceRerender();
 
     await this.$store.dispatch(
       "Products/setSearchParameter",
@@ -183,6 +206,9 @@ export default {
     await this.$store.dispatch("Products/setAllProduct");
   },
   methods: {
+    forceRerender() {
+      this.componentKey += 1;
+    },
     viewProduct(product) {
       this.$router.push({
         name: "product",
