@@ -3,7 +3,12 @@
     <b-container class="mt-5">
       <b-row>
         <b-col>
-          <b-button class="mb-2" v-if="admin && visible" variant="warning" size="sm">
+          <b-button
+            class="mb-2"
+            v-if="admin && visible"
+            variant="warning"
+            size="sm"
+          >
             <b-icon icon="pen"></b-icon>
           </b-button>
           <b-img
@@ -12,7 +17,12 @@
           ></b-img>
         </b-col>
         <b-col>
-          <b-button class="mb-2" v-if="admin && visible" variant="warning" size="sm">
+          <b-button
+            class="mb-2"
+            v-if="admin && visible"
+            variant="warning"
+            size="sm"
+          >
             <b-icon icon="pen"></b-icon>
           </b-button>
           <b-img
@@ -21,7 +31,12 @@
           ></b-img>
         </b-col>
         <b-col>
-          <b-button class="mb-2" v-if="admin && visible" variant="warning" size="sm">
+          <b-button
+            class="mb-2"
+            v-if="admin && visible"
+            variant="warning"
+            size="sm"
+          >
             <b-icon icon="pen"></b-icon>
           </b-button>
           <b-img
@@ -30,7 +45,12 @@
           ></b-img>
         </b-col>
         <b-col>
-          <b-button class="mb-2" v-if="admin && visible" variant="warning" size="sm">
+          <b-button
+            class="mb-2"
+            v-if="admin && visible"
+            variant="warning"
+            size="sm"
+          >
             <b-icon icon="pen"></b-icon>
           </b-button>
           <b-img
@@ -41,7 +61,12 @@
       </b-row>
       <b-row class="mt-5">
         <b-col>
-          <b-button class="mb-2" v-if="admin && visible" variant="warning" size="sm">
+          <b-button
+            class="mb-2"
+            v-if="admin && visible"
+            variant="warning"
+            size="sm"
+          >
             <b-icon icon="pen"></b-icon>
           </b-button>
           <b-img
@@ -50,7 +75,12 @@
           ></b-img>
         </b-col>
         <b-col>
-          <b-button class="mb-2" v-if="admin && visible" variant="warning" size="sm">
+          <b-button
+            class="mb-2"
+            v-if="admin && visible"
+            variant="warning"
+            size="sm"
+          >
             <b-icon icon="pen"></b-icon>
           </b-button>
           <b-img
@@ -78,12 +108,10 @@ export default {
   },
   methods: {
     advertise() {
-      window.location.replace("/products");
+      window.location.replace("/");
     },
     banner() {
-      const x = "book and book",
-        y = 4;
-      window.location.replace(`/${x}/${y}?hello=goo&no=ok`);
+      window.location.replace("/");
     },
   },
   computed: {},

@@ -47,15 +47,22 @@
               <h6 style="color: #f00">
                 {{ error }}
               </h6>
-              <div
-                class="form-group d-flex align-items-center justify-content-between mt-1 mb-0"
-              >
-                <a class="small" href="/forget-password">Forgot Password?</a>
-                <b-button variant="primary" @click="login">Login</b-button>
-              </div>
+
+              <b-row align-v="center" class="mt-3">
+                <b-col cols="4">
+                  <b-button block variant="primary" @click="login"
+                    >Login</b-button
+                  >
+                </b-col>
+                <b-col cols="2"></b-col>
+                <b-col cols="6">
+                  <small
+                    ><a href="/register">Need an account? Sign up!</a></small
+                  >
+                </b-col>
+              </b-row>
             </b-form>
             <hr />
-            <small><a href="/register">Need an account? Sign up!</a></small>
           </b-card>
         </b-col>
       </b-row>
