@@ -1,5 +1,5 @@
 const { SubCategory } = require('../models')
-
+ 
 module.exports = {
 	async getSubCategoryByName(req, res) {
 		try {
