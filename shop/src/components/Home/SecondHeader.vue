@@ -132,29 +132,37 @@
 
 <script>
 import { mapState } from "vuex";
+import CategoryService from "@/services/CategoryService.js";
+import SubCategoryService from "@/services/SubCategoryService.js";
+import SubSubCategoryService from "@/services/SubSubCategoryService.js";
 export default {
   name: "HomeSecondHeader",
   components: {},
   data() {
     return {
+      categoryList: null,
       categoryeachRow: 6,
       categoryListRow1: null,
       categoryListRow2: null,
+      subCategoryList: null,
+      subSubCategoryList: null,
     };
   },
   computed: {
-    ...mapState({
-      categoryList: (state) => state.Products.Category.categoryList,
-      subCategoryList: (state) => state.Products.Category.subCategoryList,
-      subSubCategoryList: (state) => state.Products.Category.subSubCategoryList,
-    }),
+    ...mapState({}),
   },
-  mounted() {
+  async mounted() {
+    this.categoryList = (await CategoryService.getCategoryList()).data;
     this.categoryListRow1 = this.categoryList.slice(0, this.categoryeachRow);
     this.categoryListRow2 = this.categoryList.slice(
       this.categoryeachRow,
       this.categoryList.length
     );
+    this.subCategoryList = (await SubCategoryService.getSubCategoryList()).data;
+    this.subSubCategoryList = (
+      await SubSubCategoryService.getSubSubCategoryList()
+    ).data;
+
     this.$root.$on("bv::dropdown::show", (bvEvent) => {
       if (bvEvent.componentId === "dropdown-2") {
         this.isDropdown2Visible = true;
@@ -171,18 +179,30 @@ export default {
   },
   methods: {
     categorySelect(category) {
-      const route = '/products/' + category.name
+      const route = "/products/" + category.name;
       window.location.replace(route);
     },
     subCategorySelect(subCategory) {
-      const category = this.categoryList.find(obj => obj.id == subCategory.CategoryId);
-      const route = ('/products/' + category.name +'/'+ subCategory.name)
+      const category = this.categoryList.find(
+        (obj) => obj.id == subCategory.CategoryId
+      );
+      const route = "/products/" + category.name + "/" + subCategory.name;
       window.location.replace(route);
     },
     subSubCategorySelect(subSubCategory) {
-      const subCategory = this.subCategoryList.find(obj => obj.id == subSubCategory.SubCategoryId);
-      const category = this.categoryList.find(obj => obj.id == subCategory.CategoryId);
-      const route = ('/products/' + category.name+'/' + subCategory.name+'/'+subSubCategory.name)
+      const subCategory = this.subCategoryList.find(
+        (obj) => obj.id == subSubCategory.SubCategoryId
+      );
+      const category = this.categoryList.find(
+        (obj) => obj.id == subCategory.CategoryId
+      );
+      const route =
+        "/products/" +
+        category.name +
+        "/" +
+        subCategory.name +
+        "/" +
+        subSubCategory.name;
       window.location.replace(route);
     },
   },

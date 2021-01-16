@@ -139,15 +139,12 @@ export default {
         currency: "USD",
         quantity: 1,
       });
-      console.log(toCheckout);
       try {
         const checkoutSession = (
           await CheckoutService.createCheckoutSession({
             checkoutProduct: toCheckout,
           })
         ).data;
-        console.log(checkoutSession);
-        console.log("checkout");
         stripeInit.then((stripe) => {
           stripe
             .redirectToCheckout({
@@ -160,19 +157,9 @@ export default {
               console.error(error);
             });
         });
-        // stripe.redirectToCheckout({sessionId: checkoutSession.id})
       } catch (err) {
         console.log(err);
       }
-      // } else {
-      //   this.$bvToast.toast("You have to sign in to checkout.", {
-      //     title: "Checkout failed",
-      //     variant: "info",
-      //     toaster: "b-toaster-top-center",
-      //     noCloseButton: true,
-      //     solid: true,
-      //   });
-      // }
     },
   },
 };

@@ -5,7 +5,6 @@ module.exports = {
 		try {
 			const products = await Product.findAll({
 				include: [
-					// { all: true }
 					{ model: Category },
 					{ model: SubCategory },
 					{ model: SubSubCategory }

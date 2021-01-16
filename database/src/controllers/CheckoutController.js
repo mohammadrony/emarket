@@ -1,9 +1,5 @@
-// const _ = require('lodash')
-// const { Cart, Product } = require('../models')
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY
-const stripePublicKey = process.env.STRIPE_PUBLIC_KEY
 const stripe = require('stripe')(stripeSecretKey);
-// console.log(stripeSecretKey)
 module.exports = {
   async createCheckoutSession(req, res) {
     const checkoutProduct = req.body.checkoutProduct
