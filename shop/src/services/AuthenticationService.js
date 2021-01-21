@@ -19,7 +19,13 @@ export default {
   verifyToken(token) {
     return Api().get(`/verifyToken/${token}`);
   },
+  verifyRegsToken(token) {
+    return Api().get(`/verifyRegsToken/${token}`);
+  },
   resetPassword(credentials) {
     return Api().post("/resetPassword", credentials);
+  },
+  resetRegsToken(credentials) {
+    return Api().post("/resetRegsToken", credentials)
   }
 };

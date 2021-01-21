@@ -14,7 +14,39 @@ function jwtSignUser(user) {
 module.exports = {
     async register(req, res) {
         try {
+            var buf = crypto.randomBytes(20);
+            var token = buf.toString('hex');
+            req.body.registerToken = token;
+            req.body.profileImage = "http://localhost:8084/public/user-image/default-man.png"
             const user = await User.create(req.body)
+
+            var transporter = await nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.ESTORE_EMAIL,
+                    pass: process.env.ESTORE_PASSWORD,
+                },
+                tls: {
+                    rejectUnauthorized: false
+                }
+            })
+            var mailOptions = {
+                from: process.env.ESTORE_EMAIL,
+                to: req.body.email,
+                subject: "Welcome to e-store",
+                // subject: 'Verify your account on e-store',
+                text: "Hello from e-store"
+                // text: 'You are receiving this because you (or someone else) have requested to create an account on e-store\n\n' +
+                //     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+                //     'http://' + 'localhost:8080' + '/register/' + token + '\n\n' +
+                //     'If you did not request this, please ignore this email.\n'
+            }
+            await transporter.sendMail(mailOptions, function (err) {
+                if (err) {
+                    return console.log('Error sending an email', err);
+                }
+            });
+
             userJson = user.toJSON()
             res.send({
                 user: userJson,
@@ -85,10 +117,9 @@ module.exports = {
                 },
                 attributes: ['id']
             })
-            console.log("user before", user)
             if (!user) {
                 return res.status(403).send({
-                    error: "User not found."
+                    error: "Email not registered."
                 })
             }
             res.send(user)
@@ -151,7 +182,7 @@ module.exports = {
             });
             if (!user) {
                 return res.status(403).send({
-                    error: "Invalid token no."
+                    error: "invalid token."
                 })
             }
             res.send(user)
@@ -161,6 +192,28 @@ module.exports = {
             })
         }
     },
+    async verifyRegsToken(req, res) {
+        try {
+            const token = req.params.token
+            const user = await User.findOne({
+                where: {
+                    registerToken: token
+                },
+                attributes: ["id", "email", "firstName", "lastName", "registerToken"]
+            });
+            if (!user) {
+                return res.status(403).send({
+                    error: "invalid token."
+                })
+            }
+            res.send(user)
+        } catch (err) {
+            res.status(500).send({
+                error: "An error occured when verifying the authentication token."
+            })
+        }
+    },
+
     async resetPassword(req, res) {
         try {
             const user = { password: req.body.password, resetPasswordToken: "" }
@@ -180,6 +233,10 @@ module.exports = {
                     rejectUnauthorized: false
                 }
             })
+            console.log("sent mail")
+            console.log("sent mail")
+            console.log("sent mail")
+            console.log("sent mail")
             var mailOptions = {
                 from: process.env.ESTORE_EMAIL,
                 to: req.body.email,
@@ -188,11 +245,49 @@ module.exports = {
 
 We wanted to let you know that your e-store password was reset.
                 
-If you did not perform this action, you can recover access by entering ${req.body.email} into the form at https://localhost:8080/reset-password
+If you did not perform this action, you can recover access by entering ${req.body.email} into the form at http://localhost:8080/reset-password
                                 
-If you run into problems, please contact support by visiting https://localhost:8080/contact
+If you run into problems, please contact support by visiting http://localhost:8080/contact
                 
 Please do not reply to this email with your password. We will never ask for your password, and we strongly discourage you from sharing it with anyone.`
+            }
+            await transporter.sendMail(mailOptions, function (err) {
+                if (err) {
+                    return console.log('Error sending an email', err);
+                }
+            });
+            res.send(userId)
+        } catch (err) {
+            res.status(500).send({
+                error: "An error occured when trying to reset your password."
+            })
+        }
+    },
+    async resetRegsToken(req, res) {
+        try {
+            const user = { registerToken: "" }
+            const userId = req.body.id
+            await User.update(user, {
+                where: {
+                    id: userId
+                }
+            })
+            var transporter = await nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.ESTORE_EMAIL,
+                    pass: process.env.ESTORE_PASSWORD,
+                },
+                tls: {
+                    rejectUnauthorized: false
+                }
+            })
+            var mailOptions = {
+                from: process.env.ESTORE_EMAIL,
+                to: req.body.email,
+                subject: 'e-store',
+                text: "Hello" + req.body.name + "\n\n"
+                    + "welcome to e-store\n" 
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {

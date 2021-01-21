@@ -1,7 +1,6 @@
 <template>
   <div>
-    <b-container class="mt-3">
-      <b-row>
+      <b-row class="mt-3">
         <b-col>
           <b-carousel
             id="carousel-1"
@@ -38,7 +37,6 @@
           </b-carousel>
         </b-col>
       </b-row>
-    </b-container>
   </div>
 </template>
 

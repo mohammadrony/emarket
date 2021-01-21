@@ -59,51 +59,14 @@
             <b-row class="mt-2">
               <b-col class="text-center">
                 <small
-                  ><b-link to="/reset-password"
+                  ><b-link v-b-toggle.collapse-requestToken
                     >forget your password?</b-link
                   ></small
                 >
               </b-col>
             </b-row>
-            <b-collapse
-              class="p-2 mt-2"
-              id="collapse-requestToken"
-              style="background-color: #f4f6f8"
-            >
-              <b-form v-if="!mailSent" @submit.prevent="requestToken">
-                <b-form-group
-                  @submit.prevent="requestToken"
-                  style="font-weight: bold"
-                  label="Enter your email address"
-                  label-for="input-email-for-token"
-                >
-                  <b-form-input
-                    v-model="emailResetPassword"
-                    id="input-email-for-token"
-                    type="email"
-                    required
-                  ></b-form-input>
-                </b-form-group>
-                <a>we will send you a link to reset your password.</a><br />
-                <b-alert variant="danger" class="mt-2" :show="tokenAlert">
-                  {{ tokenAlertMessage }}
-                </b-alert>
-                <b-button
-                  class="mt-3"
-                  variant="outline-info"
-                  @click="requestToken"
-                >
-                  <strong>Submit</strong>
-                </b-button>
-              </b-form>
-              <div class="px-2" v-if="mailSent">
-                <strong>Reset password</strong>
-                <div class="mt-2">
-
-                  Check your email for a link to reset your password. If it
-                  doesn’t appear within a few minutes, check your spam folder.
-              </div>
-                </div>
+            <b-collapse id="collapse-requestToken">
+              <ReqPassToken />
             </b-collapse>
             <hr />
             <b-row>
@@ -121,8 +84,9 @@
 </template>
 
 <script>
-import AuthenticationService from "@/services/AuthenticationService";
+import AuthenticationService from "@/services/AuthenticationService.js";
 import TopHeader from "@/components/TopHeader.vue";
+import ReqPassToken from "@/components/User/ReqPassToken.vue";
 import Footer from "@/components/Footer.vue";
 import store from "@/store";
 
@@ -130,6 +94,7 @@ export default {
   name: "Login",
   components: {
     TopHeader,
+    ReqPassToken,
     Footer,
   },
   data() {
@@ -137,40 +102,10 @@ export default {
       shop: store.state.shop,
       email: null,
       password: null,
-      emailResetPassword: null,
-      tokenAlert: null,
-      mailSent: false,
-      tokenAlertMessage: null,
       error: null,
     };
   },
   methods: {
-    async requestToken() {
-      try {
-        const user = await AuthenticationService.validUser(
-          this.emailResetPassword
-        );
-        if (user.data.id) {
-          try {
-            const token = await AuthenticationService.requestToken({
-              email: this.emailResetPassword,
-            });
-            if (token.data) {
-              this.tokenAlert = false;
-              this.mailSent = true;
-            }
-          } catch (error) {
-            console.log(error.response.data.error);
-            this.tokenAlert = true;
-            this.tokenAlertMessage = error.response.data.error;
-          }
-        }
-      } catch (error) {
-        console.log(error.response.data.error);
-        this.tokenAlert = true;
-        this.tokenAlertMessage = error.response.data.error;
-      }
-    },
     async login() {
       try {
         if (!this.email || !this.password) {

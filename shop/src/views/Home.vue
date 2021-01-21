@@ -2,11 +2,13 @@
   <div>
     <TopHeader />
     <SecondHeader />
-    <TopCarousel />
-    <Advertise />
-    <TopSellProduct />
-    <NewAddProduct />
-    <Support />
+    <b-container>
+      <TopCarousel />
+      <Advertise />
+      <TopSellProduct />
+      <NewAddProduct />
+      <Support />
+    </b-container>
     <Footer />
   </div>
 </template>

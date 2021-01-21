@@ -67,7 +67,13 @@
           </div>
           <b-row>
             <b-col cols="8">
-              <b-button @click="buyNow" class="mt-3" size="lg" variant="success" block>
+              <b-button
+                @click="buyNow"
+                class="mt-3"
+                size="lg"
+                variant="success"
+                block
+              >
                 <b-icon-cart-fill />
                 Buy Now
               </b-button>
@@ -77,16 +83,17 @@
       </b-col>
       <b-col />
     </b-row>
-    <b-row>
-      <div class="product-detail">
-        <div class="container">
-          <div class="product-detail-feature">
-            <h3>Feature</h3>
-            <div v-html="displayProduct.description"></div>
-          </div>
-        </div>
+    <b-container class="mt-5 p-4" style="background-color: #eeeeee">
+      <div class="product-detail-feature">
+        <h3>Feature</h3>
+        <div v-html="displayProduct.description"></div>
       </div>
-    </b-row>
+    </b-container>
+    <!-- <b-row>
+      <div class="product-detail">
+        <div class="container"></div>
+      </div>
+    </b-row> -->
 
     <Review />
     <Recommendation :subSubCatId="displayProduct.SubSubCategoryId">
@@ -129,12 +136,8 @@ export default {
         title: this.title,
         image: this.image,
       };
-      await this.$store.dispatch(
-        "Products/Cart/addToCart",
-        buyProduct
-      );
+      await this.$store.dispatch("Products/Cart/addToCart", buyProduct);
       window.location.replace("/checkout");
-      
     },
   },
   async mounted() {

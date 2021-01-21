@@ -1,7 +1,7 @@
 const Joi = require('joi')
 
 module.exports = {
-    register (req, res, next) {
+    register(req, res, next) {
         const schema = Joi.object({
             firstName: Joi.string().regex(new RegExp('^.{0,32}$')),
             lastName: Joi.string().regex(new RegExp('^.{0,32}$')),
@@ -10,31 +10,30 @@ module.exports = {
                 new RegExp('^[a-zA-z0-9]{8,32}$')
             ),
             isAdmin: Joi.bool()
-            
+
         })
 
         const validate = schema.validate(req.body)
-        if(validate.error){
-            switch(validate.error.details[0].context.key){
+        if (validate.error) {
+            switch (validate.error.details[0].context.key) {
                 case 'firstName':
                     res.status(400).send({
                         error: `first name and last name can't have over 32 characters`
-                    }) 
+                    })
                     break
                 case 'email':
                     res.status(400).send({
-                        error: 'You must provide a valid email address'
-                    }) 
+                        error: 'please provide a valid email address'
+                    })
                     break
                 case 'password':
                     res.status(400).send({
-                        error: `The password should contain: 
-                            1. 8 to 32 characters in length.
-                            2. Not other than lower case, upper case and numerics.
+                        error: `Invalid password format<br>
+                            No other than lower case, upper case and numerics.
                         `
                     })
                     break
-                default: 
+                default:
                     console.log(validate)
                     res.status(400).send({
                         error: 'Invalid registration information'

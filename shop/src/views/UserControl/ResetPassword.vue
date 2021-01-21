@@ -12,46 +12,7 @@
                 Please try again.
               </small>
             </b-alert>
-            <div class="p-2 mt-2" style="background-color: #f4f6f8">
-              <b-form v-if="!mailSent" @submit.prevent="requestToken">
-                <b-form-group
-                  @submit.prevent="requestToken"
-                  style="font-weight: bold"
-                  label="Enter your email address"
-                  label-for="input-email-for-token"
-                >
-                  <b-form-input
-                    v-model="emailResetPassword"
-                    id="input-email-for-token"
-                    type="email"
-                    required
-                  ></b-form-input>
-                </b-form-group>
-                <a>we will send you a link to reset your password.</a><br />
-                <b-alert variant="danger" class="mt-2" :show="tokenAlert">
-                  {{ tokenAlertMessage }}
-                </b-alert>
-                <b-button
-                  class="mt-3"
-                  variant="outline-info"
-                  @click="requestToken"
-                >
-                  <strong>Submit</strong>
-                </b-button>
-              </b-form>
-              <div class="px-2" v-if="mailSent">
-                <div>
-                  Check your email for a link to reset your password. If it
-                  doesn’t appear within a few minutes, check your spam folder.
-                  <b-button
-                    class="text-center mt-3 mb-2"
-                    to="/login"
-                    variant="outline-info"
-                    >Return to Log in</b-button
-                  >
-                </div>
-              </div>
-            </div>
+              <ReqPassToken/>
           </b-card>
 
           <b-card v-if="tokenValidate" style="color: #001e5f">
@@ -110,12 +71,13 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 
 <script>
 import TopHeader from "@/components/TopHeader.vue";
+import ReqPassToken from "@/components/User/ReqPassToken.vue";
 import Footer from "@/components/Footer.vue";
 import AuthenticationService from "@/services/AuthenticationService.js";
 import store from "@/store";
@@ -124,6 +86,7 @@ export default {
   name: "ResetPassword",
   components: {
     TopHeader,
+    ReqPassToken,
     Footer,
   },
   data() {
@@ -167,32 +130,6 @@ export default {
     }
   },
   methods: {
-    async requestToken() {
-      try {
-        const user = await AuthenticationService.validUser(
-          this.emailResetPassword
-        );
-        if (user.data.id) {
-          try {
-            const token = await AuthenticationService.requestToken({
-              email: this.emailResetPassword,
-            });
-            if (token.data) {
-              this.tokenAlert = false;
-              this.mailSent = true;
-            }
-          } catch (error) {
-            console.log(error.response.data.error);
-            this.tokenAlert = true;
-            this.tokenAlertMessage = error.response.data.error;
-          }
-        }
-      } catch (error) {
-        console.log(error.response.data.error);
-        this.tokenAlert = true;
-        this.tokenAlertMessage = error.response.data.error;
-      }
-    },
     async passwordReset() {
       console.log(
         this.newPassword,
@@ -209,8 +146,6 @@ export default {
         try {
           await AuthenticationService.resetPassword({
             id: this.userId,
-            email: this.email,
-            name: this.name,
             password: this.newPassword,
           }).data;
         } catch (error) {

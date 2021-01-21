@@ -53,10 +53,14 @@ module.exports = (app) => {
     AuthenticationController.validUser)
   app.post("/requestToken",
     AuthenticationController.requestToken)
-  app.get("/verifyToken/:token",
+    app.get("/verifyToken/:token",
     AuthenticationController.verifyToken)
+  app.get("/verifyRegsToken/:token",
+    AuthenticationController.verifyRegsToken)
   app.post("/resetPassword",
     AuthenticationController.resetPassword)
+  app.post("/resetRegsToken",
+    AuthenticationController.resetRegsToken)
 
   // checkout
   app.post("/createCheckoutSession",

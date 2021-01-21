@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     profileImage: DataTypes.STRING,
+    registerToken: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
       unique: true
