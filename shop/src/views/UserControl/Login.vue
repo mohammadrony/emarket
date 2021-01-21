@@ -59,7 +59,7 @@
             <b-row class="mt-2">
               <b-col class="text-center">
                 <small
-                  ><b-link v-b-toggle.collapse-requestToken
+                  ><b-link to="/reset-password"
                     >forget your password?</b-link
                   ></small
                 >
