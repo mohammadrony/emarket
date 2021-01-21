@@ -10,6 +10,9 @@ export default {
   user(id) {
     return Api().get(`/user/${id}`);
   },
+  validUser(email) {
+    return Api().get(`/validUser/${email}`)
+  },
   requestToken(credentials) {
     return Api().post("/requestToken", credentials);
   },
@@ -19,5 +22,4 @@ export default {
   resetPassword(credentials) {
     return Api().post("/resetPassword", credentials);
   }
-
 };

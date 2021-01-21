@@ -59,23 +59,45 @@ module.exports = {
     async user(req, res) {
         try {
             const userId = req.params.id;
-            // const userId2 = req.user.id;     // is to check authenticated user send request or not
             const user = await User.findOne({
                 where: {
                     id: userId
                 }
             })
-            if(!user){
+            if (!user) {
                 return res.status(403).send({
                     error: "User not found."
                 })
             }
             res.send(user)
-        } catch(err) {
+        } catch (err) {
             res.status(500).send({
                 error: "An error occured when trying to get an user."
             })
         }
+    },
+    async validUser(req, res) {
+        try {
+
+            const user = await User.findOne({
+                where: {
+                    email: req.params.email
+                },
+                attributes: ['id']
+            })
+            console.log("user before", user)
+            if (!user) {
+                return res.status(403).send({
+                    error: "User not found."
+                })
+            }
+            res.send(user)
+        } catch (error) {
+            res.status(500).send({
+                error: "An error occured when trying to get an user."
+            })
+        }
+
     },
     async requestToken(req, res) {
         try {
@@ -87,12 +109,6 @@ module.exports = {
                     email: user.email
                 }
             })
-
-            if (!user) {
-                return res.status(403).send({
-                    error: 'Invalid Email Address.'
-                })
-            }
             var transporter = await nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
@@ -105,23 +121,20 @@ module.exports = {
             })
             var mailOptions = {
                 from: process.env.ESTORE_EMAIL,
-                to: 'ronyku1829@gmail.com',
+                to: req.body.email,
                 subject: 'Reset Password on e-store',
-                text: "hello",
                 text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                     'http://' + 'localhost:8080' + '/reset-password/' + token + '\n\n' +
                     'If you did not request this, please ignore this email and your password will remain unchanged.\n'
             }
-            let mail = await transporter.sendMail(mailOptions, function (err, info) {
+            await transporter.sendMail(mailOptions, function (err) {
                 if (err) {
                     return console.log('Error sending an email', err);
                 }
-                console.log("Message sent: %s", info.messageId);
             });
             res.send(token);
         } catch (err) {
-            console.log("here4")
             res.status(500).send({
                 error: 'An error occured when trying to reset the password.'
             })
@@ -133,14 +146,15 @@ module.exports = {
             const user = await User.findOne({
                 where: {
                     resetPasswordToken: token
-                }
+                },
+                attributes: ["id", "email", "firstName", "lastName", "resetPasswordToken"]
             });
-            if (!user) { 
+            if (!user) {
                 return res.status(403).send({
                     error: "Invalid token no."
                 })
             }
-            res.send(token)
+            res.send(user)
         } catch (err) {
             res.status(500).send({
                 error: "An error occured when verifying the authentication token."
@@ -149,13 +163,42 @@ module.exports = {
     },
     async resetPassword(req, res) {
         try {
-            const user = { password: req.body.password, resetPasswordToken: "check" }
+            const user = { password: req.body.password, resetPasswordToken: "" }
             const userId = req.body.id
             await User.update(user, {
                 where: {
                     id: userId
                 }
             })
+            var transporter = await nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.ESTORE_EMAIL,
+                    pass: process.env.ESTORE_PASSWORD,
+                },
+                tls: {
+                    rejectUnauthorized: false
+                }
+            })
+            var mailOptions = {
+                from: process.env.ESTORE_EMAIL,
+                to: req.body.email,
+                subject: 'Password changed on e-store',
+                text: `Hello ${req.body.name},
+
+We wanted to let you know that your e-store password was reset.
+                
+If you did not perform this action, you can recover access by entering ${req.body.email} into the form at https://localhost:8080/reset-password
+                                
+If you run into problems, please contact support by visiting https://localhost:8080/contact
+                
+Please do not reply to this email with your password. We will never ask for your password, and we strongly discourage you from sharing it with anyone.`
+            }
+            await transporter.sendMail(mailOptions, function (err) {
+                if (err) {
+                    return console.log('Error sending an email', err);
+                }
+            });
             res.send(userId)
         } catch (err) {
             res.status(500).send({

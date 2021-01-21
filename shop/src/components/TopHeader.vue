@@ -47,7 +47,8 @@
             <b-navbar-nav>
               <b-nav-item class="mr-auto" to="/cart-view"
                 ><div>
-                  <i class="fas fa-shopping-cart"></i> Cart
+                  <b-icon icon="cart2"></b-icon>
+                  Cart
                 </div></b-nav-item
               >
             </b-navbar-nav>

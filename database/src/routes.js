@@ -38,7 +38,6 @@ const SubCategoryController = require("./controllers/SubCategoryController")
 const SubSubCategoryController = require("./controllers/SubSubCategoryController")
 const AuthenticationController = require("./controllers/AuthenticationController")
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy');
-const Product = require('./models/Product');
 
 module.exports = (app) => {
   // user
@@ -50,6 +49,8 @@ module.exports = (app) => {
   app.get("/user/:id",
     isAuthenticated,
     AuthenticationController.user)
+  app.get("/validUser/:email",
+    AuthenticationController.validUser)
   app.post("/requestToken",
     AuthenticationController.requestToken)
   app.get("/verifyToken/:token",
@@ -166,7 +167,6 @@ module.exports = (app) => {
   app.delete("/wishlist/delete/:productId",
     isAuthenticated,
     WishlistController.remove)
-
 
   //image
   app.get("/image",
