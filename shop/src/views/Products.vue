@@ -5,33 +5,11 @@
     <b-row class="mt-4">
       <div :class="{ 'col-3': sidebar_visible, 'col-1': !sidebar_visible }">
         <ProductCategorySidebar v-if="sidebar_visible" :key="componentKey" />
-        <b-row class="text-right">
-          <b-col />
-          <b-col v-if="sidebar">
-            <b-button
-              class="mt-2"
-              v-if="sidebar_visible"
-              title="Hide list"
-              @click="sidebar_visible = false"
-              size="sm"
-            >
-              <b-icon scale="1.4" icon="x"></b-icon>
-            </b-button>
-            <b-button-toolbar class="mt-2" v-if="!sidebar_visible">
-              <b-button-group class="ml-4">
-                <b-button
-                  @click="sidebar_visible = true"
-                  title="Show Categories"
-                >
-                  <b-icon scale="1.4" icon="list"></b-icon>
-                </b-button>
-              </b-button-group>
-            </b-button-toolbar>
-          </b-col>
-          <b-col />
-        </b-row>
       </div>
-      <b-col :class="{ 'col-8': sidebar_visible, 'col-10': !sidebar_visible }">
+      <div
+        :key="componentKey"
+        :class="{ 'col-8': sidebar_visible, 'col-10': !sidebar_visible }"
+      >
         <b-row>
           <b-col
             cols="4"
@@ -97,7 +75,7 @@
             </h6>
           </b-col>
         </b-row>
-      </b-col>
+      </div>
       <b-col></b-col>
     </b-row>
     <Footer />
@@ -127,6 +105,7 @@ export default {
 
   data() {
     return {
+      route: null,
       admin: null,
       componentKey: 0,
       categoryList: null,
@@ -137,20 +116,16 @@ export default {
         query: {},
       },
       displayProduct: [],
-      sidebar_visible: true,
       searchText: "",
       currentPage: 1,
     };
   },
   computed: {
+    sidebar_visible() {
+      if (!this.route || this.route.params.subSubCategory) return false;
+      else return true;
+    },
     ...mapState({
-      sidebar: function () {
-        const sidebar =
-          this.searchParameter.categoryId |
-          this.searchParameter.subCategoryId |
-          this.searchParameter.subSubCategoryId;
-        return sidebar;
-      },
       allProduct: (state) => state.Products.allProduct,
       apCount: (state) => state.Products.apCount,
       displayProducts: (state) => state.Products.displayProducts,
@@ -160,50 +135,50 @@ export default {
 
   async mounted() {
     this.admin = this.$store.state.admin;
-    const route = this.$store.state.route;
+    this.route = this.$store.state.route;
 
-    if (route.params.subSubCategory) {
+    if (this.route.params.subSubCategory) {
       try {
         const subSubCategory = (
           await SubSubCategoryService.getSubSubCategoryByName(
-            route.params.subSubCategory
+            this.route.params.subSubCategory
           )
         ).data;
         this.searchParameter.param.subSubCategoryId = subSubCategory.id;
       } catch (error) {
         console.log("error get sub sub cat id by name", error);
       }
-    } else if (route.params.subCategory) {
+    } else if (this.route.params.subCategory) {
       try {
         const subCategory = (
           await SubCategoryService.getSubCategoryByName(
-            route.params.subCategory
+            this.route.params.subCategory
           )
         ).data;
         this.searchParameter.param.subCategoryId = subCategory.id;
       } catch (error) {
         console.log("error get sub cat id by name", error);
       }
-    } else if (route.params.category) {
+    } else if (this.route.params.category) {
       try {
         const category = (
-          await CategoryService.getCategoryByName(route.params.category)
+          await CategoryService.getCategoryByName(this.route.params.category)
         ).data;
         this.searchParameter.param.categoryId = category.id;
       } catch (error) {
         console.log("error get cat id by name", error);
       }
     }
-    if (route.query.q) {
-      const str = route.query.q;
+    if (this.route.query.q) {
+      const str = this.route.query.q;
       this.searchParameter.query.q = str;
     }
-    if (route.query.lo) {
-      const lo = parseInt(route.query.lo);
+    if (this.route.query.lo) {
+      const lo = parseInt(this.route.query.lo);
       this.searchParameter.query.lo = lo;
     }
-    if (route.query.hi) {
-      const hi = parseInt(route.query.hi);
+    if (this.route.query.hi) {
+      const hi = parseInt(this.route.query.hi);
       this.searchParameter.query.hi = hi;
     }
     this.forceRerender();

@@ -11,8 +11,8 @@
           <b-navbar-brand href="/">
             <img src="../../public/assets/images/e-store.png" />
           </b-navbar-brand>
-          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-          <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-toggle target="nav-top-header-collapse"></b-navbar-toggle>
+          <b-collapse id="nav-top-header-collapse" is-nav>
             <b-navbar-nav class="mr-auto">
               <b-dropdown
                 id="dropdown-right"

@@ -7,9 +7,17 @@
             <b-icon variant="primary" icon="house-door-fill"></b-icon>
             <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
           </b-navbar-brand>
-          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-          <b-collapse id="nav-collapse" is-nav>
-            <b-navbar-nav>
+          <b-navbar-toggle target="nav-products-collapse">
+            <b-button-toolbar>
+              <b-button-group>
+                <b-button variant="outline-dark" class="px-3 py-2">
+                  <b-icon scale="1.6" icon="list"></b-icon>
+                </b-button>
+              </b-button-group>
+            </b-button-toolbar>
+          </b-navbar-toggle>
+          <b-collapse id="nav-products-collapse" is-nav>
+            <b-navbar-nav class="mr-auto">
               <b-nav-item @click="setCategory" v-if="category != null">
                 {{ category.name }}
                 <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
@@ -25,10 +33,16 @@
                 {{ subSubCategory.name }}
                 <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
               </b-nav-item>
-                <b-button :to="{ name: 'add-product'}" v-if="admin" class="ml-5" size="md" variant="outline-dark">
-                  <b-icon class="mr-2" icon="plus-square"></b-icon>
-                  Add New Product
-                </b-button>
+              <b-button
+                :to="{ name: 'add-product' }"
+                v-if="admin"
+                class="mr-auto"
+                size="md"
+                variant="outline-dark"
+              >
+                <b-icon class="mr-2" icon="plus-square"></b-icon>
+                Add New Product
+              </b-button>
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">
               <b-nav-form @submit.prevent="search">
@@ -68,7 +82,7 @@ export default {
     };
   },
   async mounted() {
-    this.admin = this.$store.state.admin
+    this.admin = this.$store.state.admin;
     const route = this.$store.state.route;
     if (route.query.q) this.searchText = route.query.q;
 
