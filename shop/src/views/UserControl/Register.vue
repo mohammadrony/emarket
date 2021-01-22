@@ -51,6 +51,7 @@
                   v-model="email"
                   id="input-email"
                   type="email"
+                  :state="emailValidation"
                   required
                 ></b-form-input>
               </b-form-group>
@@ -155,6 +156,7 @@ export default {
       lastNameMin: 2,
       lastNameMax: 20,
       email: null,
+      formatEmail: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
       password: null,
       passwordMin: 8,
       passwordMax: 32,
@@ -176,6 +178,10 @@ export default {
           this.firstName.length >= this.firstNameMin &&
           this.firstName.length <= this.firstNameMax
         );
+    },
+    emailValidation() {
+      if (this.email == null) return null;
+      return this.formatEmail.test(this.email);
     },
     lastNameValidation() {
       if (this.lastName == null) return null;
@@ -238,6 +244,15 @@ export default {
         return false;
       } else return true;
     },
+    checkEmailValidate() {
+      if (!this.email) {
+        this.message = "Input your email address.";
+        return false;
+      } else if (!this.formatEmail.test(this.email)) {
+        this.message = "Invalid email format.";
+        return false;
+      } else return true;
+    },
     checkNameLength() {
       if (!this.firstName || this.firstName.length < this.firstNameMin) {
         this.message = "First Name is too short!";
@@ -255,6 +270,7 @@ export default {
     },
     async createAccount() {
       if (!this.checkNameLength()) return;
+      if (!this.checkEmailValidate()) return;
       if (!this.checkPasswordMatch()) return;
       try {
         const response = await AuthenticationService.register({
