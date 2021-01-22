@@ -34,12 +34,11 @@ module.exports = {
                 from: process.env.ESTORE_EMAIL,
                 to: req.body.email,
                 subject: "Welcome to e-store",
-                // subject: 'Verify your account on e-store',
-                text: "Hello from e-store"
-                // text: 'You are receiving this because you (or someone else) have requested to create an account on e-store\n\n' +
-                //     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-                //     'http://' + 'localhost:8080' + '/register/' + token + '\n\n' +
-                //     'If you did not request this, please ignore this email.\n'
+                text: 'Hello' + user.firstName + ' ' + user.lastName +
+                    'You are receiving this because you (or someone else) have requested to create an account on e-store\n\n' +
+                    'Please follow the link to complete the process:\n\n' +
+                    'http://' + 'localhost:8080' + '/register/' + token + '\n\n' +
+                    'If you did not request this, please ignore this email.\n'
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {
@@ -69,6 +68,14 @@ module.exports = {
             if (!user) {
                 return res.status(403).send({
                     error: 'Incorrect login information.'
+                })
+            }
+            if (!user.registerToken) {
+                console.log("--------------------")
+                console.log(user.registerToken)
+                console.log("--------------------")
+                return res.status(403).send({
+                    error: 'You need to verify your email to login.\n' + 'Please check your email first.\n' + 'This is one time verification.'
                 })
             }
             const correctPassword = password === user.password
@@ -233,23 +240,15 @@ module.exports = {
                     rejectUnauthorized: false
                 }
             })
-            console.log("sent mail")
-            console.log("sent mail")
-            console.log("sent mail")
-            console.log("sent mail")
             var mailOptions = {
                 from: process.env.ESTORE_EMAIL,
                 to: req.body.email,
                 subject: 'Password changed on e-store',
-                text: `Hello ${req.body.name},
-
-We wanted to let you know that your e-store password was reset.
-                
-If you did not perform this action, you can recover access by entering ${req.body.email} into the form at http://localhost:8080/reset-password
-                                
-If you run into problems, please contact support by visiting http://localhost:8080/contact
-                
-Please do not reply to this email with your password. We will never ask for your password, and we strongly discourage you from sharing it with anyone.`
+                text: 'Hello ' + req.body.name + '\n\n'
+                    + 'We wanted to let you know that your e-store password was reset\n'
+                    + 'If you did not perform this action, you can recover access by entering ' + req.body.email + ' into the form at ' + 'http://localhost:8080/reset-password' + ' \n'
+                    + 'If you run into problems, please contact support by visiting ' + 'http://localhost:8080/contact' + ' \n'
+                    + 'Please do not reply to this email with your password. We will never ask for your password, and we strongly discourage you from sharing it with anyone.\n'
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {
@@ -287,7 +286,7 @@ Please do not reply to this email with your password. We will never ask for your
                 to: req.body.email,
                 subject: 'e-store',
                 text: "Hello" + req.body.name + "\n\n"
-                    + "welcome to e-store\n" 
+                    + "your email is verified on our store.\n"
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {

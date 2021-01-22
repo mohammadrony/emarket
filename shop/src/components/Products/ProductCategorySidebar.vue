@@ -559,12 +559,14 @@ export default {
 
 <style scoped lang="scss">
 .productCategories {
-  overflow-block: hidden;
+  // overflow-block: hidden;
   float: left;
-  padding: 10px 0px 50px 50px;
+  padding: 10px 0px 10px 7px;
+}
+.productCategories ul li {
+  list-style: none;
 }
 .productCategories ul li a {
-  display: inline-block;
   text-decoration: none;
   color: #333;
   font-weight: 500;
@@ -573,9 +575,5 @@ export default {
   font-weight: 500;
   cursor: pointer;
 }
-.productCategories ul li ul li a {
-  color: #333;
-  font-size: 15px;
-  font-weight: 500;
-}
+
 </style>
