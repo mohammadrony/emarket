@@ -70,7 +70,7 @@ module.exports = {
                     error: 'Incorrect login information.'
                 })
             }
-            if (!user.registerToken) {
+            if (user.registerToken) {
                 console.log("--------------------")
                 console.log(user.registerToken)
                 console.log("--------------------")

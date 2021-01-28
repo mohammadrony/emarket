@@ -1,0 +1,185 @@
+<template>
+  <div>
+    <b-row>
+      <b-col cols="4" v-for="orderItem in orderItems" :key="orderItem.id">
+        <b-card-group deck>
+          <b-card img-top style="max-width: 14rem" class="mb-4">
+            <b-card-img
+              :src="orderItem.Product.image1"
+              style="max-width: 14rem; max-height: 14rem"
+              alt="Image Not Found"
+            ></b-card-img
+            ><br />
+            <b-link @click="viewProduct(orderItem)">{{
+              orderItem.Product.title
+            }}</b-link>
+            <br />
+            <small class="mt-2"
+              >Price: {{ orderItem.Product.amount }}
+              {{ orderItem.Product.currency }}</small
+            >
+            <br />
+            <small class="mt-2">Quantity: {{ orderItem.quantity }}</small>
+            <br />
+            <small class="mt-2"
+              >Cost: {{ orderItem.Product.amount * orderItem.quantity }}
+              {{ orderItem.Product.currency }}</small
+            >
+          </b-card>
+        </b-card-group>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <h5 style="font-weight: bold">Update Status</h5>
+        <hr />
+        <b-row>
+          <b-col cols="5">
+            <b-dropdown
+              id="dropdown-left"
+              :text="orderStatus"
+              block
+              :variant="statusVariant"
+            >
+              <b-dropdown-item
+                v-for="(status, idx) in allStatus"
+                :key="idx"
+                @click="updateStatus(status)"
+                >{{ status.name }}</b-dropdown-item
+              >
+            </b-dropdown>
+          </b-col>
+        </b-row>
+        <b-row class="mt-4">
+          <b-col>
+            <h5 style="font-weight: bold">Delete Order</h5>
+            <hr />
+            <b-row>
+              <b-col cols="5">
+                <b-button
+                  v-if="orderStatus != 'complete'"
+                  disabled
+                  block
+                  variant="danger"
+                  >Delete</b-button
+                >
+                <b-button
+                  v-if="orderStatus == 'complete'"
+                  @click="deleteOrder"
+                  block
+                  variant="danger"
+                >
+                  Delete
+                </b-button>
+              </b-col>
+            </b-row>
+            <b-row class="mt-2" v-if="orderStatus != 'complete'">
+              <b-col>
+                <small>you can't delete an order until its complete</small>
+              </b-col>
+            </b-row>
+            <b-row class="mt-2" v-if="orderStatus == 'complete'">
+              <b-col>
+                <small
+                  >you can keep this order in this stage for later
+                  analysis.</small
+                >
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
+      </b-col>
+    </b-row>
+  </div>
+</template>
+
+<script>
+import OrderItemService from "@/services/OrderItemService.js";
+import OrderService from "@/services/OrderService.js";
+export default {
+  name: "OrderItems",
+  components: {},
+  data() {
+    return {
+      orderId: null,
+      orderItems: null,
+      orderStatus: null,
+      statusVariant: null,
+      allStatus: [
+        {
+          name: "paid",
+          variant: "dark",
+        },
+        {
+          name: "processing",
+          variant: "info",
+        },
+        {
+          name: "on the way",
+          variant: "warning",
+        },
+        {
+          name: "complete",
+          variant: "success",
+        },
+      ],
+    };
+  },
+  async mounted() {
+    this.orderId = this.$store.state.route.params.orderId;
+    try {
+      this.orderItems = (
+        await OrderItemService.getOrderItemList(this.orderId)
+      ).data;
+    } catch (error) {
+      console.log(error.response.data);
+    }
+    try {
+      const orderInfo = (await OrderService.getOrder(this.orderId)).data;
+      this.orderStatus = orderInfo.status;
+      this.statusVariant = orderInfo.variant;
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
+  },
+  methods: {
+    async updateStatus(status) {
+      this.orderStatus = status.name;
+      this.statusVariant = status.variant;
+      try {
+        await OrderService.updateOrder({
+          id: this.orderId,
+          status: status.name,
+          variant: status.variant,
+        });
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+    },
+    async deleteOrder() {
+      var i;
+      for (i in this.orderItems) {
+        try {
+          await OrderItemService.deleteOrderItem(this.orderItems[i].id);
+        } catch (error) {
+          console.log(error.response.data.error);
+        }
+      }
+      try {
+        await OrderService.deleteOrder(this.orderId);
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+      window.location.replace("/admin/orders")
+    },
+    viewProduct(orderItem) {
+      const route = "/product/" + orderItem.Product.id;
+      window.location.replace(route);
+    },
+  },
+  computed: {},
+};
+</script>
+
+<style lang="sass" scoped>
+</style>

@@ -14,12 +14,13 @@ import CartView from "@/views/CartView.vue";
 import Checkout from "@/views/Checkout.vue";
 import SuccessPayment from "@/views/Payment/SuccessPayment.vue";
 import CancelPayment from "@/views/Payment/CancelPayment.vue";
-// import Admin from "@/views/Admin.vue";
-// import AOverview from "@/views/AdminChildren/AOverview.vue";
-// import AProducts from "@/views/AdminChildren/AProducts.vue";
+import Admin from "@/views/Admin.vue";
+import AOverview from "@/views/AdminChildren/AOverview.vue";
+import AProducts from "@/views/AdminChildren/AProducts.vue";
 import AddProduct from "@/views/AdminChildren/AddProduct.vue";
-// import AOrders from "@/views/AdminChildren/AOrders.vue";
-// import AProfile from "@/views/AdminChildren/AProfile.vue";
+import AOrder from "@/views/AdminChildren/AOrder.vue";
+import AOrders from "@/views/AdminChildren/AOrders.vue";
+import AProfile from "@/views/AdminChildren/AProfile.vue";
 import Unauthorized from "@/views/ErrorPage/Unauthorized.vue";
 
 Vue.use(VueRouter);
@@ -116,36 +117,42 @@ const routes = [
     component: AddProduct,
     meta: { requiresAuth: true }
   },
-  // {
-  //   path: "/admin",
-  //   name: "admin",
-  //   component: Admin,
-  //   meta: { requiresAuth: true },
-  // },
-  // {
-  //   path: "/admin/overview",
-  //   name: "admin-overview",
-  //   component: AOverview,
-  //   meta: { requiresAuth: true }
-  // },
-  // {
-  //   path: "/admin/products",
-  //   name: "admin-products",
-  //   component: AProducts,
-  //   meta: { requiresAuth: true }
-  // },
-  // {
-  //   path: "/admin/orders",
-  //   name: "admin-orders",
-  //   component: AOrders,
-  //   meta: { requiresAuth: true }
-  // },
-  // {
-  //   path: "/admin/profile",
-  //   name: "admin-profile",
-  //   component: AProfile,
-  //   meta: { requiresAuth: true }
-  // },
+  {
+    path: "/admin",
+    name: "admin",
+    component: Admin,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin/overview",
+    name: "admin-overview",
+    component: AOverview,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/admin/products",
+    name: "admin-products",
+    component: AProducts,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/admin/order/:orderId",
+    name: "admin-order",
+    component: AOrder,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/admin/orders",
+    name: "admin-orders",
+    component: AOrders,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/admin/profile",
+    name: "admin-profile",
+    component: AProfile,
+    meta: { requiresAuth: true }
+  },
   {
     path: "/error/401",
     name: "unauthorized",

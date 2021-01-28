@@ -15,7 +15,7 @@
           <strong>Item</strong>
         </b-col>
         <b-col cols="2">
-          <strong>Amount</strong>
+          <strong>Price</strong>
         </b-col>
         <b-col cols="4">
           <strong>Quantity</strong>

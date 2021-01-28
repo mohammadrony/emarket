@@ -14,9 +14,11 @@ db.Image = require("./Image")(sequelize, Sequelize.DataTypes);
 db.Category = require("./Category")(sequelize, Sequelize.DataTypes);
 db.SubCategory = require("./SubCategory")(sequelize, Sequelize.DataTypes);
 db.SubSubCategory = require("./SubSubCategory")(sequelize, Sequelize.DataTypes);
+db.OrderItem = require("./OrderItem")(sequelize, Sequelize.DataTypes);
 db.Wishlist = require("./Wishlist")(sequelize, Sequelize.DataTypes);
 db.Product = require("./Product")(sequelize, Sequelize.DataTypes);
 db.Review = require("./Review")(sequelize, Sequelize.DataTypes);
+db.Order = require("./Order")(sequelize, Sequelize.DataTypes);
 db.ReviewReply = require("./ReviewReply")(sequelize, Sequelize.DataTypes);
 db.Cart = require("./Cart")(sequelize, Sequelize.DataTypes);
 

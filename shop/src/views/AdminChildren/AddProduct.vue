@@ -303,14 +303,14 @@ export default {
   },
   methods: {
     reset() {
-      this.product = this.backupProduct
+      this.product = this.backupProduct;
     },
     async createNewProduct() {
       var formData = new FormData();
       var fieldName;
       for (fieldName in this.product) {
         formData.append(fieldName, this.product[fieldName]);
-        console.log(fieldName, this.product[fieldName]);
+        // console.log(fieldName, this.product[fieldName]);
       }
       var i;
       for (i = 0; i < this.images.length; i++) {
@@ -318,9 +318,8 @@ export default {
           formData.append("imageField", this.images[i]);
       }
       try {
-        const response = (await ProductsService.createProduct(formData)).data;
-        await this.$store.dispatch("Products/setAllBackupProduct")
-        console.log(response);
+        await ProductsService.createProduct(formData);
+        await this.$store.dispatch("Products/setAllBackupProduct");
         window.location.reload();
         this.$bvToast.toast("Product Added Successfully", {
           title: "Update",

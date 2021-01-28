@@ -168,7 +168,8 @@ export default {
   },
   computed: {
     tokenAlert() {
-      if (!this.message || this.message.length == 0) return false;
+      if (this.message == null) return null;
+      else if (this.message.length == 0) return false;
       else return true;
     },
     firstNameValidation() {

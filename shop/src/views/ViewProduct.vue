@@ -44,7 +44,7 @@
         <div class="">
           <h3>{{ displayProduct.title }}</h3>
           <h5>
-            <b>Amount : </b>{{ displayProduct.amount }}
+            <b>Price : </b>{{ displayProduct.amount }}
             {{ displayProduct.currency }}
           </h5>
           <div v-html="displayProduct.subtitle"></div>
@@ -96,8 +96,6 @@
     </b-row> -->
 
     <Review />
-    <Recommendation :subSubCatId="displayProduct.SubSubCategoryId">
-    </Recommendation>
     <Footer />
   </div>
 </template>
@@ -108,7 +106,6 @@ import ProductsService from "@/services/ProductsService.js";
 import TopHeader from "@/components/TopHeader.vue";
 import AddToCart from "@/components/AddToCart.vue";
 import Review from "@/components/ViewProduct/Review.vue";
-import Recommendation from "@/components/ViewProduct/Recommendation.vue";
 import Footer from "@/components/Footer.vue";
 import { mapState } from "vuex";
 export default {
@@ -117,7 +114,6 @@ export default {
     TopHeader,
     AddToCart,
     Review,
-    Recommendation,
     Footer,
   },
   data() {

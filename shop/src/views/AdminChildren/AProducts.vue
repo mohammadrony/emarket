@@ -43,14 +43,14 @@
 
         <div class="table-responsive">
           <hr />
-          <div v-if="this.apCount != 0">
+          <div v-if="apCount != 0">
             <b-row>
               <b-col> </b-col>
               <b-col>
                 <strong>Name</strong>
               </b-col>
               <b-col>
-                <strong>Amount</strong>
+                <strong>Price</strong>
               </b-col>
               <b-col>
                 <strong>Modify</strong>
@@ -90,7 +90,7 @@
           <h3>Nothing found for this keyword.</h3>
         </div>
         <b-pagination
-          v-if="this.apCount != 0"
+          v-if="apCount != 0"
           class=""
           size="lg"
           v-model="currentPage"

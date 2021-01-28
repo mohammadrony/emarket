@@ -2,7 +2,7 @@
   <div>
     <b-row>
       <b-col
-        cols="6"
+        cols="4"
         v-for="product in checkoutProduct"
         :key="product.productId"
       >
@@ -14,15 +14,13 @@
               alt="Image Not Found"
             ></b-card-img
             ><br />
-            <a href="" @click="viewProduct(product)">{{ product.title }}</a>
+            <b-link @click="viewProduct(product)">{{ product.title }}</b-link>
             <br />
             <small class="mt-2"
-              >Amount: {{ product.amount }} {{ product.currency }}</small
+              >Price: {{ product.amount }} {{ product.currency }}</small
             >
             <br />
-            <small class="mt-2"
-              >Quantity: {{ product.quantity }} {{ product.currency }}</small
-            >
+            <small class="mt-2">Quantity: {{ product.quantity }}</small>
             <br />
             <small class="mt-2"
               >Cost: {{ product.amount * product.quantity }}
@@ -32,10 +30,10 @@
         </b-card-group>
       </b-col>
     </b-row>
-    <b-row class="mb-3">
+    <b-row class="mb-3 mt-5">
       <b-col cols="2"></b-col>
       <b-col cols="10">
-        <b-card v-if="subTotalAmount != 0">
+        <b-card class="mt-5" v-if="subTotalAmount != 0">
           <b-row>
             <b-col cols="8">
               <h5>Sub-Total</h5>
@@ -64,15 +62,31 @@
         </b-card>
       </b-col>
     </b-row>
+    <b-row class="mb-3">
+      <b-col>
+        <b-alert variant="primary" class="my-2 p-1 pl-2" :show="!formValidate">
+          {{ message }}
+        </b-alert>
+      </b-col>
+    </b-row>
     <b-row v-if="subTotalAmount != 0">
       <b-col cols="5">
         <b-button block variant="warning" to="/cart-view">Edit Cart</b-button>
       </b-col>
       <b-col cols="2"></b-col>
       <b-col>
-        <b-button @click="checkoutApplied" block variant="success">
+        <b-button
+          v-if="!payBtnSpin"
+          @click="checkoutApplied"
+          block
+          variant="success"
+        >
           <b-icon icon="cursor-fill"></b-icon>
           Pay Now
+        </b-button>
+        <b-button v-if="payBtnSpin" block variant="success">
+          Processing...
+          <b-spinner small variant="light"></b-spinner>
         </b-button>
       </b-col>
     </b-row>
@@ -96,9 +110,12 @@ export default {
   components: {},
   data() {
     return {
+      payBtnSpin: false,
       subTotalAmount: 0,
+      formValidate: true,
+      message: "Please fill out all those field.",
+      shippingRate: this.$store.state.Checkout.shipping.cost,
       totalAmount: 0,
-      shippingRate: 4,
       checkoutProduct: null,
     };
   },
@@ -113,27 +130,32 @@ export default {
     this.totalAmount = this.subTotalAmount + this.shippingRate;
   },
   methods: {
-    viewProduct(product) {
-      this.$router.push({
-        name: "product",
-        params: {
-          productId: product.id,
-        },
-      });
-    },
     async checkoutApplied() {
+      const response = await this.$store.dispatch(
+        "Checkout/informationValidate"
+      );
+      if (!response) {
+        this.formValidate = false;
+        return;
+      }
+      this.payBtnSpin = true;
+      const customerName = response.name;
+      const customerEmail = response.email;
+      const customerPhoneNo = response.phoneNo;
+      const shippingAddress = response.shippingAddress;
       var i;
-      var toCheckout = [];
+      var checkoutItems = [];
       for (i = 0; i < this.checkoutProduct.length; i++) {
         var obj = {
-          name: this.checkoutProduct[i].title,
           currency: "USD",
+          name: this.checkoutProduct[i].title,
+          description: this.checkoutProduct[i].productId,
           amount: this.checkoutProduct[i].amount * 100,
           quantity: this.checkoutProduct[i].quantity,
         };
-        toCheckout.push(obj);
+        checkoutItems.push(obj);
       }
-      toCheckout.push({
+      checkoutItems.push({
         name: "Shipping Cost",
         amount: this.shippingRate * 100,
         currency: "USD",
@@ -142,7 +164,11 @@ export default {
       try {
         const checkoutSession = (
           await CheckoutService.createCheckoutSession({
-            checkoutProduct: toCheckout,
+            checkoutProduct: checkoutItems,
+            customerName: customerName,
+            customerEmail: customerEmail,
+            customerPhoneNo: customerPhoneNo,
+            shippingAddress: shippingAddress,
           })
         ).data;
         stripeInit.then((stripe) => {
@@ -160,6 +186,11 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    viewProduct(product) {
+      const route = "/product/"+product.productId
+      console.log(route, product)
+      window.location.replace(route);
     },
   },
 };

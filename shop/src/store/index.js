@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import {ProductsModule} from "./Products.js";
 import createPersistedState from "vuex-persistedstate";
+import { CheckoutModule } from "./Checkout.js";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -49,6 +50,7 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    Products: ProductsModule
+    Products: ProductsModule,
+    Checkout: CheckoutModule,
   }
 });

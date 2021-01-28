@@ -134,7 +134,6 @@ module.exports = {
 	async deleteProduct(req, res) {
 		try {
 			const productId = req.params.productId
-			console.log(productId)
 			const product = await Product.findOne({
 				where: {
 					id: productId

@@ -1,17 +1,21 @@
 module.exports = (sequelize, DataTypes) => {
   const Order = sequelize.define('Order', {
     id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      type:             DataTypes.INTEGER,
+      allowNull:        false,
+      primaryKey:       true,
+      autoIncrement:    true
     },
-    status: DataTypes.STRING,
-    invoiceNumber: DataTypes.STRING,
-
-  })
-  Order.associate(db => {
-    Order.belongsTo(db.User)
+    name:               DataTypes.STRING,
+    phoneNo:            DataTypes.STRING,
+    email:              DataTypes.STRING,
+    address:            DataTypes.STRING,
+    status:             DataTypes.STRING,
+    variant:            DataTypes.STRING,
+    checkoutSessionId:  DataTypes.STRING,
+    productCost:        DataTypes.INTEGER,
+    currency:           DataTypes.STRING,
+    shippingCost:       DataTypes.INTEGER,
   })
   return Order
 }

@@ -1,27 +1,45 @@
-const { Image } = require('../models')
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
+    cb(null, true);
+  } else {
+    cb(new Error("Image Upload Problem"), false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 10
+  },
+  fileFilter: fileFilter
+}).array("imageField", 10);
 
 
 module.exports = {
-  async getImage(req, res) {
+  async uploadProductImage(req, res, next) {
     try {
-      const images = await Image.findAll()
-      res.send(images)
-    } catch (err) {
+      await upload(req, res, function (err) {
+        if (err) {
+          return res.send('Fail!')
+        } else {
+          next();
+        }
+      })
+    } catch (error) {
       res.status(500).send({
-        error: 'An error occured when trying to fetch images.'
+        error: "An error2 occured when uploading product image."
       })
     }
   },
-  async setImage(req, res) {
-    try {
-      req.body.image = req.file.path
-      const image = await Image.create(req.body)
-      res.send(image)
-    } catch (err) {
-      res.status(500).send({
-        error: 'An error occured when trying to post an image.'
-      })
-    }
-  },
-
 }

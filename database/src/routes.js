@@ -1,70 +1,34 @@
-const multer = require('multer')
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/uploads/');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname);
-  }
-});
-
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
-    cb(null, true);
-  } else {
-    cb(new Error("Image Upload Problem"), false);
-  }
-};
-
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 10
-  },
-  fileFilter: fileFilter
-});
-
 const isAuthenticated = require('./policies/isAuthenticated')
 const ImageController = require("./controllers/ImageController")
 const CartsController = require("./controllers/CartsController")
+const OrderController = require("./controllers/OrderController")
 const ReviewController = require("./controllers/ReviewController")
 const WishlistController = require("./controllers/WishlistController")
 const ProductsController = require("./controllers/ProductsController")
 const CheckoutController = require("./controllers/CheckoutController")
 const CategoryController = require("./controllers/CategoryController")
+const OrderItemController = require("./controllers/OrderItemController")
 const ReviewReplyController = require("./controllers/ReviewReplyController")
 const SubCategoryController = require("./controllers/SubCategoryController")
 const SubSubCategoryController = require("./controllers/SubSubCategoryController")
 const AuthenticationController = require("./controllers/AuthenticationController")
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy');
+const Order = require('./models/Order')
 
 module.exports = (app) => {
-  // user
-  app.post("/register",
-    AuthenticationControllerPolicy.register,
-    AuthenticationController.register)
-  app.post("/login",
-    AuthenticationController.login)
-  app.get("/user/:id",
+  // cart
+  app.get("/cart/allProduct",
     isAuthenticated,
-    AuthenticationController.user)
-  app.get("/validUser/:email",
-    AuthenticationController.validUser)
-  app.post("/requestToken",
-    AuthenticationController.requestToken)
-    app.get("/verifyToken/:token",
-    AuthenticationController.verifyToken)
-  app.get("/verifyRegsToken/:token",
-    AuthenticationController.verifyRegsToken)
-  app.post("/resetPassword",
-    AuthenticationController.resetPassword)
-  app.post("/resetRegsToken",
-    AuthenticationController.resetRegsToken)
-
-  // checkout
-  app.post("/createCheckoutSession",
-    CheckoutController.createCheckoutSession)
+    CartsController.getAllCartProduct)
+  app.get("/cart/product",
+    isAuthenticated,
+    CartsController.getCartProduct)
+  app.post("/cart/product",
+    isAuthenticated,
+    CartsController.addToCart)
+  app.delete("/cart/product/:productId",
+    isAuthenticated,
+    CartsController.remove)
 
   // category
   app.get("/category/getCategoryByName/:name",
@@ -77,6 +41,78 @@ module.exports = (app) => {
     CategoryController.updateCategory)
   app.delete("/category/deleteCategory/:categoryId",
     CategoryController.deleteCategory)
+
+  // checkout
+  app.post("/createCheckoutSession",
+    CheckoutController.createCheckoutSession)
+  app.get("/retrieveCheckoutSession/:sessionId",
+    CheckoutController.retrieveCheckoutSession)
+
+  // order
+  app.get("/order/getOrderList",
+    OrderController.getOrderList)
+  app.get("/order/getOrder/:orderId",
+    OrderController.getOrder),
+  app.post("/order/createOrder",
+    OrderController.createOrder)
+  app.put("/order/updateOrder",
+    isAuthenticated,
+    OrderController.updateOrder)
+  app.delete("/order/deleteOrder/:orderId",
+    isAuthenticated,
+    OrderController.deleteOrder)
+
+  // order item
+  app.get("/orderItem/getOrderItemList/:orderId",
+    isAuthenticated,
+    OrderItemController.getOrderItemList)
+  app.post("/orderItem/createOrderItem",
+    OrderItemController.createOrderItem)
+  app.delete("/orderItem/deleteOrderItem/:orderItemId",
+    isAuthenticated,
+    OrderItemController.deleteOrderItem)
+
+  // product
+  app.get("/products/getAllProducts",
+    ProductsController.getAllProducts)
+  app.get("/products/topSellProduct/:limit",
+    ProductsController.topSellProduct)
+  app.get("/products/newAddProduct/:limit",
+    ProductsController.newAddProduct)
+  app.get("/products/getProduct/:productId",
+    ProductsController.getProduct)
+  app.get("/products/getRecommendation/:subSubCategoryId/:limit",
+    ProductsController.getRecommendation)
+  app.post("/products/createProduct",
+    ImageController.uploadProductImage,
+    ProductsController.createProduct)
+  app.put("/products/updateProduct",
+    ProductsController.updateProduct)
+  app.delete("/products/deleteProduct/:productId",
+    ProductsController.deleteProduct)
+
+  // review
+  app.get("/review/getReviewList/:productId",
+    ReviewController.getReviewList)
+  app.post("/review/createReview",
+    isAuthenticated,
+    ReviewController.createReview)
+  app.put("/review/updateReview",
+    isAuthenticated,
+    ReviewController.updateReview)
+  app.delete("/review/deleteReview/:reviewId",
+    isAuthenticated,
+    ReviewController.deleteReview)
+
+  // review reply
+  app.get("/reviewReply/getReviewReplyList/:reviewId",
+    ReviewReplyController.getReviewReplyList)
+  app.post("/reviewReply/createReviewReply",
+    ReviewReplyController.createReviewReply)
+  app.put("/reviewReply/updateReviewReply",
+    ReviewReplyController.updateReviewReply)
+  app.delete("/reviewReply/deleteReviewReply/:reviewReplyId",
+    ReviewReplyController.deleteReviewReply)
 
   // sub category
   app.get("/subCategory/getSubCategoryByName/:name",
@@ -102,61 +138,27 @@ module.exports = (app) => {
   app.delete("/subSubCategory/deleteSubSubCategory/:subSubCategoryId",
     SubSubCategoryController.deleteSubSubCategory)
 
-  // review
-  app.get("/review/getReviewList/:productId",
-    ReviewController.getReviewList)
-  app.post("/review/createReview",
+  // user
+  app.post("/register",
+    AuthenticationControllerPolicy.register,
+    AuthenticationController.register)
+  app.post("/login",
+    AuthenticationController.login)
+  app.get("/user/:id",
     isAuthenticated,
-    ReviewController.createReview)
-  app.put("/review/updateReview",
-    isAuthenticated,
-    ReviewController.updateReview)
-  app.delete("/review/deleteReview/:reviewId",
-    isAuthenticated,
-    ReviewController.deleteReview)
-
-  // review reply
-  app.get("/reviewReply/getReviewReplyList/:reviewId",
-    ReviewReplyController.getReviewReplyList)
-  app.post("/reviewReply/createReviewReply",
-    ReviewReplyController.createReviewReply)
-  app.put("/reviewReply/updateReviewReply",
-    ReviewReplyController.updateReviewReply)
-  app.delete("/reviewReply/deleteReviewReply/:reviewReplyId",
-    ReviewReplyController.deleteReviewReply)
-
-  // product
-  app.get("/products/getAllProducts",
-    ProductsController.getAllProducts)
-  app.get("/products/topSellProduct/:limit",
-    ProductsController.topSellProduct)
-  app.get("/products/newAddProduct/:limit",
-    ProductsController.newAddProduct)
-  app.get("/products/getProduct/:productId",
-    ProductsController.getProduct)
-  app.get("/products/getRecommendation/:subSubCategoryId/:limit",
-    ProductsController.getRecommendation)
-  app.post("/products/createProduct",
-    upload.array("imageField", 10),
-    ProductsController.createProduct)
-  app.put("/products/updateProduct",
-    ProductsController.updateProduct)
-  app.delete("/products/deleteProduct/:productId",
-    ProductsController.deleteProduct)
-
-  // cart
-  app.get("/cart/allProduct",
-    isAuthenticated,
-    CartsController.getAllCartProduct)
-  app.get("/cart/product",
-    isAuthenticated,
-    CartsController.getCartProduct)
-  app.post("/cart/product",
-    isAuthenticated,
-    CartsController.addToCart)
-  app.delete("/cart/product/:productId",
-    isAuthenticated,
-    CartsController.remove)
+    AuthenticationController.user)
+  app.get("/validUser/:email",
+    AuthenticationController.validUser)
+  app.post("/requestToken",
+    AuthenticationController.requestToken)
+  app.get("/verifyToken/:token",
+    AuthenticationController.verifyToken)
+  app.get("/verifyRegsToken/:token",
+    AuthenticationController.verifyRegsToken)
+  app.post("/resetPassword",
+    AuthenticationController.resetPassword)
+  app.post("/resetRegsToken",
+    AuthenticationController.resetRegsToken)
 
   // wishlist
   app.get("/wishlist",
@@ -171,11 +173,4 @@ module.exports = (app) => {
   app.delete("/wishlist/delete/:productId",
     isAuthenticated,
     WishlistController.remove)
-
-  //image
-  app.get("/image",
-    ImageController.getImage)
-  app.post("/image",
-    upload.single('imageFile'),
-    ImageController.setImage)
 }

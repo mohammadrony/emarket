@@ -7,10 +7,10 @@ export default {
     createReviewReply(credentials) {
         return Api().post('/reviewReply/createReviewReply', credentials)
     },
-    updateReview(credentials) {
+    updateReviewReply(credentials) {
         return Api().put('/reviewReply/updateReviewReply', credentials)
     },
-    deleteReview(reviewReplyId) {
+    deleteReviewReply(reviewReplyId) {
         return Api().delete(`/reviewReply/deleteReviewReply/${reviewReplyId}`)
     }
 }
