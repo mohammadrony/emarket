@@ -3,17 +3,27 @@
     <ATopHeader></ATopHeader>
     <b-container>
       <b-row>
+        <b-col class="text-center">
+          <h3>Users</h3>
+        </b-col>
+      </b-row>
+      <hr />
+      <b-row>
         <b-col>
           <b-row>
-            <b-col cols="5">
-              <b-form-input
-                size="md"
-                class="mr-sm-2"
-                placeholder="Search here..."
-                v-model="searchUserText"
-                @keyup.enter="search"
-              >
-              </b-form-input>
+            <b-col cols="9"></b-col>
+            <b-col cols="3">
+              <b-form-group class="m-0">
+                <b-form-input
+                  placeholder="Search user..."
+                  v-model="searchUserText"
+                  @keyup.enter="search"
+                >
+                </b-form-input>
+              </b-form-group>
+              <b-button variant="white">
+                <b-icon icon="search"></b-icon>
+              </b-button>
             </b-col>
           </b-row>
 
@@ -54,10 +64,13 @@
                 <b-col>{{ user.phoneNo }}</b-col>
                 <b-col>
                   <div>
-                    <b-button variant="primary" @click="userType(user)"
+                    <b-button variant="warning" @click="userType(user)"
                       >Edit</b-button
                     >
-                    <b-button class="ml-4" @click="deleteUser(user)"
+                    <b-button
+                      variant="danger"
+                      class="ml-4"
+                      @click="deleteUser(user)"
                       >Delete</b-button
                     >
                   </div>
@@ -80,45 +93,55 @@
         </b-col>
       </b-row>
     </b-container>
+    <Footer />
   </div>
 </template>
 <script>
 import { mapState } from "vuex";
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
-
+import Footer from "@/components/Footer.vue";
 export default {
-  name: "AProducts",
+  name: "AUsers",
   components: {
     ATopHeader,
+    Footer
   },
   data() {
     return {
-      userList: null,
-      displayUsers: {},
       searchUserText: "",
-      currentPage: 1,
+      currentPage: 1
     };
   },
   computed: {
     ...mapState({
-      userCount: (state) => state.Users.userCount,
-      displayUsers: (state) => state.Users.displayUsers,
-      perPage: (state) => state.Users.perPage,
-    }),
+      userCount: state => state.Users.userCount,
+      displayUsers: state => state.Users.displayUsers,
+      perPage: state => state.Users.perPage
+    })
   },
 
   async mounted() {
-    this.$store.dispatch("Users/setUserList");
+    try {
+      await this.$store.dispatch("Users/setUserList");
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
   },
 
   methods: {
+    userType(type) {
+      console.log(type);
+    },
+    deleteUser(user) {
+      console.log(user);
+    },
     search() {
       this.$store.dispatch("Users/searchUser", { text: this.searchUserText });
     },
     paginate(currentPage) {
       this.$store.dispatch("Users/paginate", currentPage);
-    },
-  },
+    }
+  }
 };
 </script>
 

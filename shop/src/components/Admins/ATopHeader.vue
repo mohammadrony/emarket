@@ -11,7 +11,7 @@
             <div style="color: #fff; font-size: 18px">Dashboard</div>
           </b-nav-item>
           <b-nav-item to="/admin/users" class="ml-2">
-            <div style="color: #fff; font-size: 18px">Products</div>
+            <div style="color: #fff; font-size: 18px">Users</div>
           </b-nav-item>
           <b-nav-item to="/admin/orders" class="ml-2">
             <div style="color: #fff; font-size: 18px">Orders</div>
@@ -59,14 +59,14 @@ export default {
       this.$store.dispatch("setToken", null);
       this.$store.dispatch("setUser", null);
       window.location.replace("/");
-    },
+    }
   },
   computed: {
     ...mapState({
-      user: (state) => state.user,
-      userLoggedIn: (state) => state.userLoggedIn,
+      user: state => state.user,
+      userLoggedIn: state => state.userLoggedIn
     })
-  },
+  }
 };
 </script>
 

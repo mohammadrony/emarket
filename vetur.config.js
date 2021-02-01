@@ -6,7 +6,7 @@ module.exports = {
   projects: [
     {
       root: './shop/',
-      package: './shop/package.json',
+      package: './package.json',
     }
   ]
 }

@@ -10,8 +10,8 @@ export const UsersModule = {
     userCount: null,
     perPage: null,
     searchParameter: {
-      text: null,
-      userType: null,
+      text: "",
+      userType: "",
     }
   },
   mutations: {
@@ -23,7 +23,7 @@ export const UsersModule = {
       state.perPage = 20
     },
     SET_DISPLAY_USERS(state, displayUsers) {
-      state.disldisplayUsers = displayUsers;
+      state.displayUsers = displayUsers;
     },
     SET_USER_COUNT(state, userCount) {
       state.userCount = userCount
@@ -51,7 +51,7 @@ export const UsersModule = {
       commit("SET_USER_BACKUP_LIST", users)
     },
     async getUserBackupList({ dispatch, state }) {
-      if (!state.userBackupList) {
+      if (state.userBackupList != null) {
         await dispatch("setUserBackupList")
       }
       return state.userBackupList;
@@ -79,7 +79,8 @@ export const UsersModule = {
       if (state.searchParameter.text != null) {
         userList = userList.filter(obj => {
           return (
-            obj.fullName.toLowerCase().includes(state.searchParameter.text.toLowerCase()) ||
+            obj.firstName.toLowerCase().includes(state.searchParameter.text.toLowerCase()) ||
+            obj.lastName.toLowerCase().includes(state.searchParameter.text.toLowerCase()) ||
             obj.email.toLowerCase().includes(state.searchParameter.text.toLowerCase()) ||
             obj.phoneNo.toLowerCase().includes(state.searchParameter.text.toLowerCase())
           );

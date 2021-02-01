@@ -13,7 +13,6 @@ const SubCategoryController = require("./controllers/SubCategoryController")
 const SubSubCategoryController = require("./controllers/SubSubCategoryController")
 const AuthenticationController = require("./controllers/AuthenticationController")
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy');
-const Order = require('./models/Order')
 
 module.exports = (app) => {
   // cart
@@ -148,6 +147,7 @@ module.exports = (app) => {
     isAuthenticated,
     AuthenticationController.user)
   app.get("/getUserList",
+    isAuthenticated,
     AuthenticationController.getUserList)
   app.get("/validUser/:email",
     AuthenticationController.validUser)

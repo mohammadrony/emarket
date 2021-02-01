@@ -85,8 +85,8 @@ module.exports = {
                     from: process.env.ESTORE_EMAIL,
                     to: req.body.email,
                     subject: 'Verify Account on e-store',
-                    text: 'hello '+user.firstName+' '+user.lastName+',\n\n'+'Recently you\'ve requested to create an account on e-store\n\n' +
-                        'Please verify your email address first\n\n'+
+                    text: 'hello ' + user.firstName + ' ' + user.lastName + ',\n\n' + 'Recently you\'ve requested to create an account on e-store\n\n' +
+                        'Please verify your email address first\n\n' +
                         'click on the following link, or paste it into your browser to complete this process\n\n' +
                         'http://' + 'localhost:8080' + '/user-verify/' + token + '\n\n' +
                         'If you did not request this, please ignore this email.\n'
@@ -146,13 +146,13 @@ module.exports = {
                 })
             }
             const userList = await User.findAll({
-                attributes: ["id",
+                attributes: [
+                    "id",
                     "email",
                     "firstName",
                     "lastName",
                     "phoneNo",
-                    "profileImage"
-                    [fn('CONCAT', col('firstName'), ' ', col('lastName')), "fullName"],
+                    "profileImage",
                     "ShopId",
                     "userType"
                 ]
