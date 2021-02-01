@@ -105,7 +105,7 @@ export default {
   computed: {
     ...mapState({
       user: (state) => state.user,
-      cartProducts: (state) => state.Products.Cart.cartProducts,
+      cartProducts: (state) => state.Cart.cartProducts,
     }),
     cartItemCount: function () {
       return this.cartProducts.length;
@@ -128,7 +128,7 @@ export default {
         quantity: 1,
       };
       await this.$store.dispatch(
-        "Products/Cart/cartQuantityRelative",
+        "Cart/cartQuantityRelative",
         cartItem
       );
     },
@@ -139,15 +139,14 @@ export default {
           quantity: -1,
         };
         await this.$store.dispatch(
-          "Products/Cart/cartQuantityRelative",
+          "Cart/cartQuantityRelative",
           cartItem
         );
       }
     },
     async remove(product) {
       const cartItem = { productId: product.productId };
-      await this.$store.dispatch("Products/Cart/removeFromCart", cartItem);
-      // window.location.reload();
+      await this.$store.dispatch("Cart/removeFromCart", cartItem);
     },
   },
 };

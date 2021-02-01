@@ -18,10 +18,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
+    phoneNo: DataTypes.STRING,
     password: DataTypes.STRING,
     resetPasswordToken: DataTypes.STRING,
     address: DataTypes.STRING,
-    isAdmin: DataTypes.BOOLEAN
+    userType: DataTypes.STRING,
+    isAdmin: DataTypes.BOOLEAN,
   })
+  User.associate = function (models) {
+    User.belongsTo(models.Shop)
+  }
   return User
 }

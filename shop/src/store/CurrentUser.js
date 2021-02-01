@@ -1,4 +1,4 @@
-export const UserModule = {
+export const CurrentUserModule = {
     namespaced: true,
     strict: true,
 

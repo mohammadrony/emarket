@@ -10,6 +10,9 @@ export default {
   user(id) {
     return Api().get(`/user/${id}`);
   },
+  getUserList() {
+    return Api().get("/getUserList");
+  },
   validUser(email) {
     return Api().get(`/validUser/${email}`)
   },

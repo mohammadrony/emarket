@@ -113,7 +113,7 @@ export default {
     this.shop = this.$store.state.shop;
     if (this.cList == false) {
       this.categoryList = await this.$store.dispatch(
-        "Products/Category/setFullCategoryList"
+        "Category/setFullCategoryList"
       );
       if (this.categoryList) this.cList = true;
     }
@@ -160,7 +160,7 @@ export default {
       this.search_category = category.name;
     },
     search() {
-      this.$store.dispatch("/Products/setSearchText", this.searchTxt);
+      this.$store.dispatch("Products/setSearchText", this.searchTxt);
       var route = "/products";
       if (this.search_category_id != 0) {
         const category = this.search_category;

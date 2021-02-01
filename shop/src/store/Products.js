@@ -1,6 +1,4 @@
 import ProductsService from "../services/ProductsService";
-import { CategoryModule } from "./Category.js";
-import { CartModule } from "./Cart.js";
 
 export const ProductsModule = {
   namespaced: true,
@@ -160,7 +158,5 @@ export const ProductsModule = {
     },
   },
   modules: {
-    Category: CategoryModule,
-    Cart: CartModule,
   }
 }

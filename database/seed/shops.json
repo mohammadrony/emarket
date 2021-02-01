@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "e-store",
+    "icon": "",
+    "code": "e-store",
+    "email": "estore@gmail.com",
+    "phoneNo": "+88017000000300",
+    "location": "<b>line1:</b> building no: 2, floor: 3<br/><b>line2:</b> Street: 22, Near Mosque<br/><b>zip code:</b> 1853<br/><b>city:</b> MJ<br/><b>division:</b> Dhaka<br/><b>country:</b> BD",
+    "header": "Find what you need here",
+    "subTitle": "e-store sub title here",
+    "details": "Large text here. about the e-store"
+  },
+  {
+    "id": 2,
+    "name": "SUPER MARKET",
+    "icon": "",
+    "code": "supermarket",
+    "email": "supermarket@gmail.com",
+    "phoneNo": "+8801700300000",
+    "location": "<b>line1:</b> building no: 2, floor: 3<br/><b>line2:</b> Street: 22, Near Mosque<br/><b>zip code:</b> 1853<br/><b>city:</b> MJ<br/><b>division:</b> Dhaka<br/><b>country:</b> BD",
+    "header": "Find what you need here",
+    "subTitle": "SUPER MARKET sub title here",
+    "details": "Large text here. about SUPER MARKET"
+  }
+]

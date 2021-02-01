@@ -1,8 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import {ProductsModule} from "./Products.js";
-import createPersistedState from "vuex-persistedstate";
+
+import { CartModule } from "./Cart.js";
+import { UsersModule } from "./Users.js"
+import { CategoryModule } from "./Category.js";
+import { ProductsModule } from "./Products.js";
 import { CheckoutModule } from "./Checkout.js";
+import { CurrentUserModule } from "./CurrentUser.js"
+
+import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -23,7 +29,7 @@ export default new Vuex.Store({
   mutations: {
     SET_TOKEN(state, token) {
       state.token = token
-      if(token) {
+      if (token) {
         state.userLoggedIn = true
       } else {
         state.userLoggedIn = false
@@ -31,7 +37,7 @@ export default new Vuex.Store({
     },
     SET_USER(state, user) {
       state.user = user
-      if(user != null){
+      if (user != null) {
         state.admin = user.isAdmin
         state.userId = user.id
       } else {
@@ -42,15 +48,20 @@ export default new Vuex.Store({
   },
   actions: {
 
-    setToken({commit}, token) {
+    setToken({ commit }, token) {
       commit('SET_TOKEN', token)
     },
-    setUser({commit}, user) {
+    setUser({ commit }, user) {
       commit('SET_USER', user)
     }
   },
   modules: {
+
+    Cart: CartModule,
+    Users: UsersModule,
+    Category: CategoryModule,
     Products: ProductsModule,
     Checkout: CheckoutModule,
+    CurrentUser: CurrentUserModule,
   }
 });

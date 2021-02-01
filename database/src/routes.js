@@ -147,6 +147,8 @@ module.exports = (app) => {
   app.get("/user/:id",
     isAuthenticated,
     AuthenticationController.user)
+  app.get("/getUserList",
+    AuthenticationController.getUserList)
   app.get("/validUser/:email",
     AuthenticationController.validUser)
   app.post("/requestToken",

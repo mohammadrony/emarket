@@ -132,14 +132,13 @@ export default {
         title: this.title,
         image: this.image,
       };
-      await this.$store.dispatch("Products/Cart/addToCart", buyProduct);
+      await this.$store.dispatch("Cart/addToCart", buyProduct);
       window.location.replace("/checkout");
     },
   },
   async mounted() {
     const productId = this.$store.state.route.params.productId;
     this.displayProduct = (await ProductsService.getProduct(productId)).data;
-    // console.log(this.displayProduct.SubSubCategoryId)
     this.current_image = this.displayProduct.image1;
   },
   computed: {

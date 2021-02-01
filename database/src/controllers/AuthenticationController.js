@@ -115,6 +115,32 @@ module.exports = {
             })
         }
     },
+    async getUserList(req, res) {
+        try {
+            const userId = req.user.id
+            if (!userId) {
+                return res.status(403).send({
+                    error: "Request is not authenticated."
+                })
+            }
+            const userList = await User.findAll({
+                attributes: ["id",
+                    "email",
+                    "firstName",
+                    "lastName",
+                    "phoneNo",
+                    [fn('CONCAT', col('firstName'), ' ', col('lastName')), "fullName"],
+                    // "ShopId",
+                    "userType"
+                ]
+            })
+            res.send(userList);
+        } catch (err) {
+            res.status(500).send({
+                error: "An error occured when trying to get user list."
+            })
+        }
+    },
     async validUser(req, res) {
         try {
 

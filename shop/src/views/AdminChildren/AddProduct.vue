@@ -340,7 +340,7 @@ export default {
         ).data;
         console.log("new category", newCategory);
         this.categoryList = await this.$store.dispatch(
-          "Products/Category/setFullCategoryList"
+          "Category/setFullCategoryList"
         );
         window.location.reload();
       } catch (err) {
@@ -358,7 +358,7 @@ export default {
 
         console.log("new sub category", newSubCategory);
         this.categoryList = await this.$store.dispatch(
-          "Products/Category/setFullCategoryList"
+          "Category/setFullCategoryList"
         );
         window.location.reload();
       } catch (err) {
@@ -375,7 +375,7 @@ export default {
         ).data;
         console.log("new sub sub category", newSubSubCategory);
         this.categoryList = await this.$store.dispatch(
-          "Products/Category/setFullCategoryList"
+          "Category/setFullCategoryList"
         );
         window.location.reload();
       } catch (err) {

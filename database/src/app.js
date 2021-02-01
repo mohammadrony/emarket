@@ -24,6 +24,3 @@ sequelize.sync({ force: false })
 	.then(() => {
 		app.listen(config.port, () => console.log(`Express server running on port ${config.port}`));
 	})
-	// .then(() => {
-	//   return sequelize.drop()
-	// })

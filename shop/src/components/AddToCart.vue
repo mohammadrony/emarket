@@ -44,7 +44,7 @@ export default {
         image: this.image,
       };
       const response = await this.$store.dispatch(
-        "Products/Cart/addToCart",
+        "Cart/addToCart",
         cartItem
       );
 
@@ -75,7 +75,7 @@ export default {
     async remove() {
       const cartItem = { productId: this.productId };
       const remove_response = await this.$store.dispatch(
-        "Products/Cart/removeFromCart",
+        "Cart/removeFromCart",
         cartItem
       );
       if (remove_response) {

@@ -121,7 +121,7 @@ export default {
   },
   computed: {},
   mounted() {
-    this.checkoutProduct = this.$store.state.Products.Cart.cartProducts;
+    this.checkoutProduct = this.$store.state.Cart.cartProducts;
     var i;
     for (i = 0; i < this.checkoutProduct.length; i++) {
       this.subTotalAmount +=

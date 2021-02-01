@@ -337,10 +337,9 @@ export default {
       newSubCategory: null,
       newSubSubCategory: null,
       sidebarList: null,
-      categoryList: this.$store.state.Products.Category.categoryList,
-      subCategoryList: this.$store.state.Products.Category.subCategoryList,
-      subSubCategoryList: this.$store.state.Products.Category
-        .subSubCategoryList,
+      categoryList: this.$store.state.Category.categoryList,
+      subCategoryList: this.$store.state.Category.subCategoryList,
+      subSubCategoryList: this.$store.state.Category.subSubCategoryList,
     };
   },
   computed: {
@@ -416,7 +415,7 @@ export default {
         ).data;
         console.log("new category", newCategory);
         this.categoryList = await this.$store.dispatch(
-          "Products/Category/setFullCategoryList"
+          "Category/setFullCategoryList"
         );
         window.location.reload();
       } catch (err) {
@@ -435,7 +434,7 @@ export default {
 
           console.log("new sub category", newSubCategory);
           this.categoryList = await this.$store.dispatch(
-            "Products/Category/setFullCategoryList"
+            "Category/setFullCategoryList"
           );
           window.location.reload();
         } catch (err) {
@@ -456,7 +455,7 @@ export default {
           ).data;
           console.log("new sub sub category", newSubSubCategory);
           this.categoryList = await this.$store.dispatch(
-            "Products/Category/setFullCategoryList"
+            "Category/setFullCategoryList"
           );
           window.location.reload();
         } catch (err) {
@@ -479,7 +478,7 @@ export default {
       try {
         await CategoryService.updateCategory(newCategory);
         this.categoryList = await this.$store.dispatch(
-          "Products/Category/setFullCategoryList"
+          "Category/setFullCategoryList"
         );
         window.location.reload();
       } catch (error) {
@@ -496,7 +495,7 @@ export default {
       try {
         await SubCategoryService.updateSubCategory(newSubCategory);
         this.categoryList = await this.$store.dispatch(
-          "Products/Category/setFullCategoryList"
+          "Category/setFullCategoryList"
         );
         window.location.reload();
       } catch (error) {
@@ -513,7 +512,7 @@ export default {
       try {
         await SubSubCategoryService.updateSubSubCategory(newSubSubCategory);
         this.categoryList = await this.$store.dispatch(
-          "Products/Category/setFullCategoryList"
+          "Category/setFullCategoryList"
         );
         window.location.reload();
       } catch (error) {
@@ -524,7 +523,7 @@ export default {
       try {
         await CategoryService.deleteCategory(category.id);
         this.categoryList = await this.$store.dispatch(
-          "Products/Category/setFullCategoryList"
+          "Category/setFullCategoryList"
         );
         window.location.reload();
       } catch (error) {
@@ -535,7 +534,7 @@ export default {
       try {
         await SubCategoryService.deleteSubCategory(subCategory.id);
         this.categoryList = await this.$store.dispatch(
-          "Products/Category/setFullCategoryList"
+          "Category/setFullCategoryList"
         );
         window.location.reload();
       } catch (error) {
@@ -546,7 +545,7 @@ export default {
       try {
         await SubSubCategoryService.deleteSubSubCategory(subSubCategory.id);
         this.categoryList = await this.$store.dispatch(
-          "Products/Category/setFullCategoryList"
+          "Category/setFullCategoryList"
         );
         window.location.reload();
       } catch (error) {
@@ -575,5 +574,4 @@ export default {
   font-weight: 500;
   cursor: pointer;
 }
-
 </style>

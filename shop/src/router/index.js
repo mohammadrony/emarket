@@ -15,8 +15,8 @@ import Checkout from "@/views/Checkout.vue";
 import SuccessPayment from "@/views/Payment/SuccessPayment.vue";
 import CancelPayment from "@/views/Payment/CancelPayment.vue";
 import Admin from "@/views/Admin.vue";
-import AOverview from "@/views/AdminChildren/AOverview.vue";
-import AProducts from "@/views/AdminChildren/AProducts.vue";
+import ADashboard from "@/views/AdminChildren/ADashboard.vue";
+import AUsers from "@/views/AdminChildren/AUsers.vue";
 import AddProduct from "@/views/AdminChildren/AddProduct.vue";
 import AOrder from "@/views/AdminChildren/AOrder.vue";
 import AOrders from "@/views/AdminChildren/AOrders.vue";
@@ -124,15 +124,15 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/admin/overview",
-    name: "admin-overview",
-    component: AOverview,
+    path: "/admin/dashboard",
+    name: "admin-dashboard",
+    component: ADashboard,
     meta: { requiresAuth: true }
   },
   {
-    path: "/admin/products",
-    name: "admin-products",
-    component: AProducts,
+    path: "/admin/users",
+    name: "admin-users",
+    component: AUsers,
     meta: { requiresAuth: true }
   },
   {

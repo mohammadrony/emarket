@@ -6,9 +6,12 @@
     "lastName": "Rony",
     "profileImage": "http://localhost:8084/public/user-image/default-man.png",
     "email": "ronyku1829@gmail.com",
+    "phoneNo": "+8801700100000",
     "password": "12345678",
     "resetPasswordToken": "",
     "address": "Bangladesh",
+    "userType": "admin",
+    "ShopId": 1,
     "isAdmin": true
   },
   {
@@ -18,9 +21,12 @@
     "lastName": "Rony",
     "profileImage": "http://localhost:8084/public/user-image/default-man.png",
     "email": "rony@gmail.com",
+    "phoneNo": "+8801700100001",
     "password": "12345678",
     "address": "Dhaka, Bangladesh",
-    "isAdmin": false
+    "userType": "shop admin",
+    "ShopId": 1,
+    "isAdmin": true
   },
   {
     "id": 3,
@@ -29,9 +35,12 @@
     "lastName": "Pranto",
     "profileImage": "http://localhost:8084/public/user-image/default-man.png",
     "email": "mukit@gmail.com",
+    "phoneNo": "+8801700100002",
     "password": "12345678",
     "address": "Shariatpur, Bangladesh",
-    "isAdmin": false
+    "userType": "shop manager",
+    "ShopId": 1,
+    "isAdmin": true
   },
   {
     "id": 4,
@@ -40,9 +49,12 @@
     "lastName": "Shanto",
     "profileImage": "http://localhost:8084/public/user-image/default-man.png",
     "email": "shanto@gmail.com",
+    "phoneNo": "+8801700100003",
     "password": "12345678",
     "address": "Bagerhat, Bangladesh",
-    "isAdmin": false
+    "userType": "shop admin",
+    "ShopId": 2,
+    "isAdmin": true
   },
   {
     "id": 5,
@@ -51,9 +63,12 @@
     "lastName": "Mortoza",
     "profileImage": "http://localhost:8084/public/user-image/default-man.png",
     "email": "nuhash@gmail.com",
+    "phoneNo": "+8801700100004",
     "password": "12345678",
     "address": "Dhaka, Bangladesh",
-    "isAdmin": false
+    "userType": "shop manager",
+    "ShopId": 2,
+    "isAdmin": true
   },
   {
     "id": 6,
@@ -62,8 +77,11 @@
     "lastName": "Sajid",
     "profileImage": "http://localhost:8084/public/user-image/default-man.png",
     "email": "sajid@gmail.com",
+    "phoneNo": "+8801700100005",
     "password": "12345678",
     "address": "Comilla, Bangladesh",
+    "userType": "customer",
+    "ShopId": 1,
     "isAdmin": false
   },
   {
@@ -73,19 +91,39 @@
     "lastName": "Moon",
     "profileImage": "http://localhost:8084/public/user-image/default-man.png",
     "email": "moon@gmail.com",
+    "phoneNo": "+8801700100006",
     "password": "12345678",
     "address": "Gazipur, Bangladesh",
+    "userType": "customer",
+    "ShopId": 1,
     "isAdmin": false
   },
   {
-    "id": 7,
+    "id": 8,
     "username": "rafin22",
     "firstName": "Rafin",
     "lastName": "Hasan",
     "profileImage": "http://localhost:8084/public/user-image/default-man.png",
     "email": "rafin@gmail.com",
+    "phoneNo": "+8801700100007",
     "password": "12345678",
     "address": "Khulna, Bangladesh",
+    "userType": "customer",
+    "ShopId": 2,
+    "isAdmin": false
+  },
+  {
+    "id": 9,
+    "username": "azizul335",
+    "firstName": "Azizul",
+    "lastName": "Hassan",
+    "profileImage": "http://localhost:8084/public/user-image/default-man.png",
+    "email": "azizul@gmail.com",
+    "phoneNo": "+8801700100008",
+    "password": "12345678",
+    "address": "Khulna, Bangladesh",
+    "userType": "customer",
+    "ShopId": 2,
     "isAdmin": false
   }
 ]

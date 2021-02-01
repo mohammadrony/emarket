@@ -7,10 +7,10 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="mr-auto">
-          <b-nav-item to="/admin/overview" class="ml-2">
+          <b-nav-item to="/admin/dashboard" class="ml-2">
             <div style="color: #fff; font-size: 18px">Dashboard</div>
           </b-nav-item>
-          <b-nav-item to="/admin/products" class="ml-2">
+          <b-nav-item to="/admin/users" class="ml-2">
             <div style="color: #fff; font-size: 18px">Products</div>
           </b-nav-item>
           <b-nav-item to="/admin/orders" class="ml-2">
