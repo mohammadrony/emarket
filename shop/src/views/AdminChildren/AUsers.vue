@@ -29,6 +29,9 @@
                   <strong>Name</strong>
                 </b-col>
                 <b-col>
+                  <strong>Phone No.</strong>
+                </b-col>
+                <b-col>
                   <strong>Status</strong>
                 </b-col>
               </b-row>
@@ -48,6 +51,7 @@
                   {{ user.email }}
                 </b-col>
                 <b-col>{{ user.firstName }} {{ user.lastName }}</b-col>
+                <b-col>{{ user.phoneNo }}</b-col>
                 <b-col>
                   <div>
                     <b-button variant="primary" @click="userType(user)"
@@ -85,7 +89,7 @@ import ATopHeader from "@/components/Admins/ATopHeader.vue";
 export default {
   name: "AProducts",
   components: {
-    ATopHeader
+    ATopHeader,
   },
   data() {
     return {

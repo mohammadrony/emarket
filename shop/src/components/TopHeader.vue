@@ -153,7 +153,7 @@ export default {
     logout() {
       this.$store.dispatch("setToken", null);
       this.$store.dispatch("setUser", null);
-      window.location.replace("/");
+      window.location.reload();
     },
     set_category(category) {
       this.search_category_id = category.id;

@@ -71,11 +71,33 @@ module.exports = {
                 })
             }
             if (user.registerToken) {
-                console.log("--------------------")
-                console.log(user.registerToken)
-                console.log("--------------------")
+                var transporter = await nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: process.env.ESTORE_EMAIL,
+                        pass: process.env.ESTORE_PASSWORD,
+                    },
+                    tls: {
+                        rejectUnauthorized: false
+                    }
+                })
+                var mailOptions = {
+                    from: process.env.ESTORE_EMAIL,
+                    to: req.body.email,
+                    subject: 'Verify Account on e-store',
+                    text: 'hello '+user.firstName+' '+user.lastName+',\n\n'+'Recently you\'ve requested to create an account on e-store\n\n' +
+                        'Please verify your email address first\n\n'+
+                        'click on the following link, or paste it into your browser to complete this process\n\n' +
+                        'http://' + 'localhost:8080' + '/user-verify/' + token + '\n\n' +
+                        'If you did not request this, please ignore this email.\n'
+                }
+                await transporter.sendMail(mailOptions, function (err) {
+                    if (err) {
+                        return console.log('Error sending an email', err);
+                    }
+                });
                 return res.status(403).send({
-                    error: 'You need to verify your email to login.\n' + 'Please check your email first.\n' + 'This is one time verification.'
+                    error: 'We need to verify your email first.<br>So, We sent you a verification link to do that.<br>Please follow the given instruction.'
                 })
             }
             const correctPassword = password === user.password
@@ -129,6 +151,7 @@ module.exports = {
                     "firstName",
                     "lastName",
                     "phoneNo",
+                    "profileImage"
                     [fn('CONCAT', col('firstName'), ' ', col('lastName')), "fullName"],
                     "ShopId",
                     "userType"

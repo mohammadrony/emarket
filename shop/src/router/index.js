@@ -4,10 +4,11 @@ import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Products from "@/views/Products.vue";
 import ViewProduct from "@/views/ViewProduct.vue";
-import Login from "@/views/UserControl/Login.vue";
-import ResetPassword from "@/views/UserControl/ResetPassword.vue";
-import Register from "@/views/UserControl/Register.vue";
-// import UserProfile from "@/views/UserControl/UserProfile.vue";
+import Login from "@/views/User/Login.vue";
+import ResetPassword from "@/views/User/ResetPassword.vue";
+import Register from "@/views/User/Register.vue";
+import UserProfile from "@/views/User/Profile.vue";
+import UserVerify from "@/views/User/UserVerify.vue";
 // import AboutUs from "@/views/AboutUs.vue";
 import CartView from "@/views/CartView.vue";
 // import Wishlist from "@/views/Wishlist.vue";
@@ -76,11 +77,16 @@ const routes = [
     name: "register",
     component: Register
   },
-  // {
-  //   path: "/profile/:userId",
-  //   name: "profile",
-  //   component: UserProfile
-  // },
+  {
+    path: "/user-verify/:token",
+    name: "user-verify",
+    component: UserVerify
+  },
+  {
+    path: "/profile/:userId",
+    name: "profile",
+    component: UserProfile
+  },
   // {
   //   path: "/about",
   //   name: "about-page",

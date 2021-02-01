@@ -75,7 +75,7 @@
 import TopHeader from "@/components/TopHeader.vue";
 import AuthenticationService from "@/services/AuthenticationService.js";
 export default {
-  name: "UserProfile",
+  name: "Profile",
   components: {
     TopHeader,
   },

@@ -70,19 +70,21 @@ export const UsersModule = {
     },
     async filterUsers({ state, dispatch }) {
       var userList = await dispatch("getUserBackupList");
-      if (state.userType != null) {
+      if (state.searchParameter.userType != null) {
         userList = userList.filter(obj => {
           return (
             obj.userType == state.searchParameter.userType);
         });
       }
-      userList = userList.filter(obj => {
-        return (
-          obj.fullName.toLowerCase().includes(state.searchParameter.text.toLowerCase()) ||
-          obj.email.toLowerCase().includes(state.searchParameter.text.toLowerCase()) ||
-          obj.phoneNo.toLowerCase().includes(state.searchParameter.text.toLowerCase())
-        );
-      });
+      if (state.searchParameter.text != null) {
+        userList = userList.filter(obj => {
+          return (
+            obj.fullName.toLowerCase().includes(state.searchParameter.text.toLowerCase()) ||
+            obj.email.toLowerCase().includes(state.searchParameter.text.toLowerCase()) ||
+            obj.phoneNo.toLowerCase().includes(state.searchParameter.text.toLowerCase())
+          );
+        });
+      }
       return userList;
     },
   },

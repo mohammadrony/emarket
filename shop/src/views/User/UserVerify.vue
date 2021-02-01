@@ -4,9 +4,9 @@
     <b-container>
       <b-row class="m-5">
         <b-col cols="6">
-          <b-card v-if="!tokenValidate">
+          <b-card v-if="!registerToken">
             <h5 class="text-center"><strong>Email Verification</strong></h5>
-            <b-alert v-if="tokenList" class="mt-4" variant="warning" show>
+            <b-alert class="mt-4" variant="warning" show>
               <small>
                 It looks like you clicked on an invalid verification link.
                 Please try again.
@@ -14,7 +14,7 @@
             </b-alert>
           </b-card>
 
-          <b-card v-if="tokenValidate" style="color: #001e5f">
+          <b-card v-if="registerToken" style="color: #001e5f">
             <b-card
               border-variant="info"
               header="Email Verified"
@@ -35,10 +35,11 @@
 </template>
 
 <script>
+import AuthenticationService from "@/services/AuthenticationService.js";
 import TopHeader from "@/components/TopHeader.vue";
 import Footer from "@/components/Footer.vue";
 export default {
-  name: "UserVerifyToken",
+  name: "UserVerify",
   components: {
     TopHeader,
     Footer,
@@ -46,35 +47,32 @@ export default {
   data() {
     return {
       userId: null,
-      tokenValidate: null
+      registerToken: null,
     };
   },
-  mounted() {
+  async mounted() {
     const token = this.$store.state.route.params.token;
-    if(token){
+    if (token) {
       try {
-
         const user = (await AuthenticationService.verifyRegsToken(token)).data;
         if (user.registerToken === token) {
-          this.tokenValidate = user.registerToken
+          this.registerToken = user.registerToken;
           this.userId = user.id;
         }
-        
-      } catch(error) {
-        console.log(error.response.data.error)
+      } catch (error) {
+        console.log(error.response.data.error);
       }
 
-      if(this.userId) {
+      if (this.userId) {
         try {
           await AuthenticationService.resetRegsToken({
             id: this.userId,
+            registerToken: this.registerToken,
           }).data;
-          
-        } catch(error) {
-          console.log(error.response.data.error)
+        } catch (error) {
+          console.log(error.response.data.error);
         }
       }
-
     }
   },
   methods: {},
