@@ -130,7 +130,7 @@ module.exports = {
                     "lastName",
                     "phoneNo",
                     [fn('CONCAT', col('firstName'), ' ', col('lastName')), "fullName"],
-                    // "ShopId",
+                    "ShopId",
                     "userType"
                 ]
             })
