@@ -38,8 +38,12 @@ export default new Vuex.Store({
     SET_USER(state, user) {
       state.user = user
       if (user != null) {
-        state.admin = user.isAdmin
         state.userId = user.id
+        if (user.priority == 1) {
+          state.admin = true
+        } else {
+          state.admin = false
+        }
       } else {
         state.admin = false
         state.userId = 0

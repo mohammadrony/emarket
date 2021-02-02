@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     resetPasswordToken: DataTypes.STRING,
     address: DataTypes.STRING,
     userType: DataTypes.STRING,
-    isAdmin: DataTypes.BOOLEAN,
+    variant: DataTypes.STRING,
+    priority: DataTypes.INTEGER,
   })
   User.associate = function (models) {
     User.belongsTo(models.Shop)
