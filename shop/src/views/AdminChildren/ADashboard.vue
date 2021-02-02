@@ -1,10 +1,10 @@
 <template>
   <div class="a-overview">
     <ATopHeader></ATopHeader>
-    <b-container>
+    <b-container class="mt-5">
       <b-row align-v="center">
         <b-col md="6">
-          <h3>Overview Page</h3>
+          <h3>Admin Dashboard Page</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora
             illum dolor nobis voluptate officia reprehenderit eveniet nam omnis
@@ -17,15 +17,18 @@
         </b-col>
       </b-row>
     </b-container>
+    <Footer class="mt-5"/>
   </div>
 </template>
 
 <script>
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
+import Footer from "@/components/Footer.vue";
 export default {
   name: "AOverview",
   components: {
-    ATopHeader
+    ATopHeader,
+    Footer
   }
 };
 </script>

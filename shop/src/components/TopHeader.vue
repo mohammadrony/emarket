@@ -71,9 +71,9 @@
                     >{{ user.firstName }} {{ user.lastName }}</em
                   >
                 </template>
-                <!-- <b-dropdown-item v-if="user.isAdmin" to="/admin"
+                <b-dropdown-item v-if="user.isAdmin" to="/admin"
                   >Admin Panel</b-dropdown-item
-                > -->
+                >
                 <b-dropdown-item @click="userProfile()"
                   >Profile</b-dropdown-item
                 >

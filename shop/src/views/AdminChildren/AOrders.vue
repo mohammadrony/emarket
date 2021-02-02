@@ -89,7 +89,9 @@
           <hr />
         </div>
       </div>
-
+      <div class="m-4 d-flex justify-content-center" v-if="orders == 0">
+        <h3>Order not found...</h3>
+      </div>
       <b-pagination
         v-if="orders != 0"
         size="lg"
@@ -111,13 +113,13 @@ export default {
   name: "AOrders",
   components: {
     ATopHeader,
-    Footer,
+    Footer
   },
   data() {
     return {
       anyType: {
         name: "All",
-        variant: "dark",
+        variant: "dark"
       },
       selectedTypeName: "All",
       selectedTypeVariant: "dark",
@@ -129,23 +131,23 @@ export default {
       orderStatus: [
         {
           name: "paid",
-          variant: "dark",
+          variant: "dark"
         },
         {
           name: "processing",
-          variant: "info",
+          variant: "info"
         },
         {
           name: "on the way",
-          variant: "warning",
+          variant: "warning"
         },
         {
           name: "complete",
-          variant: "success",
-        },
+          variant: "success"
+        }
       ],
       currentPage: 1,
-      perPage: 20,
+      perPage: 20
     };
   },
   computed: {},
@@ -175,7 +177,7 @@ export default {
         this.selectedTypeName = status.name;
         this.selectedTypeVariant = status.variant;
         this.orderList2 = this.orderList.filter(
-          (obj) => obj.status == status.name
+          obj => obj.status == status.name
         );
       }
       this.orders = this.orderList2.length;
@@ -183,13 +185,13 @@ export default {
       this.secondOrderList = this.orderList2.slice(start, start + this.perPage);
     },
     async updateStatus(order, status) {
-      const index = this.orderList.findIndex((obj) => obj.id === order.id);
+      const index = this.orderList.findIndex(obj => obj.id === order.id);
       this.orderList[index].status = status.name;
       this.orderList[index].variant = status.variant;
       await OrderService.updateOrder({
         id: order.id,
         status: status.name,
-        variant: status.variant,
+        variant: status.variant
       });
     },
     orderDetails(order) {
@@ -203,8 +205,8 @@ export default {
       const start = (currentPage - 1) * this.perPage;
       this.secondOrderList = this.orderList2.slice(start, start + this.perPage);
       // this.forceRerender() //optional
-    },
-  },
+    }
+  }
 };
 </script>
 

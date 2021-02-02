@@ -15,7 +15,7 @@ import CartView from "@/views/CartView.vue";
 import Checkout from "@/views/Checkout.vue";
 import SuccessPayment from "@/views/Payment/SuccessPayment.vue";
 import CancelPayment from "@/views/Payment/CancelPayment.vue";
-import Admin from "@/views/Admin.vue";
+// import Admin from "@/views/Admin.vue";
 import ADashboard from "@/views/AdminChildren/ADashboard.vue";
 import AUsers from "@/views/AdminChildren/AUsers.vue";
 import AddProduct from "@/views/AdminChildren/AddProduct.vue";
@@ -126,12 +126,6 @@ const routes = [
   {
     path: "/admin",
     name: "admin",
-    component: Admin,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: "/admin/dashboard",
-    name: "admin-dashboard",
     component: ADashboard,
     meta: { requiresAuth: true }
   },
