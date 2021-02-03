@@ -66,11 +66,7 @@ module.exports = {
 	},
 	async getProduct(req, res) {
 		try {
-			const product = await Product.findOne({
-				where: {
-					id: req.params.productId
-				}
-			})
+			const product = await Product.findByPk(req.params.productId)
 			res.send(product)
 		} catch (err) {
 			res.status(500).send({
@@ -134,11 +130,7 @@ module.exports = {
 	async deleteProduct(req, res) {
 		try {
 			const productId = req.params.productId
-			const product = await Product.findOne({
-				where: {
-					id: productId
-				}
-			})
+			const product = await Product.findByPk(productId)
 			if (!product) {
 				return res.status(403).send({
 					error: 'No product to delete.'

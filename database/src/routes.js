@@ -52,8 +52,8 @@ module.exports = (app) => {
     OrderController.getOrderList)
   app.get("/order/getOrder/:orderId",
     OrderController.getOrder),
-  app.post("/order/createOrder",
-    OrderController.createOrder)
+    app.post("/order/createOrder",
+      OrderController.createOrder)
   app.put("/order/updateOrder",
     isAuthenticated,
     OrderController.updateOrder)
@@ -67,7 +67,7 @@ module.exports = (app) => {
     OrderItemController.getOrderItemList)
   app.post("/orderItem/createOrderItem",
     OrderItemController.createOrderItem)
-  app.delete("/orderItem/deleteOrderItem/:orderItemId",
+  app.delete("/orderItem/deleteOrderItem/:orderId",
     isAuthenticated,
     OrderItemController.deleteOrderItem)
 
@@ -146,6 +146,12 @@ module.exports = (app) => {
   app.get("/user/:id",
     isAuthenticated,
     AuthenticationController.user)
+  app.post("/updateUser",
+    isAuthenticated,
+    AuthenticationController.updateUser);
+  app.post("/updatePassword",
+    isAuthenticated,
+    AuthenticationController.updatePassword);
   app.get("/getUserList",
     isAuthenticated,
     AuthenticationController.getUserList)

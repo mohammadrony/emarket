@@ -56,12 +56,7 @@ module.exports = {
 	},
 	async deleteReview(req, res) {
 		try {
-			const { reviewId } = req.params
-			const review = await Review.findOne({
-				where: {
-					id: reviewId
-				}
-			})
+			const review = await Review.findByPk(req.params.reviewId)
 
 			if (!review) {
 				return res.status(403).send({

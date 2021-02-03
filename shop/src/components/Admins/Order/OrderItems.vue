@@ -108,21 +108,21 @@ export default {
       allStatus: [
         {
           name: "paid",
-          variant: "dark",
+          variant: "dark"
         },
         {
           name: "processing",
-          variant: "info",
+          variant: "info"
         },
         {
           name: "on the way",
-          variant: "warning",
+          variant: "warning"
         },
         {
           name: "complete",
-          variant: "success",
-        },
-      ],
+          variant: "success"
+        }
+      ]
     };
   },
   async mounted() {
@@ -150,34 +150,31 @@ export default {
         await OrderService.updateOrder({
           id: this.orderId,
           status: status.name,
-          variant: status.variant,
+          variant: status.variant
         });
       } catch (error) {
         console.log(error.response.data.error);
       }
     },
     async deleteOrder() {
-      var i;
-      for (i in this.orderItems) {
-        try {
-          await OrderItemService.deleteOrderItem(this.orderItems[i].id);
-        } catch (error) {
-          console.log(error.response.data.error);
-        }
+      try {
+        await OrderItemService.deleteOrderItem(this.OrderId);
+      } catch (error) {
+        console.log(error.response.data.error);
       }
       try {
         await OrderService.deleteOrder(this.orderId);
       } catch (error) {
         console.log(error.response.data.error);
       }
-      window.location.replace("/admin/orders")
+      window.location.replace("/admin/orders");
     },
     viewProduct(orderItem) {
       const route = "/product/" + orderItem.Product.id;
       window.location.replace(route);
-    },
+    }
   },
-  computed: {},
+  computed: {}
 };
 </script>
 

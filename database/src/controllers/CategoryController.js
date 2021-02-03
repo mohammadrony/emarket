@@ -53,12 +53,7 @@ module.exports = {
 	},
 	async deleteCategory(req, res) {
 		try {
-			const { categoryId } = req.params
-			const category = await Category.findOne({
-				where: {
-					id: categoryId
-				}
-			})
+			const category = await Category.findByPk(req.params.categoryId)
 			if (!category) {
 				return res.status(403).send({
 					error: 'No category to delete.'

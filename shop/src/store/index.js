@@ -2,7 +2,6 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import { CartModule } from "./Cart.js";
-import { UsersModule } from "./Users.js"
 import { CategoryModule } from "./Category.js";
 import { ProductsModule } from "./Products.js";
 import { CheckoutModule } from "./Checkout.js";
@@ -51,18 +50,18 @@ export default new Vuex.Store({
     },
   },
   actions: {
-
     setToken({ commit }, token) {
       commit('SET_TOKEN', token)
     },
-    setUser({ commit }, user) {
+    setUser({ state, commit }, user) {
+      console.log("from store", state.admin)
       commit('SET_USER', user)
+      console.log("from store", state.admin)
     }
   },
   modules: {
 
     Cart: CartModule,
-    Users: UsersModule,
     Category: CategoryModule,
     Products: ProductsModule,
     Checkout: CheckoutModule,

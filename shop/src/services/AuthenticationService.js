@@ -7,6 +7,12 @@ export default {
   login(credentials) {
     return Api().post("/login", credentials);
   },
+  updateUser(credentials){
+    return Api().post("/updateUser", credentials);
+  },
+  updatePassword(credentials){
+    return Api().post("/updatePassword", credentials);
+  },
   user(id) {
     return Api().get(`/user/${id}`);
   },

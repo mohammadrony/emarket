@@ -40,19 +40,18 @@ module.exports = {
 	async deleteOrderItem(req, res) {
 		//try to delete order item by order id findall
 		try {
-			const orderItemId = req.params.orderItemId
-			const orderItem = await OrderItem.findOne({
+			const orderItems = await OrderItem.findAll({
 				where: {
-					id: orderItemId
+					OrderId: req.params.orderId
 				}
 			})
-			if (!orderItem) {
+			if (!orderItems) {
 				return res.status(403).send({
 					error: 'No order item to delete.'
 				})
 			}
-			await orderItem.destroy()
-			res.send(orderItem)
+			await orderItems.destroy()
+			res.send(orderItems)
 
 		} catch (err) {
 			res.status(500).send({

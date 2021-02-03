@@ -71,7 +71,7 @@
                     >{{ user.firstName }} {{ user.lastName }}</em
                   >
                 </template>
-                <b-dropdown-item v-if="user.isAdmin" to="/admin"
+                <b-dropdown-item v-if="admin" to="/admin"
                   >Admin Panel</b-dropdown-item
                 >
                 <b-dropdown-item @click="userProfile()"
@@ -124,6 +124,7 @@ export default {
   computed: {
     ...mapState({
       user: (state) => state.user,
+      admin: (state) => state.admin,
       userLoggedIn: (state) => state.userLoggedIn,
     }),
   },

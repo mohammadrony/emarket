@@ -92,7 +92,7 @@ export default {
       this.user = (await AuthenticationService.user(userId)).data;
       console.log(this.user);
     } catch(error) {
-      console.log(error)
+      console.log(error.response.data.error)
     }
   },
 };

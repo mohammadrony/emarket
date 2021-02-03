@@ -7,7 +7,7 @@ export default {
     createOrderItem(credentials) {
         return Api().post('/orderItem/createOrderItem', credentials)
     },
-    deleteOrderItem(orderItemId) {
-        return Api().delete(`/orderItem/deleteOrderItem/${orderItemId}`)
+    deleteOrderItem(orderId) {
+        return Api().delete(`/orderItem/deleteOrderItem/${orderId}`)
     }
 }

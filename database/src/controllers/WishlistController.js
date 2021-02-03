@@ -22,12 +22,10 @@ module.exports = {
   },
   async getWishlistById(req, res) {
     try {
-      const userId = req.user.id
-      const { productId } = req.params
       const wishlistItem = await Wishlist.findOne({
         where: {
-          UserId: userId,
-          ProductId: productId
+          UserId: req.user.id,
+          ProductId: req.params.productId
         }
       })
       res.send(wishlistItem)
@@ -39,12 +37,9 @@ module.exports = {
   },
   async addToWishlist(req, res) {
     try {
-      console.log(req.body)
-      userId = req.userId
       productId = req.body.productId
-
       const wishlistItem = await Wishlist.create({
-        UserId: userId,
+        UserId: req.user.id,
         ProductId: productId
       })
       res.send(wishlistItem)
@@ -56,12 +51,10 @@ module.exports = {
   },
   async remove(req, res) {
     try {
-      const userId = req.user.id
-      const { productId } = req.params
       const wishlistProduct = await Wishlist.findOne({
         where: {
-          UserId: userId,
-          ProductId: productId
+          UserId: req.user.id,
+          ProductId: req.params.productId
         }
       })
       if (!wishlistProduct) {

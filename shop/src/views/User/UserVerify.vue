@@ -42,12 +42,12 @@ export default {
   name: "UserVerify",
   components: {
     TopHeader,
-    Footer,
+    Footer
   },
   data() {
     return {
       userId: null,
-      registerToken: null,
+      registerToken: null
     };
   },
   async mounted() {
@@ -65,10 +65,12 @@ export default {
 
       if (this.userId) {
         try {
-          await AuthenticationService.resetRegsToken({
-            id: this.userId,
-            registerToken: this.registerToken,
-          }).data;
+          (
+            await AuthenticationService.resetRegsToken({
+              id: this.userId,
+              registerToken: this.registerToken
+            })
+          ).data;
         } catch (error) {
           console.log(error.response.data.error);
         }
@@ -76,7 +78,7 @@ export default {
     }
   },
   methods: {},
-  computed: {},
+  computed: {}
 };
 </script>
 

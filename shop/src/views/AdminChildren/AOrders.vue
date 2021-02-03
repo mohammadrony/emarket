@@ -45,7 +45,7 @@
         </b-row>
         <hr />
       </div>
-      <div :key="componentKey">
+      <div>
         <div v-for="order in secondOrderList" :key="order.id">
           <b-row>
             <b-col cols="1" class="text-center">{{ order.id }}</b-col>
@@ -124,7 +124,6 @@ export default {
       selectedTypeName: "All",
       selectedTypeVariant: "dark",
       orders: 0,
-      componentKey: 0,
       secondOrderList: null,
       orderList: null,
       orderList2: null,
@@ -164,7 +163,7 @@ export default {
         );
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.error);
     }
   },
   methods: {
@@ -185,9 +184,10 @@ export default {
       this.secondOrderList = this.orderList2.slice(start, start + this.perPage);
     },
     async updateStatus(order, status) {
-      const index = this.orderList.findIndex(obj => obj.id === order.id);
-      this.orderList[index].status = status.name;
-      this.orderList[index].variant = status.variant;
+      // find only in the paginated user
+      const index = this.secondOrderList.findIndex(obj => obj.id === order.id);
+      this.secondOrderList[index].status = status.name;
+      this.secondOrderList[index].variant = status.variant;
       await OrderService.updateOrder({
         id: order.id,
         status: status.name,
@@ -198,13 +198,9 @@ export default {
       const route = "/admin/order/" + order.id;
       window.location.replace(route);
     },
-    forceRerender() {
-      this.componentKey += 1;
-    },
     paginate(currentPage) {
       const start = (currentPage - 1) * this.perPage;
       this.secondOrderList = this.orderList2.slice(start, start + this.perPage);
-      // this.forceRerender() //optional
     }
   }
 };

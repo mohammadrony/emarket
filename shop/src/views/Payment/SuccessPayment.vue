@@ -45,7 +45,7 @@ export default {
       const session = await CheckoutService.retrieveCheckoutSession(session_id);
       console.log("checkout session", session.data);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.error);
     }
   },
   methods: {},

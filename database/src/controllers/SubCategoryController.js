@@ -1,12 +1,11 @@
 const { SubCategory } = require('../models')
- 
+
 module.exports = {
 	async getSubCategoryByName(req, res) {
 		try {
-			const subCategoryName = req.params.name;
 			const subCategory = await SubCategory.findOne({
 				where: {
-					name: subCategoryName
+					name: req.params.name
 				}
 			})
 			res.send(subCategory)
@@ -55,12 +54,7 @@ module.exports = {
 	},
 	async deleteSubCategory(req, res) {
 		try {
-			const subCategoryId = req.params.subCategoryId
-			const subCategory = await SubCategory.findOne({
-				where: {
-					id: subCategoryId
-				}
-			})
+			const subCategory = await SubCategory.findByPk(req.params.subCategoryId)
 			if (!subCategory) {
 				return res.status(403).send({
 					error: 'No sub category to delete.'

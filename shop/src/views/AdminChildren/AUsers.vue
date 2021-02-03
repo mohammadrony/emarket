@@ -55,7 +55,7 @@
                       anyType.name
                     }}</b-dropdown-item>
                     <b-dropdown-item
-                      v-for="(status, idx) in orderStatus"
+                      v-for="(status, idx) in userStatus"
                       :key="idx"
                       @click="selectType(status)"
                       >{{ status.name }}</b-dropdown-item
@@ -87,11 +87,11 @@
                         size="sm"
                         block
                         id="dropdown-left"
-                        text="user.status"
-                        :variant="userVariant"
+                        :text="user.userType"
+                        :variant="user.variant"
                       >
                         <b-dropdown-item
-                          v-for="(status, idx) in orderStatus"
+                          v-for="(status, idx) in userStatus"
                           :key="idx"
                           @click="updateStatus(user, status)"
                           >{{ status.name }}</b-dropdown-item
@@ -103,23 +103,12 @@
                         size="sm"
                         block
                         variant="warning"
-                        @click="orderDetails(user)"
+                        @click="userDetails(user)"
                       >
                         Details
                       </b-button>
                     </b-col>
                   </b-row>
-                  <!-- <div>
-                    <b-button variant="warning" @click="userType(user)"
-                      >Edit</b-button
-                    >
-                    <b-button
-                      variant="danger"
-                      class="ml-4"
-                      @click="deleteUser(user)"
-                      >Delete</b-button
-                    >
-                  </div> -->
                 </b-col>
               </b-row>
               <hr />
@@ -162,39 +151,40 @@ export default {
       selectedTypeVariant: "dark",
       searchUserText: "",
       users: 0,
-      componentKey: 0,
       secondUserList: null,
       userList: null,
       userList2: null,
-      orderStatus: [
+      userStatus: [
         {
-          name: "paid",
+          name: "admin",
+          priority: 1,
+          description: "Owner of this system.",
           variant: "dark"
         },
         {
-          name: "processing",
+          name: "shop owner",
+          priority: 2,
+          description: "Own's a shop in the system.",
+          variant: "primary"
+        },
+        {
+          name: "shop manager",
+          priority: 3,
+          description: "Helps the owner to manage the shop.",
           variant: "info"
         },
         {
-          name: "on the way",
+          name: "customer",
+          priority: 5,
+          description: "End user of the system.",
           variant: "warning"
-        },
-        {
-          name: "complete",
-          variant: "success"
         }
       ],
       currentPage: 1,
       perPage: 20
     };
   },
-  computed: {
-    userVariant: function(event) {
-      console.log(event);
-      const info = "info";
-      return info;
-    }
-  },
+  computed: {},
 
   async mounted() {
     try {
@@ -206,48 +196,44 @@ export default {
         this.secondUserList = this.userList2.slice(start, start + this.perPage);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.error);
     }
-    // try {
-    //   await this.$store.dispatch("Users/setUserList");
-    // } catch (error) {
-    //   console.log(error.response.data.error);
-    // }
   },
 
   methods: {
+    search() {
+      console.log(this.searchUserText);
+      console.log(this.userType);
+    },
     selectType(status) {
       if (status.name == "All") {
         this.selectedTypeName = status.name;
         this.selectedTypeVariant = status.variant;
-        this.orderList2 = this.orderList.slice();
+        this.userList2 = this.userList.slice();
       } else {
         this.selectedTypeName = status.name;
         this.selectedTypeVariant = status.variant;
-        this.orderList2 = this.orderList.filter(
-          obj => obj.status == status.name
-        );
+        this.userList2 = this.userList.filter(obj => obj.status == status.name);
       }
-      this.orders = this.orderList2.length;
+      this.users = this.userList2.length;
       const start = 0;
-      this.secondOrderList = this.orderList2.slice(start, start + this.perPage);
+      this.secondUserList = this.userList2.slice(start, start + this.perPage);
     },
     async updateStatus(user, status) {
-      const index = this.displayUsers.findIndex(obj => obj.id === user.id);
-      this.displayUsers[index].status = status.name;
-      this.displayUsers[index].variant = status.variant;
-      await AuthenticationService.updateOrder({
+      console.log("update user status", status);
+      const index = this.secondUserList.findIndex(obj => obj.id === user.id);
+      this.secondUserList[index].userType = status.name;
+      this.secondUserList[index].variant = status.variant;
+      await AuthenticationService.updateUser({
         id: user.id,
-        status: status.name,
+        userType: status.name,
+        priority: status.priority,
         variant: status.variant
       });
     },
-    orderDetails(user) {
-      const route = "/admin/order/" + user.id;
+    userDetails(user) {
+      const route = "/admin/user/" + user.id;
       window.location.replace(route);
-    },
-    forceRerender() {
-      this.componentKey += 1;
     },
     userType(type) {
       console.log(type);
@@ -255,29 +241,13 @@ export default {
     deleteUser(user) {
       console.log(user);
     },
-    search() {
-      this.$store.dispatch("Users/searchUser", { text: this.searchUserText });
-    },
     paginate(currentPage) {
-      this.$store.dispatch("Users/paginate", currentPage);
+      const start = (currentPage - 1) * this.perPage;
+      this.secondUserList = this.userList2.slice(start, start + this.perPage);
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.danger-alert {
-  color: red;
-}
-
-.product-image {
-  width: 66%;
-  margin: 0, auto;
-}
-
-.table-header {
-  background: cornflowerblue;
-  padding: 0;
-  margin: 0;
-}
 </style>

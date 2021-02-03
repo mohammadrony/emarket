@@ -12,7 +12,7 @@
                 Please try again.
               </small>
             </b-alert>
-              <ReqPassToken/>
+            <ReqPassToken />
           </b-card>
 
           <b-card v-if="tokenValidate" style="color: #001e5f">
@@ -87,7 +87,7 @@ export default {
   components: {
     TopHeader,
     ReqPassToken,
-    Footer,
+    Footer
   },
   data() {
     return {
@@ -103,7 +103,7 @@ export default {
       email: null,
       newPassword: null,
       confirmPassword: null,
-      tokenValidate: false,
+      tokenValidate: false
     };
   },
   async mounted() {
@@ -144,17 +144,19 @@ export default {
         this.error = "Password could not have over 32 character.";
       } else {
         try {
-          await AuthenticationService.resetPassword({
-            id: this.userId,
-            password: this.newPassword,
-          }).data;
+          (
+            await AuthenticationService.resetPassword({
+              id: this.userId,
+              password: this.newPassword
+            })
+          ).data;
         } catch (error) {
           console.log("error reset pass", error.response.data.error);
         }
         try {
           const response = await AuthenticationService.login({
             email: this.email,
-            password: this.newPassword,
+            password: this.newPassword
           });
           this.$store.dispatch("setToken", response.data.token);
           this.$store.dispatch("setUser", response.data.user);
@@ -163,9 +165,9 @@ export default {
           console.log(error.response.data.error);
         }
       }
-    },
+    }
   },
-  computed: {},
+  computed: {}
 };
 </script>
 

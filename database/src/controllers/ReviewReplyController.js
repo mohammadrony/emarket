@@ -52,12 +52,7 @@ module.exports = {
 	},
 	async deleteReviewReply(req, res) {
 		try {
-			const { reviewReplyId } = req.params
-			const reviewReply = await ReviewReply.findOne({
-				where: {
-					id: reviewReplyId
-				}
-			})
+			const reviewReply = await ReviewReply.findByPk(req.params.reviewReplyId)
 			if (!reviewReply) {
 				return res.status(403).send({
 					error: 'No review reply to delete.'

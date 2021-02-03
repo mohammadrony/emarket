@@ -15,11 +15,7 @@ module.exports = {
 	},
 	async getOrder(req, res) {
 		try {
-			const order = await Order.findOne({
-				where: {
-					id: req.params.orderId
-				}
-			})
+			const order = await Order.findByPk(req.params.orderId)
 			res.send(order)
 		} catch (err) {
 			res.status(500).send({
@@ -53,12 +49,7 @@ module.exports = {
 	},
 	async deleteOrder(req, res) {
 		try {
-			const orderId = req.params.orderId
-			const order = await Order.findOne({
-				where: {
-					id: orderId
-				}
-			})
+			const order = await OrderPk(req.params.orderId)
 			if (!order) {
 				return res.status(403).send({
 					error: 'No order to delete.'

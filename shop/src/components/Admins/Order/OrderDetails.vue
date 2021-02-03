@@ -47,7 +47,7 @@ export default {
   components: {},
   data() {
     return {
-      orderInfo: null,
+      orderInfo: {}
     };
   },
   async mounted() {
@@ -59,7 +59,7 @@ export default {
     }
   },
   methods: {},
-  computed: {},
+  computed: {}
 };
 </script>
 

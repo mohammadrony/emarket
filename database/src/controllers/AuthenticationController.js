@@ -119,12 +119,7 @@ module.exports = {
     },
     async user(req, res) {
         try {
-            const userId = req.params.id;
-            const user = await User.findOne({
-                where: {
-                    id: userId
-                }
-            })
+            const user = await User.findByPk(req.params.userId)
             if (!user) {
                 return res.status(403).send({
                     error: "User not found."
@@ -134,6 +129,49 @@ module.exports = {
         } catch (err) {
             res.status(500).send({
                 error: "An error occured when trying to get an user."
+            })
+        }
+    },
+    async updateUser(req, res) {
+        try {
+            console.log(req.body)
+            console.log(req.body)
+            console.log(req.body)
+            console.log(req.user)
+            console.log(req.user)
+            console.log(req.user)
+            const user = await User.update(req.body, {
+                where: {
+                    id: req.body.id
+                }
+            })
+            res.send(user);
+        } catch (err) {
+            res.status(500).send({
+                error: "An error occured when trying to update user information"
+            })
+        }
+    },
+    async updatePassword(req, res) {
+        try {
+            userId = req.user.id;
+            password = req.body.password;
+            oldPassword = req.body.oldPassword;
+            const user = await User.update(password, {
+                where: {
+                    id: userId,
+                    password: oldPassword
+                }
+            })
+            if (!user) {
+                res.status(403).send({
+                    error: "Can't update user password with these information."
+                })
+            }
+            res.send(user.id)
+        } catch (err) {
+            res.status(500).send({
+                error: "An error occured when trying to update password"
             })
         }
     },
@@ -153,8 +191,9 @@ module.exports = {
                     "lastName",
                     "phoneNo",
                     "profileImage",
-                    "ShopId",
-                    "userType"
+                    "userType",
+                    "variant",
+                    "ShopId"
                 ]
             })
             res.send(userList);
@@ -166,7 +205,6 @@ module.exports = {
     },
     async validUser(req, res) {
         try {
-
             const user = await User.findOne({
                 where: {
                     email: req.params.email
@@ -229,10 +267,9 @@ module.exports = {
     },
     async verifyToken(req, res) {
         try {
-            const token = req.params.token
             const user = await User.findOne({
                 where: {
-                    resetPasswordToken: token
+                    resetPasswordToken: req.params.token
                 },
                 attributes: ["id", "email", "firstName", "lastName", "resetPasswordToken"]
             });
@@ -250,10 +287,9 @@ module.exports = {
     },
     async verifyRegsToken(req, res) {
         try {
-            const token = req.params.token
             const user = await User.findOne({
                 where: {
-                    registerToken: token
+                    registerToken: req.params.token
                 },
                 attributes: ["id", "email", "firstName", "lastName", "registerToken"]
             });
