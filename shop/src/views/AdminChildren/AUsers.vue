@@ -220,7 +220,6 @@ export default {
       this.secondUserList = this.userList2.slice(start, start + this.perPage);
     },
     async updateStatus(user, status) {
-      console.log("update user status", status);
       const index = this.secondUserList.findIndex(obj => obj.id === user.id);
       this.secondUserList[index].userType = status.name;
       this.secondUserList[index].variant = status.variant;
