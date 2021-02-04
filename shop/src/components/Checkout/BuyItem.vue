@@ -39,7 +39,9 @@
               <h5>Sub-Total</h5>
             </b-col>
             <b-col cols="4">
-              <b-card-text>{{ subTotalAmount }} $</b-card-text>
+              <b-card-text
+                >{{ subTotalAmount }} {{ selectedCurrency }}</b-card-text
+              >
             </b-col>
           </b-row>
           <b-row>
@@ -47,7 +49,9 @@
               <h5>Shipping Rate</h5>
             </b-col>
             <b-col cols="4">
-              <b-card-text>{{ shippingRate }} $</b-card-text>
+              <b-card-text
+                >{{ shippingRate }} {{ selectedCurrency }}</b-card-text
+              >
             </b-col>
           </b-row>
           <hr />
@@ -56,7 +60,9 @@
               <h5>Total</h5>
             </b-col>
             <b-col cols="4">
-              <b-card-text>{{ totalAmount }} $</b-card-text>
+              <b-card-text
+                >{{ totalAmount }} {{ selectedCurrency }}</b-card-text
+              >
             </b-col>
           </b-row>
         </b-card>
@@ -110,13 +116,14 @@ export default {
   components: {},
   data() {
     return {
+      selectedCurrency: "USD",
       payBtnSpin: false,
       subTotalAmount: 0,
       formValidate: true,
       message: "Please fill out all those field.",
       shippingRate: this.$store.state.Checkout.shipping.cost,
       totalAmount: 0,
-      checkoutProduct: null,
+      checkoutProduct: null
     };
   },
   computed: {},
@@ -151,7 +158,7 @@ export default {
           name: this.checkoutProduct[i].title,
           description: this.checkoutProduct[i].productId,
           amount: this.checkoutProduct[i].amount * 100,
-          quantity: this.checkoutProduct[i].quantity,
+          quantity: this.checkoutProduct[i].quantity
         };
         checkoutItems.push(obj);
       }
@@ -159,7 +166,7 @@ export default {
         name: "Shipping Cost",
         amount: this.shippingRate * 100,
         currency: "USD",
-        quantity: 1,
+        quantity: 1
       });
       try {
         const checkoutSession = (
@@ -168,18 +175,18 @@ export default {
             customerName: customerName,
             customerEmail: customerEmail,
             customerPhoneNo: customerPhoneNo,
-            shippingAddress: shippingAddress,
+            shippingAddress: shippingAddress
           })
         ).data;
-        stripeInit.then((stripe) => {
+        stripeInit.then(stripe => {
           stripe
             .redirectToCheckout({
-              sessionId: checkoutSession.id,
+              sessionId: checkoutSession.id
             })
-            .then(function (result) {
+            .then(function(result) {
               console.log(result);
             })
-            .catch(function (error) {
+            .catch(function(error) {
               console.error(error);
             });
         });
@@ -188,11 +195,11 @@ export default {
       }
     },
     viewProduct(product) {
-      const route = "/product/"+product.productId
-      console.log(route, product)
+      const route = "/product/" + product.productId;
+      console.log(route, product);
       window.location.replace(route);
-    },
-  },
+    }
+  }
 };
 </script>
 
