@@ -78,7 +78,7 @@ export default {
       searchText: null,
       category: null,
       subCategory: null,
-      subSubCategory: null,
+      subSubCategory: null
     };
   },
   async mounted() {
@@ -106,9 +106,13 @@ export default {
   },
   methods: {
     search() {
-      if (this.searchText != null) {
-        const path = this.$store.state.route.path + "?q=" + this.searchText;
-        window.location.replace(path);
+      if (this.searchText) {
+        var newRoute = this.$store.state.route.path;
+        console.log(newRoute);
+        if (this.searchText != "") {
+          newRoute += "?q=" + this.searchText;
+        }
+        window.location.replace(newRoute);
       }
     },
     async productHome() {
@@ -133,8 +137,8 @@ export default {
         "/" +
         this.subSubCategory.name;
       window.location.replace(route);
-    },
-  },
+    }
+  }
 };
 </script>
 
