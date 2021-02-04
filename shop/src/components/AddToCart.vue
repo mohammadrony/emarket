@@ -50,8 +50,6 @@ export default {
 
       if (response) {
         this.addedToCart = true;
-
-        console.log("Added to cart is succeeded");
         this.$bvToast.toast("Product added to cart", {
           title: "Add to Cart",
           variant: "success",
@@ -61,8 +59,6 @@ export default {
         });
         return;
       } else {
-        console.log("This item is already in the cart.");
-        console.log("So quantity is increased by 1.");
         this.$bvToast.toast("Cart item increased", {
           title: "Already in Cart",
           variant: "primary",

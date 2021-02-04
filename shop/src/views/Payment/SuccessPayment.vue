@@ -30,26 +30,64 @@
 import TopHeader from "@/components/TopHeader.vue";
 import Footer from "@/components/Footer.vue";
 import CheckoutService from "@/services/CheckoutService.js";
+import OrderService from "../../services/OrderService";
+import OrderItemService from "../../services/OrderItemService";
 export default {
   name: "SuccessPayment",
   components: {
     TopHeader,
-    Footer,
+    Footer
   },
   data() {
-    return {};
+    return {
+      order: {},
+      session: {}
+    };
   },
   async mounted() {
-    const session_id = this.$store.state.route.query.id;
+    const sessionId = this.$store.state.route.query.id;
     try {
-      const session = await CheckoutService.retrieveCheckoutSession(session_id);
-      console.log("checkout session", session.data);
+      this.session = (
+        await CheckoutService.retrieveCheckoutSession(sessionId)
+      ).data;
     } catch (error) {
       console.log(error.response.data.error);
     }
+    const lineItems = this.session.line_items.data;
+    try {
+      this.order = (
+        await OrderService.createOrder({
+          name: this.session.metadata.customerName,
+          phoneNo: this.session.metadata.customerPhoneNo,
+          email: this.session.customer_email,
+          address: this.session.metadata.shippingAddress,
+          status: "paid",
+          variant: "dark",
+          checkoutSessionId: sessionId,
+          productCost: this.session.amount_total / 100,
+          currency: this.session.currency.toUpperCase(),
+          shippingCost: lineItems[lineItems.length - 1].amount_total / 100
+        })
+      ).data;
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
+
+    var i;
+    for (i in lineItems) {
+      try {
+        await OrderItemService.createOrderItem({
+          quantity: lineItems[i].quantity,
+          ProductId: parseInt(lineItems[i].description),
+          OrderId: this.order.id
+        });
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+    }
   },
   methods: {},
-  computed: {},
+  computed: {}
 };
 </script>
 

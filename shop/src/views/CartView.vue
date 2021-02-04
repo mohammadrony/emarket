@@ -4,7 +4,7 @@
     <b-container>
       <b-row>
         <b-col class="text-center">
-          <h2 class="m-4">My Cart</h2>
+          <h2 class="m-4">Cart</h2>
           <hr />
         </b-col>
       </b-row>
@@ -42,7 +42,11 @@
                 >+
               </b-button>
               <a class="ml-4">{{ product.quantity }}</a>
-              <b-button size="sm" variant="warning" class="ml-4" @click="quantityDec(product)"
+              <b-button
+                size="sm"
+                variant="warning"
+                class="ml-4"
+                @click="quantityDec(product)"
                 >-</b-button
               >
               <b-button
@@ -70,7 +74,7 @@
         </b-row>
         <b-row>
           <b-col cols="2">
-            <b-button block variant="info" to="/">Add More</b-button>
+            <b-button block variant="info" to="/products">Add More</b-button>
           </b-col>
           <b-col cols="8"></b-col>
           <b-col cols="2">
@@ -89,34 +93,33 @@
 
 <script>
 import { mapState } from "vuex";
-// import CartService from "@/services/CartService.js";
 import TopHeader from "@/components/TopHeader.vue";
 import Footer from "@/components/Footer.vue";
 export default {
   name: "MyCart",
   components: {
     TopHeader,
-    Footer,
+    Footer
   },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapState({
-      user: (state) => state.user,
-      cartProducts: (state) => state.Cart.cartProducts,
+      user: state => state.user,
+      cartProducts: state => state.Cart.cartProducts
     }),
-    cartItemCount: function () {
+    cartItemCount: function() {
       return this.cartProducts.length;
     },
-    totalAmount: function () {
-      var i, amount = 0;
+    totalAmount: function() {
+      var i,
+        amount = 0;
       for (i = 0; i < this.cartProducts.length; i++) {
         amount += this.cartProducts[i].amount * this.cartProducts[i].quantity;
       }
       return amount;
-    },
+    }
   },
   methods: {
     routeChangetoProduct(product) {
@@ -125,30 +128,24 @@ export default {
     async quantityInc(product) {
       const cartItem = {
         productId: product.productId,
-        quantity: 1,
+        quantity: 1
       };
-      await this.$store.dispatch(
-        "Cart/cartQuantityRelative",
-        cartItem
-      );
+      await this.$store.dispatch("Cart/cartQuantityRelative", cartItem);
     },
     async quantityDec(product) {
       if (product.quantity > 1) {
         const cartItem = {
           productId: product.productId,
-          quantity: -1,
+          quantity: -1
         };
-        await this.$store.dispatch(
-          "Cart/cartQuantityRelative",
-          cartItem
-        );
+        await this.$store.dispatch("Cart/cartQuantityRelative", cartItem);
       }
     },
     async remove(product) {
       const cartItem = { productId: product.productId };
       await this.$store.dispatch("Cart/removeFromCart", cartItem);
-    },
-  },
+    }
+  }
 };
 </script>
 

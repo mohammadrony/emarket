@@ -58,11 +58,8 @@ export const CartModule = {
         },
         async removeFromCart({ commit, dispatch }, cartItem) {
             const index = (await dispatch("checkCartItem", cartItem));
-            if (index == -1) {
-                return false;
-            }
+            if (index == -1) return false;
             else {
-                console.log("remove item index", index)
                 commit("DELETE_CART_ITEM", index)
                 return true;
             }
