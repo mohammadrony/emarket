@@ -90,12 +90,13 @@
                         :text="user.userType"
                         :variant="user.variant"
                       >
-                        <b-dropdown-item
-                          v-for="(status, idx) in userStatus"
-                          :key="idx"
-                          @click="updateStatus(user, status)"
-                          >{{ status.name }}</b-dropdown-item
-                        >
+                        <div v-for="(status, idx) in userStatus" :key="idx">
+                          <b-dropdown-item
+                            v-if="currentUser.priority == user.priority"
+                            @click="updateStatus(user, status)"
+                            >{{ status.name }}</b-dropdown-item
+                          >
+                        </div>
                       </b-dropdown>
                     </b-col>
                     <b-col cols="5">
@@ -143,6 +144,7 @@ export default {
   },
   data() {
     return {
+      currentUser: {},
       anyType: {
         name: "All",
         variant: "dark"
@@ -188,6 +190,7 @@ export default {
 
   async mounted() {
     try {
+      this.currentUser = this.$store.state.user;
       this.userList = (await AuthenticationService.getUserList()).data;
       this.userList2 = this.userList.slice();
       if (this.userList2) {

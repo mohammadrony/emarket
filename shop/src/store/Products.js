@@ -127,7 +127,8 @@ export const ProductsModule = {
       commit("SET_ALL_BACKUP_PRODUCT", allProduct)
     },
     async getAllBackupProduct({ dispatch, state }) {
-      if (!state.allBackupProduct) {
+
+      if (state.allBackupProduct == null || state.allBackupProduct.length == 0) {
         await dispatch("setAllBackupProduct")
       }
       return state.allBackupProduct;

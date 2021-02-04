@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     variant:            DataTypes.STRING,
     checkoutSessionId:{
       type:             DataTypes.STRING,
-      unique:           true
     },
     productCost:        DataTypes.INTEGER,
     currency:           DataTypes.STRING,

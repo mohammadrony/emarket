@@ -121,6 +121,7 @@ module.exports = {
             delete user.address;
             delete user.userType;
             delete user.variant;
+            console.log(user)
             userJson = user.toJSON()
             res.send({
                 user: userJson,
