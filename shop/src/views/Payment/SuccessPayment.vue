@@ -82,7 +82,7 @@ export default {
     }
 
     var i;
-    for (i in lineItems) {
+    for (i = 0; i < lineItems.length - 1; i++) {
       const productId = parseInt(lineItems[i].description);
       try {
         await OrderItemService.createOrderItem({

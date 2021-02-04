@@ -28,8 +28,7 @@ module.exports = {
 	},
 	async createOrderItem(req, res) {
 		try {
-			const orderItem = { quantity: req.body.quantity, ProductId: req.body.productId, OrderId: req.body.orderId }
-			const orderItemCreated = await OrderItem.create(orderItem)
+			const orderItemCreated = await OrderItem.create(req.body)
 			res.send(orderItemCreated)
 		} catch (err) {
 			res.status(500).send({
@@ -38,20 +37,15 @@ module.exports = {
 		}
 	},
 	async deleteOrderItem(req, res) {
-		//try to delete order item by order id findall
 		try {
-			const orderItems = await OrderItem.findAll({
-				where: {
-					OrderId: req.params.orderId
-				}
-			})
-			if (!orderItems) {
+			const orderItem = await OrderItem.findByPk(req.params.orderItemId)
+			if (!orderItem) {
 				return res.status(403).send({
 					error: 'No order item to delete.'
 				})
 			}
-			await orderItems.destroy()
-			res.send(orderItems)
+			await orderItem.destroy()
+			res.send(orderItem)
 
 		} catch (err) {
 			res.status(500).send({

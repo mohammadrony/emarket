@@ -117,7 +117,11 @@ export const CheckoutModule = {
             else {
                 var i, shippingAddress = ""
                 for (i in state.customerDetails.address) {
-                    shippingAddress += i + ": " + state.customerDetails.address[i] + "\n"
+                    if (i == "zipCode") {
+                        shippingAddress += "<b>zip code:</b> " + state.customerDetails.address[i] + "<br/>"
+                        continue;
+                    }
+                    shippingAddress += "<b>" + i + ":</b> " + state.customerDetails.address[i] + "<br/>"
                 }
                 const data = {
                     name: state.customerDetails.name,

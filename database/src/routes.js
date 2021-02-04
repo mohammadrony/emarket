@@ -69,7 +69,7 @@ module.exports = (app) => {
     OrderItemController.getOrderItemList)
   app.post("/orderItem/createOrderItem",
     OrderItemController.createOrderItem)
-  app.delete("/orderItem/deleteOrderItem/:orderId",
+  app.delete("/orderItem/deleteOrderItem/:orderItemId",
     isAuthenticated,
     OrderItemController.deleteOrderItem)
 

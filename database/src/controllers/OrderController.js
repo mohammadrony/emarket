@@ -63,7 +63,7 @@ module.exports = {
 	},
 	async deleteOrder(req, res) {
 		try {
-			const order = await OrderPk(req.params.orderId)
+			const order = await Order.findByPk(req.params.orderId)
 			if (!order) {
 				return res.status(403).send({
 					error: 'No order to delete.'

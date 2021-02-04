@@ -132,7 +132,7 @@ export default {
         await OrderItemService.getOrderItemList(this.orderId)
       ).data;
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response.data.error);
     }
     try {
       const orderInfo = (await OrderService.getOrder(this.orderId)).data;
@@ -157,10 +157,12 @@ export default {
       }
     },
     async deleteOrder() {
-      try {
-        await OrderItemService.deleteOrderItem(this.OrderId);
-      } catch (error) {
-        console.log(error.response.data.error);
+      for (var i in this.orderItems) {
+        try {
+          await OrderItemService.deleteOrderItem(this.orderItems[i].id);
+        } catch (error) {
+          console.log(error.response.data.error);
+        }
       }
       try {
         await OrderService.deleteOrder(this.orderId);
