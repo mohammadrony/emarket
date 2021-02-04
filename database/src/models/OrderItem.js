@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
   const OrderItem = sequelize.define('OrderItem', {
     id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
+      type:           DataTypes.INTEGER,
+      allowNull:      false,
+      primaryKey:     true,
+      autoIncrement:  true,
     },
-    quantity: DataTypes.INTEGER
+    quantity:         DataTypes.INTEGER
   })
   OrderItem.associate = function (models) {
     OrderItem.belongsTo(models.Product)

@@ -1,4 +1,7 @@
 import ProductsService from "../services/ProductsService";
+import CategoryService from "@/services/CategoryService.js";
+import SubCategoryService from "@/services/SubCategoryService.js";
+import SubSubCategoryService from "@/services/SubSubCategoryService.js";
 
 export const ProductsModule = {
   namespaced: true,
@@ -62,49 +65,62 @@ export const ProductsModule = {
       commit("SET_MAXIMUM_AMOUNT", 1000000000);
 
     },
-    setSearchParameter({ commit, dispatch }, searchParameter) {
-      if (searchParameter.param.subSubCategoryId) {
-        dispatch("setSearchSubSubCategoryId", searchParameter.param.subSubCategoryId)
+    async setSearchParameter({ commit }, route) {
+      if (route.params.subSubCategory) {
+        try {
+          const subSubCategory = (
+            await SubSubCategoryService.getSubSubCategoryByName(
+              route.params.subSubCategory
+            )
+          ).data;
+
+          commit("SET_SEARCH_CATEGORY_ID", 0);
+          commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
+          commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", subSubCategory.id);
+
+        } catch (error) {
+          console.log("error get sub sub cat id by name", error);
+        }
+      } else if (route.params.subCategory) {
+        try {
+          const subCategory = (
+            await SubCategoryService.getSubCategoryByName(
+              route.params.subCategory
+            )
+          ).data;
+
+          commit("SET_SEARCH_CATEGORY_ID", 0);
+          commit("SET_SEARCH_SUB_CATEGORY_ID", subCategory.id);
+          commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", 0);
+
+        } catch (error) {
+          console.log("error get sub cat id by name", error);
+        }
+      } else if (route.params.category) {
+        try {
+          const category = (
+            await CategoryService.getCategoryByName(route.params.category)
+          ).data;
+
+          commit("SET_SEARCH_CATEGORY_ID", category.id);
+          commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
+          commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", 0);
+
+        } catch (error) {
+          console.log("error get cat id by name", error);
+        }
       }
-      else if (searchParameter.param.subCategoryId) {
-        dispatch("setSearchSubCategoryId", searchParameter.param.subCategoryId)
-      }
-      else if (searchParameter.param.categoryId) {
-        dispatch("setSearchCategoryId", searchParameter.param.categoryId)
-      }
-      if (searchParameter.query.q) {
-        commit("SET_SEARCH_TEXT", searchParameter.query.q)
-      }
-      if (searchParameter.query.lo) {
-        commit("SET_LOWEST_AMOUNT", searchParameter.query.lo)
-      }
-      if (searchParameter.query.hi) {
-        commit("SET_MAXIMUM_AMOUNT", searchParameter.query.hi)
-      }
-    },
-    setSearchText({ commit }, searchText) {
-      commit("SET_SEARCH_TEXT", searchText);
-    },
-    setSearchCategoryId({ commit }, categoryId) {
-      commit("SET_SEARCH_CATEGORY_ID", categoryId);
-      commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
-      commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", 0);
-    },
-    setSearchSubCategoryId({ commit }, subCategoryId) {
-      commit("SET_SEARCH_CATEGORY_ID", 0);
-      commit("SET_SEARCH_SUB_CATEGORY_ID", subCategoryId);
-      commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", 0);
-    },
-    setSearchSubSubCategoryId({ commit }, subSubCategoryId) {
-      commit("SET_SEARCH_CATEGORY_ID", 0);
-      commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
-      commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", subSubCategoryId);
-    },
-    setLowestAmount({ commit }, lowestAmount) {
-      commit("SET_LOWEST_AMOUNT", lowestAmount);
-    },
-    setMaximumAmount({ commit }, maximumAmount) {
-      commit("SET_MAXIMUM_AMOUNT", maximumAmount);
+      if (route.query.q) {
+        commit("SET_SEARCH_TEXT", route.query.q)
+      } else commit("SET_SEARCH_TEXT", "")
+      if (route.query.lo) {
+        const lo = parseInt(route.query.lo);
+        commit("SET_LOWEST_AMOUNT", lo)
+      } else commit("SET_LOWEST_AMOUNT", 0)
+      if (route.query.hi) {
+        const hi = parseInt(route.query.hi);
+        commit("SET_MAXIMUM_AMOUNT", hi)
+      } else commit("SET_MAXIMUM_AMOUNT", 1000000000)
     },
     async setAllBackupProduct({ commit }) {
       const allProduct = (await ProductsService.getAllProducts()).data;
@@ -123,7 +139,6 @@ export const ProductsModule = {
       const displayProducts = allProduct.slice(0, state.perPage);
       commit("SET_DISPLAY_PRODUCTS", displayProducts)
     },
-
     paginate({ commit, state }, currentPage) {
       const start = (currentPage - 1) * state.perPage;
       const displayProducts = state.allProduct.slice(start, start + state.perPage);
@@ -154,7 +169,14 @@ export const ProductsModule = {
           val.title.toLowerCase().includes(state.searchParameter.text.toLowerCase())
         );
       });
+      allProduct = allProduct.filter(val => {
+        return (
+          val.amount >= state.searchParameter.lowestAmount &&
+          val.amount <= state.searchParameter.maximumAmount
+        );
+      });
       return allProduct;
+
     },
   },
   modules: {

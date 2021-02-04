@@ -103,10 +103,10 @@ export default {
     return {
       shop: null,
       cList: false,
-      categoryList: null,
+      categoryList: {},
       searchTxt: "",
       search_category_id: 0,
-      search_category: "All Category",
+      search_category: "All Category"
     };
   },
   async mounted() {
@@ -117,16 +117,20 @@ export default {
       );
       if (this.categoryList) this.cList = true;
     }
-    this.categoryList = (await CategoryService.getCategoryList()).data;
+    try {
+      this.categoryList = (await CategoryService.getCategoryList()).data;
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
     const defaultCategory = { id: 0, name: "All Category" };
     this.categoryList.unshift(defaultCategory);
   },
   computed: {
     ...mapState({
-      user: (state) => state.user,
-      admin: (state) => state.admin,
-      userLoggedIn: (state) => state.userLoggedIn,
-    }),
+      user: state => state.user,
+      admin: state => state.admin,
+      userLoggedIn: state => state.userLoggedIn
+    })
   },
 
   methods: {
@@ -137,7 +141,7 @@ export default {
           variant: "primary",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
-          solid: true,
+          solid: true
         });
       } else {
         window.location.replace("/wishlist");
@@ -147,8 +151,8 @@ export default {
       this.$router.push({
         name: "profile",
         params: {
-          userId: this.user.id,
-        },
+          userId: this.user.id
+        }
       });
     },
     logout() {
@@ -172,8 +176,8 @@ export default {
         route += "?q=" + text;
         window.location.replace(route);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

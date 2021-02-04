@@ -15,28 +15,53 @@
         <b-row>
           <b-img
             height="90px"
-            @click="current_image = displayProduct.image1"
+            @click="changeImage(displayProduct.image1)"
             :src="displayProduct.image1"
           ></b-img>
           <b-img
             height="90px"
-            @click="current_image = displayProduct.image2"
+            @click="changeImage(displayProduct.image2)"
             :src="displayProduct.image2"
           ></b-img>
           <b-img
             height="90px"
-            @click="current_image = displayProduct.image3"
+            @click="changeImage(displayProduct.image3)"
             :src="displayProduct.image3"
           ></b-img>
           <b-img
             height="90px"
-            @click="current_image = displayProduct.image4"
+            @click="changeImage(displayProduct.image4)"
             :src="displayProduct.image4"
           ></b-img>
           <b-img
             height="90px"
-            @click="current_image = displayProduct.image4"
+            @click="changeImage(displayProduct.image5)"
             :src="displayProduct.image5"
+          ></b-img>
+          <b-img
+            height="90px"
+            @click="changeImage(displayProduct.image6)"
+            :src="displayProduct.image6"
+          ></b-img>
+          <b-img
+            height="90px"
+            @click="changeImage(displayProduct.image7)"
+            :src="displayProduct.image7"
+          ></b-img>
+          <b-img
+            height="90px"
+            @click="changeImage(displayProduct.image8)"
+            :src="displayProduct.image8"
+          ></b-img>
+          <b-img
+            height="90px"
+            @click="changeImage(displayProduct.image9)"
+            :src="displayProduct.image9"
+          ></b-img>
+          <b-img
+            height="90px"
+            @click="changeImage(displayProduct.image10)"
+            :src="displayProduct.image10"
           ></b-img>
         </b-row>
       </b-col>
@@ -89,13 +114,7 @@
         <div v-html="displayProduct.description"></div>
       </div>
     </b-container>
-    <!-- <b-row>
-      <div class="product-detail">
-        <div class="container"></div>
-      </div>
-    </b-row> -->
-
-    <Review />
+    <Review class="mt-3" />
     <Footer />
   </div>
 </template>
@@ -114,15 +133,18 @@ export default {
     TopHeader,
     AddToCart,
     Review,
-    Footer,
+    Footer
   },
   data() {
     return {
       current_image: null,
-      displayProduct: {},
+      displayProduct: {}
     };
   },
   methods: {
+    changeImage(image) {
+      this.current_image = image;
+    },
     async buyNow() {
       const buyProduct = {
         productId: this.productId,
@@ -130,98 +152,28 @@ export default {
         currency: this.currency,
         quantity: 1,
         title: this.title,
-        image: this.image,
+        image: this.image
       };
       await this.$store.dispatch("Cart/addToCart", buyProduct);
       window.location.replace("/checkout");
-    },
+    }
   },
   async mounted() {
-    const productId = this.$store.state.route.params.productId;
-    this.displayProduct = (await ProductsService.getProduct(productId)).data;
-    this.current_image = this.displayProduct.image1;
+    const productId = parseInt(this.$store.state.route.params.productId);
+    try {
+      this.displayProduct = (await ProductsService.getProduct(productId)).data;
+      this.current_image = this.displayProduct.image1;
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
   },
   computed: {
     ...mapState({
-      user: (state) => state.user,
-    }),
-  },
+      user: state => state.user
+    })
+  }
 };
 </script>
 
 <style scoped lang="scss">
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Open Sans", serif;
-  background: #eee;
-}
-
-.content {
-  width: 420px;
-  margin-top: 10px;
-}
-
-.ratings {
-  background-color: #fff;
-  padding: 54px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 10px 10px #e0e0e0;
-}
-
-.product-rating {
-  font-size: 50px;
-}
-
-.stars i {
-  font-size: 18px;
-  color: #28a745;
-}
-
-.rating-text {
-  margin-top: 10px;
-}
-.btn-grey {
-  background-color: #d8d8d8;
-  color: #fff;
-}
-.rating-block {
-  background-color: #fafafa;
-  border: 1px solid #efefef;
-  padding: 15px 15px 20px 15px;
-  border-radius: 3px;
-}
-.bold {
-  font-weight: 700;
-}
-.padding-bottom-7 {
-  padding-bottom: 7px;
-}
-
-.review-block {
-  background-color: #fafafa;
-  border: 1px solid #efefef;
-  padding: 15px;
-  border-radius: 3px;
-  margin-bottom: 15px;
-}
-.review-block-name {
-  font-size: 12px;
-  margin: 10px 0;
-}
-.review-block-date {
-  font-size: 12px;
-}
-.review-block-rate {
-  font-size: 13px;
-  margin-bottom: 15px;
-}
-.review-block-title {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-.review-block-description {
-  font-size: 13px;
-}
 </style>

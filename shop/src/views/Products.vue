@@ -10,7 +10,8 @@
         :key="componentKey"
         :class="{ 'col-8': sidebar_visible, 'col-10': !sidebar_visible }"
       >
-        <b-row>
+        <FilterComponent />
+        <b-row class="mt-4">
           <b-col
             cols="4"
             v-for="(product, index) in displayProducts"
@@ -51,8 +52,12 @@
             </b-card-group>
           </b-col>
         </b-row>
-        <b-row class="mt-3" v-if="this.apCount == 0">
-          <h5>There is no product that matches the search criteria!!!</h5>
+        <b-row class="mt-3 mb-5" v-if="this.apCount == 0">
+          <b-col>
+            <hr />
+            <h3>Found Nothing...</h3>
+            <hr />
+          </b-col>
         </b-row>
         <b-row v-if="this.apCount != 0" class="mt-3" align-v="center">
           <b-col>
@@ -68,9 +73,8 @@
           <b-col>
             <h6>
               SHOWING {{ (currentPage - 1) * perPage + 1 }} TO
-              {{ currentPage * perPage }} OF {{ apCount }} ({{
-                Math.ceil(apCount / perPage)
-              }}
+              {{ perPage >= apCount ? apCount : (currentPage * perPage) }} OF
+              {{ apCount }} ({{ Math.ceil(apCount / perPage) }}
               PAGES)
             </h6>
           </b-col>
@@ -87,20 +91,19 @@ import { mapState } from "vuex";
 import TopHeader from "@/components/TopHeader.vue";
 import ProductsNavbar from "@/components/Products/ProductsNavbar.vue";
 import ProductCategorySidebar from "@/components/Products/ProductCategorySidebar.vue";
+import FilterComponent from "@/components/Products/FilterComponent.vue";
 import AddToCart from "@/components/AddToCart.vue";
 import Footer from "@/components/Footer.vue";
 import productsService from "@/services/ProductsService.js";
-import CategoryService from "@/services/CategoryService.js";
-import SubCategoryService from "@/services/SubCategoryService.js";
-import SubSubCategoryService from "@/services/SubSubCategoryService.js";
 export default {
   name: "Products",
   components: {
     TopHeader,
     ProductsNavbar,
-    AddToCart,
-    Footer,
     ProductCategorySidebar,
+    FilterComponent,
+    AddToCart,
+    Footer
   },
 
   data() {
@@ -113,11 +116,11 @@ export default {
       subSubCategoryList: null,
       searchParameter: {
         param: {},
-        query: {},
+        query: {}
       },
       displayProduct: [],
       searchText: "",
-      currentPage: 1,
+      currentPage: 1
     };
   },
   computed: {
@@ -126,67 +129,18 @@ export default {
       else return true;
     },
     ...mapState({
-      allProduct: (state) => state.Products.allProduct,
-      apCount: (state) => state.Products.apCount,
-      displayProducts: (state) => state.Products.displayProducts,
-      perPage: (state) => state.Products.perPage,
-    }),
+      allProduct: state => state.Products.allProduct,
+      apCount: state => state.Products.apCount,
+      displayProducts: state => state.Products.displayProducts,
+      perPage: state => state.Products.perPage
+    })
   },
 
   async mounted() {
     this.admin = this.$store.state.admin;
     this.route = this.$store.state.route;
-
-    if (this.route.params.subSubCategory) {
-      try {
-        const subSubCategory = (
-          await SubSubCategoryService.getSubSubCategoryByName(
-            this.route.params.subSubCategory
-          )
-        ).data;
-        this.searchParameter.param.subSubCategoryId = subSubCategory.id;
-      } catch (error) {
-        console.log("error get sub sub cat id by name", error);
-      }
-    } else if (this.route.params.subCategory) {
-      try {
-        const subCategory = (
-          await SubCategoryService.getSubCategoryByName(
-            this.route.params.subCategory
-          )
-        ).data;
-        this.searchParameter.param.subCategoryId = subCategory.id;
-      } catch (error) {
-        console.log("error get sub cat id by name", error);
-      }
-    } else if (this.route.params.category) {
-      try {
-        const category = (
-          await CategoryService.getCategoryByName(this.route.params.category)
-        ).data;
-        this.searchParameter.param.categoryId = category.id;
-      } catch (error) {
-        console.log("error get cat id by name", error);
-      }
-    }
-    if (this.route.query.q) {
-      const str = this.route.query.q;
-      this.searchParameter.query.q = str;
-    }
-    if (this.route.query.lo) {
-      const lo = parseInt(this.route.query.lo);
-      this.searchParameter.query.lo = lo;
-    }
-    if (this.route.query.hi) {
-      const hi = parseInt(this.route.query.hi);
-      this.searchParameter.query.hi = hi;
-    }
+    await this.$store.dispatch("Products/setSearchParameter", this.route);
     this.forceRerender();
-
-    await this.$store.dispatch(
-      "Products/setSearchParameter",
-      this.searchParameter
-    );
     await this.$store.dispatch("Products/setAllProduct");
   },
   methods: {
@@ -202,29 +156,16 @@ export default {
       this.$router.push({
         name: "product",
         params: {
-          productId: product.id,
-        },
+          productId: product.id
+        }
       });
     },
     paginate(currentPage) {
       this.$store.dispatch("Products/paginate", currentPage);
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-.item-background {
-  background-color: rgb(190, 243, 240);
-}
-.product-page-title {
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-}
-.details-image {
-  max-height: 30rem;
-}
-.product-image {
-  height: 10rem;
-  width: 10rem;
-}
 </style>

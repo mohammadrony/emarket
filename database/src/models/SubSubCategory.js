@@ -1,15 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
   const SubSubCategory = sequelize.define('SubSubCategory', {
     id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      type:           DataTypes.INTEGER,
+      allowNull:      false,
+      primaryKey:     true,
+      autoIncrement:  true
     },
-    name: {
-      type: DataTypes.STRING,
-      unique: true
-    }
+    name:             DataTypes.STRING,
   })
   SubSubCategory.associate = function (models) {
     SubSubCategory.belongsTo(models.SubCategory)

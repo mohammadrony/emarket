@@ -210,8 +210,8 @@
                 <br />
                 <b-link>{{
                   currentUserReview.User.firstName +
-                  " " +
-                  currentUserReview.User.lastName
+                    " " +
+                    currentUserReview.User.lastName
                 }}</b-link>
                 <br />
                 <!-- <small size="sm">{{ review.createdAt }}</small> -->
@@ -366,12 +366,18 @@ export default {
       editComment: "",
       productId: null,
       loginAlert: false,
-      reviewList: null,
+      reviewList: null
     };
   },
   async mounted() {
-    this.productId = this.$store.state.route.params.productId;
-    this.reviewList = (await ReviewService.getReviewList(this.productId)).data;
+    this.productId = parseInt(this.$store.state.route.params.productId);
+    try {
+      this.reviewList = (
+        await ReviewService.getReviewList(this.productId)
+      ).data;
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
     var i;
     for (i = 0; i < this.reviewList.length; i++) {
       if (this.reviewList[i].comment != "") this.commentCount++;
@@ -433,7 +439,7 @@ export default {
             await ReviewService.createReview({
               rating: this.rating,
               comment: this.comment,
-              productId: this.productId,
+              productId: this.productId
             })
           ).data;
           window.location.reload();
@@ -463,7 +469,7 @@ export default {
               id: this.editReviewId,
               rating: this.editRating,
               comment: this.editComment,
-              productId: this.productId,
+              productId: this.productId
             })
           ).data;
           window.location.reload();
@@ -477,18 +483,16 @@ export default {
     },
     async deleteReview(review) {
       if (this.userLoggedIn) {
-        console.log("review", review);
         try {
-          const response = (await ReviewService.deleteReview(review.id)).data;
+          await ReviewService.deleteReview(review.id);
           window.location.reload();
-          console.log("response", response);
         } catch (error) {
           console.log("error deleting review", error);
         }
       }
-    },
+    }
   },
-  computed: {},
+  computed: {}
 };
 </script>
 
