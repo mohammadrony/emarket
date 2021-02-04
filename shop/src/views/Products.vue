@@ -30,6 +30,7 @@
                   {{ product.amount }} {{ product.currency }}
                 </h6>
                 <AddToCart
+                  :key="cartComponentKey"
                   class="mt-2"
                   btn_size="sm"
                   :id="product.id"
@@ -111,6 +112,7 @@ export default {
       route: null,
       admin: null,
       componentKey: 0,
+      cartComponentKey: 0,
       categoryList: null,
       subCategoryList: null,
       subSubCategoryList: null,
@@ -147,6 +149,9 @@ export default {
     forceRerender() {
       this.componentKey += 1;
     },
+    refreshCartBtn(){
+      this.cartComponentKey +=1;
+    },
     async deleteProduct(product) {
       await productsService.deleteProduct(product.id);
       await this.$store.dispatch("Products/setAllBackupProduct");
@@ -160,8 +165,9 @@ export default {
         }
       });
     },
-    paginate(currentPage) {
-      this.$store.dispatch("Products/paginate", currentPage);
+    async paginate(currentPage) {
+      await this.$store.dispatch("Products/paginate", currentPage);
+      this.refreshCartBtn();
     }
   }
 };

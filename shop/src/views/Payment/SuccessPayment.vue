@@ -15,8 +15,8 @@
               <b-icon icon="check" scale="3"></b-icon>
             </b-button>
             <h1 class="mt-4">You're all set!</h1>
-            <h6>Thanks for being awesome,</h6>
-            <h6>we hope you enjoy your purchase!</h6>
+            <h6>Thanks for your purchase!</h6>
+            <h6>We'll deliver your order in few days.</h6>
             <b-card-footer class="mt-4"> estorebd.com </b-card-footer>
           </b-card>
         </b-col>
@@ -30,8 +30,9 @@
 import TopHeader from "@/components/TopHeader.vue";
 import Footer from "@/components/Footer.vue";
 import CheckoutService from "@/services/CheckoutService.js";
-import OrderService from "../../services/OrderService";
-import OrderItemService from "../../services/OrderItemService";
+import OrderService from "@/services/OrderService";
+import OrderItemService from "@/services/OrderItemService";
+import ProductsService from "@/services/ProductsService";
 export default {
   name: "SuccessPayment",
   components: {
@@ -46,6 +47,13 @@ export default {
   },
   async mounted() {
     const sessionId = this.$store.state.route.query.id;
+    var previousOrder;
+    try {
+      previousOrder = (await OrderService.getOrderBySessionId(sessionId)).data;
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
+    if (previousOrder) return;
     try {
       this.session = (
         await CheckoutService.retrieveCheckoutSession(sessionId)
@@ -75,11 +83,26 @@ export default {
 
     var i;
     for (i in lineItems) {
+      const productId = parseInt(lineItems[i].description);
       try {
         await OrderItemService.createOrderItem({
           quantity: lineItems[i].quantity,
-          ProductId: parseInt(lineItems[i].description),
+          ProductId: productId,
           OrderId: this.order.id
+        });
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+      var lineproduct;
+      try {
+        lineproduct = (await ProductsService.getProductSales(productId)).data;
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+      try {
+        await ProductsService.updateProduct({
+          id: productId,
+          sales: lineproduct.sales + lineItems[i].quantity
         });
       } catch (error) {
         console.log(error.response.data.error);

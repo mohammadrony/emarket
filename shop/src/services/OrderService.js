@@ -4,8 +4,11 @@ export default {
     getOrderList() {
         return Api().get('/order/getOrderList')
     },
-    getOrder(orderId){
+    getOrder(orderId) {
         return Api().get(`/order/getOrder/${orderId}`)
+    },
+    getOrderBySessionId(sessionId) {
+        return Api().get(`/order/getOrderBySessionId/${sessionId}`)
     },
     createOrder(credentials) {
         return Api().post('/order/createOrder', credentials)

@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     address:            DataTypes.STRING,
     status:             DataTypes.STRING,
     variant:            DataTypes.STRING,
-    checkoutSessionId:  DataTypes.STRING,
+    checkoutSessionId:{
+      type:             DataTypes.STRING,
+      unique:           true
+    },
     productCost:        DataTypes.INTEGER,
     currency:           DataTypes.STRING,
     shippingCost:       DataTypes.INTEGER,

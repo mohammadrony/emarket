@@ -55,15 +55,15 @@ export default {
     async requestToken() {
       try {
         this.mailSent = false;
-        const user = await AuthenticationService.validUser(
+        const user = (await AuthenticationService.validUser(
           this.emailResetPassword
-        );
-        if (user.data.id) {
+        )).data;
+        if (user.id) {
           try {
-            const token = await AuthenticationService.requestToken({
+            const token = (await AuthenticationService.requestToken({
               email: this.emailResetPassword,
-            });
-            if (token.data) {
+            })).data;
+            if (token) {
               this.tokenAlert = false;
               this.mailSent = true;
             }

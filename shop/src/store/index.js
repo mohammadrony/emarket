@@ -53,10 +53,8 @@ export default new Vuex.Store({
     setToken({ commit }, token) {
       commit('SET_TOKEN', token)
     },
-    setUser({ state, commit }, user) {
-      console.log("from store", state.admin)
+    setUser({ commit }, user) {
       commit('SET_USER', user)
-      console.log("from store", state.admin)
     }
   },
   modules: {

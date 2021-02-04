@@ -112,12 +112,12 @@ export default {
           this.error = "Provide login information.";
           return;
         }
-        const response = await AuthenticationService.login({
+        const response = (await AuthenticationService.login({
           email: this.email,
           password: this.password,
-        });
-        this.$store.dispatch("setToken", response.data.token);
-        this.$store.dispatch("setUser", response.data.user);
+        })).data;
+        this.$store.dispatch("setToken", response.token);
+        this.$store.dispatch("setUser", response.user);
         window.location.replace("/");
       } catch (error) {
         console.log(error.response.data.error);

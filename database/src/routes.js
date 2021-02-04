@@ -52,6 +52,8 @@ module.exports = (app) => {
     OrderController.getOrderList)
   app.get("/order/getOrder/:orderId",
     OrderController.getOrder),
+  app.get("/order/getOrderBySessionId/:sessionId",
+      OrderController.getOrderBySessionId),
     app.post("/order/createOrder",
       OrderController.createOrder)
   app.put("/order/updateOrder",
@@ -78,6 +80,8 @@ module.exports = (app) => {
     ProductsController.topSellProduct)
   app.get("/products/newAddProduct/:limit",
     ProductsController.newAddProduct)
+  app.get("/products/getProductSales/:productId",
+    ProductsController.getProductSales)
   app.get("/products/getProduct/:productId",
     ProductsController.getProduct)
   app.get("/products/getRecommendation/:subSubCategoryId/:limit",

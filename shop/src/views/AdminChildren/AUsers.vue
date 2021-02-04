@@ -151,9 +151,9 @@ export default {
       selectedTypeVariant: "dark",
       searchUserText: "",
       users: 0,
-      secondUserList: null,
-      userList: null,
-      userList2: null,
+      secondUserList: [],
+      userList: [],
+      userList2: [],
       userStatus: [
         {
           name: "admin",
@@ -202,18 +202,40 @@ export default {
 
   methods: {
     search() {
-      console.log(this.searchUserText);
-      console.log(this.userType);
+      if (this.selectedTypeName != "All") {
+        this.userList2 = this.userList2.filter(val => {
+          return val.userType
+            .toLowerCase()
+            .includes(this.selectedTypeName.toLowerCase());
+        });
+      }
+      this.userList2 = this.userList2.filter(val => {
+        return (
+          val.firstName
+            .toLowerCase()
+            .includes(this.searchUserText.toLowerCase()) ||
+          val.lastName
+            .toLowerCase()
+            .includes(this.searchUserText.toLowerCase()) ||
+          val.email.toLowerCase().includes(this.searchUserText.toLowerCase())
+        );
+      });
+      this.users = this.userList2.length;
+      const start = 0;
+      this.secondUserList = this.userList2.slice(start, start + this.perPage);
     },
     selectType(status) {
       if (status.name == "All") {
+        this.searchUserText = "";
         this.selectedTypeName = status.name;
         this.selectedTypeVariant = status.variant;
         this.userList2 = this.userList.slice();
       } else {
         this.selectedTypeName = status.name;
         this.selectedTypeVariant = status.variant;
-        this.userList2 = this.userList.filter(obj => obj.status == status.name);
+        this.userList2 = this.userList.filter(
+          obj => obj.userType == status.name
+        );
       }
       this.users = this.userList2.length;
       const start = 0;

@@ -13,6 +13,9 @@ export default {
     getRecommendation({subSubCategoryId, limit}){
         return Api().get(`/products/getRecommendation/${subSubCategoryId}/${limit}`)
     },
+    getProductSales(productId) {
+        return Api().get(`/products/getProductSales/${productId}`)
+    },
     getProduct(productId) {
         return Api().get(`/products/getProduct/${productId}`)
     },

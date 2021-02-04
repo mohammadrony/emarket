@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
     phoneNo:            DataTypes.STRING,
     password:           DataTypes.STRING,
     resetPasswordToken: DataTypes.STRING,
-    address:            DataTypes.STRING,
     userType:           DataTypes.STRING,
     variant:            DataTypes.STRING,
     priority:           DataTypes.INTEGER,

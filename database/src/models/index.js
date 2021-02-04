@@ -7,7 +7,6 @@ const sequelize = new Sequelize(config.db.database, config.db.user, config.db.pa
   storage:  config.db.storage
 })
 
-
 const db = {}
 db.Shop           = require("./Shop")(sequelize, Sequelize.DataTypes);
 db.User           = require("./User")(sequelize, Sequelize.DataTypes);

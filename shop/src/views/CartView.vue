@@ -32,7 +32,10 @@
               {{ product.title }}
             </b-link>
           </b-col>
-          <b-col cols="2"> {{ product.amount * product.quantity }} $</b-col>
+          <b-col cols="2">
+            {{ product.amount * product.quantity }}
+            {{ product.currency }}</b-col
+          >
           <b-col cols="4">
             <div class="quantity-style">
               <b-button
@@ -68,7 +71,9 @@
           <b-col cols="2">
             <b-card>
               <b-card-title>Total</b-card-title>
-              <b-card-text>{{ totalAmount }} $</b-card-text>
+              <b-card-text
+                >{{ totalAmount }} {{ selectedCurrency }}</b-card-text
+              >
             </b-card>
           </b-col>
         </b-row>
@@ -92,9 +97,9 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import TopHeader from "@/components/TopHeader.vue";
 import Footer from "@/components/Footer.vue";
+import { mapState } from "vuex";
 export default {
   name: "MyCart",
   components: {
@@ -102,11 +107,13 @@ export default {
     Footer
   },
   data() {
-    return {};
+    return {
+      selectedCurrency: "USD"
+    };
   },
+  mounted() {},
   computed: {
     ...mapState({
-      user: state => state.user,
       cartProducts: state => state.Cart.cartProducts
     }),
     cartItemCount: function() {
@@ -123,7 +130,7 @@ export default {
   },
   methods: {
     routeChangetoProduct(product) {
-      window.location.replace(`/products/${product.productId}`);
+      window.location.replace(`/product/${product.productId}`);
     },
     async quantityInc(product) {
       const cartItem = {

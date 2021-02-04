@@ -45,7 +45,14 @@ module.exports = {
                     return console.log('Error sending an email', err);
                 }
             });
-
+            delete user.email;
+            delete user.registerToken;
+            delete user.phoneNo;
+            delete user.password;
+            delete user.resetPasswordToken;
+            delete user.address;
+            delete user.userType;
+            delete user.variant;
             userJson = user.toJSON()
             res.send({
                 user: userJson,
@@ -106,6 +113,14 @@ module.exports = {
                     error: 'Incorrect login information.'
                 })
             }
+            delete user.email;
+            delete user.registerToken;
+            delete user.phoneNo;
+            delete user.password;
+            delete user.resetPasswordToken;
+            delete user.address;
+            delete user.userType;
+            delete user.variant;
             userJson = user.toJSON()
             res.send({
                 user: userJson,
@@ -125,6 +140,9 @@ module.exports = {
                     error: "User not found."
                 })
             }
+            delete user.registerToken;
+            delete user.password;
+            delete user.resetPasswordToken;
             res.send(user)
         } catch (err) {
             res.status(500).send({
@@ -134,12 +152,6 @@ module.exports = {
     },
     async updateUser(req, res) {
         try {
-            console.log(req.body)
-            console.log(req.body)
-            console.log(req.body)
-            console.log(req.user)
-            console.log(req.user)
-            console.log(req.user)
             const user = await User.update(req.body, {
                 where: {
                     id: req.body.id
@@ -168,7 +180,8 @@ module.exports = {
                     error: "Can't update user password with these information."
                 })
             }
-            res.send(user.id)
+
+            res.send(1)
         } catch (err) {
             res.status(500).send({
                 error: "An error occured when trying to update password"
@@ -378,7 +391,7 @@ module.exports = {
                     return console.log('Error sending an email', err);
                 }
             });
-            res.send(userId)
+            res.send(1)
         } catch (err) {
             res.status(500).send({
                 error: "An error occured when trying to reset your password."

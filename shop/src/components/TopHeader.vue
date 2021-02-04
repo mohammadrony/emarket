@@ -182,15 +182,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#nav {
-  padding: 0;
-  margin: 0;
-  a.router-link-exact-active {
-    color: #ffffff;
-  }
-}
-.cart-icon:hover {
-  cursor: pointer;
-  color: navy;
-}
 </style>

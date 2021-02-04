@@ -64,6 +64,20 @@ module.exports = {
 			})
 		}
 	},
+	async getProductSales(req,res){
+		try {
+
+			const product = await Product.findByPk(req.params.productId, {
+				attributes: ["sales"]
+			})
+			res.send(product)
+		} catch(err){
+			res.status(500).send({
+				error: "An error occured when tring to fetch a product sales"
+			})
+		}
+		
+	},
 	async getProduct(req, res) {
 		try {
 			const product = await Product.findByPk(req.params.productId)

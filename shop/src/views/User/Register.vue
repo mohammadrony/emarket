@@ -144,7 +144,7 @@ export default {
   name: "Register",
   components: {
     TopHeader,
-    Footer,
+    Footer
   },
   data() {
     return {
@@ -163,7 +163,7 @@ export default {
       confirmPassword: null,
       confirmPasswordMin: 8,
       confirmPasswordMax: 32,
-      message: null,
+      message: null
     };
   },
   computed: {
@@ -208,7 +208,7 @@ export default {
           this.confirmPassword.length <= this.confirmPasswordMax &&
           this.password == this.confirmPassword
         );
-    },
+    }
   },
   methods: {
     checkPasswordMatch() {
@@ -279,19 +279,16 @@ export default {
           lastName: this.lastName,
           email: this.email,
           password: this.password,
-          isAdmin: false,
+          isAdmin: false
         });
-        console.log(response);
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);
-
-        this.$bvModal.hide("register-modal");
         window.location.replace("/");
       } catch (error) {
         this.message = error.response.data.error;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

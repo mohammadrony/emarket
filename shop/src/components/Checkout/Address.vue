@@ -193,7 +193,6 @@ export default {
       formatNumber: /^[0-9+-]+$/,
       formatEmail: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
       shipping: this.$store.state.Checkout.shipping,
-      // payment: this.$store.state.Checkout.payment,
     };
   },
   computed: {

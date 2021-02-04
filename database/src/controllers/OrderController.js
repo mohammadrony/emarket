@@ -23,6 +23,20 @@ module.exports = {
 			})
 		}
 	},
+	async getOrderBySessionId(req, res) {
+		try {
+			const order = await Order.findOne({
+				where: {
+					checkoutSessionId: req.params.sessionId
+				}
+			})
+			res.send(order)
+		} catch (err) {
+			res.status(500).send({
+				error: 'An error occured when trying to fetch an order.'
+			})
+		}
+	},
 	async createOrder(req, res) {
 		try {
 			const order = await Order.create(req.body)

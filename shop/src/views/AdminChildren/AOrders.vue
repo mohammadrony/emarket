@@ -184,7 +184,6 @@ export default {
       this.secondOrderList = this.orderList2.slice(start, start + this.perPage);
     },
     async updateStatus(order, status) {
-      // find only in the paginated user
       const index = this.secondOrderList.findIndex(obj => obj.id === order.id);
       this.secondOrderList[index].status = status.name;
       this.secondOrderList[index].variant = status.variant;
