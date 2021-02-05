@@ -13,6 +13,7 @@ import UserVerify from "@/views/User/UserVerify.vue";
 import CartView from "@/views/CartView.vue";
 // import Wishlist from "@/views/Wishlist.vue";
 import Checkout from "@/views/Checkout.vue";
+import Order from "@/views/Order.vue";
 import SuccessPayment from "@/views/Payment/SuccessPayment.vue";
 import CancelPayment from "@/views/Payment/CancelPayment.vue";
 // import Admin from "@/views/Admin.vue";
@@ -116,6 +117,11 @@ const routes = [
     path: "/checkout",
     name: "checkout",
     component: Checkout
+  },
+  {
+    path: "/order/:sessionId",
+    name: "order",
+    component: Order
   },
   {
     path: "/add-product",

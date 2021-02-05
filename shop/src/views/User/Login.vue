@@ -58,11 +58,11 @@
             </b-form>
             <b-row class="mt-2">
               <b-col class="text-center">
-                <small
-                  ><b-link v-b-toggle.collapse-requestToken
-                    >forget your password?</b-link
-                  ></small
-                >
+                <small>
+                  <b-link v-b-toggle.collapse-requestToken>
+                    forget your password?
+                  </b-link>
+                </small>
               </b-col>
             </b-row>
             <b-collapse id="collapse-requestToken">
@@ -95,14 +95,14 @@ export default {
   components: {
     TopHeader,
     ReqPassToken,
-    Footer,
+    Footer
   },
   data() {
     return {
       shop: store.state.shop,
       email: null,
       password: null,
-      error: null,
+      error: null
     };
   },
   methods: {
@@ -112,10 +112,12 @@ export default {
           this.error = "Provide login information.";
           return;
         }
-        const response = (await AuthenticationService.login({
-          email: this.email,
-          password: this.password,
-        })).data;
+        const response = (
+          await AuthenticationService.login({
+            email: this.email,
+            password: this.password
+          })
+        ).data;
         this.$store.dispatch("setToken", response.token);
         this.$store.dispatch("setUser", response.user);
         window.location.replace("/");
@@ -123,8 +125,8 @@ export default {
         console.log(error.response.data.error);
         this.error = error.response.data.error;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
