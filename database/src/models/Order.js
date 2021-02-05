@@ -11,8 +11,6 @@ module.exports = (sequelize, DataTypes) => {
     email:              DataTypes.STRING,
     address:            DataTypes.STRING,
     status:             DataTypes.STRING,
-    feedback:           DataTypes.STRING,
-    feedbackReply:      DataTypes.STRING,
     variant:            DataTypes.STRING,
     checkoutSessionId:{
       type:             DataTypes.STRING,
