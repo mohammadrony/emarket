@@ -24,7 +24,9 @@
                   style="max-width: 25rem; max-height: 25rem"
                   alt="Image Not Found"
                 ></b-card-img>
-                <a href="" @click="viewProduct(product)">{{ product.title }}</a>
+                <b-link @click="viewProduct(product)">{{
+                  product.title
+                }}</b-link>
                 <br />
                 <h6 class="mt-2">
                   {{ product.amount }} {{ product.currency }}
@@ -74,7 +76,7 @@
           <b-col>
             <h6>
               SHOWING {{ (currentPage - 1) * perPage + 1 }} TO
-              {{ perPage >= apCount ? apCount : (currentPage * perPage) }} OF
+              {{ perPage >= apCount ? apCount : currentPage * perPage }} OF
               {{ apCount }} ({{ Math.ceil(apCount / perPage) }}
               PAGES)
             </h6>
@@ -149,8 +151,8 @@ export default {
     forceRerender() {
       this.componentKey += 1;
     },
-    refreshCartBtn(){
-      this.cartComponentKey +=1;
+    refreshCartBtn() {
+      this.cartComponentKey += 1;
     },
     async deleteProduct(product) {
       await productsService.deleteProduct(product.id);
@@ -158,12 +160,8 @@ export default {
       window.location.reload();
     },
     viewProduct(product) {
-      this.$router.push({
-        name: "product",
-        params: {
-          productId: product.id
-        }
-      });
+      const newRoute = "/product/" + product.id;
+      window.location.replace(newRoute);
     },
     async paginate(currentPage) {
       await this.$store.dispatch("Products/paginate", currentPage);

@@ -137,7 +137,7 @@ export default {
   },
   data() {
     return {
-      current_image: null,
+      current_image: "",
       displayProduct: {}
     };
   },
@@ -147,12 +147,12 @@ export default {
     },
     async buyNow() {
       const buyProduct = {
-        productId: this.productId,
-        amount: this.amount,
-        currency: this.currency,
+        productId: this.displayProduct.id,
+        amount: this.displayProduct.amount,
+        currency: this.displayProduct.amount,
         quantity: 1,
-        title: this.title,
-        image: this.image
+        title: this.displayProduct.title,
+        image: this.displayProduct.image
       };
       await this.$store.dispatch("Cart/addToCart", buyProduct);
       window.location.replace("/checkout");

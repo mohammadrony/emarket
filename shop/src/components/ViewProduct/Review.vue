@@ -354,9 +354,9 @@ export default {
       averageRating: 0,
       commentCount: 0,
       currentUserReview: null,
-      userId: this.$store.state.userId,
-      admin: this.$store.state.admin,
-      userLoggedIn: this.$store.state.userLoggedIn,
+      userId: 0,
+      admin: false,
+      userLoggedIn: false,
       reviewAlert: null,
       editReviewAlert: null,
       rating: null,
@@ -364,12 +364,15 @@ export default {
       editReviewId: 0,
       editRating: null,
       editComment: "",
-      productId: null,
+      productId: 0,
       loginAlert: false,
-      reviewList: null
+      reviewList: []
     };
   },
   async mounted() {
+    this.userId = this.$store.state.userId;
+    this.admin = this.$store.state.admin;
+    this.userLoggedIn = this.$store.state.userLoggedIn;
     this.productId = parseInt(this.$store.state.route.params.productId);
     try {
       this.reviewList = (
@@ -435,17 +438,14 @@ export default {
       if (this.comment == null) this.comment = "";
       if (this.rating != 0 || this.comment != "") {
         try {
-          const response = (
-            await ReviewService.createReview({
-              rating: this.rating,
-              comment: this.comment,
-              productId: this.productId
-            })
-          ).data;
+          await ReviewService.createReview({
+            rating: this.rating,
+            comment: this.comment,
+            productId: this.productId
+          });
           window.location.reload();
-          console.log(response);
         } catch (error) {
-          console.log("error create review", error);
+          console.log(error.response.data.error);
         }
       } else {
         this.reviewAlert = "Please add a rating or review to submit.";
@@ -462,20 +462,16 @@ export default {
       if (this.editComment == null) this.editComment = "";
       this.$bvModal.hide("editReviewModal");
       if (this.editRating != 0 || this.editComment != "") {
-        console.log("review", this.editRating, this.editComment);
         try {
-          const response = (
-            await ReviewService.updateReview({
-              id: this.editReviewId,
-              rating: this.editRating,
-              comment: this.editComment,
-              productId: this.productId
-            })
-          ).data;
+          await ReviewService.updateReview({
+            id: this.editReviewId,
+            rating: this.editRating,
+            comment: this.editComment,
+            productId: this.productId
+          });
           window.location.reload();
-          console.log("response", response);
         } catch (error) {
-          console.log("error updating review", error);
+          console.log(error.response.data.error);
         }
       } else {
         this.editReviewAlert = "Please add a rating or review to submit.";
@@ -487,7 +483,7 @@ export default {
           await ReviewService.deleteReview(review.id);
           window.location.reload();
         } catch (error) {
-          console.log("error deleting review", error);
+          console.log(error.response.data.error);
         }
       }
     }

@@ -101,7 +101,6 @@ export default {
   name: "TopHeader",
   data() {
     return {
-      shop: null,
       cList: false,
       categoryList: {},
       searchTxt: "",
@@ -110,7 +109,6 @@ export default {
     };
   },
   async mounted() {
-    this.shop = this.$store.state.shop;
     if (this.cList == false) {
       this.categoryList = await this.$store.dispatch(
         "Category/setFullCategoryList"
