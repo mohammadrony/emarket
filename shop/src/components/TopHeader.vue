@@ -74,7 +74,7 @@
                 <b-dropdown-item v-if="admin" to="/admin"
                   >Admin Panel</b-dropdown-item
                 >
-                <b-dropdown-item @click="userProfile()"
+                <b-dropdown-item to="/profile"
                   >Profile</b-dropdown-item
                 >
                 <b-dropdown-item @click="logout()">Log Out</b-dropdown-item>
@@ -144,14 +144,6 @@ export default {
       } else {
         window.location.replace("/wishlist");
       }
-    },
-    userProfile() {
-      this.$router.push({
-        name: "profile",
-        params: {
-          userId: this.user.id
-        }
-      });
     },
     logout() {
       this.$store.dispatch("setToken", null);

@@ -1,100 +1,211 @@
 <template>
-  <div class="user-profile">
+  <div>
     <TopHeader></TopHeader>
-    <b-row class="mt-2">
-      <b-col cols="1"></b-col>
-      <b-col cols="2">
-        <b-list-group>
-          <b-list-group-item>
-            <b-img
-              rounded="circle"
-              height="50"
-              width="50"
-              :src="user.profileImage"
-            ></b-img>
-            <h3 class="mt-2">John</h3>
-            <h6>Personal settings</h6>
-          </b-list-group-item>
-          <b-list-group-item to="/" active>Profile</b-list-group-item>
-          <b-list-group-item>Account</b-list-group-item>
-          <b-list-group-item>Account security</b-list-group-item>
-        </b-list-group>
-      </b-col>
-      <b-col cols="5">
-        <h3>Your Profile</h3>
-        <hr />
-        <h6>Your Name</h6>
-        <b-form inline class="mb-4">
-          <label class="sr-only" for="first-name">Name</label>
-          <b-form-input
-            id="first-name"
-            class="mb-2"
-            placeholder="First Name"
-          ></b-form-input>
 
-          <label class="sr-only" for="last-name">Username</label>
-          <b-input-group class="mb-2">
-            <b-form-input id="lastname" placeholder="Last Name"></b-form-input>
-          </b-input-group>
-        </b-form>
-
-        <b-form-group id="input-group-2" label="Username" label-for="input-2">
-          <b-form-input
-            id="input-2"
-            placeholder="Username"
-            required
-          ></b-form-input>
-        </b-form-group>
-        <b-form-group
-          id="input-group-1"
-          label="Email address:"
-          label-for="input-1"
-        >
-          <b-form-input
-            id="input-1"
-            type="email"
-            placeholder="Enter email"
-            required
-          ></b-form-input>
-        </b-form-group>
-      </b-col>
-      <b-col cols="3">
-        <b-img
-          rounded="circle"
-          height="250"
-          width="250"
-          :src="user.profileImage"
-        ></b-img>
-      </b-col>
-      <b-col cols="1"></b-col>
-    </b-row>
+    <b-container class="mt-4">
+      <div v-if="userId != 0">
+        <b-tabs nav-wrapper-class="w-25" lazy vertical pills card>
+          <b-tab title="Profile" active>
+            <b-row>
+              <b-col>
+                <h5>Public profile</h5>
+              </b-col>
+            </b-row>
+            <hr class="my-2" />
+            <b-row>
+              <b-col cols="7">
+                <div class="mt-3">
+                  <strong>Name</strong>
+                </div>
+                <div class="mt-1">
+                  {{ user.firstName }} {{ user.lastName }}
+                  <b-button variant="white" class="ml-1" size="sm">
+                    <b-icon
+                      v-b-tooltip.hover
+                      title="edit"
+                      @click="changeName"
+                      icon="pen"
+                    ></b-icon>
+                  </b-button>
+                </div>
+                <div v-if="user.username">
+                  <div class="mt-3">
+                    <strong>Username</strong>
+                  </div>
+                  <div class="mt-1">
+                    {{ user.username }}
+                    <b-button variant="white" class="ml-1" size="sm">
+                      <b-icon
+                        v-b-tooltip.hover
+                        title="edit"
+                        @click="changeUserName"
+                        icon="pen"
+                      ></b-icon>
+                    </b-button>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <strong>Email</strong>
+                </div>
+                <div class="mt-1">
+                  {{ user.email }}
+                </div>
+                <div class="mt-3">
+                  <strong>Password</strong>
+                </div>
+                <div class="mt-1">
+                  ************
+                  <b-button
+                    v-b-modal.modalUpdatePassword
+                    variant="white"
+                    class="ml-1"
+                    size="sm"
+                  >
+                    <b-icon
+                      v-b-tooltip.hover
+                      title="change password"
+                      icon="pen"
+                    ></b-icon>
+                  </b-button>
+                </div>
+                <b-modal
+                  title="Change password"
+                  id="modalUpdatePassword"
+                  hide-footer
+                >
+                  <b-form>
+                    <b-form-group
+                      id="input-group-current-password"
+                      label="Current Password"
+                      label-for="input-current-password"
+                    >
+                      <b-form-input
+                        v-model="currentPassword"
+                        id="input-current-password"
+                        type="password"
+                        @keyup.enter="updatePassword"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                    <b-form-group
+                      id="input-group-new-password"
+                      label="New Password"
+                      label-for="input-new-password"
+                    >
+                      <b-form-input
+                        v-model="newPassword"
+                        id="input-new-password"
+                        type="password"
+                        @keyup.enter="updatePassword"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                    <b-form-group
+                      id="input-group-confirm-password"
+                      label="Confirm Password"
+                      label-for="input-confirm-password"
+                    >
+                      <b-form-input
+                        v-model="confirmPassword"
+                        id="input-confirm-password"
+                        type="password"
+                        @keyup.enter="updatePassword"
+                        required
+                      ></b-form-input>
+                    </b-form-group>
+                    <b-row class="mt-4">
+                      <b-col cols="4"></b-col>
+                      <b-col cols="4">
+                        <b-button block variant="danger">
+                          Reset
+                        </b-button>
+                      </b-col>
+                      <b-col cols="4">
+                        <b-button block variant="success">Submit</b-button>
+                      </b-col>
+                    </b-row>
+                  </b-form>
+                </b-modal>
+                <div class="mt-4">
+                  <b-button variant="outline-danger">
+                    Close my account
+                  </b-button>
+                </div>
+              </b-col>
+              <b-col cols="5">
+                <b-img
+                  rounded="circle"
+                  width="230px"
+                  height="auto"
+                  :src="user.profileImage"
+                ></b-img>
+              </b-col>
+            </b-row>
+          </b-tab>
+          <b-tab title="Your Review"><p>I'm the second tab</p></b-tab>
+        </b-tabs>
+      </div>
+      <div v-if="userId == 0">
+        User not found...
+      </div>
+    </b-container>
+    <Footer />
   </div>
 </template>
 
 <script>
 import TopHeader from "@/components/TopHeader.vue";
+import Footer from "@/components/Footer.vue";
 import AuthenticationService from "@/services/AuthenticationService.js";
 export default {
   name: "Profile",
   components: {
     TopHeader,
+    Footer
   },
   data() {
     return {
-      user: {
-        profileImage: "http://localhost:8084/public/user-image/default-man.png",
-      },
+      userId: 0,
+      firstName: "",
+      lastName: "",
+      userName: "",
+      currentPassword: null,
+      newPassword: null,
+      confirmPassword: null,
+      user: {}
     };
   },
   async mounted() {
-    try {
-      const userId = this.$store.state.route.params.userId;
-      this.user = (await AuthenticationService.user(userId)).data;
-      console.log(this.user);
-    } catch(error) {
-      console.log(error.response.data.error)
+    this.userId = this.$store.state.userId;
+    if (this.userId != 0) {
+      try {
+        this.user = (await AuthenticationService.user(this.userId)).data;
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
     }
   },
+  methods: {
+    changeName() {
+      console.log("change name");
+    },
+    changeUserName() {
+      console.log("change user name");
+    },
+    async updatePassword() {
+      try {
+        const response = (
+          await AuthenticationService.updatePassword({
+            currentPassword: this.currentPassword,
+            newPassword: this.newPassword
+          })
+        ).data;
+        console.log(response);
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+    }
+  }
 };
 </script>
 

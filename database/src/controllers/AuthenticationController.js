@@ -45,15 +45,16 @@ module.exports = {
                     return console.log('Error sending an email', err);
                 }
             });
-            delete user.email;
-            delete user.registerToken;
-            delete user.phoneNo;
-            delete user.password;
-            delete user.resetPasswordToken;
-            delete user.address;
-            delete user.userType;
-            delete user.variant;
-            userJson = user.toJSON()
+            const newUser = {
+                id: user.id,
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                profileImage: user.profileImage,
+                priority: user.priority,
+                ShopId: user.ShopId
+            }
+            userJson = newUser.toJSON()
             res.send({
                 user: userJson,
                 token: jwtSignUser(userJson)
@@ -70,7 +71,16 @@ module.exports = {
             const user = await User.findOne({
                 where: {
                     email: email
-                }
+                },
+                attributes: [
+                    "id",
+                    "username",
+                    "firstName",
+                    "lastName",
+                    "profileImage",
+                    "priority",
+                    "ShopId"
+                ]
             })
             if (!user) {
                 return res.status(403).send({
@@ -113,14 +123,6 @@ module.exports = {
                     error: 'Incorrect login information.'
                 })
             }
-            delete user.email;
-            delete user.registerToken;
-            delete user.phoneNo;
-            delete user.password;
-            delete user.resetPasswordToken;
-            delete user.address;
-            delete user.userType;
-            delete user.variant;
             console.log(user)
             userJson = user.toJSON()
             res.send({
@@ -135,15 +137,26 @@ module.exports = {
     },
     async user(req, res) {
         try {
-            const user = await User.findByPk(req.params.userId)
+            const user = await User.findByPk(req.params.id, {
+                attributes: [
+                    "id",
+                    "username",
+                    "firstName",
+                    "lastName",
+                    "profileImage",
+                    "email",
+                    "phoneNo",
+                    "userType",
+                    "variant",
+                    "priority",
+                    "ShopId"
+                ]
+            })
             if (!user) {
                 return res.status(403).send({
                     error: "User not found."
                 })
             }
-            delete user.registerToken;
-            delete user.password;
-            delete user.resetPasswordToken;
             res.send(user)
         } catch (err) {
             res.status(500).send({
@@ -168,24 +181,18 @@ module.exports = {
     async updatePassword(req, res) {
         try {
             userId = req.user.id;
-            password = req.body.password;
-            oldPassword = req.body.oldPassword;
-            const user = await User.update(password, {
+            newPassword = req.body.newPassword;
+            currentPassword = req.body.currentPassword;
+            const user = await User.update(newPassword, {
                 where: {
                     id: userId,
-                    password: oldPassword
+                    password: currentPassword
                 }
             })
-            if (!user) {
-                res.status(403).send({
-                    error: "Can't update user password with these information."
-                })
-            }
-
-            res.send(1)
+            res.send(user)
         } catch (err) {
             res.status(500).send({
-                error: "An error occured when trying to update password"
+                error: "Incorrect current password."
             })
         }
     },
@@ -207,6 +214,7 @@ module.exports = {
                     "profileImage",
                     "userType",
                     "variant",
+                    "priority",
                     "ShopId"
                 ]
             })
@@ -365,7 +373,7 @@ module.exports = {
         try {
             const user = { registerToken: "" }
             const userId = req.body.id
-            await User.update(user, {
+            const userRet = await User.update(user, {
                 where: {
                     id: userId
                 }
@@ -392,7 +400,7 @@ module.exports = {
                     return console.log('Error sending an email', err);
                 }
             });
-            res.send(1)
+            res.send(userRet)
         } catch (err) {
             res.status(500).send({
                 error: "An error occured when trying to reset your password."

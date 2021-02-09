@@ -84,7 +84,7 @@ const routes = [
     component: UserVerify
   },
   {
-    path: "/profile/:userId",
+    path: "/profile",
     name: "profile",
     component: UserProfile
   },
