@@ -61,6 +61,7 @@ module.exports = {
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
+                email: user.email,
                 profileImage: user.profileImage,
                 priority: user.priority,
                 ShopId: user.ShopId
@@ -131,6 +132,7 @@ module.exports = {
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
+                email: user.email,
                 profileImage: user.profileImage,
                 userType: user.userType,
                 priority: user.priority,
@@ -172,6 +174,43 @@ module.exports = {
         } catch (err) {
             res.status(500).send({
                 error: "An error occured when trying to get an user."
+            })
+        }
+    },
+    async deleteAccount(req, res) {
+        console.log("up here to delete account")
+        console.log("up here to delete account")
+        console.log("up here to delete account")
+        console.log("up here to delete account")
+        console.log("up here to delete account")
+        console.log("up here to delete account")
+        console.log("up here to delete account")
+        console.log("up here to delete account")
+        console.log("up here to delete account")
+        console.log("up here to delete account")
+        try {
+            console.log(req.user.id, req.params.password)
+            console.log(req.user.id, req.params.password)
+            console.log(req.user.id, req.params.password)
+            console.log(req.user.id, req.params.password)
+            console.log(req.user.id, req.params.password)
+            console.log(req.user.id, req.params.password)
+            const user = User.findOne({
+                where: {
+                    id: req.user.id,
+                    password: req.params.password
+                }
+            })
+            if (!user) {
+                return res.status(403).send({
+                    error: "Incorrect Password."
+                })
+            }
+            await user.destroy();
+            res.sendStatus(200)
+        } catch (error) {
+            res.status(500).send({
+                error: "An error occured when trying to delete an user account"
             })
         }
     },

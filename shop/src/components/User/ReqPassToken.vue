@@ -11,6 +11,7 @@
         >
           <b-form-input
             v-model="emailResetPassword"
+            ref="emailField2"
             id="input-email-for-token"
             @keyup="mailSent = false"
             type="email"
@@ -47,22 +48,24 @@ export default {
       emailResetPassword: null,
       tokenAlert: null,
       mailSent: false,
-      tokenAlertMessage: null,
+      tokenAlertMessage: null
     };
   },
-  mounted() {},
+  computed: {},
   methods: {
     async requestToken() {
       try {
         this.mailSent = false;
-        const user = (await AuthenticationService.validUser(
-          this.emailResetPassword
-        )).data;
+        const user = (
+          await AuthenticationService.validUser(this.emailResetPassword)
+        ).data;
         if (user.id) {
           try {
-            const token = (await AuthenticationService.requestToken({
-              email: this.emailResetPassword,
-            })).data;
+            const token = (
+              await AuthenticationService.requestToken({
+                email: this.emailResetPassword
+              })
+            ).data;
             if (token) {
               this.tokenAlert = false;
               this.mailSent = true;
@@ -78,9 +81,8 @@ export default {
         this.tokenAlert = true;
         this.tokenAlertMessage = error.response.data.error;
       }
-    },
-  },
-  computed: {},
+    }
+  }
 };
 </script>
 

@@ -125,9 +125,9 @@ export default {
   },
   computed: {
     ...mapState({
-      user: state => state.user,
-      admin: state => state.admin,
-      userLoggedIn: state => state.userLoggedIn
+      user: state => state.CurrentUser.user,
+      admin: state => state.CurrentUser.admin,
+      userLoggedIn: state => state.CurrentUser.userLoggedIn
     })
   },
 
@@ -146,8 +146,8 @@ export default {
       }
     },
     logout() {
-      this.$store.dispatch("setToken", null);
-      this.$store.dispatch("setUser", null);
+      this.$store.dispatch("CurrentUser/setToken", null);
+      this.$store.dispatch("CurrentUser/setUser", null);
       window.location.reload();
     },
     set_category(category) {

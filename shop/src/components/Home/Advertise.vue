@@ -102,7 +102,7 @@ export default {
     };
   },
   mounted() {
-    this.admin = this.$store.state.admin;
+    this.admin = this.$store.state.CurrentUser.admin;
   },
   methods: {
     advertise() {

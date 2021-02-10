@@ -29,9 +29,10 @@ const upload = multer({
 module.exports = {
   async uploadProductImage(req, res, next) {
     try {
+      // what is the actual code
       await upload(req, res, function (err) {
         if (err) {
-          return res.send('Fail!')
+          return res.send('An error occured on uploading images')
         } else {
           next();
         }

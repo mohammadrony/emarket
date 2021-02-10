@@ -1,5 +1,6 @@
 export const CheckoutModule = {
     namespaced: true,
+    strict: true,
     state: {
         customerDetails: {
             name: null,
@@ -159,6 +160,5 @@ export const CheckoutModule = {
         setCustomerAddressCountry({ commit }, country) {
             commit("SET_CUSTOMER_ADDRESS_COUNTRY", country)
         }
-    },
-    modules: {}
+    }
 }

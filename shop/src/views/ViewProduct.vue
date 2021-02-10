@@ -169,7 +169,7 @@ export default {
   },
   computed: {
     ...mapState({
-      user: state => state.user
+      user: state => state.CurrentUser.user
     })
   }
 };

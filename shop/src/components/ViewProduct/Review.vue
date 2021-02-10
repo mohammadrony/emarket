@@ -370,9 +370,9 @@ export default {
     };
   },
   async mounted() {
-    this.userId = this.$store.state.userId;
-    this.admin = this.$store.state.admin;
-    this.userLoggedIn = this.$store.state.userLoggedIn;
+    this.userId = this.$store.state.CurrentUser.userId;
+    this.admin = this.$store.state.CurrentUser.admin;
+    this.userLoggedIn = this.$store.state.CurrentUser.userLoggedIn;
     this.productId = parseInt(this.$store.state.route.params.productId);
     try {
       this.reviewList = (

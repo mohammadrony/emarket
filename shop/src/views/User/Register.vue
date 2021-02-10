@@ -138,7 +138,6 @@
 import AuthenticationService from "@/services/AuthenticationService";
 import TopHeader from "@/components/TopHeader.vue";
 import Footer from "@/components/Footer.vue";
-import store from "@/store";
 
 export default {
   name: "Register",
@@ -148,7 +147,6 @@ export default {
   },
   data() {
     return {
-      shop: store.state.shop,
       firstName: null,
       firstNameMin: 2,
       firstNameMax: 20,
@@ -280,8 +278,8 @@ export default {
           email: this.email,
           password: this.password,
         });
-        this.$store.dispatch("setToken", response.data.token);
-        this.$store.dispatch("setUser", response.data.user);
+        this.$store.dispatch("CurrentUser/setToken", response.data.token);
+        this.$store.dispatch("CurrentUser/setUser", response.data.user);
         window.location.replace("/");
       } catch (error) {
         this.message = error.response.data.error;

@@ -82,7 +82,7 @@ export default {
     };
   },
   async mounted() {
-    this.admin = this.$store.state.admin;
+    this.admin = this.$store.state.CurrentUser.admin;
     const route = this.$store.state.route;
     if (route.query.q) this.searchText = route.query.q;
 

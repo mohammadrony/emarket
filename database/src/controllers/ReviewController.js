@@ -72,4 +72,18 @@ module.exports = {
 			})
 		}
 	},
+	async deleteReviewByUser(req, res) {
+		try {
+			await Review.destroy({
+				where: {
+					UserId: req.user.id
+				}
+			})
+			res.sendStatus(200)
+		} catch (err) {
+			res.status(500).send({
+				error: 'An error occured when trying to delete users review.'
+			})
+		}
+	},
 }

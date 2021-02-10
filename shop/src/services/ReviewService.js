@@ -12,5 +12,8 @@ export default {
     },
     deleteReview(reviewId) {
         return Api().delete(`/review/deleteReview/${reviewId}`)
+    },
+    deleteReviewByUser() {
+        return Api().delete("/review/deleteReviewByUser")
     }
 }

@@ -80,7 +80,6 @@ import TopHeader from "@/components/TopHeader.vue";
 import ReqPassToken from "@/components/User/ReqPassToken.vue";
 import Footer from "@/components/Footer.vue";
 import AuthenticationService from "@/services/AuthenticationService.js";
-import store from "@/store";
 
 export default {
   name: "ResetPassword",
@@ -91,7 +90,6 @@ export default {
   },
   data() {
     return {
-      shop: store.state.shop,
       tokenList: false,
       error: null,
       userId: null,
@@ -158,8 +156,8 @@ export default {
             email: this.email,
             password: this.newPassword
           });
-          this.$store.dispatch("setToken", response.data.token);
-          this.$store.dispatch("setUser", response.data.user);
+          this.$store.dispatch("CurrentUser/setToken", response.data.token);
+          this.$store.dispatch("CurrentUser/setUser", response.data.user);
           window.location.replace("/");
         } catch (error) {
           console.log(error.response.data.error);

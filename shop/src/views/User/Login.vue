@@ -17,6 +17,7 @@
                   v-model="email"
                   id="input-email"
                   type="email"
+                  ref="emailField"
                   @keyup="error = null"
                   @keyup.enter="login"
                   required
@@ -66,7 +67,7 @@
               </b-col>
             </b-row>
             <b-collapse id="collapse-requestToken">
-              <ReqPassToken />
+              <ReqPassToken/>
             </b-collapse>
             <hr />
             <b-row>
@@ -88,7 +89,6 @@ import AuthenticationService from "@/services/AuthenticationService.js";
 import TopHeader from "@/components/TopHeader.vue";
 import ReqPassToken from "@/components/User/ReqPassToken.vue";
 import Footer from "@/components/Footer.vue";
-import store from "@/store";
 
 export default {
   name: "Login",
@@ -99,11 +99,13 @@ export default {
   },
   data() {
     return {
-      shop: store.state.shop,
       email: null,
       password: null,
       error: null
     };
+  },
+  mounted() {
+    this.$refs.emailField.focus();
   },
   methods: {
     async login() {
@@ -118,8 +120,8 @@ export default {
             password: this.password
           })
         ).data;
-        this.$store.dispatch("setToken", response.token);
-        this.$store.dispatch("setUser", response.user);
+        this.$store.dispatch("CurrentUser/setToken", response.token);
+        this.$store.dispatch("CurrentUser/setUser", response.user);
         window.location.replace("/");
       } catch (error) {
         console.log(error.response.data.error);

@@ -1,5 +1,6 @@
 export const CartModule = {
     namespaced: true,
+    strict: true,
     state: {
         cartProducts: []
     },
@@ -64,8 +65,5 @@ export const CartModule = {
                 return true;
             }
         },
-    },
-    modules: {
-
     }
 }

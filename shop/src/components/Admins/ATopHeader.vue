@@ -56,15 +56,15 @@ export default {
   mounted() {},
   methods: {
     logout() {
-      this.$store.dispatch("setToken", null);
-      this.$store.dispatch("setUser", null);
+      this.$store.dispatch("CurrentUser/setToken", null);
+      this.$store.dispatch("CurrentUser/setUser", null);
       window.location.replace("/");
     }
   },
   computed: {
     ...mapState({
-      user: state => state.user,
-      userLoggedIn: state => state.userLoggedIn
+      user: state => state.CurrentUser.user,
+      userLoggedIn: state => state.CurrentUser.userLoggedIn
     })
   }
 };

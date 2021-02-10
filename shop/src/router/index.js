@@ -174,7 +174,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-  const admin = store.state.admin;
+  const admin = store.state.CurrentUser.admin;
   if (requiresAuth && !admin) {
     next("/error/401");
   }

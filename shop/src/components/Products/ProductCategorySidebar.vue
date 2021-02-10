@@ -344,7 +344,7 @@ export default {
   },
   computed: {
     ...mapState({
-      admin: (state) => state.admin,
+      admin: (state) => state.CurrentUser.admin,
       searchParameter: (state) => state.Products.searchParameter,
     }),
   },

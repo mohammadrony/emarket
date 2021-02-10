@@ -52,7 +52,7 @@ module.exports = (app) => {
     OrderController.getOrderList)
   app.get("/order/getOrder/:orderId",
     OrderController.getOrder),
-  app.get("/order/getOrderBySessionId/:sessionId",
+    app.get("/order/getOrderBySessionId/:sessionId",
       OrderController.getOrderBySessionId),
     app.post("/order/createOrder",
       OrderController.createOrder)
@@ -106,6 +106,9 @@ module.exports = (app) => {
   app.delete("/review/deleteReview/:reviewId",
     isAuthenticated,
     ReviewController.deleteReview)
+  app.delete("/review/deleteReviewByUser",
+    isAuthenticated,
+    ReviewController.deleteReviewByUser)
 
   // review reply
   app.get("/reviewReply/getReviewReplyList/:reviewId",
@@ -153,6 +156,9 @@ module.exports = (app) => {
   app.post("/updateUser",
     isAuthenticated,
     AuthenticationController.updateUser);
+  app.delete("/deleteAccount/:password",
+    isAuthenticated,
+    AuthenticationController.deleteAccount)
   app.post("/updatePassword",
     isAuthenticated,
     AuthenticationController.updatePassword);

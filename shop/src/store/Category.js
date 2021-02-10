@@ -3,6 +3,7 @@ import SubCategoryService from "@/services/SubCategoryService.js"
 import SubSubCategoryService from "@/services/SubSubCategoryService.js"
 export const CategoryModule = {
     namespaced: true,
+    strict: true,
     state: {
         categoryList: null,
         subCategoryList: null,
@@ -31,8 +32,5 @@ export const CategoryModule = {
             commit("SET_SUB_SUB_CATEGORY_LIST", subSubCategoryList);
             return categoryList;
         },
-    },
-    modules: {
-
     }
 }
