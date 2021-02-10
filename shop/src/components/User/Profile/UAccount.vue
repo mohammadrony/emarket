@@ -85,16 +85,16 @@ export default {
     },
     async deleteAccount() {
       try {
-        const response = await ReviewService.deleteReviewByUser();
-        console.log(response.data);
-      } catch (error) {
-        console.log(error.response.data.error);
-      }
-      try {
         await AuthenticationService.deleteAccount(this.userDeletePasscode);
         window.location.replace("/");
       } catch (error) {
         this.deleteAccountError = error.response.data.error;
+        console.log(error.response.data.error);
+      }
+      try {
+        const response = await ReviewService.deleteReviewByUser();
+        console.log(response.data);
+      } catch (error) {
         console.log(error.response.data.error);
       }
     }

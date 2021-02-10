@@ -11,7 +11,7 @@ export default {
     return Api().post("/updateUser", credentials);
   },
   deleteAccount(password){
-    return Api.delete(`/deleteAccount/${password}`)
+    return Api().delete(`/deleteAccount/${password}`);
   },
   updatePassword(credentials){
     return Api().post("/updatePassword", credentials);

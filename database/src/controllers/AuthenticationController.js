@@ -53,7 +53,9 @@ module.exports = {
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {
-                    return console.log('Error sending an email', err);
+                    return res.status(403).send({
+                        error: "An error occured when trying to send an email to register."
+                    });
                 }
             });
             const newUser = {
@@ -113,7 +115,9 @@ module.exports = {
                 }
                 await transporter.sendMail(mailOptions, function (err) {
                     if (err) {
-                        return console.log('Error sending an email', err);
+                        return res.status(403).send({
+                            error: "An error occured when trying to send an email to login verification."
+                        });
                     }
                 });
                 return res.status(403).send({
@@ -178,32 +182,12 @@ module.exports = {
         }
     },
     async deleteAccount(req, res) {
-        console.log("up here to delete account")
-        console.log("up here to delete account")
-        console.log("up here to delete account")
-        console.log("up here to delete account")
-        console.log("up here to delete account")
-        console.log("up here to delete account")
-        console.log("up here to delete account")
-        console.log("up here to delete account")
-        console.log("up here to delete account")
-        console.log("up here to delete account")
         try {
-            console.log(req.user.id, req.params.password)
-            console.log(req.user.id, req.params.password)
-            console.log(req.user.id, req.params.password)
-            console.log(req.user.id, req.params.password)
-            console.log(req.user.id, req.params.password)
-            console.log(req.user.id, req.params.password)
-            const user = User.findOne({
-                where: {
-                    id: req.user.id,
-                    password: req.params.password
-                }
-            })
-            if (!user) {
+            const user = User.findById(req.user.id)
+            const correctPassword = req.params.password === user.password
+            if (!correctPassword) {
                 return res.status(403).send({
-                    error: "Incorrect Password."
+                    error: 'Incorrect password.'
                 })
             }
             await user.destroy();
@@ -327,13 +311,15 @@ module.exports = {
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {
-                    return console.log('Error sending an email', err);
+                    return res.status(403).send({
+                        error: "An error occured when trying to send an email for request password token"
+                    });
                 }
             });
             res.send(token);
         } catch (err) {
             res.status(500).send({
-                error: 'An error occured when trying to reset the password.'
+                error: 'An error occured when trying to request password token.'
             })
         }
     },
@@ -353,7 +339,7 @@ module.exports = {
             res.send(user)
         } catch (err) {
             res.status(500).send({
-                error: "An error occured when verifying the authentication token."
+                error: "An error occured when verifying the password reset token."
             })
         }
     },
@@ -373,7 +359,7 @@ module.exports = {
             res.send(user)
         } catch (err) {
             res.status(500).send({
-                error: "An error occured when verifying the authentication token."
+                error: "An error occured when verifying the register token."
             })
         }
     },
@@ -409,13 +395,15 @@ module.exports = {
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {
-                    return console.log('Error sending an email', err);
+                    return res.status(403).send({
+                        error: "An error occured when trying to send email to reset password."
+                    })
                 }
             });
             res.send(userId)
         } catch (err) {
             res.status(500).send({
-                error: "An error occured when trying to reset your password."
+                error: "An error occured when trying to reset password."
             })
         }
     },
@@ -443,17 +431,20 @@ module.exports = {
                 to: req.body.email,
                 subject: 'e-store',
                 text: "Hello" + req.body.name + "\n\n"
-                    + "your email is verified on our store.\n"
+                    + "your email is now verified on our store.\n\n"
+                    + "Thank you.\n"
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {
-                    return console.log('Error sending an email', err);
+                    return res.status(403).send({
+                        error: "An error occured when trying to send an email to reset register token"
+                    });
                 }
             });
             res.send(userRet)
         } catch (err) {
             res.status(500).send({
-                error: "An error occured when trying to reset your password."
+                error: "An error occured when trying to reset register token."
             })
         }
     }
