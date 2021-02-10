@@ -211,7 +211,7 @@ export default {
     }
   },
   methods: {
-    checkPasswordMatch() {
+    passwordValidate() {
       if (!this.password) {
         this.message = "Enter a new password.";
         return false;
@@ -245,7 +245,7 @@ export default {
         return false;
       } else return true;
     },
-    checkEmailValidate() {
+    emailVAlidate() {
       if (!this.email) {
         this.message = "Input your email address.";
         return false;
@@ -254,7 +254,7 @@ export default {
         return false;
       } else return true;
     },
-    checkNameLength() {
+    nameValidate() {
       if (!this.firstName || this.firstName.length < this.firstNameMin) {
         this.message = "First Name is too short!";
         return false;
@@ -270,16 +270,15 @@ export default {
       } else return true;
     },
     async createAccount() {
-      if (!this.checkNameLength()) return;
-      if (!this.checkEmailValidate()) return;
-      if (!this.checkPasswordMatch()) return;
+      if (!this.nameValidate()) return;
+      if (!this.emailVAlidate()) return;
+      if (!this.passwordValidate()) return;
       try {
         const response = await AuthenticationService.register({
           firstName: this.firstName,
           lastName: this.lastName,
           email: this.email,
           password: this.password,
-          isAdmin: false
         });
         this.$store.dispatch("setToken", response.data.token);
         this.$store.dispatch("setUser", response.data.user);

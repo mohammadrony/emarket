@@ -14,6 +14,17 @@ function jwtSignUser(user) {
 module.exports = {
     async register(req, res) {
         try {
+            req.body.userType = "customer"
+            if (req.body.userType == "customer") {
+                req.body.variant = "warning"
+                req.body.priority = 2
+                req.body.ShopId = 1
+            }
+            else if (req.body.userType == "Admin") {
+                req.body.variant = "dark"
+                req.body.priority = 1
+                req.body.ShopId = 1
+            }
             var buf = crypto.randomBytes(20);
             var token = buf.toString('hex');
             req.body.registerToken = token;
@@ -34,8 +45,8 @@ module.exports = {
                 from: process.env.ESTORE_EMAIL,
                 to: req.body.email,
                 subject: "Welcome to e-store",
-                text: 'Hello' + user.firstName + ' ' + user.lastName +
-                    'You are receiving this because you (or someone else) have requested to create an account on e-store\n\n' +
+                text: 'Hello ' + user.firstName + ' ' + user.lastName + ',\n\n' +
+                    'Your email verification link to create an account on e-store\n\n' +
                     'Please follow the link to complete the process:\n\n' +
                     'http://' + 'localhost:8080' + '/register/' + token + '\n\n' +
                     'If you did not request this, please ignore this email.\n'
@@ -54,10 +65,9 @@ module.exports = {
                 priority: user.priority,
                 ShopId: user.ShopId
             }
-            userJson = newUser.toJSON()
             res.send({
-                user: userJson,
-                token: jwtSignUser(userJson)
+                user: newUser,
+                token: jwtSignUser(newUser)
             })
         } catch (err) {
             res.status(400).send({
@@ -71,18 +81,10 @@ module.exports = {
             const user = await User.findOne({
                 where: {
                     email: email
-                },
-                attributes: [
-                    "id",
-                    "username",
-                    "firstName",
-                    "lastName",
-                    "profileImage",
-                    "priority",
-                    "ShopId"
-                ]
+                }
             })
             if (!user) {
+                console.log("user not found")
                 return res.status(403).send({
                     error: 'Incorrect login information.'
                 })
@@ -123,11 +125,20 @@ module.exports = {
                     error: 'Incorrect login information.'
                 })
             }
-            console.log(user)
-            userJson = user.toJSON()
+
+            const retUser = {
+                id: user.id,
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                profileImage: user.profileImage,
+                userType: user.userType,
+                priority: user.priority,
+                ShopId: user.ShopId
+            }
             res.send({
-                user: userJson,
-                token: jwtSignUser(userJson)
+                user: retUser,
+                token: jwtSignUser(retUser)
             })
         } catch (err) {
             res.status(500).send({

@@ -145,8 +145,16 @@
           <b-tab title="Your Review"><p>I'm the second tab</p></b-tab>
         </b-tabs>
       </div>
-      <div v-if="userId == 0">
+      <div class="my-5" v-if="userId == 0">
+        <br>
+        <br>
+        <br>
         User not found...
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
       </div>
     </b-container>
     <Footer />
