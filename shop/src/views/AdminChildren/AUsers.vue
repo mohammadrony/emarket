@@ -156,13 +156,13 @@ export default {
       userList2: [],
       userStatus: [
         {
-          name: "admin",
+          name: "Admin",
           priority: 1,
           description: "Owner of this system.",
           variant: "dark"
         },
         {
-          name: "customer",
+          name: "Customer",
           priority: 2,
           description: "End user of the system.",
           variant: "warning"

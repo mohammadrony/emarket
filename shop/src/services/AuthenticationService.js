@@ -10,8 +10,11 @@ export default {
   updateUser(credentials){
     return Api().post("/updateUser", credentials);
   },
-  deleteAccount(password){
-    return Api().delete(`/deleteAccount/${password}`);
+  verifyPassword(userDeletePasscode){
+    return Api().get(`/verifyPassword/${userDeletePasscode}`)
+  },
+  deleteAccount(){
+    return Api().delete("/user/deleteAccount");
   },
   updatePassword(credentials){
     return Api().post("/updatePassword", credentials);

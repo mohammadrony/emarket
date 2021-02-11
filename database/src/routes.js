@@ -155,13 +155,16 @@ module.exports = (app) => {
     AuthenticationController.user)
   app.post("/updateUser",
     isAuthenticated,
-    AuthenticationController.updateUser);
-  app.delete("/deleteAccount/:password",
+    AuthenticationController.updateUser)
+  app.get("/verifyPassword/:password",
+    isAuthenticated,
+    AuthenticationController.verifyPassword)
+  app.delete("/user/deleteAccount",
     isAuthenticated,
     AuthenticationController.deleteAccount)
   app.post("/updatePassword",
     isAuthenticated,
-    AuthenticationController.updatePassword);
+    AuthenticationController.updatePassword)
   app.get("/getUserList",
     isAuthenticated,
     AuthenticationController.getUserList)

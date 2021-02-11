@@ -35,7 +35,7 @@
       <b-form-input
         type="password"
         ref="passwordField"
-        v-model="userDeletePasscode"
+        v-model="deleteUserPasscode"
         id="input-password"
       >
       </b-form-input>
@@ -72,8 +72,9 @@ export default {
   data() {
     return {
       userId: 0,
+      correctPassword: false,
       deleteAccountError: "",
-      userDeletePasscode: null
+      deleteUserPasscode: null
     };
   },
   mounted() {
@@ -85,17 +86,30 @@ export default {
     },
     async deleteAccount() {
       try {
-        await AuthenticationService.deleteAccount(this.userDeletePasscode);
-        window.location.replace("/");
+        const response = (
+          await AuthenticationService.verifyPassword(this.deleteUserPasscode)
+        ).data;
+        if (response.correctPassword) {
+          this.correctPassword = response.correctPassword;
+        }
       } catch (error) {
-        this.deleteAccountError = error.response.data.error;
         console.log(error.response.data.error);
       }
-      try {
-        const response = await ReviewService.deleteReviewByUser();
-        console.log(response.data);
-      } catch (error) {
-        console.log(error.response.data.error);
+      if (this.correctPassword) {
+        try {
+          await ReviewService.deleteReviewByUser();
+        } catch (error) {
+          console.log(error.response.data.error);
+        }
+        try {
+          await AuthenticationService.deleteAccount();
+        } catch (error) {
+          this.deleteAccountError = error.response.data.error;
+          console.log(error.response.data.error);
+        }
+        this.$store.dispatch("CurrentUser/setToken", null);
+        this.$store.dispatch("CurrentUser/setUser", null);
+        window.location.replace("/");
       }
     }
   },

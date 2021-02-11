@@ -67,7 +67,7 @@
               </b-col>
             </b-row>
             <b-collapse id="collapse-requestToken">
-              <ReqPassToken/>
+              <ReqPassToken />
             </b-collapse>
             <hr />
             <b-row>
@@ -133,37 +133,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.error {
-  color: red;
-}
-.abbr:hover,
-.abbr:active {
-  color: #4caf50;
-  color: #19689c;
-}
-.abbr:active,
-.abbr:hover {
-  outline-width: 0;
-}
-.logo {
-  font-family: fontawesome;
-  text-decoration: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 30px;
-  letter-spacing: 3px;
-  color: #000000;
-  display: block;
-  top: 17px;
-}
-// a {
-//     color: inherit;
-// }
-.abbr {
-  background-color: transparent;
-}
-#layoutAuthentication {
-  background-color: rgb(255, 255, 255);
-}
 </style>

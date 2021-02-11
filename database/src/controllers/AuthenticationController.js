@@ -14,8 +14,8 @@ function jwtSignUser(user) {
 module.exports = {
     async register(req, res) {
         try {
-            req.body.userType = "customer"
-            if (req.body.userType == "customer") {
+            req.body.userType = "Customer"
+            if (req.body.userType == "Customer") {
                 req.body.variant = "warning"
                 req.body.priority = 2
                 req.body.ShopId = 1
@@ -181,17 +181,31 @@ module.exports = {
             })
         }
     },
-    async deleteAccount(req, res) {
+    async verifyPassword(req, res) {
         try {
-            const user = User.findById(req.user.id)
-            const correctPassword = req.params.password === user.password
+            const correctPassword = req.params.password === req.user.password
             if (!correctPassword) {
                 return res.status(403).send({
                     error: 'Incorrect password.'
                 })
             }
+            res.send({ correctPassword: correctPassword })
+        } catch (error) {
+            res.status(500).send({
+                error: "An error occured when verifying the password"
+            })
+        }
+    },
+    async deleteAccount(req, res) {
+        try {
+            const user = await User.findByPk(req.user.id)
+            if (!user) {
+                return res.status(403).send({
+                    error: 'No user to delete.'
+                })
+            }
             await user.destroy();
-            res.sendStatus(200)
+            res.send({ id: user.id })
         } catch (error) {
             res.status(500).send({
                 error: "An error occured when trying to delete an user account"

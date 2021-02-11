@@ -79,7 +79,7 @@ module.exports = {
 					UserId: req.user.id
 				}
 			})
-			res.sendStatus(200)
+			res.send({ id: req.user.id })
 		} catch (err) {
 			res.status(500).send({
 				error: 'An error occured when trying to delete users review.'
