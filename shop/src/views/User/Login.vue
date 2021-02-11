@@ -6,9 +6,8 @@
         <b-col cols="5">
           <b-card style="color: #001e5f">
             <h4 style="font-weight: bold">Login</h4>
-            <b-form class="mt-4">
+            <b-form @submit.stop.prevent="login" class="mt-4">
               <b-form-group
-                style="font-weight: bold"
                 id="input-group-email"
                 label="Email"
                 label-for="input-email"
@@ -18,14 +17,11 @@
                   id="input-email"
                   type="email"
                   ref="emailField"
-                  @keyup="error = null"
-                  @keyup.enter="login"
                   required
                 ></b-form-input>
               </b-form-group>
 
               <b-form-group
-                style="font-weight: bold"
                 id="input-group-password"
                 label="Password"
                 label-for="input-password"
@@ -34,22 +30,23 @@
                   v-model="password"
                   id="input-password"
                   type="password"
-                  @keyup="error = null"
-                  @keyup.enter="login"
                   required
                 ></b-form-input>
               </b-form-group>
-              <h6 style="color: #f00">
-                {{ error }}
-              </h6>
+              <b-alert
+                variant="primary"
+                class="my-2 p-1 pl-2"
+                :show="loginAlert"
+              >
+                {{ loginMessage }}
+              </b-alert>
               <b-row>
                 <b-col cols="3"></b-col>
                 <b-col cols="6">
                   <b-button
-                    style="font-weight: bold"
                     block
                     class="p-2 mt-2"
-                    @click="login"
+                    type="submit"
                     variant="warning"
                     >Login</b-button
                   >
@@ -72,8 +69,8 @@
             <hr />
             <b-row>
               <b-col class="text-center">
-                <a>New Customer?</a
-                ><a href="/register">&nbsp;Create your account</a>
+                New Customer?&nbsp;
+                <b-link to="/register">Create your account</b-link>
               </b-col>
             </b-row>
           </b-card>
@@ -101,7 +98,8 @@ export default {
     return {
       email: null,
       password: null,
-      error: null
+      loginMessage: null,
+      loginAlert: false
     };
   },
   mounted() {
@@ -110,10 +108,6 @@ export default {
   methods: {
     async login() {
       try {
-        if (!this.email || !this.password) {
-          this.error = "Provide login information.";
-          return;
-        }
         const response = (
           await AuthenticationService.login({
             email: this.email,
@@ -124,8 +118,8 @@ export default {
         this.$store.dispatch("CurrentUser/setUser", response.user);
         window.location.replace("/");
       } catch (error) {
-        console.log(error.response.data.error);
-        this.error = error.response.data.error;
+        this.loginAlert = true;
+        this.loginMessage = error.response.data.error;
       }
     }
   }

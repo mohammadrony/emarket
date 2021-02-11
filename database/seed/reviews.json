@@ -10,15 +10,15 @@
     "id": 2,
     "rating": 5,
     "comment": "this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy.",
-    "UserId": 2,
-    "ProductId": 1
+    "UserId": 1,
+    "ProductId": 2
   },
   {
     "id": 3,
     "rating": 4,
     "comment": "this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy.",
-    "UserId": 3,
-    "ProductId": 1
+    "UserId": 1,
+    "ProductId": 3
   },
   {
     "id": 4,

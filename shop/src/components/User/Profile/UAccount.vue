@@ -34,14 +34,15 @@
       >
       <b-form-input
         type="password"
+        @keyup="modalAlert = false"
         ref="passwordField"
-        v-model="deleteUserPasscode"
+        v-model="currentPassword"
         id="input-password"
       >
       </b-form-input>
-      <b-alert class="my-2" v-if="deleteAccountError">{{
-        deleteAccountError
-      }}</b-alert>
+      <b-alert :show="modalAlert" variant="primary" class="my-2 p-1 pl-2">
+        {{ deleteAccountError }}
+      </b-alert>
       <b-row class="mt-3">
         <b-col cols="4"></b-col>
         <b-col cols="4">
@@ -65,6 +66,7 @@
 
 <script>
 import AuthenticationService from "@/services/AuthenticationService.js";
+import UserService from "@/services/UserService.js";
 import ReviewService from "@/services/ReviewService.js";
 export default {
   name: "UAccount",
@@ -72,9 +74,9 @@ export default {
   data() {
     return {
       userId: 0,
-      correctPassword: false,
+      modalAlert: null,
       deleteAccountError: "",
-      deleteUserPasscode: null
+      currentPassword: null
     };
   },
   mounted() {
@@ -85,25 +87,26 @@ export default {
       this.$refs.passwordField.focus();
     },
     async deleteAccount() {
+      var correctPassword = false;
       try {
-        const response = (
-          await AuthenticationService.verifyPassword(this.deleteUserPasscode)
-        ).data;
-        if (response.correctPassword) {
-          this.correctPassword = response.correctPassword;
-        }
+        correctPassword = (
+          await AuthenticationService.verifyPassword(this.currentPassword)
+        ).data.correctPassword;
       } catch (error) {
+        this.modalAlert = true;
+        this.deleteAccountError = error.response.data.error;
         console.log(error.response.data.error);
       }
-      if (this.correctPassword) {
+      if (correctPassword) {
         try {
           await ReviewService.deleteReviewByUser();
         } catch (error) {
           console.log(error.response.data.error);
         }
         try {
-          await AuthenticationService.deleteAccount();
+          await UserService.deleteAccount();
         } catch (error) {
+          this.modalAlert = true;
           this.deleteAccountError = error.response.data.error;
           console.log(error.response.data.error);
         }

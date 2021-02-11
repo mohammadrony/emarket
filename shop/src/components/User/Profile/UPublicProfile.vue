@@ -71,11 +71,25 @@
           </b-form>
         </div>
 
-        <div v-if="user.username">
+        <div>
           <div class="mt-3">
             <strong>Username</strong>
+            <b-button
+              v-if="!user.username"
+              @click="changeUserName"
+              variant="white"
+              class="ml-1"
+              size="sm"
+            >
+              <b-icon
+                v-b-tooltip.hover
+                title="Add username"
+                scale="0.8"
+                icon="pen"
+              ></b-icon>
+            </b-button>
           </div>
-          <div class="mt-1" v-if="editUserName == 0">
+          <div class="mt-1" v-if="user.username && editUserName == 0">
             {{ user.username }}
             <b-button
               @click="changeUserName"
@@ -85,7 +99,7 @@
             >
               <b-icon
                 v-b-tooltip.hover
-                title="change username"
+                title="Change username"
                 scale="0.8"
                 icon="pen"
               ></b-icon>
@@ -99,9 +113,17 @@
                     size="sm"
                     placeholder="Username"
                     v-model="userName"
+                    @keyup="checkUserName"
+                    :state="userNameValidation"
                     required
                   >
                   </b-form-input>
+                  <b-form-valid-feedback :state="userNameValidation">
+                    This username is available.
+                  </b-form-valid-feedback>
+                  <b-form-invalid-feedback :state="userNameValidation">
+                    {{ userNameMessage }}
+                  </b-form-invalid-feedback>
                 </b-col>
               </b-row>
               <b-row class="mt-2">
@@ -146,8 +168,16 @@
             ></b-icon>
           </b-button>
         </div>
-        <b-modal title="Change password" id="modalUpdatePassword" hide-footer>
-          <b-form @reset="resetField" @submit.stop.prevent="updatePassword">
+        <b-modal
+          @shown="$refs.currentPasswordField.focus()"
+          title="Change password"
+          id="modalUpdatePassword"
+          hide-footer
+        >
+          <b-form
+            @reset="resetPasswordField"
+            @submit.stop.prevent="updatePassword"
+          >
             <b-form-group
               id="input-group-current-password"
               label="Current Password"
@@ -157,8 +187,22 @@
                 v-model="currentPassword"
                 id="input-current-password"
                 type="password"
+                ref="currentPasswordField"
+                :state="validCurrentPassword && currentPasswordValidation"
                 required
               ></b-form-input>
+              <b-form-invalid-feedback
+                v-if="currentPassword"
+                :state="validCurrentPassword && currentPasswordValidation"
+              >
+                {{ currentPasswordMessage }}
+              </b-form-invalid-feedback>
+              <b-form-invalid-feedback
+                v-if="!currentPassword"
+                :state="validCurrentPassword && currentPasswordValidation"
+              >
+                Current password field can't be empty!
+              </b-form-invalid-feedback>
             </b-form-group>
             <b-form-group
               id="input-group-new-password"
@@ -169,8 +213,23 @@
                 v-model="newPassword"
                 id="input-new-password"
                 type="password"
+                :state="newPasswordValidation"
                 required
               ></b-form-input>
+
+              <b-form-invalid-feedback
+                v-if="newPassword"
+                :state="newPasswordValidation"
+              >
+                New password must have 8-32 character long, contain letters,
+                numbers and must not contain space.
+              </b-form-invalid-feedback>
+              <b-form-invalid-feedback
+                v-if="!newPassword"
+                :state="newPasswordValidation"
+              >
+                Password field can't be empty!
+              </b-form-invalid-feedback>
             </b-form-group>
             <b-form-group
               id="input-group-confirm-password"
@@ -180,9 +239,22 @@
               <b-form-input
                 v-model="confirmPassword"
                 id="input-confirm-password"
+                :state="confirmPasswordValidation"
                 type="password"
                 required
               ></b-form-input>
+              <b-form-invalid-feedback
+                v-if="confirmPassword"
+                :state="confirmPasswordValidation"
+              >
+                Password didn't match
+              </b-form-invalid-feedback>
+              <b-form-invalid-feedback
+                v-if="!confirmPassword"
+                :state="confirmPasswordValidation"
+              >
+                Password field can't be empty!
+              </b-form-invalid-feedback>
             </b-form-group>
             <b-row class="mt-4">
               <b-col cols="4"></b-col>
@@ -214,77 +286,167 @@
 
 <script>
 import AuthenticationService from "@/services/AuthenticationService.js";
+import UserService from "@/services/UserService.js";
 export default {
   name: "UPublicProfile",
   components: {},
   data() {
     return {
       user: {},
-      editName: 0,
-      editUserName: 0,
       userId: 0,
-      firstName: "",
+      editName: 0,
       lastName: "",
       userName: "",
+      firstName: "",
+      editUserName: 0,
+      formatUserName: /^[a-zA-Z0-9]{6,20}$/,
+      formatPassword: /^[a-zA-z0-9]{8,32}$/,
+      userNameMessage: "",
+      userNameValidation: null,
+      validCurrentPassword: true,
+      currentPasswordMessage: "",
+      newPasswordMessage: "",
+      confirmPasswordMessage: "",
       currentPassword: null,
       newPassword: null,
       confirmPassword: null
     };
   },
-  mounted() {
-    this.user = this.$store.state.CurrentUser.user;
+  computed: {
+    currentPasswordValidation() {
+      if (this.currentPassword == "") return false;
+      else return null;
+    },
+    newPasswordValidation() {
+      if (this.newPassword == null) return null;
+      else if (!this.formatPassword.test(this.newPassword)) {
+        return false;
+      } else return true;
+    },
+    confirmPasswordValidation() {
+      if (this.confirmPassword == null) return null;
+      else if (
+        this.newPassword != this.confirmPassword ||
+        !this.formatPassword.test(this.confirmPassword)
+      ) {
+        return false;
+      } else return true;
+    }
+  },
+  async mounted() {
+    this.userId = this.$store.state.CurrentUser.userId;
+    try {
+      this.user = (await UserService.getUserById(this.userId)).data;
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
   },
   methods: {
     changeName() {
       this.firstName = this.user.firstName;
       this.lastName = this.user.lastName;
       this.editName ^= 1;
-      console.log("change name");
     },
     async updateName() {
-      await AuthenticationService.updateUser({
-        id: this.user.id,
-        firstName: this.firstName,
-        lastName: this.lastName
-      });
-      this.editName ^= 1;
-      window.location.reload();
-    },
-    async updateUserName() {
-      await AuthenticationService.updateUser({
-        id: this.user.id,
-        username: this.firstName
-      });
-      this.editUserName ^= 1;
-      window.location.reload();
-    },
-    changeUserName() {
-      this.userName = this.user.username;
-      this.editUserName ^= 1;
-      console.log("change user name");
-    },
-    async updatePassword() {
       try {
-        const response = (
-          await AuthenticationService.updatePassword({
-            currentPassword: this.currentPassword,
-            newPassword: this.newPassword
-          })
-        ).data;
-        console.log(response);
+        await UserService.updateUser({
+          id: this.user.id,
+          firstName: this.firstName,
+          lastName: this.lastName
+        });
+        this.$store.dispatch("CurrentUser/setName", {
+          firstName: this.firstName,
+          lastName: this.lastName
+        });
+        this.editName ^= 1;
+        window.location.reload();
       } catch (error) {
         console.log(error.response.data.error);
       }
     },
-    resetField() {
+    changeUserName() {
+      this.userName = this.user.username;
+      this.editUserName ^= 1;
+    },
+    async checkUserName() {
+      if (this.userName == this.user.username) {
+        return true;
+      } else if (!this.formatUserName.test(this.userName)) {
+        this.userNameValidation = false;
+        this.userNameMessage =
+          "Your username must be 6-20 characters using alphabets and numbers";
+        return false;
+      }
+      try {
+        const response = (await UserService.checkUserName(this.userName)).data;
+        this.userNameValidation = response.userNameAvailable;
+        if (response.userNameAvailable == true) {
+          this.userNameMessage = "";
+          return true;
+        } else {
+          this.userNameMessage = "This username is not available";
+          return false;
+        }
+      } catch (error) {
+        this.userNameValidation = false;
+        this.userNameMessage = error.response.data.error;
+        console.log(error.response.data.error);
+      }
+    },
+    async updateUserName() {
+      if (
+        !(await this.checkUserName()) ||
+        this.userName == this.user.username
+      ) {
+        return;
+      }
+      try {
+        await UserService.updateUser({
+          id: this.user.id,
+          username: this.userName
+        });
+        this.$store.dispatch("CurrentUser/setUserName", this.userName);
+        this.editUserName ^= 1;
+        window.location.reload();
+      } catch (error) {
+        this.userNameValidation = false;
+        this.userNameMessage = error.response.data.error;
+        console.log(error.response.data.error);
+      }
+    },
+    resetPasswordField() {
       this.currentPassword = "";
-      this.newPassword = "";
-      this.confirmPassword = "";
+      this.newPassword = null;
+      this.confirmPassword = null;
+    },
+    async updatePassword() {
+      var correctPassword = false;
+      try {
+        correctPassword = (
+          await AuthenticationService.verifyPassword(this.currentPassword)
+        ).data.correctPassword;
+      } catch (error) {
+        this.validCurrentPassword = false;
+        this.currentPasswordMessage = error.response.data.error;
+      }
+      if (
+        correctPassword &&
+        this.newPasswordValidation &&
+        this.confirmPasswordValidation
+      ) {
+        try {
+          await AuthenticationService.updatePassword({
+            password: this.newPassword
+          });
+          window.location.reload();
+        } catch (error) {
+          this.validCurrentPassword = false;
+          this.currentPasswordMessage = error.response.data.error;
+        }
+      }
     }
-  },
-  computed: {}
+  }
 };
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="sass" scoped></style>

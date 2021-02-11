@@ -54,6 +54,9 @@ export default {
   },
   mounted() {
     this.userId = this.$store.state.CurrentUser.userId;
+    if (this.userId == 0) {
+      window.location.replace("/");
+    }
   },
   methods: {}
 };

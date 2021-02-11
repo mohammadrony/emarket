@@ -152,41 +152,13 @@ module.exports = {
             })
         }
     },
-    async user(req, res) {
-        try {
-            const user = await User.findByPk(req.params.id, {
-                attributes: [
-                    "id",
-                    "username",
-                    "firstName",
-                    "lastName",
-                    "profileImage",
-                    "email",
-                    "phoneNo",
-                    "userType",
-                    "variant",
-                    "priority",
-                    "ShopId"
-                ]
-            })
-            if (!user) {
-                return res.status(403).send({
-                    error: "User not found."
-                })
-            }
-            res.send(user)
-        } catch (err) {
-            res.status(500).send({
-                error: "An error occured when trying to get an user."
-            })
-        }
-    },
+
     async verifyPassword(req, res) {
         try {
             const correctPassword = req.params.password === req.user.password
             if (!correctPassword) {
                 return res.status(403).send({
-                    error: 'Incorrect password.'
+                    error: 'incorrect current password.'
                 })
             }
             res.send({ correctPassword: correctPassword })
@@ -196,103 +168,19 @@ module.exports = {
             })
         }
     },
-    async deleteAccount(req, res) {
-        try {
-            const user = await User.findByPk(req.user.id)
-            if (!user) {
-                return res.status(403).send({
-                    error: 'No user to delete.'
-                })
-            }
-            await user.destroy();
-            res.send({ id: user.id })
-        } catch (error) {
-            res.status(500).send({
-                error: "An error occured when trying to delete an user account"
-            })
-        }
-    },
-    async updateUser(req, res) {
+    async updatePassword(req, res) {
         try {
             const user = await User.update(req.body, {
                 where: {
-                    id: req.body.id
-                }
-            })
-            res.send(user);
-        } catch (err) {
-            res.status(500).send({
-                error: "An error occured when trying to update user information"
-            })
-        }
-    },
-    async updatePassword(req, res) {
-        try {
-            userId = req.user.id;
-            newPassword = req.body.newPassword;
-            currentPassword = req.body.currentPassword;
-            const user = await User.update(newPassword, {
-                where: {
-                    id: userId,
-                    password: currentPassword
+                    id: req.user.id
                 }
             })
             res.send(user)
         } catch (err) {
             res.status(500).send({
-                error: "Incorrect current password."
+                error: "An error occured when trying to update the password"
             })
         }
-    },
-    async getUserList(req, res) {
-        try {
-            const userId = req.user.id
-            if (!userId) {
-                return res.status(403).send({
-                    error: "Request is not authenticated."
-                })
-            }
-            const userList = await User.findAll({
-                attributes: [
-                    "id",
-                    "email",
-                    "firstName",
-                    "lastName",
-                    "phoneNo",
-                    "profileImage",
-                    "userType",
-                    "variant",
-                    "priority",
-                    "ShopId"
-                ]
-            })
-            res.send(userList);
-        } catch (err) {
-            res.status(500).send({
-                error: "An error occured when trying to get user list."
-            })
-        }
-    },
-    async validUser(req, res) {
-        try {
-            const user = await User.findOne({
-                where: {
-                    email: req.params.email
-                },
-                attributes: ['id']
-            })
-            if (!user) {
-                return res.status(403).send({
-                    error: "Email not registered."
-                })
-            }
-            res.send(user)
-        } catch (error) {
-            res.status(500).send({
-                error: "An error occured when trying to get an user."
-            })
-        }
-
     },
     async requestToken(req, res) {
         try {

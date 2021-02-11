@@ -6,11 +6,10 @@
         <b-col cols="7">
           <b-card style="color: #001e5f">
             <h4 style="font-weight: bold">Create Account</h4>
-            <b-form @submit.stop.prevent class="mt-4">
+            <b-form @submit.stop.prevent="createAccount" class="mt-4">
               <b-row>
                 <b-col>
                   <b-form-group
-                    style="font-weight: bold"
                     id="input-group-first-name"
                     label="First Name"
                     label-for="input-first-name"
@@ -22,11 +21,16 @@
                       :state="firstNameValidation"
                       required
                     ></b-form-input>
+                    <b-form-invalid-feedback
+                      v-if="firstName"
+                      :state="firstNameValidation"
+                    >
+                      Your first name could be 15 character long.
+                    </b-form-invalid-feedback>
                   </b-form-group>
                 </b-col>
                 <b-col>
                   <b-form-group
-                    style="font-weight: bold"
                     id="input-group-last-name"
                     label="Last Name"
                     label-for="input-last-name"
@@ -38,11 +42,16 @@
                       :state="lastNameValidation"
                       required
                     ></b-form-input>
+                    <b-form-invalid-feedback
+                      v-if="lastName"
+                      :state="lastNameValidation"
+                    >
+                      Your last name could be 15 character long.
+                    </b-form-invalid-feedback>
                   </b-form-group>
                 </b-col>
               </b-row>
               <b-form-group
-                style="font-weight: bold"
                 id="input-group-email"
                 label="Email"
                 label-for="input-email"
@@ -51,15 +60,20 @@
                   v-model="email"
                   id="input-email"
                   type="email"
-                  :state="emailValidation"
+                  :state="validEmail && emailValidation"
                   required
                 ></b-form-input>
+                <b-form-invalid-feedback
+                  v-if="email"
+                  :state="validEmail && emailValidation"
+                >
+                  {{ emailMessage }}
+                </b-form-invalid-feedback>
               </b-form-group>
 
               <b-row>
                 <b-col>
                   <b-form-group
-                    style="font-weight: bold"
                     id="input-group-password"
                     label="Password"
                     label-for="input-password"
@@ -67,17 +81,21 @@
                     <b-form-input
                       v-model="password"
                       id="input-password"
-                      @keyup="message = null"
                       type="password"
                       :state="newPasswordValidation"
                       required
                     ></b-form-input>
+                    <b-form-invalid-feedback
+                      v-if="password"
+                      :state="newPasswordValidation"
+                    >
+                      Your password could be 8-32 character long, contain
+                      letters, numbers and must not contain space.
+                    </b-form-invalid-feedback>
                   </b-form-group>
                 </b-col>
                 <b-col>
                   <b-form-group
-                    @submit.stop.prevent
-                    style="font-weight: bold"
                     id="input-group-confirm-password"
                     label="Confirm Password"
                     label-for="input-confirm-password"
@@ -85,33 +103,26 @@
                     <b-form-input
                       v-model="confirmPassword"
                       id="input-confirm-password"
-                      @keyup="message = null"
                       type="password"
                       :state="confirmPasswordValidation"
                       required
                     ></b-form-input>
+                    <b-form-invalid-feedback
+                      v-if="confirmPassword"
+                      :state="confirmPasswordValidation"
+                    >
+                      Password didn't match
+                    </b-form-invalid-feedback>
                   </b-form-group>
                 </b-col>
               </b-row>
 
-              <b-row>
-                <b-col>
-                  <b-alert
-                    variant="primary"
-                    class="my-2 p-1 pl-2"
-                    :show="tokenAlert"
-                  >
-                    {{ message }}
-                  </b-alert>
-                </b-col>
-              </b-row>
               <b-row class="mt-3">
                 <b-col cols="3"></b-col>
                 <b-col cols="6">
                   <b-button
-                    style="font-weight: bold"
                     block
-                    @click="createAccount"
+                    type="submit"
                     class="p-2"
                     variant="warning"
                     >Create Account</b-button
@@ -148,20 +159,15 @@ export default {
   data() {
     return {
       firstName: null,
-      firstNameMin: 2,
-      firstNameMax: 20,
       lastName: null,
-      lastNameMin: 2,
-      lastNameMax: 20,
       email: null,
+      formatName: /^.{1,15}$/,
       formatEmail: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+      formatPassword: /^[a-zA-z0-9]{8,32}$/,
       password: null,
-      passwordMin: 8,
-      passwordMax: 32,
+      validEmail: true,
       confirmPassword: null,
-      confirmPasswordMin: 8,
-      confirmPasswordMax: 32,
-      message: null
+      emailMessage: null
     };
   },
   computed: {
@@ -172,117 +178,58 @@ export default {
     },
     firstNameValidation() {
       if (this.firstName == null) return null;
-      else
-        return (
-          this.firstName.length >= this.firstNameMin &&
-          this.firstName.length <= this.firstNameMax
-        );
+      else if (!this.formatName.test(this.firstName)) {
+        return false;
+      } else return true;
+    },
+    lastNameValidation() {
+      if (this.lastName == null) return null;
+      else if (!this.formatName.test(this.lastName)) {
+        return false;
+      } else return true;
     },
     emailValidation() {
       if (this.email == null) return null;
       return this.formatEmail.test(this.email);
     },
-    lastNameValidation() {
-      if (this.lastName == null) return null;
-      else
-        return (
-          this.lastName.length >= this.lastNameMin &&
-          this.lastName.length <= this.lastNameMax
-        );
-    },
     newPasswordValidation() {
       if (this.password == null) return null;
-      else
-        return (
-          this.password.length >= this.passwordMin &&
-          this.password.length <= this.passwordMax
-        );
+      else if (!this.formatPassword.test(this.password)) {
+        return false;
+      } else return true;
     },
     confirmPasswordValidation() {
       if (this.confirmPassword == null) return null;
-      else
-        return (
-          this.confirmPassword.length >= this.confirmPasswordMin &&
-          this.confirmPassword.length <= this.confirmPasswordMax &&
-          this.password == this.confirmPassword
-        );
+      else if (!this.formatPassword.test(this.confirmPassword)) {
+        return false;
+      } else if (!this.formatPassword.test(this.confirmPassword)) {
+        return false;
+      } else return true;
     }
   },
   methods: {
-    passwordValidate() {
-      if (!this.password) {
-        this.message = "Enter a new password.";
-        return false;
-      } else if (this.password.length < this.passwordMin) {
-        this.message =
-          "New password must have at least " + this.passwordMin + " character.";
-        return false;
-      } else if (this.password.length > this.passwordMax) {
-        this.message =
-          "New password could not have more than " +
-          this.passwordMax +
-          " character.";
-        return false;
-      } else if (!this.confirmPassword) {
-        this.message = "Enter confirm password.";
-        return false;
-      } else if (this.confirmPassword.length < this.confirmPasswordMin) {
-        this.message =
-          "New password must have at least " +
-          this.confirmPasswordMin +
-          " character.";
-        return false;
-      } else if (this.confirmPassword.length > this.confirmPasswordMax) {
-        this.message =
-          "New password could not have more than " +
-          this.confirmPasswordMax +
-          " character.";
-        return false;
-      } else if (this.password != this.confirmPassword) {
-        this.message = "password not matched.";
-        return false;
-      } else return true;
-    },
-    emailVAlidate() {
-      if (!this.email) {
-        this.message = "Input your email address.";
-        return false;
-      } else if (!this.formatEmail.test(this.email)) {
-        this.message = "Invalid email format.";
-        return false;
-      } else return true;
-    },
-    nameValidate() {
-      if (!this.firstName || this.firstName.length < this.firstNameMin) {
-        this.message = "First Name is too short!";
-        return false;
-      } else if (this.firstName.length > this.firstNameMax) {
-        this.message = "First Name is too long!";
-        return false;
-      } else if (!this.lastName || this.lastName.length < this.lastNameMin) {
-        this.message = "Last Name is too short!";
-        return false;
-      } else if (this.lastName.length > this.lastNameMax) {
-        this.message = "Last Name is too long!";
-        return false;
-      } else return true;
-    },
     async createAccount() {
-      if (!this.nameValidate()) return;
-      if (!this.emailVAlidate()) return;
-      if (!this.passwordValidate()) return;
+      if (
+        !this.firstNameValidation ||
+        !this.lastNameValidation ||
+        !this.emailValidation ||
+        !this.newPasswordValidation ||
+        !this.confirmPasswordValidation
+      )
+        return;
       try {
         const response = await AuthenticationService.register({
           firstName: this.firstName,
           lastName: this.lastName,
           email: this.email,
-          password: this.password,
+          password: this.password
         });
         this.$store.dispatch("CurrentUser/setToken", response.data.token);
         this.$store.dispatch("CurrentUser/setUser", response.data.user);
         window.location.replace("/");
       } catch (error) {
-        this.message = error.response.data.error;
+        this.validEmail = false;
+        this.emailMessage = error.response.data.error;
       }
     }
   }

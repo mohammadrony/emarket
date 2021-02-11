@@ -134,7 +134,7 @@
 <script>
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
 import Footer from "@/components/Footer.vue";
-import AuthenticationService from "../../services/AuthenticationService";
+import UserService from "@/services/UserService.js";
 export default {
   name: "AUsers",
   components: {
@@ -176,7 +176,7 @@ export default {
 
   async mounted() {
     try {
-      this.userList = (await AuthenticationService.getUserList()).data;
+      this.userList = (await UserService.getUserList()).data;
       this.userList2 = this.userList.slice();
       if (this.userList2) {
         this.users = this.userList2.length;
@@ -233,7 +233,7 @@ export default {
       const index = this.secondUserList.findIndex(obj => obj.id === user.id);
       this.secondUserList[index].userType = status.name;
       this.secondUserList[index].variant = status.variant;
-      await AuthenticationService.updateUser({
+      await UserService.updateUser({
         id: user.id,
         userType: status.name,
         priority: status.priority,

@@ -4,6 +4,9 @@ export default {
     getReviewList(productId) {
         return Api().get(`/review/getReviewList/${productId}`)
     },
+    getUsersReviewList() {
+        return Api().get("/review/getUsersReviewList")
+    },
     createReview(credentials) {
         return Api().post('/review/createReview', credentials)
     },

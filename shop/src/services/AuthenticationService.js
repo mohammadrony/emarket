@@ -7,26 +7,11 @@ export default {
   login(credentials) {
     return Api().post("/login", credentials);
   },
-  updateUser(credentials){
-    return Api().post("/updateUser", credentials);
-  },
-  verifyPassword(userDeletePasscode){
-    return Api().get(`/verifyPassword/${userDeletePasscode}`)
-  },
-  deleteAccount(){
-    return Api().delete("/user/deleteAccount");
+  verifyPassword(currentPassword){
+    return Api().get(`/verifyPassword/${currentPassword}`)
   },
   updatePassword(credentials){
     return Api().post("/updatePassword", credentials);
-  },
-  user(id) {
-    return Api().get(`/user/${id}`);
-  },
-  getUserList() {
-    return Api().get("/getUserList");
-  },
-  validUser(email) {
-    return Api().get(`/validUser/${email}`)
   },
   requestToken(credentials) {
     return Api().post("/requestToken", credentials);

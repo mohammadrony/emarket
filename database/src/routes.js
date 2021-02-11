@@ -1,4 +1,5 @@
 const isAuthenticated = require('./policies/isAuthenticated')
+const UserController = require("./controllers/UserController")
 const ImageController = require("./controllers/ImageController")
 const CartsController = require("./controllers/CartsController")
 const OrderController = require("./controllers/OrderController")
@@ -15,6 +16,30 @@ const AuthenticationController = require("./controllers/AuthenticationController
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy');
 
 module.exports = (app) => {
+  // authentication
+  app.post("/register",
+    AuthenticationControllerPolicy.register,
+    AuthenticationController.register)
+  app.post("/login",
+    AuthenticationController.login)
+  app.get("/verifyPassword/:password",
+    isAuthenticated,
+    AuthenticationController.verifyPassword)
+  app.post("/updatePassword",
+    isAuthenticated,
+    AuthenticationControllerPolicy.updatePassword,
+    AuthenticationController.updatePassword)
+  app.post("/requestToken",
+    AuthenticationController.requestToken)
+  app.get("/verifyToken/:token",
+    AuthenticationController.verifyToken)
+  app.get("/verifyRegsToken/:token",
+    AuthenticationController.verifyRegsToken)
+  app.post("/resetPassword",
+    AuthenticationController.resetPassword)
+  app.post("/resetRegsToken",
+    AuthenticationController.resetRegsToken)
+
   // cart
   app.get("/cart/allProduct",
     isAuthenticated,
@@ -97,6 +122,9 @@ module.exports = (app) => {
   // review
   app.get("/review/getReviewList/:productId",
     ReviewController.getReviewList)
+  app.get("/review/getUsersReviewList",
+    isAuthenticated,
+    ReviewController.getUsersReviewList)
   app.post("/review/createReview",
     isAuthenticated,
     ReviewController.createReview)
@@ -145,41 +173,22 @@ module.exports = (app) => {
     SubSubCategoryController.deleteSubSubCategory)
 
   // user
-  app.post("/register",
-    AuthenticationControllerPolicy.register,
-    AuthenticationController.register)
-  app.post("/login",
-    AuthenticationController.login)
-  app.get("/user/:id",
+  app.get("/user/checkUserName/:userName",
     isAuthenticated,
-    AuthenticationController.user)
-  app.post("/updateUser",
-    isAuthenticated,
-    AuthenticationController.updateUser)
-  app.get("/verifyPassword/:password",
-    isAuthenticated,
-    AuthenticationController.verifyPassword)
+    UserController.checkUserName)
   app.delete("/user/deleteAccount",
     isAuthenticated,
-    AuthenticationController.deleteAccount)
-  app.post("/updatePassword",
+    UserController.deleteAccount)
+  app.get("/user/getUserById/:userId",
+    UserController.getUserById)
+  app.get("/user/getUserList",
     isAuthenticated,
-    AuthenticationController.updatePassword)
-  app.get("/getUserList",
+    UserController.getUserList)
+  app.post("/user/updateUser",
     isAuthenticated,
-    AuthenticationController.getUserList)
-  app.get("/validUser/:email",
-    AuthenticationController.validUser)
-  app.post("/requestToken",
-    AuthenticationController.requestToken)
-  app.get("/verifyToken/:token",
-    AuthenticationController.verifyToken)
-  app.get("/verifyRegsToken/:token",
-    AuthenticationController.verifyRegsToken)
-  app.post("/resetPassword",
-    AuthenticationController.resetPassword)
-  app.post("/resetRegsToken",
-    AuthenticationController.resetRegsToken)
+    UserController.updateUser)
+  app.get("/user/getUserByEmail/:email",
+    UserController.getUserByEmail)
 
   // wishlist
   app.get("/wishlist",

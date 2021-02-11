@@ -1,4 +1,4 @@
-const { sequelize, Review, User } = require('../models')
+const { Product, Review, User } = require('../models')
 
 
 module.exports = {
@@ -25,6 +25,27 @@ module.exports = {
 		} catch (err) {
 			res.status(500).send({
 				error: 'An error occured when trying to fetch the reviews.'
+			})
+		}
+	},
+	async getUsersReviewList(req, res) {
+		try {
+			const reviewList = await Review.findAll({
+				where: {
+					UserId: req.user.id
+				},
+				include: {
+					model: Product,
+					attributes: [
+						"title",
+						"image1"
+					]
+				}
+			})
+			res.send(reviewList);
+		} catch (error) {
+			res.status(500).send({
+				error: "An error occured when trying to fetch users review list."
 			})
 		}
 	},

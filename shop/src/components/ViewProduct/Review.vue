@@ -151,7 +151,6 @@
                     review.User.firstName + " " + review.User.lastName
                   }}</b-link>
                   <br />
-                  <!-- <small size="sm">{{ review.createdAt }}</small> -->
                 </b-col>
                 <b-col cols="9">
                   <b-row>
@@ -214,7 +213,6 @@
                     currentUserReview.User.lastName
                 }}</b-link>
                 <br />
-                <!-- <small size="sm">{{ review.createdAt }}</small> -->
               </b-col>
               <b-col cols="8">
                 <b-row>
@@ -390,47 +388,44 @@ export default {
       else if (this.reviewList[i].rating == 3) this.threeStar++;
       else if (this.reviewList[i].rating == 4) this.fourStar++;
       else if (this.reviewList[i].rating == 5) this.fiveStar++;
-      this.ratingCount =
-        this.oneStar +
-        this.twoStar +
-        this.threeStar +
-        this.fourStar +
-        this.fiveStar;
-      if (this.ratingCount != 0) {
-        this.averageRating =
-          Math.round(
-            (10 *
-              (5 * this.fiveStar +
-                4 * this.fourStar +
-                3 * this.threeStar +
-                2 * this.twoStar +
-                1 * this.oneStar)) /
-              this.ratingCount
-          ) / 10;
-      }
-      this.oneStarPercent = Math.round(
-        (this.oneStar * 100) / this.ratingCount,
-        1
-      );
-      this.twoStarPercent = Math.round(
-        (this.twoStar * 100) / this.ratingCount,
-        1
-      );
-      this.threeStarPercent = Math.round(
-        (this.threeStar * 100) / this.ratingCount
-      );
-      this.fourStarPercent = Math.round(
-        (this.fourStar * 100) / this.ratingCount
-      );
-      this.fiveStarPercent = Math.round(
-        (this.fiveStar * 100) / this.ratingCount
-      );
+
       if (this.reviewList[i].UserId == this.userId)
         this.currentUserReview = this.reviewList[i];
       if (!this.reviewList[i].mode) {
         this.reviewList[i].mode = 0;
       }
     }
+    this.ratingCount =
+      this.oneStar +
+      this.twoStar +
+      this.threeStar +
+      this.fourStar +
+      this.fiveStar;
+    if (this.ratingCount != 0) {
+      this.averageRating =
+        Math.round(
+          (10 *
+            (5 * this.fiveStar +
+              4 * this.fourStar +
+              3 * this.threeStar +
+              2 * this.twoStar +
+              1 * this.oneStar)) /
+            this.ratingCount
+        ) / 10;
+    }
+    this.oneStarPercent = Math.round(
+      (this.oneStar * 100) / this.ratingCount,
+      1
+    );
+    this.twoStarPercent = Math.round(
+      (this.twoStar * 100) / this.ratingCount,
+      1
+    );
+    this.threeStarPercent = Math.round(
+      (this.threeStar * 100) / this.ratingCount
+    );
+    this.fourStarPercent = Math.round((this.fourStar * 100) / this.ratingCount);
+    this.fiveStarPercent = Math.round((this.fiveStar * 100) / this.ratingCount);
   },
   methods: {
     async createReview() {

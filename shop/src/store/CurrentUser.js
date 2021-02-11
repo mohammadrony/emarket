@@ -32,13 +32,26 @@ export const CurrentUserModule = {
                 state.userId = 0
             }
         },
+        SET_NAME(state, { firstName, lastName }) {
+            state.user.firstName = firstName
+            state.user.lastName = lastName
+        },
+        SET_USERNAME(state, userName){
+            state.user.username = userName
+        }
     },
     actions: {
         setToken({ commit }, token) {
-            commit('SET_TOKEN', token)
+            commit("SET_TOKEN", token)
         },
         setUser({ commit }, user) {
-            commit('SET_USER', user)
+            commit("SET_USER", user)
+        },
+        setName({ commit }, { firstName, lastName }) {
+            commit("SET_NAME", { firstName, lastName })
+        },
+        setUserName({ commit }, userName) {
+            commit("SET_USERNAME", userName)
         }
     }
 }

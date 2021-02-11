@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="p-2 mt-2" style="background-color: #f4f6f8">
-      <b-form @submit.prevent="requestToken">
+      <b-form @submit.stop.prevent="requestToken">
         <b-form-group
           @submit.prevent="requestToken"
           class="mb-2"
@@ -18,12 +18,12 @@
             required
           ></b-form-input>
         </b-form-group>
-        <a>we will send you a link to reset your password.</a><br />
+        <small>We will send you a link to reset your password.</small><br />
         <b-alert variant="primary" class="my-2 p-1 pl-2" :show="tokenAlert">
           {{ tokenAlertMessage }}
         </b-alert>
-        <b-button class="mt-2" variant="outline-info" @click="requestToken">
-          <strong>Submit</strong>
+        <b-button class="mt-2" variant="outline-dark" type="submit">
+          Submit
         </b-button>
         <b-card class="mt-3" v-if="mailSent">
           <div><strong>Request accepted</strong></div>
@@ -40,6 +40,7 @@
 
 <script>
 import AuthenticationService from "@/services/AuthenticationService.js";
+import UserService from "@/services/UserService.js";
 export default {
   name: "RequestToken",
   components: {},
@@ -54,32 +55,26 @@ export default {
   computed: {},
   methods: {
     async requestToken() {
+      var user;
       try {
         this.mailSent = false;
-        const user = (
-          await AuthenticationService.validUser(this.emailResetPassword)
-        ).data;
-        if (user.id) {
-          try {
-            const token = (
-              await AuthenticationService.requestToken({
-                email: this.emailResetPassword
-              })
-            ).data;
-            if (token) {
-              this.tokenAlert = false;
-              this.mailSent = true;
-            }
-          } catch (error) {
-            console.log(error.response.data.error);
-            this.tokenAlert = true;
-            this.tokenAlertMessage = error.response.data.error;
-          }
-        }
+        user = (await UserService.getUserByEmail(this.emailResetPassword))
+          .data;
       } catch (error) {
-        console.log(error.response.data.error);
         this.tokenAlert = true;
         this.tokenAlertMessage = error.response.data.error;
+      }
+      if (user) {
+        try {
+          await AuthenticationService.requestToken({
+            email: this.emailResetPassword
+          });
+          this.tokenAlert = false;
+          this.mailSent = true;
+        } catch (error) {
+          this.tokenAlert = true;
+          this.tokenAlertMessage = error.response.data.error;
+        }
       }
     }
   }
