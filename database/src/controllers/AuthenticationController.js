@@ -46,7 +46,7 @@ module.exports = {
                 to: req.body.email,
                 subject: "Welcome to e-store",
                 text: 'Hello ' + user.firstName + ' ' + user.lastName + ',\n\n' +
-                    'Your email verification link to create an account on e-store\n\n' +
+                    'Your verification link to create an account on e-store\n\n' +
                     'Please follow the link to complete the process:\n\n' +
                     'http://' + 'localhost:8080' + '/register/' + token + '\n\n' +
                     'If you did not request this, please ignore this email.\n'

@@ -1,6 +1,12 @@
 <template>
   <div>
-    <h4>you made {{ reviews }} reviews on product.</h4>
+    <div style="color: #001e5f" v-if="reviews != 0 && reviews != 1">
+      <h4>You made {{ reviews }} reviews on product.</h4>
+    </div>
+    <div style="color: #001e5f" v-if="reviews == 0 || reviews == 1">
+      <h4>You made {{ reviews }} review on product.</h4>
+    </div>
+
     <div v-for="review in reviewList2" :key="review.id" class="mb-2">
       <b-card class="mt-3" bg-variant="white" text-variant="dark">
         <b-row>
