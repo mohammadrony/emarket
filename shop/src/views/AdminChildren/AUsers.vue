@@ -67,7 +67,7 @@
             </div>
 
             <div v-for="user in secondUserList" :key="user.id">
-              <b-row v-if="userId != user.id">
+              <b-row>
                 <b-col>
                   <b-img
                     height="80px"
