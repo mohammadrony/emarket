@@ -4,8 +4,8 @@ export default {
   checkUserName(userName) {
     return Api().get(`/user/checkUserName/${userName}`);
   },
-  deleteAccount() {
-    return Api().delete("/user/deleteAccount");
+  deleteAccount(userId) {
+    return Api().delete(`/user/deleteAccount/${userId}`);
   },
   getUserList() {
     return Api().get("/user/getUserList");

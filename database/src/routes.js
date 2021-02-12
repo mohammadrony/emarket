@@ -176,7 +176,7 @@ module.exports = (app) => {
   app.get("/user/checkUserName/:userName",
     isAuthenticated,
     UserController.checkUserName)
-  app.delete("/user/deleteAccount",
+  app.delete("/user/deleteAccount/:userId",
     isAuthenticated,
     UserController.deleteAccount)
   app.get("/user/getUserById/:userId",

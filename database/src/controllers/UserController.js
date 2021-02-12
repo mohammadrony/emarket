@@ -27,7 +27,13 @@ module.exports = {
     },
     async deleteAccount(req, res) {
         try {
-            const user = await User.findByPk(req.user.id)
+            if (req.params.userId != req.user.id && req.user.priority != 1) {
+                console.log(req.params.userId != req.user.id)
+                return res.status(403).send({
+                    error: "You don't have permits to do that."
+                })
+            }
+            const user = await User.findByPk(req.params.userId)
             if (!user) {
                 return res.status(403).send({
                     error: 'No user to delete.'

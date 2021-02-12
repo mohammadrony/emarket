@@ -29,9 +29,10 @@
         We'll also delete all of your activity from our server.
       </p>
 
-      <label for="input-password"
-        >To be sure please enter your <strong>current password</strong></label
-      >
+      <label for="input-password">
+        To be sure please enter your
+        <strong>current password</strong>
+      </label>
       <b-form-input
         type="password"
         @keyup="modalAlert = false"
@@ -99,16 +100,15 @@ export default {
       }
       if (correctPassword) {
         try {
-          await ReviewService.deleteReviewByUser();
+          await ReviewService.deleteReviewByUser(this.userId);
         } catch (error) {
           console.log(error.response.data.error);
         }
         try {
-          await UserService.deleteAccount();
+          await UserService.deleteAccount(this.userId);
         } catch (error) {
           this.modalAlert = true;
           this.deleteAccountError = error.response.data.error;
-          console.log(error.response.data.error);
         }
         this.$store.dispatch("CurrentUser/setToken", null);
         this.$store.dispatch("CurrentUser/setUser", null);

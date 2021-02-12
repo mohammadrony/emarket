@@ -67,7 +67,7 @@
             </div>
 
             <div v-for="user in secondUserList" :key="user.id">
-              <b-row>
+              <b-row v-if="userId != user.id">
                 <b-col>
                   <b-img
                     height="80px"
@@ -102,10 +102,10 @@
                       <b-button
                         size="sm"
                         block
-                        variant="warning"
-                        @click="userDetails(user)"
+                        variant="danger"
+                        @click="deleteAccount(user)"
                       >
-                        Details
+                        Delete
                       </b-button>
                     </b-col>
                   </b-row>
@@ -135,6 +135,7 @@
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
 import Footer from "@/components/Footer.vue";
 import UserService from "@/services/UserService.js";
+import ReviewService from "@/services/ReviewService.js";
 export default {
   name: "AUsers",
   components: {
@@ -147,6 +148,7 @@ export default {
         name: "All",
         variant: "dark"
       },
+      userId: 0,
       selectedTypeName: "All",
       selectedTypeVariant: "dark",
       searchUserText: "",
@@ -176,6 +178,7 @@ export default {
 
   async mounted() {
     try {
+      this.userId = this.$store.state.CurrentUser.userId;
       this.userList = (await UserService.getUserList()).data;
       this.userList2 = this.userList.slice();
       if (this.userList2) {
@@ -240,15 +243,25 @@ export default {
         variant: status.variant
       });
     },
-    userDetails(user) {
-      const route = "/admin/user/" + user.id;
-      window.location.replace(route);
-    },
-    userType(type) {
-      console.log(type);
-    },
-    deleteUser(user) {
-      console.log(user);
+    async deleteAccount(user) {
+      try {
+        await ReviewService.deleteReviewByUser(user.id);
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+      try {
+        await UserService.deleteAccount(user.id);
+        window.location.reload();
+      } catch (error) {
+        this.$bvToast.toast(error.response.data.error, {
+          title: "Error deleting Account",
+          variant: "danger",
+          toaster: "b-toaster-top-center",
+          noCloseButton: false,
+          solid: true
+        });
+        console.log(error.response.data.error);
+      }
     },
     paginate(currentPage) {
       const start = (currentPage - 1) * this.perPage;
