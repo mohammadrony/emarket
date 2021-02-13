@@ -31,7 +31,7 @@ export default {
     return {
       newAddProduct: null,
       newAddLimit: 4,
-      newAddViewTitle: "New 2021 Fresh Stock",
+      newAddViewTitle: "New 2021 Fresh Stock"
     };
   },
   async mounted() {
@@ -42,11 +42,9 @@ export default {
   methods: {
     gotoProduct(product) {
       window.location.replace(`/product/${product.id}`);
-    },
-  },
-  computed: {},
+    }
+  }
 };
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="scss" scoped></style>

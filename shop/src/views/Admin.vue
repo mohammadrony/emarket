@@ -39,8 +39,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.left-align {
+<style lang="scss" scoped>.left-align {
   text-align: left;
 }
 </style>

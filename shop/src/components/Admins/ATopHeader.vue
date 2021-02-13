@@ -30,7 +30,7 @@
                 >{{ user.firstName }} {{ user.lastName }}</em
               >
             </template>
-            <b-dropdown-item to="/profile">Profile</b-dropdown-item>
+            <b-dropdown-item to="/admin/profile">Admin Profile</b-dropdown-item>
             <b-dropdown-item @click="logout()">Log Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -70,5 +70,4 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="scss" scoped></style>

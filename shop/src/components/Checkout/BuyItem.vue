@@ -190,8 +190,8 @@ export default {
               console.error(error);
             });
         });
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        console.log(error.response.data.error);
       }
     },
     viewProduct(product) {
@@ -203,5 +203,4 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="scss" scoped></style>

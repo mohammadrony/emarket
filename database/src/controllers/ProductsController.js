@@ -64,19 +64,19 @@ module.exports = {
 			})
 		}
 	},
-	async getProductSales(req,res){
+	async getProductSales(req, res) {
 		try {
 
 			const product = await Product.findByPk(req.params.productId, {
 				attributes: ["sales"]
 			})
 			res.send(product)
-		} catch(err){
+		} catch (err) {
 			res.status(500).send({
 				error: "An error occured when tring to fetch a product sales"
 			})
 		}
-		
+
 	},
 	async getProduct(req, res) {
 		try {
@@ -120,7 +120,7 @@ module.exports = {
 			}
 			req.body.sales = 0
 			const product = await Product.create(req.body)
-			res.send(product)
+			res.send({ id: product.id })
 		} catch (err) {
 			res.status(500).send({
 				error: 'An error occured when trying to create a product.'

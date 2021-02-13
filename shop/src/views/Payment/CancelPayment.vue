@@ -11,15 +11,14 @@
             header-text-variant="white"
             align="center"
           >
-          <b-button size=lg disabled variant="light">
-
-            <b-icon icon="x" scale="2" variant="danger"></b-icon>
-          </b-button>
-          <h3 class="mt-4">Payment Cancelled</h3>
-          <h6>This payment can not be completed.</h6>
-          <b-card-footer class="mt-4">
-            estorebd.com
-          </b-card-footer>
+            <b-button size="lg" disabled variant="light">
+              <b-icon icon="x" scale="2" variant="danger"></b-icon>
+            </b-button>
+            <h3 class="mt-4">Payment Cancelled</h3>
+            <h6>This payment can not be completed.</h6>
+            <b-card-footer class="mt-4">
+              estorebd.com
+            </b-card-footer>
           </b-card>
         </b-col>
       </b-row>
@@ -35,16 +34,15 @@ export default {
   name: "CancelPayment",
   components: {
     TopHeader,
-    Footer,
+    Footer
   },
   data() {
     return {};
   },
   mounted() {},
   methods: {},
-  computed: {},
+  computed: {}
 };
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="scss" scoped></style>

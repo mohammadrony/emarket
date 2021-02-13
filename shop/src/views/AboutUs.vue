@@ -15,8 +15,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.top-container {
+<style lang="scss" scoped>.top-container {
   background-color: #bebdbd;
 }
 </style>

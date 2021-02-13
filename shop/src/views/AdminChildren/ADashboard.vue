@@ -3,7 +3,7 @@
     <ATopHeader></ATopHeader>
     <b-container class="mt-5">
       <b-row align-v="center">
-        <b-col md="6">
+        <b-col>
           <h3>Admin Dashboard Page</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora
@@ -12,7 +12,7 @@
             doloribus perferendis itaque quae.
           </p>
         </b-col>
-        <b-col md="6">
+        <b-col>
           <img src="/img/svg/overview.svg" alt="" width="300" />
         </b-col>
       </b-row>

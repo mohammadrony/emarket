@@ -1,17 +1,26 @@
+import ShopService from "@/services/ShopService.js";
 export const ShopModule = {
     namespaced: true,
     strict: true,
     state: {
-        shopName: "e-store",
+        shopId: 1,
+        shopLogo: "",
     },
     mutations: {
-        SET_SHOP_NAME(state, shopName) {
-            state.shopName = shopName
+        SET_SHOP_LOGO(state, shopLogo) {
+            state.shopLogo = shopLogo
         }
     },
     actions: {
-        setShopName({ commit }, shopName) {
-            commit('SET_SHOP_NAME', shopName)
+        async setShopLogo({ state, commit }) {
+            const shop = (await ShopService.getShopLogo(state.shopId)).data
+            commit("SET_SHOP_LOGO", shop.logo)
+        },
+        async getShopLogo({ state, dispatch }) {
+            if (state.shopLogo == "") {
+                await dispatch("setShopLogo")
+            }
+            return state.shopLogo
         }
     }
 }

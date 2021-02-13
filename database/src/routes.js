@@ -1,4 +1,5 @@
 const isAuthenticated = require('./policies/isAuthenticated')
+const ShopController = require("./controllers/ShopController")
 const UserController = require("./controllers/UserController")
 const ImageController = require("./controllers/ImageController")
 const CartsController = require("./controllers/CartsController")
@@ -147,6 +148,10 @@ module.exports = (app) => {
     ReviewReplyController.updateReviewReply)
   app.delete("/reviewReply/deleteReviewReply/:reviewReplyId",
     ReviewReplyController.deleteReviewReply)
+
+  // shop
+  app.get("/shop/getShopLogo/:shopId",
+    ShopController.getShopLogo)
 
   // sub category
   app.get("/subCategory/getSubCategoryByName/:name",

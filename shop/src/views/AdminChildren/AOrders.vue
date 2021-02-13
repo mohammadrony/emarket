@@ -149,7 +149,6 @@ export default {
       perPage: 20
     };
   },
-  computed: {},
   async mounted() {
     try {
       this.orderList = (await OrderService.getOrderList()).data;

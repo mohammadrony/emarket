@@ -9,14 +9,14 @@
           style="background-color: #00283a"
         >
           <b-navbar-brand href="/">
-            <img src="../../public/assets/images/e-store.png" />
+            <b-img :src="shopLogo" />
           </b-navbar-brand>
           <b-navbar-toggle target="nav-top-header-collapse"></b-navbar-toggle>
           <b-collapse id="nav-top-header-collapse" is-nav>
             <b-navbar-nav class="mr-auto">
               <b-dropdown
                 id="dropdown-right"
-                :text="search_category"
+                :text="searchCategoryName"
                 style="background-color: #fff"
                 variant="transparent"
                 class="mr-auto"
@@ -24,8 +24,8 @@
                 <b-dropdown-item
                   variant="dark"
                   @click="set_category(category)"
-                  v-for="category in categoryList"
-                  :key="category.id"
+                  v-for="(category,idx) in categoryList"
+                  :key="idx"
                   >{{ category.name }}</b-dropdown-item
                 >
               </b-dropdown>
@@ -74,9 +74,7 @@
                 <b-dropdown-item v-if="admin" to="/admin"
                   >Admin Panel</b-dropdown-item
                 >
-                <b-dropdown-item to="/profile"
-                  >Profile</b-dropdown-item
-                >
+                <b-dropdown-item to="/profile">Profile</b-dropdown-item>
                 <b-dropdown-item @click="logout()">Log Out</b-dropdown-item>
               </b-nav-item-dropdown>
             </b-navbar-nav>
@@ -95,42 +93,30 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import CategoryService from "@/services/CategoryService.js";
 export default {
   name: "TopHeader",
   data() {
     return {
-      cList: false,
-      categoryList: {},
+      user: {},
+      admin: false,
+      shopId: 1,
+      shopLogo: "",
+      userLoggedIn: false,
+      categoryList: [],
       searchTxt: "",
-      search_category_id: 0,
-      search_category: "All Category"
+      searchCategoryId: 0,
+      searchCategoryName: "All Category"
     };
   },
   async mounted() {
-    if (this.cList == false) {
-      this.categoryList = await this.$store.dispatch(
-        "Category/setFullCategoryList"
-      );
-      if (this.categoryList) this.cList = true;
-    }
-    try {
-      this.categoryList = (await CategoryService.getCategoryList()).data;
-    } catch (error) {
-      console.log(error.response.data.error);
-    }
-    const defaultCategory = { id: 0, name: "All Category" };
-    this.categoryList.unshift(defaultCategory);
+    this.shopLogo = await this.$store.dispatch("Shop/getShopLogo");
+    this.user = this.$store.state.CurrentUser.user;
+    this.admin = this.$store.state.CurrentUser.admin;
+    this.userLoggedIn = this.$store.state.CurrentUser.userLoggedIn;
+    this.categoryList = await this.$store.dispatch("Category/getCategoryList");
+    this.categoryList.unshift({ id: 0, name: "All Category" });
   },
-  computed: {
-    ...mapState({
-      user: state => state.CurrentUser.user,
-      admin: state => state.CurrentUser.admin,
-      userLoggedIn: state => state.CurrentUser.userLoggedIn
-    })
-  },
-
+  computed: {},
   methods: {
     wishlist() {
       if (!this.userLoggedIn) {
@@ -151,20 +137,19 @@ export default {
       window.location.reload();
     },
     set_category(category) {
-      this.search_category_id = category.id;
-      this.search_category = category.name;
+      this.searchCategoryId = category.id;
+      this.searchCategoryName = category.name;
     },
     search() {
-      this.$store.dispatch("Products/setSearchText", this.searchTxt);
-      var route = "/products";
-      if (this.search_category_id != 0) {
-        const category = this.search_category;
-        route += "/" + category;
+      var newRoute = "/products";
+      if (this.searchCategoryId != 0) {
+        const category = this.searchCategoryName;
+        newRoute += "/" + category;
       }
       if (this.searchTxt != "") {
         const text = this.searchTxt;
-        route += "?q=" + text;
-        window.location.replace(route);
+        newRoute += "?q=" + text;
+        window.location.replace(newRoute);
       }
     }
   }

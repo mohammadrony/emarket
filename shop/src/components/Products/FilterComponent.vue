@@ -72,5 +72,4 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="scss" scoped></style>

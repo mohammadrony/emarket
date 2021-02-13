@@ -6,7 +6,11 @@
         <b-navbar text-variant="white" variant="info">
           <b-navbar-brand style="color: #fff">Add Product</b-navbar-brand>
         </b-navbar>
-        <b-form class="mt-3">
+        <b-form
+          @reset="resetProduct"
+          @submit.stop.prevent="createNewProduct"
+          class="mt-3"
+        >
           <b-row>
             <b-col>
               <b-form-group
@@ -96,7 +100,7 @@
               </div>
               <b-form-group class="mt-2" label="Product Category">
                 <b-row class="mt-2">
-                  <b-col cols="5">
+                  <b-col>
                     <b-dropdown
                       id="dropdown-category"
                       :text="selectedCategory"
@@ -113,26 +117,15 @@
                       </b-dropdown-item>
                     </b-dropdown>
                   </b-col>
-                  <b-col cols="1"><h6 class="mt-2">or</h6></b-col>
-                  <b-col cols="6">
-                    <b-form-group @submit.prevent="addNewCategory">
-                      <b-form-input
-                        id="input-category"
-                        v-model="newCategory"
-                        placeholder="Add New Category"
-                      >
-                      </b-form-input>
-                    </b-form-group>
-                  </b-col>
                 </b-row>
                 <b-row class="mt-4">
-                  <b-col cols="5">
+                  <b-col>
                     <b-dropdown
                       id="dropdown-subCategory"
                       :text="selectedSubCategory"
                       variant="info"
                       block
-                      :disabled="!product.CategoryId"
+                      :disabled="product.CategoryId == 0"
                     >
                       <div
                         v-for="subCategory in subCategoryList"
@@ -147,27 +140,15 @@
                       </div>
                     </b-dropdown>
                   </b-col>
-                  <b-col cols="1"><h6 class="mt-2">or</h6></b-col>
-                  <b-col cols="6">
-                    <b-form-group @submit.prevent="addNewSubCategory">
-                      <b-form-input
-                        id="input-sub-category"
-                        v-model="newSubCategory"
-                        :disabled="!product.CategoryId"
-                        placeholder="Add New Sub Category"
-                      >
-                      </b-form-input>
-                    </b-form-group>
-                  </b-col>
                 </b-row>
                 <b-row class="mt-4">
-                  <b-col cols="5">
+                  <b-col>
                     <b-dropdown
                       id="dropdown-subSubCategory"
                       :text="selectedSubSubCategory"
                       variant="info"
                       block
-                      :disabled="!product.SubCategoryId"
+                      :disabled="product.SubCategoryId == 0"
                     >
                       <div
                         v-for="subSubCategory in subSubCategoryList"
@@ -176,7 +157,7 @@
                         <b-dropdown-item
                           v-if="
                             product.SubCategoryId ==
-                            subSubCategory.SubCategoryId
+                              subSubCategory.SubCategoryId
                           "
                           @click="set_subSubCategory(subSubCategory)"
                         >
@@ -184,18 +165,6 @@
                         </b-dropdown-item>
                       </div>
                     </b-dropdown>
-                  </b-col>
-                  <b-col cols="1"><h6 class="mt-2">or</h6></b-col>
-                  <b-col cols="6">
-                    <b-form-group @submit.prevent="addNewSubSubCategory">
-                      <b-form-input
-                        id="input-sub-sub-category"
-                        v-model="newSubSubCategory"
-                        :disabled="!product.SubCategoryId"
-                        placeholder="Add New Sub Sub Category"
-                      >
-                      </b-form-input>
-                    </b-form-group>
                   </b-col>
                 </b-row>
               </b-form-group>
@@ -231,10 +200,10 @@
             <b-col cols="5">
               <b-row>
                 <b-col>
-                  <b-button variant="danger" block>Reset</b-button>
+                  <b-button type="reset" variant="danger" block>Reset</b-button>
                 </b-col>
                 <b-col>
-                  <b-button variant="primary" block @click="createNewProduct"
+                  <b-button variant="primary" block type="submit"
                     >Submit</b-button
                   >
                 </b-col>
@@ -244,65 +213,65 @@
         </b-form>
       </b-card>
     </b-container>
+    <Footer />
   </div>
 </template>
 
 <script>
 import ProductsService from "@/services/ProductsService";
-import CategoryService from "@/services/CategoryService";
-import SubCategoryService from "@/services/SubCategoryService";
-import SubSubCategoryService from "@/services/SubSubCategoryService";
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
+import Footer from "@/components/Footer.vue";
 import { VueEditor } from "vue2-editor";
 export default {
   name: "AddProduct",
   components: {
     ATopHeader,
     VueEditor,
+    Footer
   },
   data() {
     return {
       images: [],
-      categoryList: null,
-      subCategoryList: null,
-      subSubCategoryList: null,
+      categoryList: [],
+      subCategoryList: [],
+      subSubCategoryList: [],
       selectedCategory: "Category",
       selectedSubCategory: "Sub Category",
       selectedSubSubCategory: "Sub Sub Category",
-      newCategory: null,
-      newSubCategory: null,
-      newSubSubCategory: null,
       backupProduct: null,
       product: {
-        code: null,
-        title: null,
+        code: "",
+        title: "",
         amount: null,
-        subtitle: null,
-        description: null,
+        subtitle: "",
+        description: "",
         currency: "USD",
-        CategoryId: null,
-        SubCategoryId: null,
-        SubSubCategoryId: null,
+        CategoryId: 0,
+        SubCategoryId: 0,
+        SubSubCategoryId: 0
       },
       errorCountImage:
         "You are not allowed to add more than 10 image for this product.",
-      max_input_img: 10,
+      maximumImageCount: 10,
       imageAlert: null,
       errorFieldRequired: "Please fill in all required field.",
       allFieldRequired: null,
-      dispImg: [],
+      dispImg: []
     };
   },
+  computed: {},
   async mounted() {
     this.backupProduct = this.product;
-    this.categoryList = (await CategoryService.getCategoryList()).data;
-    this.subCategoryList = (await SubCategoryService.getSubCategoryList()).data;
-    this.subSubCategoryList = (
-      await SubSubCategoryService.getSubSubCategoryList()
-    ).data;
+    this.categoryList = await this.$store.dispatch("Category/getCategoryList");
+    this.subCategoryList = await this.$store.dispatch(
+      "Category/getSubCategoryList"
+    );
+    this.subSubCategoryList = await this.$store.dispatch(
+      "Category/getSubCategoryList"
+    );
   },
   methods: {
-    reset() {
+    resetProduct() {
       this.product = this.backupProduct;
     },
     async createNewProduct() {
@@ -310,101 +279,44 @@ export default {
       var fieldName;
       for (fieldName in this.product) {
         formData.append(fieldName, this.product[fieldName]);
-        // console.log(fieldName, this.product[fieldName]);
       }
       var i;
       for (i = 0; i < this.images.length; i++) {
-        if (i < this.max_input_img)
+        if (i < this.maximumImageCount)
           formData.append("imageField", this.images[i]);
       }
       try {
         await ProductsService.createProduct(formData);
-        await this.$store.dispatch("Products/setAllBackupProduct");
-        window.location.reload();
-        this.$bvToast.toast("Product Added Successfully", {
-          title: "Update",
-          variant: "dark",
-          toaster: "b-toaster-top-center",
-          noCloseButton: true,
-          solid: true,
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    },
-
-    async addNewCategory() {
-      try {
-        const newCategory = (
-          await CategoryService.createCategory({ name: this.newCategory })
+        const newProduct = (
+          await this.$store.dispatch("Products/setAllBackupProduct")
         ).data;
-        console.log("new category", newCategory);
-        this.categoryList = await this.$store.dispatch(
-          "Category/setFullCategoryList"
-        );
-        window.location.reload();
-      } catch (err) {
-        console.log("error create categ", err);
+        window.location.replace("/products/" + newProduct.id);
+      } catch (error) {
+        console.log(error.response.data.error);
       }
     },
-    async addNewSubCategory() {
-      try {
-        const newSubCategory = (
-          await SubCategoryService.createSubCategory({
-            name: this.newSubCategory,
-            CategoryId: this.product.CategoryId,
-          })
-        ).data;
-
-        console.log("new sub category", newSubCategory);
-        this.categoryList = await this.$store.dispatch(
-          "Category/setFullCategoryList"
-        );
-        window.location.reload();
-      } catch (err) {
-        console.log("error create sub categ", err);
-      }
-    },
-    async addNewSubSubCategory() {
-      try {
-        const newSubSubCategory = (
-          await SubSubCategoryService.createSubSubCategory({
-            name: this.newSubCategory,
-            SubCategoryId: this.product.SubCategoryId,
-          })
-        ).data;
-        console.log("new sub sub category", newSubSubCategory);
-        this.categoryList = await this.$store.dispatch(
-          "Category/setFullCategoryList"
-        );
-        window.location.reload();
-      } catch (err) {
-        console.log("error create sub sub categ", err);
-      }
-    },
-
     set_category(category) {
       this.selectedCategory = category.name;
       this.selectedSubCategory = "Sub Category";
       this.selectedSubSubCategory = "Sub Sub Category";
-      (this.product.SubCategoryId = null),
-        (this.product.SubSubCategoryId = null),
+      (this.product.SubCategoryId = 0),
+        (this.product.SubSubCategoryId = 0),
         (this.product.CategoryId = category.id);
     },
     set_subCategory(subCategory) {
       this.selectedSubCategory = subCategory.name;
       this.selectedSubSubCategory = "Sub Sub Category";
       this.product.SubCategoryId = subCategory.id;
-      this.product.SubSubCategoryId = null;
+      this.product.SubSubCategoryId = 0;
     },
     set_subSubCategory(subSubCategory) {
       this.selectedSubSubCategory = subSubCategory.name;
       this.product.SubSubCategoryId = subSubCategory.id;
     },
-    onFileChange() {
+    onFileChange(event) {
       this.images = event.target.files;
 
-      if (this.images.length > this.max_input_img) {
+      if (this.images.length > this.maximumImageCount) {
         this.imageAlert = true;
       } else {
         this.imageAlert = false;
@@ -412,23 +324,11 @@ export default {
       var i;
 
       for (i = 0; i < this.images.length; i++) {
-        if (i < this.max_input_img)
+        if (i < this.maximumImageCount)
           this.dispImg[i] = URL.createObjectURL(this.images[i]);
       }
-    },
-  },
-  computed: {},
+    }
+  }
 };
 </script>
-
-<style scoped>
-.list-item {
-  padding-left: 20px;
-}
-.list-item:hover {
-  background-color: #bbb;
-}
-.list-item:active {
-  background-color: #23a;
-}
-</style>
+<style lang="scss" scoped></style>
