@@ -17,19 +17,19 @@ export default {
     curr: String,
     title: String,
     amount: Number,
-    image: String,
+    image: String
   },
   computed: {
     ...mapState({
-      user: (state) => state.CurrentUser.user,
-    }),
+      user: state => state.CurrentUser.user
+    })
   },
   data() {
     return {
       productName: this.title,
       productId: this.id,
       currency: this.curr,
-      productamount: this.amount,
+      productamount: this.amount
     };
   },
   mounted() {},
@@ -41,12 +41,9 @@ export default {
         currency: this.currency,
         quantity: 1,
         title: this.title,
-        image: this.image,
+        image: this.image
       };
-      const response = await this.$store.dispatch(
-        "Cart/addToCart",
-        cartItem
-      );
+      const response = await this.$store.dispatch("Cart/addToCart", cartItem);
 
       if (response) {
         this.addedToCart = true;
@@ -55,7 +52,7 @@ export default {
           variant: "success",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
-          solid: true,
+          solid: true
         });
         return;
       } else {
@@ -64,7 +61,7 @@ export default {
           variant: "primary",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
-          solid: true,
+          solid: true
         });
       }
     },
@@ -77,8 +74,8 @@ export default {
       if (remove_response) {
         this.addedToCart = false;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped></style>

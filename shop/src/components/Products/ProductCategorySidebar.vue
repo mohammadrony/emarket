@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import CategorySidebar from "@/components/Products/CategorySidebar.vue";
 import SubCategorySidebar from "@/components/Products/SubCategorySidebar.vue";
 import SubSubCategorySidebar from "@/components/Products/SubSubCategorySidebar.vue";
@@ -26,16 +25,14 @@ export default {
   },
   data() {
     return {
-      sidebarList: ""
+      sidebarList: "",
+      searchParameter: {}
     };
   },
-  computed: {
-    ...mapState({
-      searchParameter: state => state.Products.searchParameter
-    })
-  },
+  computed: {},
 
   async mounted() {
+    this.searchParameter = this.$store.state.Products.searchParameter;
     if (this.searchParameter.subSubCategoryId != 0) {
       this.sidebarList = "none";
     } else if (this.searchParameter.subCategoryId != 0) {

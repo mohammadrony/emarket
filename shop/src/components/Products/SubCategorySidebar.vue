@@ -4,10 +4,10 @@
       <div v-for="subCategory in subCategoryList" :key="subCategory.id">
         <li
           v-if="searchParameter.categoryId == subCategory.CategoryId"
-          class="mt-2"
+          class="mb-2"
         >
           <b-row v-if="subCategory.mode == 0">
-            <div :class="{ 'col-12': !admin, 'col-7': admin }">
+            <div :class="{ 'col-12': !admin, 'col-8': admin }">
               <b-link
                 variant="white"
                 block
@@ -23,7 +23,7 @@
               </b-link>
             </div>
 
-            <b-col v-if="admin" cols="5">
+            <b-col v-if="admin" cols="4">
               <b-button-toolbar>
                 <b-button-group size="sm">
                   <b-button @click="subCategory.mode ^= 1" variant="white">
@@ -52,7 +52,7 @@
           </b-row>
           <b-row v-if="subCategory.mode == 1">
             <b-form @submit.stop.prevent="updateSubCategory(subCategory)">
-              <b-col cols="7">
+              <b-col cols="8">
                 <b-form-group>
                   <b-form-input
                     size="sm"
@@ -62,7 +62,7 @@
                   />
                 </b-form-group>
               </b-col>
-              <b-col cols="5">
+              <b-col cols="4">
                 <b-button-toolbar>
                   <b-button-group size="sm">
                     <b-button type="submit" variant="white">
@@ -88,9 +88,9 @@
           </b-row>
         </li>
       </div>
-      <b-row class="mt-2" v-if="admin">
-        <b-form @submit.stop.prevent="createNewSubCateg">
-          <b-col cols="7">
+      <div v-if="admin">
+        <b-card>
+          <b-form @submit.stop.prevent="createNewSubCateg">
             <b-form-group>
               <b-form-input
                 size="sm"
@@ -99,14 +99,12 @@
                 placeholder="Category Name"
               />
             </b-form-group>
-          </b-col>
-          <b-col cols="5">
             <b-button size="sm" type="submit" variant="warning">
               Create
             </b-button>
-          </b-col>
-        </b-form>
-      </b-row>
+          </b-form>
+        </b-card>
+      </div>
     </ul>
   </div>
 </template>
@@ -120,17 +118,18 @@ export default {
   data() {
     return {
       newSubCategory: "",
+      searchParameter: {},
       subCategoryList: []
     };
   },
   computed: {
     ...mapState({
       admin: state => state.CurrentUser.admin,
-      searchParameter: state => state.Products.searchParameter
     })
   },
 
   async mounted() {
+    this.searchParameter = this.$store.state.Products.searchParameter;
     this.subCategoryList = await this.$store.dispatch(
       "Category/getSubCategoryList"
     );

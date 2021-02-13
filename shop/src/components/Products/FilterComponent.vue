@@ -24,7 +24,7 @@
         Filter
       </b-button>
     </b-row>
-    <hr />
+    <hr class="my-4"/>
   </div>
 </template>
 

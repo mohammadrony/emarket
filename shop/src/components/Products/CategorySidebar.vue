@@ -1,9 +1,9 @@
 <template>
   <div class="productCategories">
     <ul>
-      <li v-for="(category, idx) in categoryList" :key="idx" class="mt-2">
+      <li v-for="category in categoryList" :key="category.id" class="mb-2">
         <b-row v-if="category.mode == 0">
-          <div :class="{ 'col-12': !admin, 'col-7': admin }">
+          <div :class="{ 'col-12': !admin, 'col-8': admin }">
             <b-link variant="white" block @click="categorySelect(category)">
               <small>{{ category.name }}</small>
               <b-icon
@@ -15,7 +15,7 @@
             </b-link>
           </div>
 
-          <b-col v-if="admin" cols="5">
+          <b-col v-if="admin" cols="4">
             <b-button-toolbar>
               <b-button-group size="sm">
                 <b-button @click="category.mode ^= 1" variant="white">
@@ -39,64 +39,62 @@
             </b-button-toolbar>
           </b-col>
         </b-row>
-        <b-row v-if="category.mode == 1">
+        <div v-if="category.mode == 1">
           <b-form @submit.stop.prevent="updateCategory(category)">
-            <b-col cols="7">
-              <b-form-group>
-                <b-form-input
-                  size="sm"
-                  required
-                  v-model="category.name"
-                  placeholder="Category Name"
-                />
-              </b-form-group>
-            </b-col>
-            <b-col cols="5">
-              <b-button-toolbar>
-                <b-button-group size="sm">
-                  <b-button type="submit" variant="white">
-                    <b-icon
-                      variant="primary"
-                      v-b-tooltip.hover
-                      title="Save"
-                      icon="check2"
-                    />
-                  </b-button>
-                  <b-button @click="category.mode ^= 1" variant="white">
-                    <b-icon
-                      variant="danger"
-                      v-b-tooltip.hover
-                      title="Cancel"
-                      icon="x"
-                    />
-                  </b-button>
-                </b-button-group>
-              </b-button-toolbar>
-            </b-col>
+            <b-row>
+              <b-col cols="8">
+                <b-form-group>
+                  <b-form-input
+                    size="sm"
+                    required
+                    v-model="category.name"
+                    placeholder="Category Name"
+                  />
+                </b-form-group>
+              </b-col>
+              <b-col cols="4">
+                <b-button-toolbar>
+                  <b-button-group size="sm">
+                    <b-button type="submit" variant="white">
+                      <b-icon
+                        variant="primary"
+                        v-b-tooltip.hover
+                        title="Save"
+                        icon="check2"
+                      />
+                    </b-button>
+                    <b-button @click="category.mode ^= 1" variant="white">
+                      <b-icon
+                        variant="danger"
+                        v-b-tooltip.hover
+                        title="Cancel"
+                        icon="x"
+                      />
+                    </b-button>
+                  </b-button-group>
+                </b-button-toolbar>
+              </b-col>
+            </b-row>
           </b-form>
-        </b-row>
+        </div>
       </li>
-      <li>
-        <b-row class="mt-2" v-if="admin">
+      <div v-if="admin">
+        <b-card>
           <b-form @submit.stop.prevent="createNewCateg">
-            <b-col cols="7">
-              <b-form-group>
-                <b-form-input
-                  size="sm"
-                  required
-                  v-model="newCategory"
-                  placeholder="Category Name"
-                />
-              </b-form-group>
-            </b-col>
-            <b-col cols="5">
-              <b-button size="sm" type="submit" variant="warning">
-                Create
-              </b-button>
-            </b-col>
+            <b-form-group>
+              <b-form-input
+                size="sm"
+                required
+                v-model="newCategory"
+                placeholder="Category Name"
+              />
+            </b-form-group>
+            <b-button size="sm" type="submit" variant="warning">
+              Create
+            </b-button>
           </b-form>
-        </b-row>
-      </li>
+        </b-card>
+      </div>
     </ul>
   </div>
 </template>
@@ -110,6 +108,7 @@ export default {
   data() {
     return {
       newCategory: "",
+      searchParameter: {},
       categoryList: []
     };
   },
@@ -120,8 +119,9 @@ export default {
   },
 
   async mounted() {
+    this.searchParameter = this.$store.state.Products.searchParameter;
     this.categoryList = await this.$store.dispatch("Category/getCategoryList");
-    this.categoryList.map(obj => ({
+    this.categoryList = this.categoryList.map(obj => ({
       ...obj,
       mode: 0
     }));

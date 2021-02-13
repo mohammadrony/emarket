@@ -23,9 +23,15 @@
               >
                 <b-dropdown-item
                   variant="dark"
+                  @click="set_category({ id: 0, name: 'All Category' })"
+                >
+                  All Category
+                </b-dropdown-item>
+                <b-dropdown-item
+                  variant="dark"
                   @click="set_category(category)"
-                  v-for="(category,idx) in categoryList"
-                  :key="idx"
+                  v-for="category in categoryList"
+                  :key="category.id"
                   >{{ category.name }}</b-dropdown-item
                 >
               </b-dropdown>
@@ -114,7 +120,6 @@ export default {
     this.admin = this.$store.state.CurrentUser.admin;
     this.userLoggedIn = this.$store.state.CurrentUser.userLoggedIn;
     this.categoryList = await this.$store.dispatch("Category/getCategoryList");
-    this.categoryList.unshift({ id: 0, name: "All Category" });
   },
   computed: {},
   methods: {
