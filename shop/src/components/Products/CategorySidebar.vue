@@ -11,6 +11,7 @@
                 icon="triangle-fill"
                 scale="0.5"
                 rotate="90"
+                shift-v="-2"
               />
             </b-link>
           </div>

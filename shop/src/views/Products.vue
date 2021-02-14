@@ -57,9 +57,7 @@
         </b-row>
         <b-row class="mt-3 mb-5" v-if="this.apCount == 0">
           <b-col>
-            <hr />
-            <h3>Found Nothing...</h3>
-            <hr />
+            <h2>...</h2>
           </b-col>
         </b-row>
         <b-row v-if="this.apCount != 0" class="mt-3" align-v="center">

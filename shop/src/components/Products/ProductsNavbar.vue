@@ -36,23 +36,23 @@
               <b-button
                 :to="{ name: 'add-product' }"
                 v-if="admin"
-                class="mr-auto"
+                class=""
                 size="md"
                 variant="outline-dark"
               >
-                <b-icon class="mr-2" icon="plus-square"></b-icon>
-                Add New Product
+                <b-icon class="mr-2" scale="0.8" icon="plus-square"></b-icon>
+                Create Item
               </b-button>
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">
-              <b-nav-form @submit.prevent="search">
+              <b-nav-form @submit.stop.prevent="search">
                 <b-form-input
                   v-model="searchText"
                   size="sm"
                   class="mr-sm-2"
                   placeholder="Search here"
                 ></b-form-input>
-                <b-button @click="search" variant="white">
+                <b-button type="submit" variant="white">
                   <b-icon icon="search"></b-icon
                 ></b-button>
               </b-nav-form>
@@ -119,16 +119,16 @@ export default {
       await this.$store.dispatch("Products/resetSearchParameter");
       window.location.replace("/products");
     },
-    async setCategory() {
+    setCategory() {
       const route = "/products/" + this.category.name;
       window.location.replace(route);
     },
-    async setSubCategory() {
+    setSubCategory() {
       const route =
         "/products/" + this.category.name + "/" + this.subCategory.name;
       window.location.replace(route);
     },
-    async setSubSubCategory() {
+    setSubSubCategory() {
       const route =
         "/products/" +
         this.category.name +

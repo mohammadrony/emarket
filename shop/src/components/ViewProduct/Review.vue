@@ -26,7 +26,6 @@
             <br />
           </b-card>
         </b-col>
-        <!-- progress bar rating start -->
         <b-col cols="4" class="justify-content-center">
           <b-row align-v="center" class="my-2">
             <b-col cols="2">
@@ -123,7 +122,6 @@
             </b-col>
           </b-row>
         </b-col>
-        <!-- progress bar rating end -->
         <b-col></b-col>
       </b-row>
 
@@ -254,45 +252,43 @@
               </a>
             </div>
             <hr />
-
-            <b-row>
-              <b-col cols="5">
-                <h6>Rating</h6>
-                <b-form-rating
-                  v-model="rating"
-                  variant="primary"
-                  class="mb-4"
-                ></b-form-rating>
-              </b-col>
-            </b-row>
-            <h6>Review</h6>
-            <b-alert variant="warning" v-if="reviewAlert">{{
-              reviewAlert
-            }}</b-alert>
-
-            <b-alert variant="warning" :show="loginAlert && !userLoggedIn">
-              <a href="#"> Sign in to write a review </a>
-            </b-alert>
-            <b-form-group>
-              <b-form-textarea
-                @keyup="loginAlert = true"
-                class="mb-3"
-                v-model="comment"
-                placeholder="Write a review"
-                rows="3"
-                max-rows="8"
-              ></b-form-textarea>
-            </b-form-group>
-
-            <b-button variant="primary" disabled v-if="!userLoggedIn"
-              >Submit</b-button
-            >
-            <b-button
-              variant="primary"
-              @click="createReview"
-              v-if="userLoggedIn"
-              >Submit</b-button
-            >
+            <b-form v-if="userLoggedIn" @submit.stop.prevent="createReview">
+              <b-row>
+                <b-col cols="5">
+                  <h6>Rating</h6>
+                  <b-form-rating
+                    v-model="rating"
+                    variant="primary"
+                    class="mb-4"
+                  ></b-form-rating>
+                </b-col>
+              </b-row>
+              <h6>Review</h6>
+              <b-form-group>
+                <b-form-textarea
+                  @keyup="loginAlert = true"
+                  class="mb-3"
+                  required
+                  v-model="comment"
+                  placeholder="Write a review"
+                  rows="3"
+                  max-rows="8"
+                ></b-form-textarea>
+              </b-form-group>
+              <b-button variant="primary" type="submit" v-if="userLoggedIn"
+                >Submit</b-button
+              >
+            </b-form>
+            <div v-if="!userLoggedIn">
+              You'll not be able to write a review until you're logged in.
+              <b-row>
+                <b-col>
+                  <b-button to="/login" class="mt-3" variant="warning"
+                    >Login</b-button
+                  >
+                </b-col>
+              </b-row>
+            </div>
           </b-card>
         </b-col>
       </b-row>
@@ -412,20 +408,24 @@ export default {
               1 * this.oneStar)) /
             this.ratingCount
         ) / 10;
+      this.oneStarPercent = Math.round(
+        (this.oneStar * 100) / this.ratingCount,
+        1
+      );
+      this.twoStarPercent = Math.round(
+        (this.twoStar * 100) / this.ratingCount,
+        1
+      );
+      this.threeStarPercent = Math.round(
+        (this.threeStar * 100) / this.ratingCount
+      );
+      this.fourStarPercent = Math.round(
+        (this.fourStar * 100) / this.ratingCount
+      );
+      this.fiveStarPercent = Math.round(
+        (this.fiveStar * 100) / this.ratingCount
+      );
     }
-    this.oneStarPercent = Math.round(
-      (this.oneStar * 100) / this.ratingCount,
-      1
-    );
-    this.twoStarPercent = Math.round(
-      (this.twoStar * 100) / this.ratingCount,
-      1
-    );
-    this.threeStarPercent = Math.round(
-      (this.threeStar * 100) / this.ratingCount
-    );
-    this.fourStarPercent = Math.round((this.fourStar * 100) / this.ratingCount);
-    this.fiveStarPercent = Math.round((this.fiveStar * 100) / this.ratingCount);
   },
   methods: {
     async createReview() {

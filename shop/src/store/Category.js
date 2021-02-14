@@ -53,5 +53,17 @@ export const CategoryModule = {
             }
             return state.subSubCategoryList
         },
+        async getCategoryName({ state }, categoryId) {
+            const category = state.categoryList.filter(obj => obj.id == categoryId)
+            return category[0].name;
+        },
+        async getSubCategoryName({ state }, subCategoryId) {
+            const subCategory = state.subCategoryList.filter(obj => obj.id == subCategoryId)
+            return subCategory[0].name;
+        },
+        async getSubSubCategoryName({ state }, subSubCategoryId) {
+            const subSubCategory = state.subSubCategoryList.filter(obj => obj.id == subSubCategoryId)
+            return subSubCategory[0].name;
+        }
     }
 }

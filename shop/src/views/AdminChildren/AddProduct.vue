@@ -1,6 +1,7 @@
 <template>
   <div>
     <ATopHeader />
+    
     <b-container>
       <b-card>
         <b-navbar text-variant="white" variant="info">
@@ -85,7 +86,7 @@
                   placeholder="Upto 10 image"
                   required
                   multiple
-                  @change="onFileChange"
+                  @change="selectedImage"
                 />
               </b-form-group>
               <b-alert variant="warning" class="mt-2" :show="imageAlert">{{
@@ -94,7 +95,7 @@
               <div id="preview">
                 <b-row class="mt-2">
                   <b-col cols="3" v-for="(img, index) in dispImg" :key="index"
-                    >{{ index + 1 }} <b-img :src="img"
+                    >{{ index + 1 }} <b-img :src="img" width="100%"
                   /></b-col>
                 </b-row>
               </div>
@@ -267,7 +268,7 @@ export default {
       "Category/getSubCategoryList"
     );
     this.subSubCategoryList = await this.$store.dispatch(
-      "Category/getSubCategoryList"
+      "Category/getSubSubCategoryList"
     );
   },
   methods: {
@@ -286,10 +287,9 @@ export default {
           formData.append("imageField", this.images[i]);
       }
       try {
-        await ProductsService.createProduct(formData);
-        const newProduct = (
-          await this.$store.dispatch("Products/setAllBackupProduct")
-        ).data;
+        const newProduct = (await ProductsService.createProduct(formData)).data;
+        await this.$store.dispatch("Products/setAllBackupProduct");
+        console.log(newProduct)
         window.location.replace("/products/" + newProduct.id);
       } catch (error) {
         console.log(error.response.data.error);
@@ -313,7 +313,7 @@ export default {
       this.selectedSubSubCategory = subSubCategory.name;
       this.product.SubSubCategoryId = subSubCategory.id;
     },
-    onFileChange(event) {
+    selectedImage(event) {
       this.images = event.target.files;
 
       if (this.images.length > this.maximumImageCount) {

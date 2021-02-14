@@ -37,7 +37,7 @@ module.exports = {
 			const limit = req.params.limit;
 			const products = await Product.findAll({
 				limit: parseInt(limit),
-				order: [['createdAt', 'ASC']],
+				order: [['createdAt', 'DESC']],
 				attributes: ['id', 'title', 'amount', 'currency', 'sales', 'image1', 'CategoryId', 'SubCategoryId', 'SubSubCategoryId']
 			});
 			res.send(products)

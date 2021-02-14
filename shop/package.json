@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^1.11.0",
+    "@toast-ui/vue-editor": "^2.5.1",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.18.1",

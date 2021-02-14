@@ -19,6 +19,7 @@
                   icon="triangle-fill"
                   scale="0.5"
                   rotate="90"
+                  shift-v="-2"
                 />
               </b-link>
             </div>
@@ -124,7 +125,7 @@ export default {
   },
   computed: {
     ...mapState({
-      admin: state => state.CurrentUser.admin,
+      admin: state => state.CurrentUser.admin
     })
   },
 
