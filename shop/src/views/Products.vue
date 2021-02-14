@@ -20,15 +20,17 @@
             <b-card-group deck>
               <b-card img-top style="max-width: 25rem" class="mb-4">
                 <b-card-img
+                  @click="viewProduct(product)"
                   :src="product.image1"
                   style="max-width: 25rem; max-height: 25rem"
                   alt="Image Not Found"
                 ></b-card-img>
-                <b-link @click="viewProduct(product)">{{
-                  product.title
-                }}</b-link>
-                <br />
-                <h6 class="mt-2">
+                <div class="mt-2">
+                  <b-link @click="viewProduct(product)">{{
+                    product.title
+                  }}</b-link>
+                </div>
+                <h6 class="mt-1">
                   {{ product.amount }} {{ product.currency }}
                 </h6>
                 <AddToCart

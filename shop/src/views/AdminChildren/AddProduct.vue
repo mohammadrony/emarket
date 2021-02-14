@@ -1,7 +1,7 @@
 <template>
   <div>
     <ATopHeader />
-    
+
     <b-container>
       <b-card>
         <b-navbar text-variant="white" variant="info">
@@ -59,21 +59,16 @@
                   </b-form-group>
                 </b-col>
               </b-row>
-              <b-form-group
-                id="input-group-subtitle"
-                label="Short Overview"
-                label-for="input-subtitle"
-              >
-                <b-form-textarea
-                  id="input-subtitle"
-                  v-model="product.subtitle"
-                  placeholder="Short Overview"
-                  rows="6"
-                  max-rows="10"
-                  required
+              <div>
+                <b-form-group
+                  id="input-group-overview"
+                  label="Overview"
+                  label-for="input-overview"
                 >
-                </b-form-textarea>
-              </b-form-group>
+                  <vue-editor id="input-overview" v-model="product.subtitle">
+                  </vue-editor>
+                </b-form-group>
+              </div>
             </b-col>
             <b-col>
               <b-form-group
@@ -289,8 +284,8 @@ export default {
       try {
         const newProduct = (await ProductsService.createProduct(formData)).data;
         await this.$store.dispatch("Products/setAllBackupProduct");
-        console.log(newProduct)
-        window.location.replace("/products/" + newProduct.id);
+        console.log(newProduct);
+        window.location.replace("/product/" + newProduct.id);
       } catch (error) {
         console.log(error.response.data.error);
       }

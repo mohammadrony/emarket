@@ -19,63 +19,63 @@
               alt="Image Not Found"
             />
           </b-row>
-          <b-row>
+          <b-row class="justify-content-left">
             <b-img
-              class="mr-2"
+              class="ml-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image1)"
               :src="displayProduct.image1"
             ></b-img>
             <b-img
-              class="mr-2"
+              class="ml-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image2)"
               :src="displayProduct.image2"
             ></b-img>
             <b-img
-              class="mr-2"
+              class="ml-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image3)"
               :src="displayProduct.image3"
             ></b-img>
             <b-img
-              class="mr-2"
+              class="ml-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image4)"
               :src="displayProduct.image4"
             ></b-img>
             <b-img
-              class="mr-2"
+              class="ml-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image5)"
               :src="displayProduct.image5"
             ></b-img>
             <b-img
-              class="mr-2"
+              class="ml-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image6)"
               :src="displayProduct.image6"
             ></b-img>
             <b-img
-              class="mr-2"
+              class="ml-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image7)"
               :src="displayProduct.image7"
             ></b-img>
             <b-img
-              class="mr-2"
+              class="ml-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image8)"
               :src="displayProduct.image8"
             ></b-img>
             <b-img
-              class="mr-2"
+              class="ml-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image9)"
               :src="displayProduct.image9"
             ></b-img>
             <b-img
-              class="mr-2"
+              class="ml-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image10)"
               :src="displayProduct.image10"
@@ -201,5 +201,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

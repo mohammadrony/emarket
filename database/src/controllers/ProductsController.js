@@ -4,6 +4,7 @@ module.exports = {
 	async getAllProducts(req, res) {
 		try {
 			const products = await Product.findAll({
+				order: [['createdAt', 'DESC']],
 				include: [
 					{ model: Category },
 					{ model: SubCategory },
