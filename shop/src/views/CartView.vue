@@ -1,10 +1,10 @@
 <template>
   <div class="cart">
     <TopHeader></TopHeader>
-    <b-container>
+    <b-container class="mt-3">
       <b-row>
         <b-col class="text-center">
-          <h2 class="m-4">Cart</h2>
+          <h2>Cart</h2>
           <hr />
         </b-col>
       </b-row>
@@ -91,7 +91,6 @@
         </b-row>
       </div>
     </b-container>
-    <br />
     <Footer class="mt-5" />
   </div>
 </template>

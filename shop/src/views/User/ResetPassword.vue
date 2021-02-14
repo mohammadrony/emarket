@@ -1,8 +1,8 @@
 <template>
   <div>
     <TopHeader />
-    <b-container>
-      <b-row class="m-5">
+    <b-container class="mt-5">
+      <b-row class="ml-5">
         <b-col cols="6">
           <b-card v-if="!tokenValidate">
             <h5 class="text-center"><strong>Reset your password</strong></h5>

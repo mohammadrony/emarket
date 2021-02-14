@@ -16,7 +16,6 @@ import Checkout from "@/views/Checkout.vue";
 import Order from "@/views/Order.vue";
 import SuccessPayment from "@/views/Payment/SuccessPayment.vue";
 import CancelPayment from "@/views/Payment/CancelPayment.vue";
-// import Admin from "@/views/Admin.vue";
 import ADashboard from "@/views/AdminChildren/ADashboard.vue";
 import AUsers from "@/views/AdminChildren/AUsers.vue";
 import AddProduct from "@/views/AdminChildren/AddProduct.vue";
@@ -24,6 +23,7 @@ import AOrder from "@/views/AdminChildren/AOrder.vue";
 import AOrders from "@/views/AdminChildren/AOrders.vue";
 import AProfile from "@/views/AdminChildren/AProfile.vue";
 import Unauthorized from "@/views/ErrorPage/Unauthorized.vue";
+import NotFound from "@/views/ErrorPage/NotFound.vue";
 
 Vue.use(VueRouter);
 
@@ -124,8 +124,8 @@ const routes = [
     component: Order
   },
   {
-    path: "/add-product",
-    name: "add-product",
+    path: "/admin/add-product",
+    name: "admin-add-product",
     component: AddProduct,
     meta: { requiresAuth: true }
   },
@@ -163,6 +163,11 @@ const routes = [
     path: "/error/401",
     name: "unauthorized",
     component: Unauthorized
+  },
+  {
+    path: "/*",
+    name: "not-found",
+    component: NotFound
   }
 ];
 

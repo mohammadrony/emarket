@@ -17,7 +17,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 

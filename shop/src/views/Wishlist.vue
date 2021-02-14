@@ -1,7 +1,7 @@
 <template>
   <div class="wishlist">
     <TopHeader></TopHeader>
-    <b-container>
+    <b-container class="mt-5">
       <b-row>
         <b-col v-for="wishItem in myWishlist" :key="wishItem.id" cols="6">
           <b-card img-left style="max-height: 25rem">
@@ -10,7 +10,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer></Footer>
+    <Footer class="mt-5"/>
   </div>
 </template>
 

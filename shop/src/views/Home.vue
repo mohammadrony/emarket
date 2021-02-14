@@ -3,13 +3,13 @@
     <TopHeader />
     <SecondHeader />
     <b-container>
-      <TopCarousel />
-      <Advertise />
-      <TopSellProduct />
-      <NewAddProduct />
-      <Support />
+      <TopCarousel class="mt-3" />
+      <Advertise class="mt-5" />
+      <TopSellProduct class="mt-5" />
+      <NewAddProduct class="mt-5" />
+      <Support class="mt-5" />
     </b-container>
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 
@@ -33,11 +33,11 @@ export default {
     TopSellProduct,
     NewAddProduct,
     Support,
-    Footer,
+    Footer
   },
   mounted() {
     this.$store.dispatch("Products/resetSearchParameter");
-  },
+  }
 };
 </script>
 

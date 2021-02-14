@@ -17,7 +17,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 
@@ -32,15 +32,14 @@ export default {
     TopHeader,
     Address,
     BuyItem,
-    Footer,
+    Footer
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {},
+  methods: {}
 };
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

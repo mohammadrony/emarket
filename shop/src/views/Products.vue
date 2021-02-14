@@ -85,7 +85,7 @@
       </div>
       <b-col></b-col>
     </b-row>
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 

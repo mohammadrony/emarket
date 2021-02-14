@@ -2,7 +2,7 @@
   <div>
     <ATopHeader />
 
-    <b-container>
+    <b-container class="mt-4">
       <b-card>
         <b-navbar text-variant="white" variant="info">
           <b-navbar-brand style="color: #fff">Add Product</b-navbar-brand>
@@ -71,6 +71,78 @@
               </div>
             </b-col>
             <b-col>
+              <b-form-group label="Product Category">
+                <b-row>
+                  <b-col>
+                    <b-dropdown
+                      id="dropdown-category"
+                      :text="selectedCategory"
+                      variant="warning"
+                      block
+                      menu-class="w-100"
+                    >
+                      <b-dropdown-item
+                        v-for="category in categoryList"
+                        :key="category.id"
+                        @click="set_category(category)"
+                      >
+                        <a>{{ category.name }}</a>
+                      </b-dropdown-item>
+                    </b-dropdown>
+                  </b-col>
+                </b-row>
+                <b-row class="mt-4">
+                  <b-col>
+                    <b-dropdown
+                      id="dropdown-subCategory"
+                      :text="selectedSubCategory"
+                      variant="warning"
+                      block
+                      menu-class="w-100"
+                      :disabled="product.CategoryId == 0"
+                    >
+                      <div
+                        v-for="subCategory in subCategoryList"
+                        :key="subCategory.id"
+                      >
+                        <b-dropdown-item
+                          v-if="product.CategoryId == subCategory.CategoryId"
+                          @click="set_subCategory(subCategory)"
+                        >
+                          {{ subCategory.name }}
+                        </b-dropdown-item>
+                      </div>
+                    </b-dropdown>
+                  </b-col>
+                </b-row>
+                <b-row class="mt-4">
+                  <b-col>
+                    <b-dropdown
+                      id="dropdown-subSubCategory"
+                      :text="selectedSubSubCategory"
+                      variant="warning"
+                      block
+                      menu-class="w-100"
+                      :disabled="product.SubCategoryId == 0"
+                    >
+                      <div
+                        v-for="subSubCategory in subSubCategoryList"
+                        :key="subSubCategory.id"
+                      >
+                        <b-dropdown-item
+                          v-if="
+                            product.SubCategoryId ==
+                              subSubCategory.SubCategoryId
+                          "
+                          @click="set_subSubCategory(subSubCategory)"
+                        >
+                          {{ subSubCategory.name }}
+                        </b-dropdown-item>
+                      </div>
+                    </b-dropdown>
+                  </b-col>
+                </b-row>
+              </b-form-group>
               <b-form-group
                 id="input-group-images"
                 label="Product Images"
@@ -94,76 +166,6 @@
                   /></b-col>
                 </b-row>
               </div>
-              <b-form-group class="mt-2" label="Product Category">
-                <b-row class="mt-2">
-                  <b-col>
-                    <b-dropdown
-                      id="dropdown-category"
-                      :text="selectedCategory"
-                      variant="info"
-                      block
-                      menu-class="w-100"
-                    >
-                      <b-dropdown-item
-                        v-for="category in categoryList"
-                        :key="category.id"
-                        @click="set_category(category)"
-                      >
-                        <a>{{ category.name }}</a>
-                      </b-dropdown-item>
-                    </b-dropdown>
-                  </b-col>
-                </b-row>
-                <b-row class="mt-4">
-                  <b-col>
-                    <b-dropdown
-                      id="dropdown-subCategory"
-                      :text="selectedSubCategory"
-                      variant="info"
-                      block
-                      :disabled="product.CategoryId == 0"
-                    >
-                      <div
-                        v-for="subCategory in subCategoryList"
-                        :key="subCategory.id"
-                      >
-                        <b-dropdown-item
-                          v-if="product.CategoryId == subCategory.CategoryId"
-                          @click="set_subCategory(subCategory)"
-                        >
-                          {{ subCategory.name }}
-                        </b-dropdown-item>
-                      </div>
-                    </b-dropdown>
-                  </b-col>
-                </b-row>
-                <b-row class="mt-4">
-                  <b-col>
-                    <b-dropdown
-                      id="dropdown-subSubCategory"
-                      :text="selectedSubSubCategory"
-                      variant="info"
-                      block
-                      :disabled="product.SubCategoryId == 0"
-                    >
-                      <div
-                        v-for="subSubCategory in subSubCategoryList"
-                        :key="subSubCategory.id"
-                      >
-                        <b-dropdown-item
-                          v-if="
-                            product.SubCategoryId ==
-                              subSubCategory.SubCategoryId
-                          "
-                          @click="set_subSubCategory(subSubCategory)"
-                        >
-                          {{ subSubCategory.name }}
-                        </b-dropdown-item>
-                      </div>
-                    </b-dropdown>
-                  </b-col>
-                </b-row>
-              </b-form-group>
             </b-col>
           </b-row>
           <hr />
@@ -209,7 +211,7 @@
         </b-form>
       </b-card>
     </b-container>
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 
@@ -231,9 +233,9 @@ export default {
       categoryList: [],
       subCategoryList: [],
       subSubCategoryList: [],
-      selectedCategory: "Category",
-      selectedSubCategory: "Sub Category",
-      selectedSubSubCategory: "Sub Sub Category",
+      selectedCategory: "Category Name",
+      selectedSubCategory: "Sub Category Name",
+      selectedSubSubCategory: "Sub Sub Category Name",
       backupProduct: null,
       product: {
         code: "",
@@ -247,7 +249,7 @@ export default {
         SubSubCategoryId: 0
       },
       errorCountImage:
-        "You are not allowed to add more than 10 image for this product.",
+        "You are not allowed to add more than 10 image for any product.",
       maximumImageCount: 10,
       imageAlert: null,
       errorFieldRequired: "Please fill in all required field.",
@@ -284,7 +286,6 @@ export default {
       try {
         const newProduct = (await ProductsService.createProduct(formData)).data;
         await this.$store.dispatch("Products/setAllBackupProduct");
-        console.log(newProduct);
         window.location.replace("/product/" + newProduct.id);
       } catch (error) {
         console.log(error.response.data.error);
@@ -318,9 +319,11 @@ export default {
       }
       var i;
 
+      this.dispImg = [];
       for (i = 0; i < this.images.length; i++) {
-        if (i < this.maximumImageCount)
+        if (i < this.maximumImageCount) {
           this.dispImg[i] = URL.createObjectURL(this.images[i]);
+        }
       }
     }
   }

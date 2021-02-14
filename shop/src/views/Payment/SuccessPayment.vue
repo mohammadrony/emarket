@@ -1,8 +1,8 @@
 <template>
   <div>
     <TopHeader></TopHeader>
-    <b-container>
-      <b-row class="m-5" align-h="center">
+    <b-container class="mt-5">
+      <b-row align-h="center">
         <b-col cols="6" class="text-center">
           <b-card
             border-variant="primary"
@@ -22,7 +22,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer></Footer>
+    <Footer class="mt-5" />
   </div>
 </template>
 

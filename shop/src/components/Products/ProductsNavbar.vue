@@ -34,7 +34,7 @@
                 <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
               </b-nav-item>
               <b-button
-                :to="{ name: 'add-product' }"
+                to="/admin/add-product"
                 v-if="admin"
                 class=""
                 size="md"

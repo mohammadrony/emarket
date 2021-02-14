@@ -1,8 +1,8 @@
 <template>
   <div>
     <TopHeader />
-    <b-container>
-      <b-row class="mt-5" align-h="center">
+    <b-container class="mt-5">
+      <b-row align-h="center">
         <b-col cols="7">
           <b-card style="color: #001e5f">
             <h4 style="font-weight: bold">Create Account</h4>
@@ -141,7 +141,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 

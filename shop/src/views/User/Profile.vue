@@ -16,7 +16,7 @@
           </b-tab>
         </b-tabs>
       </div>
-      <div class="my-5" v-if="userId == 0">
+      <div class="mt-5" v-if="userId == 0">
         <br />
         <br />
         <br />
@@ -28,7 +28,7 @@
         <br />
       </div>
     </b-container>
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 

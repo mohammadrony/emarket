@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="mt-5">
+    <b-container>
       <b-row v-if="topSellProduct">
         <b-col>
           <h3>{{ topSellViewTitle }}</h3>

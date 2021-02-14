@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-row class="mt-5">
+    <b-row>
       <b-col cols="3">
         <b-button
           class="mb-2"

@@ -8,8 +8,8 @@
       :subCategId="displayProduct.SubCategoryId"
       :subSubCategId="displayProduct.SubSubCategoryId"
     />
-    <b-container>
-      <b-row align-h="center" class="mt-5">
+    <b-container class="mt-5">
+      <b-row align-h="center">
         <b-col cols="5">
           <b-row align-h="center">
             <b-img
@@ -135,7 +135,7 @@
       </div>
     </b-container>
     <Review class="mt-3" />
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 

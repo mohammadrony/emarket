@@ -1,8 +1,8 @@
 <template>
   <div>
     <TopHeader />
-    <b-container>
-      <b-row class="m-5">
+    <b-container class="mt-5">
+      <b-row>
         <b-col cols="6">
           <b-card v-if="!registerToken">
             <h5 class="text-center"><strong>Email Verification</strong></h5>
@@ -30,7 +30,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 

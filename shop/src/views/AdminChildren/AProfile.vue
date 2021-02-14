@@ -1,7 +1,7 @@
 <template>
   <div class="a-profile">
     <ATopHeader></ATopHeader>
-    <b-container>
+    <b-container class="mt-5">
       <b-row align-v="center">
         <b-col>
           <h3>Admin Profile Page</h3>
@@ -17,7 +17,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 

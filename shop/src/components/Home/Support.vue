@@ -1,12 +1,12 @@
 <template>
   <div>
-    <b-container class="mt-5">
+    <b-container>
       <b-row>
         <b-col>
           <hr />
-          <b-row id="customer-support" align-v="center">
+          <b-row class="my-5" id="customer-support" align-v="center">
             <b-col class="text-center">
-              <b-card class="m-4">
+              <b-card>
                 <b-img
                   height="125"
                   src="http://localhost:8084/public/display-icons/fast-delivery-icon.png"
@@ -21,7 +21,7 @@
             </b-col>
 
             <b-col class="text-center">
-              <b-card class="m-4">
+              <b-card>
                 <b-img
                   height="125"
                   src="http://localhost:8084/public/display-icons/card-payment-icon.png"
@@ -36,7 +36,7 @@
             </b-col>
 
             <b-col class="text-center">
-              <b-card class="m-4">
+              <b-card>
                 <b-img
                   height="125"
                   src="http://localhost:8084/public/display-icons/online-support-icon.png"

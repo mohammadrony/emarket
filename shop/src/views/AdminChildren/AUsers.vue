@@ -1,7 +1,7 @@
 <template>
   <div>
     <ATopHeader></ATopHeader>
-    <b-container>
+    <b-container class="mt-2">
       <b-row>
         <b-col class="text-center">
           <h3>Users</h3>
@@ -128,7 +128,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 <script>

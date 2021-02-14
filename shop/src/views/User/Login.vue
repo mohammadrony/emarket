@@ -1,8 +1,8 @@
 <template>
   <div>
     <TopHeader />
-    <b-container>
-      <b-row class="mt-5" align-h="center">
+    <b-container class="mt-5">
+      <b-row align-h="center">
         <b-col cols="5">
           <b-card style="color: #001e5f">
             <h4 style="font-weight: bold">Login</h4>

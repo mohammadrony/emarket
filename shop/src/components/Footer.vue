@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5">
+  <div>
     <b-row class="py-5" style="background: #555">
       <b-col>
         <b-container>

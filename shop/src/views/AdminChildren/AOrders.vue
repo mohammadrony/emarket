@@ -89,7 +89,7 @@
           <hr />
         </div>
       </div>
-      <div class="m-4 d-flex justify-content-center" v-if="orders == 0">
+      <div class="mt-5 d-flex justify-content-center" v-if="orders == 0">
         <h3>Order not found...</h3>
       </div>
       <b-pagination
@@ -101,7 +101,7 @@
         @input="paginate(currentPage)"
       ></b-pagination>
     </b-container>
-    <Footer />
+    <Footer class="mt-5" />
   </div>
 </template>
 
