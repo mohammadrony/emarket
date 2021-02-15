@@ -1,21 +1,17 @@
 <template>
   <div class="a-profile">
     <ATopHeader></ATopHeader>
-    <b-container class="mt-5">
-      <b-row align-v="center">
-        <b-col>
-          <h3>Admin Profile Page</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora
-            illum dolor nobis voluptate officia reprehenderit eveniet nam omnis
-            veritatis ut alias quas, praesentium numquam fuga accusamus
-            doloribus perferendis itaque quae.
-          </p>
-        </b-col>
-        <b-col>
-          <img src="/img/svg/profile.svg" alt="" width="300" />
-        </b-col>
-      </b-row>
+    <b-container class="mt-4">
+      <div v-if="userId != 0">
+        <b-tabs nav-wrapper-class="w-25" vertical pills card>
+          <b-tab title="Profile" active>
+            <UPublicProfile />
+          </b-tab>
+          <b-tab lazy title="Company">
+            <CompanyProfile />
+          </b-tab>
+        </b-tabs>
+      </div>
     </b-container>
     <Footer class="mt-5" />
   </div>
@@ -23,11 +19,15 @@
 
 <script>
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
+import UPublicProfile from "@/components/User/Profile/UPublicProfile.vue";
+import CompanyProfile from "@/components/Admins/Profile/CompanyProfile.vue";
 import Footer from "@/components/Footer.vue";
 export default {
   name: "AProfile",
   components: {
     ATopHeader,
+    UPublicProfile,
+    CompanyProfile,
     Footer
   },
   data() {

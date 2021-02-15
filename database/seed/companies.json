@@ -3,7 +3,7 @@
     "id": 1,
     "name": "e-store",
     "icon": "",
-    "logo": "http://localhost:8084/public/shop/e-store/logo.png",
+    "logo": "http://localhost:8084/public/company/e-store/logo.png",
     "code": "e-store",
     "email": "estore@gmail.com",
     "phoneNo": "+88017000000300",

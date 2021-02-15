@@ -1,14 +1,16 @@
 <template>
-  <div></div>
+  <div>
+    Company Profile
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Name",
-  props: {},
+  name: "CompanyProfile",
   data() {
     return {};
   },
+  props: {},
   components: {},
   computed: {},
   mounted() {},

@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     priority:           DataTypes.INTEGER,
   })
   User.associate = function (models) {
-    User.belongsTo(models.Shop)
+    User.belongsTo(models.Company)
   }
   return User
 }

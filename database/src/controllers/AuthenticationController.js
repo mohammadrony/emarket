@@ -18,12 +18,12 @@ module.exports = {
             if (req.body.userType == "Customer") {
                 req.body.variant = "warning"
                 req.body.priority = 2
-                req.body.ShopId = 1
+                req.body.CompanyId = 1
             }
             else if (req.body.userType == "Admin") {
                 req.body.variant = "dark"
                 req.body.priority = 1
-                req.body.ShopId = 1
+                req.body.CompanyId = 1
             }
             var buf = crypto.randomBytes(20);
             var token = buf.toString('hex');
@@ -66,7 +66,7 @@ module.exports = {
                 email: user.email,
                 profileImage: user.profileImage,
                 priority: user.priority,
-                ShopId: user.ShopId
+                CompanyId: user.CompanyId
             }
             res.send({
                 user: newUser,
@@ -140,7 +140,7 @@ module.exports = {
                 profileImage: user.profileImage,
                 userType: user.userType,
                 priority: user.priority,
-                ShopId: user.ShopId
+                CompanyId: user.CompanyId
             }
             res.send({
                 user: retUser,

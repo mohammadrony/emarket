@@ -25,7 +25,7 @@ database/src/policies/isAuthenticated.js
 database/src/policies/AuthenticationControllerPolicy.js
 database/src/models
 database/src/models/Wishlist.js
-database/src/models/Shop.js
+database/src/models/Company.js
 database/src/models/ProductPrice.js
 database/src/models/Review.js
 database/src/models/Cart.js
@@ -121,7 +121,7 @@ shop/src/components/Order/OrderDetails.vue
 shop/src/components/Order/OrderItems.vue
 shop/src/App.vue
 shop/src/store
-shop/src/store/Shop.js
+shop/src/store/Company.js
 shop/src/store/Cart.js
 shop/src/store/Checkout.js
 shop/src/store/Products.js

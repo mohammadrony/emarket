@@ -1,10 +1,10 @@
 const isAuthenticated = require('./policies/isAuthenticated')
-const ShopController = require("./controllers/ShopController")
 const UserController = require("./controllers/UserController")
 const ImageController = require("./controllers/ImageController")
 const CartsController = require("./controllers/CartsController")
 const OrderController = require("./controllers/OrderController")
 const ReviewController = require("./controllers/ReviewController")
+const CompanyController = require("./controllers/CompanyController")
 const WishlistController = require("./controllers/WishlistController")
 const ProductsController = require("./controllers/ProductsController")
 const CheckoutController = require("./controllers/CheckoutController")
@@ -72,6 +72,10 @@ module.exports = (app) => {
     CheckoutController.createCheckoutSession)
   app.get("/retrieveCheckoutSession/:sessionId",
     CheckoutController.retrieveCheckoutSession)
+
+  // company
+  app.get("/company/getCompanyLogo/:companyId",
+    CompanyController.getCompanyLogo)
 
   // order
   app.get("/order/getOrderList",
@@ -148,10 +152,6 @@ module.exports = (app) => {
     ReviewReplyController.updateReviewReply)
   app.delete("/reviewReply/deleteReviewReply/:reviewReplyId",
     ReviewReplyController.deleteReviewReply)
-
-  // shop
-  app.get("/shop/getShopLogo/:shopId",
-    ShopController.getShopLogo)
 
   // sub category
   app.get("/subCategory/getSubCategoryByName/:name",

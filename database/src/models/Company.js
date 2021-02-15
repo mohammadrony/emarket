@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Shop = sequelize.define('Shop', {
+  const Company = sequelize.define('Company', {
     id: {
       type:           DataTypes.INTEGER,
       allowNull:      false,
@@ -17,5 +17,5 @@ module.exports = (sequelize, DataTypes) => {
     details:          DataTypes.TEXT,
     location:         DataTypes.STRING,
   })
-  return Shop
+  return Company
 }

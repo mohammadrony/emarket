@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { CartModule } from "./Cart.js";
-import { ShopModule } from "./Shop.js";
+import { CompanyModule } from "./Company.js";
 import { CategoryModule } from "./Category.js";
 import { ProductsModule } from "./Products.js";
 import { CheckoutModule } from "./Checkout.js";
@@ -15,8 +15,8 @@ export default new Vuex.Store({
         createPersistedState()
     ],
     modules: {
-        Shop: ShopModule,
         Cart: CartModule,
+        Company: CompanyModule,
         Category: CategoryModule,
         Products: ProductsModule,
         Checkout: CheckoutModule,

@@ -4,20 +4,16 @@
     <b-container class="mt-5">
       <b-row align-v="center">
         <b-col>
-          <h3>Admin Dashboard Page</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempora
-            illum dolor nobis voluptate officia reprehenderit eveniet nam omnis
-            veritatis ut alias quas, praesentium numquam fuga accusamus
-            doloribus perferendis itaque quae.
-          </p>
+          <!-- <h3>Admin Dashboard</h3> -->
+          <h3>Hello {{ user.firstName }} {{ user.lastName }},</h3>
+          <h5>Welcome to admin dashboard</h5>
         </b-col>
         <b-col>
           <img src="/img/svg/overview.svg" alt="" width="300" />
         </b-col>
       </b-row>
     </b-container>
-    <Footer class="mt-5"/>
+    <Footer class="mt-5" />
   </div>
 </template>
 
@@ -29,6 +25,11 @@ export default {
   components: {
     ATopHeader,
     Footer
+  },
+  data() {
+    return {
+      user: this.$store.state.CurrentUser.user
+    };
   }
 };
 </script>

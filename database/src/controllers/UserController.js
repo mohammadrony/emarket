@@ -61,7 +61,7 @@ module.exports = {
                     "userType",
                     "variant",
                     "priority",
-                    "ShopId"
+                    "CompanyId"
                 ]
             })
             if (!user) {
@@ -95,7 +95,7 @@ module.exports = {
                     "userType",
                     "variant",
                     "priority",
-                    "ShopId"
+                    "CompanyId"
                 ]
             })
             res.send(userList);

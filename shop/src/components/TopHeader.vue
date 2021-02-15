@@ -9,7 +9,7 @@
           style="background-color: #00283a"
         >
           <b-navbar-brand href="/">
-            <b-img :src="shopLogo" />
+            <b-img :src="companyLogo" />
           </b-navbar-brand>
           <b-navbar-toggle target="nav-top-header-collapse" />
           <b-collapse id="nav-top-header-collapse" is-nav>
@@ -40,7 +40,7 @@
                 <b-form-input
                   class="mr-sm-2 searchField"
                   v-model="searchTxt"
-                  placeholder="Search for products & brands"
+                  placeholder="Search for products &amp; brands"
                 />
               </b-nav-form>
             </b-navbar-nav>
@@ -87,7 +87,7 @@
 
             <b-navbar-nav v-if="!userLoggedIn">
               <b-button pill variant="success" to="/login">
-                Login & Register
+                Login &amp; Register
               </b-button>
             </b-navbar-nav>
           </b-collapse>
@@ -105,8 +105,7 @@ export default {
     return {
       user: {},
       admin: false,
-      shopId: 1,
-      shopLogo: "",
+      companyLogo: "",
       userLoggedIn: false,
       categoryList: [],
       searchTxt: "",
@@ -115,7 +114,7 @@ export default {
     };
   },
   async mounted() {
-    this.shopLogo = await this.$store.dispatch("Shop/getShopLogo");
+    this.companyLogo = await this.$store.dispatch("Company/getCompanyLogo");
     this.user = this.$store.state.CurrentUser.user;
     this.admin = this.$store.state.CurrentUser.admin;
     this.userLoggedIn = this.$store.state.CurrentUser.userLoggedIn;
