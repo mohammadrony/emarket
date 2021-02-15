@@ -10,8 +10,8 @@ export default {
   },
   props: {},
   components: {},
-  mounted() {},
   computed: {},
+  mounted() {},
   methods: {}
 };
 </script>

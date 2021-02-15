@@ -31,7 +31,7 @@
                   @keyup="error = null"
                   @keyup.enter="passwordReset"
                   required
-                ></b-form-input>
+                />
               </b-form-group>
 
               <b-form-group
@@ -47,7 +47,7 @@
                   @keyup="error = null"
                   @keyup.enter="passwordReset"
                   required
-                ></b-form-input>
+                />
               </b-form-group>
               <h6 style="color: #f00">
                 {{ error }}
@@ -63,8 +63,8 @@
                     >Submit</b-button
                   >
                 </b-col>
-                <b-col cols="3"></b-col>
-                <b-col cols="3"></b-col>
+                <b-col cols="3" />
+                <b-col cols="3" />
               </b-row>
             </b-form>
           </b-card>

@@ -10,7 +10,7 @@
               <br />
               <a style="color: #fff">+8801555111555</a>
             </b-col>
-            <b-col cols="10"></b-col>
+            <b-col cols="10"/>
           </b-row>
         </b-container>
       </b-col>

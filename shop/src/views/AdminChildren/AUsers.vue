@@ -11,7 +11,7 @@
       <b-row>
         <b-col>
           <b-row>
-            <b-col cols="8"></b-col>
+            <b-col cols="8" />
             <b-col cols="4">
               <b-form inline @submit.prevent="search">
                 <b-form-input
@@ -20,7 +20,7 @@
                   class="mr-sm-2"
                   placeholder="Search user..."
                   @keyup.enter="search"
-                ></b-form-input>
+                />
                 <b-button @click="search" variant="white">
                   <b-icon icon="search"></b-icon
                 ></b-button>
@@ -103,9 +103,19 @@
                         size="sm"
                         block
                         variant="danger"
+                        v-if="user.id != userId"
                         @click="deleteAccount(user)"
                       >
                         Delete
+                      </b-button>
+                      <b-button
+                        size="sm"
+                        block
+                        to="/admin/profile"
+                        v-if="user.id == userId"
+                        variant="info"
+                      >
+                        Profile
                       </b-button>
                     </b-col>
                   </b-row>

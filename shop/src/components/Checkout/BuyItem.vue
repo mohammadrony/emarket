@@ -31,7 +31,7 @@
       </b-col>
     </b-row>
     <b-row class="mb-3 mt-5">
-      <b-col cols="2"></b-col>
+      <b-col cols="2" />
       <b-col cols="10">
         <b-card class="mt-5" v-if="subTotalAmount != 0">
           <b-row>
@@ -79,7 +79,7 @@
       <b-col cols="5">
         <b-button block variant="warning" to="/cart-view">Edit Cart</b-button>
       </b-col>
-      <b-col cols="2"></b-col>
+      <b-col cols="2" />
       <b-col>
         <b-button
           v-if="!payBtnSpin"
@@ -87,7 +87,7 @@
           block
           variant="success"
         >
-          <b-icon icon="cursor-fill"></b-icon>
+          <b-icon icon="cursor-fill" />
           Pay Now
         </b-button>
         <b-button v-if="payBtnSpin" block variant="success">

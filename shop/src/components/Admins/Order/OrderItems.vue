@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-row>
-      <b-col cols="4" v-for="orderItem in orderItems" :key="orderItem.id">
+      <b-col cols="6" v-for="orderItem in orderItems" :key="orderItem.id">
         <b-card-group deck>
           <b-card img-top style="max-width: 14rem" class="mb-4">
             <b-card-img

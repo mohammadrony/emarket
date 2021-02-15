@@ -10,7 +10,7 @@
       </b-row>
       <b-row class="ml-2" v-if="cartItemCount == 0">empty cart!!!</b-row>
       <b-row v-if="cartItemCount != 0">
-        <b-col cols="3"></b-col>
+        <b-col cols="3" />
         <b-col cols="3">
           <strong>Item</strong>
         </b-col>
@@ -67,7 +67,7 @@
       </div>
       <div v-if="cartItemCount != 0">
         <b-row class="mb-3">
-          <b-col cols="10"></b-col>
+          <b-col cols="10" />
           <b-col cols="2">
             <b-card>
               <b-card-title>Total</b-card-title>
@@ -81,10 +81,10 @@
           <b-col cols="2">
             <b-button block variant="info" to="/products">Add More</b-button>
           </b-col>
-          <b-col cols="8"></b-col>
+          <b-col cols="8" />
           <b-col cols="2">
             <b-button to="/checkout" block variant="primary">
-              <b-icon icon="cursor-fill"></b-icon>
+              <b-icon icon="cursor-fill" />
               Checkout
             </b-button>
           </b-col>

@@ -218,9 +218,10 @@
               }}</b-alert>
               <div id="preview">
                 <b-row class="mt-2">
-                  <b-col cols="3" v-for="(img, index) in dispImg" :key="index"
-                    >{{ index + 1 }} <b-img :src="img" width="100%"
-                  /></b-col>
+                  <b-col cols="3" v-for="(img, index) in dispImg" :key="index">
+                    {{ index + 1 }}
+                    <b-img :src="img" width="100%" />
+                  </b-col>
                 </b-row>
               </div>
             </b-col>
@@ -369,7 +370,14 @@ export default {
         this.productDescriptionAlert = true;
         return;
       }
-
+      this.product.subtitle = this.product.subtitle.replace(
+        /<p><br><\/p>/g,
+        ""
+      );
+      this.product.description = this.product.description.replace(
+        /<p><br><\/p>/g,
+        ""
+      );
       var formData = new FormData();
       var fieldName;
       for (fieldName in this.product) {

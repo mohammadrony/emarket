@@ -16,7 +16,7 @@
             v-if="user.priority == 1"
             variant="success"
           >
-            <b-icon icon="check-circle-fill"></b-icon>
+            <b-icon icon="check-circle-fill" />
             Admin
           </b-badge>
         </div>
@@ -28,7 +28,7 @@
               title="change name"
               scale="0.8"
               icon="pen"
-            ></b-icon>
+             />
           </b-button>
         </div>
 
@@ -86,7 +86,7 @@
                 title="Add username"
                 scale="0.8"
                 icon="pen"
-              ></b-icon>
+               />
             </b-button>
           </div>
           <div class="mt-1" v-if="user.username && editUserName == 0">
@@ -102,7 +102,7 @@
                 title="Change username"
                 scale="0.8"
                 icon="pen"
-              ></b-icon>
+               />
             </b-button>
           </div>
           <div v-if="editUserName == 1">
@@ -165,7 +165,7 @@
               title="change password"
               scale="0.8"
               icon="pen"
-            ></b-icon>
+             />
           </b-button>
         </div>
         <b-modal
@@ -190,7 +190,7 @@
                 ref="currentPasswordField"
                 :state="validCurrentPassword && currentPasswordValidation"
                 required
-              ></b-form-input>
+              />
               <b-form-invalid-feedback
                 v-if="currentPassword"
                 :state="validCurrentPassword && currentPasswordValidation"
@@ -215,7 +215,7 @@
                 type="password"
                 :state="newPasswordValidation"
                 required
-              ></b-form-input>
+              />
 
               <b-form-invalid-feedback
                 v-if="newPassword"
@@ -242,7 +242,7 @@
                 :state="confirmPasswordValidation"
                 type="password"
                 required
-              ></b-form-input>
+              />
               <b-form-invalid-feedback
                 v-if="confirmPassword"
                 :state="confirmPasswordValidation"
@@ -257,7 +257,7 @@
               </b-form-invalid-feedback>
             </b-form-group>
             <b-row class="mt-4">
-              <b-col cols="4"></b-col>
+              <b-col cols="4" />
               <b-col cols="4">
                 <b-button type="reset" block variant="danger">
                   Reset
@@ -278,7 +278,7 @@
           width="230px"
           height="auto"
           :src="user.profileImage"
-        ></b-img>
+        />
       </b-col>
     </b-row>
   </div>

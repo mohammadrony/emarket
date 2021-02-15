@@ -17,7 +17,7 @@
               @keyup="setName"
               :state="nameValidation"
               required
-            ></b-form-input>
+            />
           </b-form-group>
           <b-form-group
             id="input-group-email"
@@ -31,7 +31,7 @@
               @keyup="setEmail"
               :state="emailValidation"
               required
-            ></b-form-input>
+            />
           </b-form-group>
           <b-form-group
             id="input-group-phone"
@@ -45,7 +45,7 @@
               @keyup="setPhoneNo"
               :state="phoneNoValidation"
               required
-            ></b-form-input>
+            />
           </b-form-group>
           <div class="mt-4">
             <b-card bg-variant="light">
@@ -68,7 +68,7 @@
                     v-model="line1"
                     @keyup="setAddressLine1"
                     id="nested-line1"
-                  ></b-form-input>
+                  />
                 </b-form-group>
                 <b-form-group
                   label="Line2:"
@@ -82,7 +82,7 @@
                     v-model="line2"
                     @keyup="setAddressLine2"
                     id="nested-line2"
-                  ></b-form-input>
+                  />
                 </b-form-group>
 
                 <b-form-group
@@ -97,7 +97,7 @@
                     v-model="zipCode"
                     @keyup="setAddressZipCode"
                     id="nested-zipcode"
-                  ></b-form-input>
+                  />
                 </b-form-group>
 
                 <b-form-group
@@ -112,7 +112,7 @@
                     v-model="city"
                     @keyup="setAddressCity"
                     id="nested-city"
-                  ></b-form-input>
+                  />
                 </b-form-group>
                 <b-form-group
                   label="Division:"
@@ -126,7 +126,7 @@
                     v-model="division"
                     @keyup="setAddressDivision"
                     id="nested-division"
-                  ></b-form-input>
+                  />
                 </b-form-group>
 
                 <b-form-group
@@ -142,7 +142,7 @@
                     v-model="country"
                     @keyup="setAddressCountry"
                     id="nested-country"
-                  ></b-form-input>
+                  />
                 </b-form-group>
               </b-form-group>
             </b-card>

@@ -20,7 +20,7 @@
                       type="text"
                       :state="firstNameValidation"
                       required
-                    ></b-form-input>
+                    />
                     <b-form-invalid-feedback
                       v-if="firstName"
                       :state="firstNameValidation"
@@ -41,7 +41,7 @@
                       type="text"
                       :state="lastNameValidation"
                       required
-                    ></b-form-input>
+                    />
                     <b-form-invalid-feedback
                       v-if="lastName"
                       :state="lastNameValidation"
@@ -62,7 +62,7 @@
                   type="email"
                   :state="validEmail && emailValidation"
                   required
-                ></b-form-input>
+                />
                 <b-form-invalid-feedback
                   v-if="email"
                   :state="validEmail && emailValidation"
@@ -84,7 +84,7 @@
                       type="password"
                       :state="newPasswordValidation"
                       required
-                    ></b-form-input>
+                    />
                     <b-form-invalid-feedback
                       v-if="password"
                       :state="newPasswordValidation"
@@ -106,7 +106,7 @@
                       type="password"
                       :state="confirmPasswordValidation"
                       required
-                    ></b-form-input>
+                    />
                     <b-form-invalid-feedback
                       v-if="confirmPassword"
                       :state="confirmPasswordValidation"
@@ -118,7 +118,7 @@
               </b-row>
 
               <b-row class="mt-3">
-                <b-col cols="3"></b-col>
+                <b-col cols="3" />
                 <b-col cols="6">
                   <b-button
                     block
@@ -128,7 +128,7 @@
                     >Create Account</b-button
                   >
                 </b-col>
-                <b-col cols="3"></b-col>
+                <b-col cols="3" />
               </b-row>
             </b-form>
             <hr />

@@ -11,7 +11,7 @@
           <b-navbar-brand href="/">
             <b-img :src="shopLogo" />
           </b-navbar-brand>
-          <b-navbar-toggle target="nav-top-header-collapse"></b-navbar-toggle>
+          <b-navbar-toggle target="nav-top-header-collapse" />
           <b-collapse id="nav-top-header-collapse" is-nav>
             <b-navbar-nav class="mr-auto">
               <b-dropdown
@@ -41,7 +41,7 @@
                   class="mr-sm-2 searchField"
                   v-model="searchTxt"
                   placeholder="Search for products & brands"
-                ></b-form-input>
+                />
               </b-nav-form>
             </b-navbar-nav>
 
@@ -53,10 +53,10 @@
             <b-navbar-nav>
               <b-nav-item class="mr-auto" to="/cart-view"
                 ><div>
-                  <b-icon icon="cart2"></b-icon>
+                  <b-icon icon="cart2" />
                   Cart
-                </div></b-nav-item
-              >
+                </div>
+              </b-nav-item>
             </b-navbar-nav>
             <b-navbar-nav v-if="userLoggedIn">
               <b-nav-item>
@@ -64,7 +64,7 @@
                   height="35px"
                   width="35px"
                   :src="user.profileImage"
-                ></b-img>
+                />
               </b-nav-item>
             </b-navbar-nav>
             <b-navbar-nav v-if="userLoggedIn">

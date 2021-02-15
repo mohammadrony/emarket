@@ -2,14 +2,14 @@
   <div>
     <b-navbar size="sm" toggleable="md" type="primary" variant="white">
       <b-navbar-brand href="#" @click="productHome">
-        <b-icon variant="primary" icon="house-door-fill"></b-icon>
-        <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
+        <b-icon variant="primary" icon="house-door-fill" />
+        <b-icon class="ml-2" scale=".7" icon="chevron-right" />
       </b-navbar-brand>
       <b-navbar-toggle target="nav-products-collapse">
         <b-button-toolbar>
           <b-button-group>
             <b-button variant="outline-dark" class="px-3 py-2">
-              <b-icon scale="1.6" icon="list"></b-icon>
+              <b-icon scale="1.6" icon="list" />
             </b-button>
           </b-button-group>
         </b-button-toolbar>
@@ -18,25 +18,24 @@
         <b-navbar-nav class="mr-auto">
           <b-nav-item @click="setCategory">
             {{ categoryName }}
-            <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
+            <b-icon class="ml-2" scale=".7" icon="chevron-right" />
           </b-nav-item>
           <b-nav-item @click="setSubCategory">
             {{ subCategoryName }}
-            <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
+            <b-icon class="ml-2" scale=".7" icon="chevron-right" />
           </b-nav-item>
           <b-nav-item @click="setSubSubCategory">
             {{ subSubCategoryName }}
-            <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
+            <b-icon class="ml-2" scale=".7" icon="chevron-right" />
           </b-nav-item>
           <b-nav-item to="#">
             {{ productName }}
           </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-          
-            <b-button pill variant="warning">
-              Edit Item
-            </b-button>
+          <b-button pill variant="warning">
+            Edit Item
+          </b-button>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -65,6 +64,7 @@ export default {
     subSubCategId: Number
   },
   components: {},
+  computed: {},
   async mounted() {
     if (this.categoryId && this.subCategoryId && this.subSubCategoryId) {
       this.categoryName = await this.$store.dispatch(
@@ -81,14 +81,13 @@ export default {
       );
     }
   },
-  computed: {},
   methods: {
     async productHome() {
       await this.$store.dispatch("Products/resetSearchParameter");
       window.location.replace("/products");
     },
     setCategory() {
-      const newRoute = "/products/" + this.category.name;
+      const newRoute = "/products/" + this.categoryName;
       window.location.replace(newRoute);
     },
     setSubCategory() {

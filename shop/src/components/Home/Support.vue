@@ -10,7 +10,7 @@
                 <b-img
                   height="125"
                   src="http://localhost:8084/public/display-icons/fast-delivery-icon.png"
-                ></b-img>
+                />
                 <br />
                 <h5 class="mt-1">
                   <a style="text-decoration: none" href="#customer-support"
@@ -25,7 +25,7 @@
                 <b-img
                   height="125"
                   src="http://localhost:8084/public/display-icons/card-payment-icon.png"
-                ></b-img>
+                />
                 <br />
                 <h5 class="mt-1">
                   <a style="text-decoration: none" href="#customer-support"
@@ -40,7 +40,7 @@
                 <b-img
                   height="125"
                   src="http://localhost:8084/public/display-icons/online-support-icon.png"
-                ></b-img>
+                />
                 <br />
                 <h5 class="mt-1">
                   <a style="text-decoration: none" href="#customer-support"
@@ -59,15 +59,15 @@
                 Subscribe to the e-store-bd.com Newsletter
               </p>
               <b-row>
-                <b-col cols="3"></b-col>
+                <b-col cols="3" />
                 <b-col cols="6">
                   <b-form-input
                     class="mt-4"
                     size="lg"
                     placeholder="Email Address"
-                  ></b-form-input>
+                  />
                 </b-col>
-                <b-col cols="3"></b-col>
+                <b-col cols="3" />
               </b-row>
               <b-button
                 class="mt-5 px-5"

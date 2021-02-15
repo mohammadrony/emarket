@@ -4,14 +4,14 @@
       <b-col class="ml-2">
         <b-navbar size="sm" toggleable="md" type="primary" variant="white">
           <b-navbar-brand href="#" @click="productHome">
-            <b-icon variant="primary" icon="house-door-fill"></b-icon>
-            <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
+            <b-icon variant="primary" icon="house-door-fill" />
+            <b-icon class="ml-2" scale=".7" icon="chevron-right" />
           </b-navbar-brand>
           <b-navbar-toggle target="nav-products-collapse">
             <b-button-toolbar>
               <b-button-group>
                 <b-button variant="outline-dark" class="px-3 py-2">
-                  <b-icon scale="1.6" icon="list"></b-icon>
+                  <b-icon scale="1.6" icon="list" />
                 </b-button>
               </b-button-group>
             </b-button-toolbar>
@@ -20,18 +20,18 @@
             <b-navbar-nav class="mr-auto">
               <b-nav-item @click="setCategory" v-if="category != null">
                 {{ category.name }}
-                <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
+                <b-icon class="ml-2" scale=".7" icon="chevron-right" />
               </b-nav-item>
               <b-nav-item @click="setSubCategory" v-if="subCategory != null">
                 {{ subCategory.name }}
-                <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
+                <b-icon class="ml-2" scale=".7" icon="chevron-right" />
               </b-nav-item>
               <b-nav-item
                 @click="setSubSubCategory"
                 v-if="subSubCategory != null"
               >
                 {{ subSubCategory.name }}
-                <b-icon class="ml-2" scale=".7" icon="chevron-right"></b-icon>
+                <b-icon class="ml-2" scale=".7" icon="chevron-right" />
               </b-nav-item>
               <b-button
                 to="/admin/add-product"
@@ -40,7 +40,7 @@
                 size="md"
                 variant="outline-dark"
               >
-                <b-icon class="mr-2" scale="0.8" icon="plus-square"></b-icon>
+                <b-icon class="mr-2" scale="0.8" icon="plus-square" />
                 Create Item
               </b-button>
             </b-navbar-nav>
@@ -51,7 +51,7 @@
                   size="sm"
                   class="mr-sm-2"
                   placeholder="Search here"
-                ></b-form-input>
+                />
                 <b-button type="submit" variant="white">
                   <b-icon icon="search"></b-icon
                 ></b-button>

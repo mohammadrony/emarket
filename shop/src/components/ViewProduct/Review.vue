@@ -2,14 +2,14 @@
   <div>
     <b-container id="review_section">
       <b-row align-v="center">
-        <b-col></b-col>
+        <b-col />
         <b-col cols="4" class="text-center">
           <b-card class="py-4">
             <br />
             <span class="product-rating">{{ averageRating }}</span
             ><span>/5</span>
             <b-row>
-              <b-col cols="2"></b-col>
+              <b-col cols="2" />
               <b-col cols="8">
                 <b-form-rating
                   readonly
@@ -18,7 +18,7 @@
                   class="mb-2"
                 ></b-form-rating>
               </b-col>
-              <b-col cols="2"></b-col>
+              <b-col cols="2" />
             </b-row>
             <h6 class="mt-2">
               {{ ratingCount }} ratings & {{ commentCount }} reviews
@@ -59,9 +59,10 @@
               </b-progress>
             </b-col>
             <b-col cols="3">
-              <small
-                >{{ fourStarPercent }} <b-icon icon="percent"></b-icon
-              ></small>
+              <small>
+                {{ fourStarPercent }}
+                <b-icon icon="percent"></b-icon>
+              </small>
             </b-col>
           </b-row>
 
@@ -122,7 +123,7 @@
             </b-col>
           </b-row>
         </b-col>
-        <b-col></b-col>
+        <b-col />
       </b-row>
 
       <hr />
@@ -143,7 +144,7 @@
                     :src="review.User.profileImage"
                     height="60px"
                     width="60px"
-                  ></b-img>
+                  />
                   <br />
                   <b-link>{{
                     review.User.firstName + " " + review.User.lastName
@@ -203,7 +204,7 @@
                   :src="currentUserReview.User.profileImage"
                   height="90px"
                   width="90px"
-                ></b-img>
+                />
                 <br />
                 <b-link>{{
                   currentUserReview.User.firstName +

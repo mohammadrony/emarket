@@ -7,7 +7,7 @@
           variant="transparent"
           v-b-toggle.categorycollapse
         >
-          <b-icon variant="white" icon="chevron-double-down"></b-icon>
+          <b-icon variant="white" icon="chevron-double-down" />
         </b-button>
       </b-col>
       <b-col cols="10">
@@ -38,7 +38,7 @@
                   :text="subCategory.name"
                 >
                   <b-dropdown-item @click="subCategorySelect(subCategory)">
-                    <b-icon icon="cursor-fill" scale="0.5"></b-icon>
+                    <b-icon icon="cursor-fill" scale="0.5" />
                     All {{ subCategory.name }}</b-dropdown-item
                   >
                   <div
@@ -54,7 +54,7 @@
                       "
                       href="#"
                     >
-                      <b-icon icon="cursor-fill" scale="0.5"></b-icon>
+                      <b-icon icon="cursor-fill" scale="0.5" />
                       {{ subSubCategory.name }}
                     </b-dropdown-item>
                   </div>
@@ -67,7 +67,7 @@
 
       <b-col>
         <b-button variant="transparent" v-b-toggle.categorycollapse>
-          <b-icon variant="white" icon="chevron-double-down"></b-icon>
+          <b-icon variant="white" icon="chevron-double-down" />
         </b-button>
       </b-col>
     </b-row>
@@ -100,7 +100,7 @@
                   :text="subCategory.name"
                 >
                   <b-dropdown-item @click="subCategorySelect(subCategory)">
-                    <b-icon icon="cursor-fill" scale="0.5"></b-icon>
+                    <b-icon icon="cursor-fill" scale="0.5" />
                     All {{ subCategory.name }}</b-dropdown-item
                   >
                   <div
@@ -116,7 +116,7 @@
                       "
                       href="#"
                     >
-                      <b-icon icon="cursor-fill" scale="0.5"></b-icon>
+                      <b-icon icon="cursor-fill" scale="0.5" />
                       {{ subSubCategory.name }}
                     </b-dropdown-item>
                   </div>

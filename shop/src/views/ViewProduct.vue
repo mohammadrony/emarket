@@ -21,65 +21,65 @@
           </b-row>
           <b-row class="justify-content-left">
             <b-img
-              class="ml-1 mb-1"
+              class="mr-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image1)"
               :src="displayProduct.image1"
-            ></b-img>
+            />
             <b-img
-              class="ml-1 mb-1"
+              class="mr-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image2)"
               :src="displayProduct.image2"
-            ></b-img>
+            />
             <b-img
-              class="ml-1 mb-1"
+              class="mr-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image3)"
               :src="displayProduct.image3"
-            ></b-img>
+            />
             <b-img
-              class="ml-1 mb-1"
+              class="mr-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image4)"
               :src="displayProduct.image4"
-            ></b-img>
+            />
             <b-img
-              class="ml-1 mb-1"
+              class="mr-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image5)"
               :src="displayProduct.image5"
-            ></b-img>
+            />
             <b-img
-              class="ml-1 mb-1"
+              class="mr-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image6)"
               :src="displayProduct.image6"
-            ></b-img>
+            />
             <b-img
-              class="ml-1 mb-1"
+              class="mr-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image7)"
               :src="displayProduct.image7"
-            ></b-img>
+            />
             <b-img
-              class="ml-1 mb-1"
+              class="mr-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image8)"
               :src="displayProduct.image8"
-            ></b-img>
+            />
             <b-img
-              class="ml-1 mb-1"
+              class="mr-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image9)"
               :src="displayProduct.image9"
-            ></b-img>
+            />
             <b-img
-              class="ml-1 mb-1"
+              class="mr-1 mb-1"
               height="90px"
               @click="changeImage(displayProduct.image10)"
               :src="displayProduct.image10"
-            ></b-img>
+            />
           </b-row>
         </b-col>
         <b-col cols="5">
@@ -135,6 +135,11 @@
       </div>
     </b-container>
     <Review class="mt-3" />
+    <Recommendation
+      class="mt-5"
+      :key="recommendationKey"
+      :subSubCatId="displayProduct.SubSubCategoryId"
+    />
     <Footer class="mt-5" />
   </div>
 </template>
@@ -145,8 +150,8 @@ import TopHeader from "@/components/TopHeader.vue";
 import ProductHeader from "@/components/ViewProduct/ProductHeader.vue";
 import AddToCart from "@/components/AddToCart.vue";
 import Review from "@/components/ViewProduct/Review.vue";
+import Recommendation from "@/components/ViewProduct/Recommendation.vue";
 import Footer from "@/components/Footer.vue";
-import { mapState } from "vuex";
 export default {
   name: "ViewProduct",
   components: {
@@ -154,18 +159,34 @@ export default {
     ProductHeader,
     AddToCart,
     Review,
+    Recommendation,
     Footer
   },
   data() {
     return {
       current_image: "",
+      user: {},
       componentKey: 0,
+      recommendationKey: 2,
       displayProduct: {}
     };
   },
+  async mounted() {
+    this.user = this.$store.state.CurrentUser.user;
+    const productId = parseInt(this.$store.state.route.params.productId);
+    try {
+      this.displayProduct = (await ProductsService.getProduct(productId)).data;
+      this.forceRerender();
+      this.current_image = this.displayProduct.image1;
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
+  },
+  computed: {},
   methods: {
     forceRerender() {
       this.componentKey += 1;
+      this.recommendationKey += 1;
     },
     changeImage(image) {
       this.current_image = image;
@@ -182,21 +203,6 @@ export default {
       await this.$store.dispatch("Cart/addToCart", buyProduct);
       window.location.replace("/checkout");
     }
-  },
-  async mounted() {
-    const productId = parseInt(this.$store.state.route.params.productId);
-    try {
-      this.displayProduct = (await ProductsService.getProduct(productId)).data;
-      this.forceRerender();
-      this.current_image = this.displayProduct.image1;
-    } catch (error) {
-      console.log(error.response.data.error);
-    }
-  },
-  computed: {
-    ...mapState({
-      user: state => state.CurrentUser.user
-    })
   }
 };
 </script>

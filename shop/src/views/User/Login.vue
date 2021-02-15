@@ -18,7 +18,7 @@
                   type="email"
                   ref="emailField"
                   required
-                ></b-form-input>
+                />
               </b-form-group>
 
               <b-form-group
@@ -31,7 +31,7 @@
                   id="input-password"
                   type="password"
                   required
-                ></b-form-input>
+                />
               </b-form-group>
               <b-alert
                 variant="primary"
@@ -41,7 +41,7 @@
                 {{ loginMessage }}
               </b-alert>
               <b-row>
-                <b-col cols="3"></b-col>
+                <b-col cols="3" />
                 <b-col cols="6">
                   <b-button
                     block
@@ -51,7 +51,7 @@
                     >Login</b-button
                   >
                 </b-col>
-                <b-col cols="3"></b-col>
+                <b-col cols="3" />
               </b-row>
             </b-form>
             <b-row class="mt-2">

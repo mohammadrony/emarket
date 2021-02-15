@@ -12,7 +12,7 @@
             align="center"
           >
             <b-button size="lg" disabled variant="primary">
-              <b-icon icon="check" scale="3"></b-icon>
+              <b-icon icon="check" scale="3" />
             </b-button>
             <h1 class="mt-4">You're all set!</h1>
             <h6>Thanks for your purchase!</h6>

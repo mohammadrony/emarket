@@ -50,7 +50,7 @@
                   size="sm"
                   variant="danger"
                 >
-                  <b-icon icon="trash"></b-icon>
+                  <b-icon icon="trash" />
                   Delete
                 </b-button>
               </b-card>
@@ -72,7 +72,7 @@
               @input="paginate(currentPage)"
             ></b-pagination>
           </b-col>
-          <b-col></b-col>
+          <b-col />
           <b-col>
             <h6>
               SHOWING {{ (currentPage - 1) * perPage + 1 }} TO
@@ -83,7 +83,7 @@
           </b-col>
         </b-row>
       </div>
-      <b-col></b-col>
+      <b-col />
     </b-row>
     <Footer class="mt-5" />
   </div>

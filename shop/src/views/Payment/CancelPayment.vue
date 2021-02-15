@@ -12,7 +12,7 @@
             align="center"
           >
             <b-button size="lg" disabled variant="light">
-              <b-icon icon="x" scale="2" variant="danger"></b-icon>
+              <b-icon icon="x" scale="2" variant="danger" />
             </b-button>
             <h3 class="mt-4">Payment Cancelled</h3>
             <h6>This payment can not be completed.</h6>

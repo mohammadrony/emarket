@@ -9,7 +9,7 @@
           @keyup.enter="priceFilter"
           v-model="minPrice"
           placeholder="Min"
-        ></b-form-input>
+        />
       </b-col>
       To
       <b-col cols="2">
@@ -17,7 +17,7 @@
           @keyup.enter="priceFilter"
           v-model="maxPrice"
           placeholder="Max"
-        ></b-form-input>
+        />
       </b-col>
       <b-button @click="priceFilter" class="ml-2" variant="outline-info">
         <b-icon-filter></b-icon-filter>

@@ -16,7 +16,7 @@
               :src="review.Product.image1"
               height="140px"
               width="140px"
-            ></b-img>
+            />
           </b-col>
           <b-col cols="9">
             your review on&nbsp;

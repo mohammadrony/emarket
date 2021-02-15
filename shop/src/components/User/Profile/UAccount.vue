@@ -45,7 +45,7 @@
         {{ deleteAccountError }}
       </b-alert>
       <b-row class="mt-3">
-        <b-col cols="4"></b-col>
+        <b-col cols="4" />
         <b-col cols="4">
           <b-button
             @click="$bvModal.hide('delete-account-confirmation')"

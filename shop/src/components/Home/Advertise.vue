@@ -8,12 +8,12 @@
           variant="warning"
           size="sm"
         >
-          <b-icon icon="pen"></b-icon>
+          <b-icon icon="pen" />
         </b-button>
         <b-img
           @click="advertise"
           src="http://localhost:8084/public/display-images/mac-mini.png"
-        ></b-img>
+        />
       </b-col>
       <b-col cols="3">
         <b-button
@@ -22,12 +22,12 @@
           variant="warning"
           size="sm"
         >
-          <b-icon icon="pen"></b-icon>
+          <b-icon icon="pen" />
         </b-button>
         <b-img
           @click="advertise"
           src="http://localhost:8084/public/display-images/ipad-2020.jpeg"
-        ></b-img>
+        />
       </b-col>
       <b-col cols="3">
         <b-button
@@ -36,12 +36,12 @@
           variant="warning"
           size="sm"
         >
-          <b-icon icon="pen"></b-icon>
+          <b-icon icon="pen" />
         </b-button>
         <b-img
           @click="advertise"
           src="http://localhost:8084/public/display-images/razer-opus.jpeg"
-        ></b-img>
+        />
       </b-col>
       <b-col cols="3">
         <b-button
@@ -50,12 +50,12 @@
           variant="warning"
           size="sm"
         >
-          <b-icon icon="pen"></b-icon>
+          <b-icon icon="pen" />
         </b-button>
         <b-img
           @click="advertise"
           src="http://localhost:8084/public/display-images/p120.jpeg"
-        ></b-img>
+        />
       </b-col>
     </b-row>
     <b-row class="mt-5">
@@ -66,12 +66,12 @@
           variant="warning"
           size="sm"
         >
-          <b-icon icon="pen"></b-icon>
+          <b-icon icon="pen" />
         </b-button>
         <b-img
           @click="banner"
           src="http://localhost:8084/public/display-images/smart-watches.jpeg"
-        ></b-img>
+        />
       </b-col>
       <b-col cols="6">
         <b-button
@@ -80,12 +80,12 @@
           variant="warning"
           size="sm"
         >
-          <b-icon icon="pen"></b-icon>
+          <b-icon icon="pen" />
         </b-button>
         <b-img
           @click="banner"
           src="http://localhost:8084/public/display-images/lenovo-yoga.jpeg"
-        ></b-img>
+        />
       </b-col>
     </b-row>
   </div>

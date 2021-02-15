@@ -16,7 +16,7 @@
             @keyup="mailSent = false"
             type="email"
             required
-          ></b-form-input>
+          />
         </b-form-group>
         <small>We will send you a link to reset your password.</small><br />
         <b-alert variant="primary" class="my-2 p-1 pl-2" :show="tokenAlert">
