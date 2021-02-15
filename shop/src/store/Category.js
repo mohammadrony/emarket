@@ -29,6 +29,7 @@ export const CategoryModule = {
                 console.log(error.response.data.error)
             }
         },
+
         async setSubCategoryList({ commit }) {
             try {
                 const subCategoryList = (await SubCategoryService.getSubCategoryList()).data;
@@ -37,6 +38,7 @@ export const CategoryModule = {
                 console.log(error.response.data.error)
             }
         },
+
         async setSubSubCategoryList({ commit }) {
             try {
                 const subSubCategoryList = (
@@ -56,7 +58,6 @@ export const CategoryModule = {
         async getSubCategoryList({ state, dispatch }) {
             if (state.subCategoryList && state.subCategoryList.length == 0) {
                 await dispatch("setSubCategoryList")
-                console.log("set sub category list", state.subCategoryList)
             }
             return state.subCategoryList
         },

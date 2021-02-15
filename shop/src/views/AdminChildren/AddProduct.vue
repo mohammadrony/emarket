@@ -88,6 +88,25 @@
                       >
                         <a>{{ category.name }}</a>
                       </b-dropdown-item>
+                      <b-dropdown-form
+                        @submit.stop.prevent="createNewCateg"
+                        inline
+                      >
+                        <b-row>
+                          <b-col>
+                            <b-form-input
+                              required
+                              v-model="newCategoryName"
+                              placeholder="Category Name"
+                            />
+                          </b-col>
+                          <b-col>
+                            <b-button type="submit" block variant="warning">
+                              Create
+                            </b-button>
+                          </b-col>
+                        </b-row>
+                      </b-dropdown-form>
                     </b-dropdown>
                   </b-col>
                 </b-row>
@@ -112,6 +131,25 @@
                           {{ subCategory.name }}
                         </b-dropdown-item>
                       </div>
+                      <b-dropdown-form
+                        @submit.stop.prevent="createNewSubCateg"
+                        inline
+                      >
+                        <b-row>
+                          <b-col>
+                            <b-form-input
+                              required
+                              v-model="newSubCategoryName"
+                              placeholder="Category Name"
+                            />
+                          </b-col>
+                          <b-col>
+                            <b-button type="submit" block variant="warning">
+                              Create
+                            </b-button>
+                          </b-col>
+                        </b-row>
+                      </b-dropdown-form>
                     </b-dropdown>
                   </b-col>
                 </b-row>
@@ -139,6 +177,25 @@
                           {{ subSubCategory.name }}
                         </b-dropdown-item>
                       </div>
+                      <b-dropdown-form
+                        @submit.stop.prevent="createNewSubSubCateg"
+                        inline
+                      >
+                        <b-row>
+                          <b-col>
+                            <b-form-input
+                              required
+                              v-model="newSubSubCategoryName"
+                              placeholder="Category Name"
+                            />
+                          </b-col>
+                          <b-col>
+                            <b-button type="submit" block variant="warning">
+                              Create
+                            </b-button>
+                          </b-col>
+                        </b-row>
+                      </b-dropdown-form>
                     </b-dropdown>
                   </b-col>
                 </b-row>
@@ -217,6 +274,9 @@
 
 <script>
 import ProductsService from "@/services/ProductsService";
+import CategoryService from "@/services/CategoryService.js";
+import SubCategoryService from "@/services/SubCategoryService.js";
+import SubSubCategoryService from "@/services/SubSubCategoryService.js";
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
 import Footer from "@/components/Footer.vue";
 import { VueEditor } from "vue2-editor";
@@ -230,6 +290,9 @@ export default {
   data() {
     return {
       images: [],
+      newCategoryName: "",
+      newSubCategoryName: "",
+      newSubSubCategoryName: "",
       categoryList: [],
       subCategoryList: [],
       subSubCategoryList: [],
@@ -260,13 +323,17 @@ export default {
   computed: {},
   async mounted() {
     this.backupProduct = this.product;
-    this.categoryList = await this.$store.dispatch("Category/getCategoryList");
-    this.subCategoryList = await this.$store.dispatch(
-      "Category/getSubCategoryList"
-    );
-    this.subSubCategoryList = await this.$store.dispatch(
-      "Category/getSubSubCategoryList"
-    );
+    this.categoryList = (
+      await this.$store.dispatch("Category/getCategoryList")
+    ).slice();
+
+    this.subCategoryList = (
+      await this.$store.dispatch("Category/getSubCategoryList")
+    ).slice();
+
+    this.subSubCategoryList = (
+      await this.$store.dispatch("Category/getSubSubCategoryList")
+    ).slice();
   },
   methods: {
     resetProduct() {
@@ -287,6 +354,45 @@ export default {
         const newProduct = (await ProductsService.createProduct(formData)).data;
         await this.$store.dispatch("Products/setAllBackupProduct");
         window.location.replace("/product/" + newProduct.id);
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+    },
+    async createNewCateg() {
+      try {
+        const newCategory = (
+          await CategoryService.createCategory({ name: this.newCategoryName })
+        ).data;
+        this.newCategoryName = "";
+        this.categoryList.push(newCategory);
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+    },
+    async createNewSubCateg() {
+      try {
+        const newSubCategory = (
+          await SubCategoryService.createSubCategory({
+            name: this.newSubCategoryName,
+            CategoryId: this.CategoryId
+          })
+        ).data;
+        this.newSubCategoryName = "";
+        this.subCategoryList.push(newSubCategory);
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+    },
+    async createNewSubSubCateg() {
+      try {
+        const newSubSubCategory = (
+          await SubSubCategoryService.createSubSubCategory({
+            name: this.newSubSubCategoryName,
+            SubSubCategoryId: this.SubCategoryId
+          })
+        ).data;
+        this.newSubSubCategoryName = "";
+        this.subSubCategoryList.push(newSubSubCategory);
       } catch (error) {
         console.log(error.response.data.error);
       }
