@@ -12,7 +12,7 @@
           @submit.stop.prevent="createNewProduct"
           class="mt-3"
         >
-          <b-row>
+          <b-row cols="1" cols-md="2">
             <b-col>
               <b-form-group
                 id="input-group-title"
@@ -65,7 +65,14 @@
                   label="Overview"
                   label-for="input-overview"
                 >
-                  <vue-editor id="input-overview" v-model="product.subtitle">
+                  <vue-editor
+                    @keyup="
+                      productSubTitleAlert ? (productSubTitleAlert = false) : 1
+                    "
+                    required
+                    id="input-overview"
+                    v-model="product.subtitle"
+                  >
                   </vue-editor>
                 </b-form-group>
               </div>
@@ -88,10 +95,7 @@
                       >
                         <a>{{ category.name }}</a>
                       </b-dropdown-item>
-                      <b-dropdown-form
-                        @submit.stop.prevent="createNewCateg"
-                        inline
-                      >
+                      <b-dropdown-form @submit.stop.prevent="createNewCateg">
                         <b-row>
                           <b-col>
                             <b-form-input
@@ -131,10 +135,7 @@
                           {{ subCategory.name }}
                         </b-dropdown-item>
                       </div>
-                      <b-dropdown-form
-                        @submit.stop.prevent="createNewSubCateg"
-                        inline
-                      >
+                      <b-dropdown-form @submit.stop.prevent="createNewSubCateg">
                         <b-row>
                           <b-col>
                             <b-form-input
@@ -179,7 +180,6 @@
                       </div>
                       <b-dropdown-form
                         @submit.stop.prevent="createNewSubSubCateg"
-                        inline
                       >
                         <b-row>
                           <b-col>
@@ -235,6 +235,12 @@
                   label-for="input-description"
                 >
                   <vue-editor
+                    @keyup="
+                      productDescriptionAlert
+                        ? (productDescriptionAlert = false)
+                        : 1
+                    "
+                    required
                     id="input-description"
                     v-model="product.description"
                   >
@@ -243,13 +249,16 @@
               </div>
             </b-col>
           </b-row>
-          <b-row>
-            <b-form-group>
-              <b-alert variant="danger" class="ml-3" :show="allFieldRequired">{{
-                errorFieldRequired
-              }}</b-alert>
-            </b-form-group>
-          </b-row>
+          <b-alert variant="warning" :show="productCategoryAlert">
+            {{ productCategoryMessage }}
+          </b-alert>
+          <b-alert variant="warning" :show="productSubTitleAlert">
+            {{ productSubTitleMessage }}
+          </b-alert>
+          <b-alert variant="warning" :show="productDescriptionAlert">
+            {{ productDescriptionMessage }}
+          </b-alert>
+
           <b-row>
             <b-col cols="7"></b-col>
             <b-col cols="5">
@@ -296,6 +305,12 @@ export default {
       categoryList: [],
       subCategoryList: [],
       subSubCategoryList: [],
+      productCategoryMessage: "Select product category.",
+      productCategoryAlert: false,
+      productSubTitleMessage: "Add product overview text.",
+      productSubTitleAlert: false,
+      productDescriptionMessage: "Add proper description for this product.",
+      productDescriptionAlert: false,
       selectedCategory: "Category Name",
       selectedSubCategory: "Sub Category Name",
       selectedSubSubCategory: "Sub Sub Category Name",
@@ -304,6 +319,7 @@ export default {
         code: "",
         title: "",
         amount: null,
+        sales: 0,
         subtitle: "",
         description: "",
         currency: "USD",
@@ -314,9 +330,7 @@ export default {
       errorCountImage:
         "You are not allowed to add more than 10 image for any product.",
       maximumImageCount: 10,
-      imageAlert: null,
-      errorFieldRequired: "Please fill in all required field.",
-      allFieldRequired: null,
+      imageAlert: false,
       dispImg: []
     };
   },
@@ -340,6 +354,22 @@ export default {
       this.product = this.backupProduct;
     },
     async createNewProduct() {
+      if (
+        this.product.CategoryId == 0 ||
+        this.product.SubCategoryId == 0 ||
+        this.product.SubSubCategoryId == 0
+      ) {
+        this.productCategoryAlert = true;
+        return;
+      } else if (this.product.subtitle == "") {
+        this.productSubTitleAlert = true;
+        return;
+      } else if (this.product.description == "") {
+        this.productSubTitleAlert = false;
+        this.productDescriptionAlert = true;
+        return;
+      }
+
       var formData = new FormData();
       var fieldName;
       for (fieldName in this.product) {
@@ -364,6 +394,7 @@ export default {
           await CategoryService.createCategory({ name: this.newCategoryName })
         ).data;
         this.newCategoryName = "";
+        await this.$store.dispatch("Category/setCategoryList");
         this.categoryList.push(newCategory);
       } catch (error) {
         console.log(error.response.data.error);
@@ -374,10 +405,11 @@ export default {
         const newSubCategory = (
           await SubCategoryService.createSubCategory({
             name: this.newSubCategoryName,
-            CategoryId: this.CategoryId
+            CategoryId: this.product.CategoryId
           })
         ).data;
         this.newSubCategoryName = "";
+        await this.$store.dispatch("Category/setSubCategoryList");
         this.subCategoryList.push(newSubCategory);
       } catch (error) {
         console.log(error.response.data.error);
@@ -388,10 +420,11 @@ export default {
         const newSubSubCategory = (
           await SubSubCategoryService.createSubSubCategory({
             name: this.newSubSubCategoryName,
-            SubSubCategoryId: this.SubCategoryId
+            SubCategoryId: this.product.SubCategoryId
           })
         ).data;
         this.newSubSubCategoryName = "";
+        await this.$store.dispatch("Category/setSubSubCategoryList");
         this.subSubCategoryList.push(newSubSubCategory);
       } catch (error) {
         console.log(error.response.data.error);
@@ -412,6 +445,7 @@ export default {
       this.product.SubSubCategoryId = 0;
     },
     set_subSubCategory(subSubCategory) {
+      this.productCategoryAlert = false;
       this.selectedSubSubCategory = subSubCategory.name;
       this.product.SubSubCategoryId = subSubCategory.id;
     },

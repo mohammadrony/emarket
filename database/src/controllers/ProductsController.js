@@ -119,7 +119,7 @@ module.exports = {
 			if (req.files[9]) {
 				req.body.image10 = "http://localhost:8084/" + req.files[9].path
 			}
-			req.body.sales = 0
+			console.log(req.body, req.files)			
 			const product = await Product.create(req.body)
 			res.send({ id: product.id })
 		} catch (err) {
