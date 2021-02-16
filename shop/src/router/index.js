@@ -4,24 +4,24 @@ import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Products from "@/views/Product/Products.vue";
 import ViewProduct from "@/views/Product/ViewProduct.vue";
-import Login from "@/views/User/Login.vue";
-import ResetPassword from "@/views/User/ResetPassword.vue";
-import Register from "@/views/User/Register.vue";
-import UserProfile from "@/views/User/Profile.vue";
-import UserVerify from "@/views/User/UserVerify.vue";
-// import AboutUs from "@/views/AboutUs.vue";
 import CartView from "@/views/UsersProduct/CartView.vue";
 import Wishlist from "@/views/UsersProduct/Wishlist.vue";
 import Checkout from "@/views/BuyProduct/Checkout.vue";
 import Order from "@/views/BuyProduct/ViewOrder.vue";
 import SuccessPayment from "@/views/PayMoney/SuccessPayment.vue";
 import CancelPayment from "@/views/PayMoney/CancelPayment.vue";
-import ADashboard from "@/views/AdminChildren/ADashboard.vue";
-import AUsers from "@/views/AdminChildren/AUsers.vue";
-import AddProduct from "@/views/AdminChildren/AddProduct.vue";
-import AOrder from "@/views/AdminChildren/AOrder.vue";
-import AOrders from "@/views/AdminChildren/AOrders.vue";
-import AProfile from "@/views/AdminChildren/AProfile.vue";
+// import AboutUs from "@/views/AboutUs.vue";
+import Register from "@/views/User/Register.vue";
+import Login from "@/views/User/Login.vue";
+import UserProfile from "@/views/User/Profile.vue";
+import UserVerify from "@/views/User/UserVerify.vue";
+import ResetPassword from "@/views/User/ResetPassword.vue";
+import ADashboard from "@/views/Admin/ADashboard.vue";
+import AUsers from "@/views/Admin/AUsers.vue";
+import AOrders from "@/views/Admin/AOrders.vue";
+import AOrder from "@/views/Admin/AOrder.vue";
+import AProfile from "@/views/Admin/AProfile.vue";
+import AddProduct from "@/views/Admin/AddProduct.vue";
 import Unauthorized from "@/views/ErrorPage/Unauthorized.vue";
 import NotFound from "@/views/ErrorPage/NotFound.vue";
 
@@ -58,36 +58,6 @@ const routes = [
     name: "product",
     component: ViewProduct
   },
-  {
-    path: "/login",
-    name: "login",
-    component: Login
-  },
-  {
-    path: "/reset-password",
-    name: "reset-password",
-    component: ResetPassword
-  },
-  {
-    path: "/reset-password/:token",
-    name: "reset-password",
-    component: ResetPassword
-  },
-  {
-    path: "/register",
-    name: "register",
-    component: Register
-  },
-  {
-    path: "/user-verify/:token",
-    name: "user-verify",
-    component: UserVerify
-  },
-  {
-    path: "/profile",
-    name: "profile",
-    component: UserProfile
-  },
   // {
   //   path: "/about",
   //   name: "about-page",
@@ -104,16 +74,6 @@ const routes = [
     component: Wishlist
   },
   {
-    path: "/success-payment",
-    name: "success-payment",
-    component: SuccessPayment
-  },
-  {
-    path: "/cancel-payment",
-    name: "/cancel-payment",
-    component: CancelPayment
-  },
-  {
     path: "/checkout",
     name: "checkout",
     component: Checkout
@@ -124,10 +84,44 @@ const routes = [
     component: Order
   },
   {
-    path: "/admin/add-product",
-    name: "admin-add-product",
-    component: AddProduct,
-    meta: { requiresAuth: true }
+    path: "/success-payment",
+    name: "success-payment",
+    component: SuccessPayment
+  },
+  {
+    path: "/cancel-payment",
+    name: "/cancel-payment",
+    component: CancelPayment
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: Register
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: UserProfile
+  },
+  {
+    path: "/user-verify/:token",
+    name: "user-verify",
+    component: UserVerify
+  },
+  {
+    path: "/reset-password",
+    name: "reset-password",
+    component: ResetPassword
+  },
+  {
+    path: "/reset-password/:token",
+    name: "reset-password",
+    component: ResetPassword
   },
   {
     path: "/admin",
@@ -142,21 +136,27 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: "/admin/order/:orderId",
-    name: "admin-order",
-    component: AOrder,
-    meta: { requiresAuth: true }
-  },
-  {
     path: "/admin/orders",
     name: "admin-orders",
     component: AOrders,
     meta: { requiresAuth: true }
   },
   {
+    path: "/admin/order/:orderId",
+    name: "admin-order",
+    component: AOrder,
+    meta: { requiresAuth: true }
+  },
+  {
     path: "/admin/profile",
     name: "admin-profile",
     component: AProfile,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/admin/add-product",
+    name: "admin-add-product",
+    component: AddProduct,
     meta: { requiresAuth: true }
   },
   {
