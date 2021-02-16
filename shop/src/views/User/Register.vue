@@ -120,12 +120,7 @@
               <b-row class="mt-3">
                 <b-col cols="3" />
                 <b-col cols="6">
-                  <b-button
-                    block
-                    type="submit"
-                    class="p-2"
-                    variant="warning"
-                  >
+                  <b-button block type="submit" class="p-2" variant="warning">
                     Create Account
                   </b-button>
                 </b-col>
