@@ -32,8 +32,9 @@
                   @click="set_category(category)"
                   v-for="category in categoryList"
                   :key="category.id"
-                  >{{ category.name }}</b-dropdown-item
                 >
+                  {{ category.name }}
+                </b-dropdown-item>
               </b-dropdown>
 
               <b-nav-form v-on:submit.prevent="search">
@@ -45,14 +46,17 @@
               </b-nav-form>
             </b-navbar-nav>
 
-            <!-- <b-navbar-nav class="ml-auto">
-              <b-nav-item to="wishlist"
-                ><div><i class="fas fa-heart"></i> Wishlist</div></b-nav-item
-              >
-            </b-navbar-nav> -->
             <b-navbar-nav>
-              <b-nav-item class="mr-auto" to="/cart-view"
-                ><div>
+              <b-nav-item class="mr-auto" @click="wishlist">
+                <div>
+                  <b-icon scale="0.7" icon="suit-heart" />
+                  Wishlist
+                </div>
+              </b-nav-item>
+            </b-navbar-nav>
+            <b-navbar-nav>
+              <b-nav-item to="/cart-view">
+                <div>
                   <b-icon icon="cart2" />
                   Cart
                 </div>
@@ -60,26 +64,22 @@
             </b-navbar-nav>
             <b-navbar-nav v-if="userLoggedIn">
               <b-nav-item>
-                <b-img
-                  height="35px"
-                  width="35px"
-                  :src="user.profileImage"
-                />
+                <b-img height="35px" width="35px" :src="user.profileImage" />
               </b-nav-item>
             </b-navbar-nav>
             <b-navbar-nav v-if="userLoggedIn">
               <b-nav-item-dropdown right>
                 <template #button-content>
-                  <em v-if="user.username" style="color: #fff">{{
-                    user.username
-                  }}</em>
-                  <em v-if="!user.username" style="color: #fff"
-                    >{{ user.firstName }} {{ user.lastName }}</em
-                  >
+                  <em v-if="user.username" style="color: #fff">
+                    {{ user.username }}
+                  </em>
+                  <em v-if="!user.username" style="color: #fff">
+                    {{ user.firstName }} {{ user.lastName }}
+                  </em>
                 </template>
-                <b-dropdown-item v-if="admin" to="/admin"
-                  >Admin Panel</b-dropdown-item
-                >
+                <b-dropdown-item v-if="admin" to="/admin">
+                  Admin Panel
+                </b-dropdown-item>
                 <b-dropdown-item to="/profile">Profile</b-dropdown-item>
                 <b-dropdown-item @click="logout()">Log Out</b-dropdown-item>
               </b-nav-item-dropdown>
@@ -124,7 +124,7 @@ export default {
   methods: {
     wishlist() {
       if (!this.userLoggedIn) {
-        this.$bvToast.toast("Sign in to check your wishlist", {
+        this.$bvToast.toast("Please login for the wishlist", {
           title: "Wishlist",
           variant: "primary",
           toaster: "b-toaster-top-center",

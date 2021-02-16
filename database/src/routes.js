@@ -1,7 +1,6 @@
 const isAuthenticated = require('./policies/isAuthenticated')
 const UserController = require("./controllers/UserController")
 const ImageController = require("./controllers/ImageController")
-const CartsController = require("./controllers/CartsController")
 const OrderController = require("./controllers/OrderController")
 const ReviewController = require("./controllers/ReviewController")
 const CompanyController = require("./controllers/CompanyController")
@@ -17,42 +16,28 @@ const AuthenticationControllerPolicy = require('./policies/AuthenticationControl
 
 module.exports = (app) => {
   // authentication
-  app.post("/register",
+  app.post("/auth/register",
     AuthenticationControllerPolicy.register,
     AuthenticationController.register)
-  app.post("/login",
+  app.post("/auth/login",
     AuthenticationController.login)
-  app.get("/verifyPassword/:password",
+  app.get("/auth/verifyPassword/:password",
     isAuthenticated,
     AuthenticationController.verifyPassword)
-  app.post("/updatePassword",
+  app.post("/auth/updatePassword",
     isAuthenticated,
     AuthenticationControllerPolicy.updatePassword,
     AuthenticationController.updatePassword)
-  app.post("/requestToken",
+  app.post("/auth/requestToken",
     AuthenticationController.requestToken)
-  app.get("/verifyToken/:token",
+  app.get("/auth/verifyToken/:token",
     AuthenticationController.verifyToken)
-  app.get("/verifyRegsToken/:token",
+  app.get("/auth/verifyRegsToken/:token",
     AuthenticationController.verifyRegsToken)
-  app.post("/resetPassword",
+  app.post("/auth/resetPassword",
     AuthenticationController.resetPassword)
-  app.post("/resetRegsToken",
+  app.post("/auth/resetRegsToken",
     AuthenticationController.resetRegsToken)
-
-  // cart
-  app.get("/cart/allProduct",
-    isAuthenticated,
-    CartsController.getAllCartProduct)
-  app.get("/cart/product",
-    isAuthenticated,
-    CartsController.getCartProduct)
-  app.post("/cart/product",
-    isAuthenticated,
-    CartsController.addToCart)
-  app.delete("/cart/product/:productId",
-    isAuthenticated,
-    CartsController.remove)
 
   // category
   app.get("/category/getCategoryByName/:name",
@@ -67,9 +52,9 @@ module.exports = (app) => {
     CategoryController.deleteCategory)
 
   // checkout
-  app.post("/createCheckoutSession",
+  app.post("/checkout/createCheckoutSession",
     CheckoutController.createCheckoutSession)
-  app.get("/retrieveCheckoutSession/:sessionId",
+  app.get("/checkout/retrieveCheckoutSession/:sessionId",
     CheckoutController.retrieveCheckoutSession)
 
   // company
@@ -185,16 +170,16 @@ module.exports = (app) => {
     UserController.getUserByEmail)
 
   // wishlist
-  app.get("/wishlist",
+  app.get("/wishlist/getWishlist",
     isAuthenticated,
     WishlistController.getWishlist)
-  app.get("/wishlist/:productId",
+  app.get("/wishlist/getWishlistItem/:productId",
     isAuthenticated,
-    WishlistController.getWishlistById)
-  app.post("/wishlist/add",
+    WishlistController.getWishlistItem)
+  app.post("/wishlist/createWishlistItem",
     isAuthenticated,
-    WishlistController.addToWishlist)
-  app.delete("/wishlist/delete/:productId",
+    WishlistController.createWishlistItem)
+  app.delete("/wishlist/deleteWishlistItem/:productId",
     isAuthenticated,
-    WishlistController.remove)
+    WishlistController.deleteWishlistItem)
 }

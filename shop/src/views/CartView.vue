@@ -8,20 +8,27 @@
           <hr />
         </b-col>
       </b-row>
-      <b-row class="ml-2" v-if="cartItemCount == 0">empty cart!!!</b-row>
-      <b-row v-if="cartItemCount != 0">
-        <b-col cols="3" />
-        <b-col cols="3">
-          <strong>Item</strong>
-        </b-col>
-        <b-col cols="2">
-          <strong>Price</strong>
-        </b-col>
-        <b-col cols="4">
-          <strong>Quantity</strong>
+      <b-row v-if="cartItemCount == 0">
+        <b-col>
+          empty cart!!!
+          <hr />
         </b-col>
       </b-row>
-      <hr />
+      <div v-if="cartItemCount != 0">
+        <b-row>
+          <b-col cols="3" />
+          <b-col cols="3">
+            <strong>Item</strong>
+          </b-col>
+          <b-col cols="2">
+            <strong>Price</strong>
+          </b-col>
+          <b-col cols="4">
+            <strong>Quantity</strong>
+          </b-col>
+        </b-row>
+        <hr />
+      </div>
       <div v-for="product in cartProducts" :key="product.id">
         <b-row>
           <b-col cols="3">
@@ -42,7 +49,7 @@
                 size="sm"
                 variant="primary"
                 @click="quantityInc(product)"
-              >+
+                >+
               </b-button>
               <a class="ml-4">{{ product.quantity }}</a>
               <b-button
@@ -50,7 +57,7 @@
                 variant="warning"
                 class="ml-4"
                 @click="quantityDec(product)"
-              >-
+                >-
               </b-button>
               <b-button
                 size="sm"

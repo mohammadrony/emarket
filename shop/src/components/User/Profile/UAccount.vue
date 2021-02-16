@@ -10,9 +10,9 @@
       <div v-if="admin">
         Role
         <br />
-        <b-button class="mt-2" :variant="user.variant">{{
-          user.userType
-        }}</b-button>
+        <b-button class="mt-2" :variant="user.variant">
+          {{ user.userType }}
+        </b-button>
       </div>
       <hr />
       <div class="mt-3">
@@ -50,8 +50,7 @@
         ref="passwordField"
         v-model="currentPassword"
         id="input-password"
-      >
-      </b-form-input>
+      />
       <b-alert :show="modalAlert" variant="primary" class="my-2 p-1 pl-2">
         {{ deleteAccountError }}
       </b-alert>

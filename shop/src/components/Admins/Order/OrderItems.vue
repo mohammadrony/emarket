@@ -8,23 +8,23 @@
               :src="orderItem.Product.image1"
               style="max-width: 14rem; max-height: 14rem"
               alt="Image Not Found"
-            ></b-card-img
-            ><br />
-            <b-link @click="viewProduct(orderItem)">{{
-              orderItem.Product.title
-            }}</b-link>
+            />
             <br />
-            <small class="mt-2"
-              >Price: {{ orderItem.Product.amount }}
-              {{ orderItem.Product.currency }}</small
-            >
+            <b-link @click="viewProduct(orderItem)">
+              {{ orderItem.Product.title }}
+            </b-link>
+            <br />
+            <small class="mt-2">
+              Price: {{ orderItem.Product.amount }}
+              {{ orderItem.Product.currency }}
+            </small>
             <br />
             <small class="mt-2">Quantity: {{ orderItem.quantity }}</small>
             <br />
-            <small class="mt-2"
-              >Cost: {{ orderItem.Product.amount * orderItem.quantity }}
-              {{ orderItem.Product.currency }}</small
-            >
+            <small class="mt-2">
+              Cost: {{ orderItem.Product.amount * orderItem.quantity }}
+              {{ orderItem.Product.currency }}
+            </small>
           </b-card>
         </b-card-group>
       </b-col>
@@ -45,8 +45,9 @@
                 v-for="(status, idx) in allStatus"
                 :key="idx"
                 @click="updateStatus(status)"
-                >{{ status.name }}</b-dropdown-item
               >
+                {{ status.name }}
+              </b-dropdown-item>
             </b-dropdown>
           </b-col>
         </b-row>
@@ -81,10 +82,9 @@
             </b-row>
             <b-row class="mt-2" v-if="orderStatus == 'complete'">
               <b-col>
-                <small
-                  >you can keep this order in this stage for later
-                  analysis.</small
-                >
+                <small>
+                  you can keep this order in this stage for later analysis.
+                </small>
               </b-col>
             </b-row>
           </b-col>

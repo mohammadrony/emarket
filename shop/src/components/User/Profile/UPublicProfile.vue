@@ -41,8 +41,7 @@
                   placeholder="First Name"
                   v-model="firstName"
                   required
-                >
-                </b-form-input>
+                />
               </b-col>
               <b-col>
                 <b-form-input
@@ -50,8 +49,7 @@
                   placeholder="Last Name"
                   v-model="lastName"
                   required
-                >
-                </b-form-input>
+                />
               </b-col>
             </b-row>
             <b-row class="mt-2">
@@ -117,8 +115,7 @@
                     @keyup="checkUserName"
                     :state="userNameValidation"
                     required
-                  >
-                  </b-form-input>
+                  />
                   <b-form-valid-feedback :state="userNameValidation">
                     This username is available.
                   </b-form-valid-feedback>

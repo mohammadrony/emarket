@@ -154,8 +154,7 @@
               :options="shipping.options"
               stacked
               v-model="shipping.selectedMethod"
-            >
-            </b-form-radio-group>
+            />
           </b-form-group>
           <!-- <h5 style="font-weight: bold" class="mt-5">Billing Options</h5>
           <hr />
@@ -164,8 +163,7 @@
               :options="payment.options"
               stacked
               v-model="payment.selectedMethod"
-            >
-            </b-form-radio-group>
+            />
           </b-form-group> -->
         </b-form>
       </b-col>

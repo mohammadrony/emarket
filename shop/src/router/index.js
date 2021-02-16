@@ -11,7 +11,7 @@ import UserProfile from "@/views/User/Profile.vue";
 import UserVerify from "@/views/User/UserVerify.vue";
 // import AboutUs from "@/views/AboutUs.vue";
 import CartView from "@/views/CartView.vue";
-// import Wishlist from "@/views/Wishlist.vue";
+import Wishlist from "@/views/Wishlist.vue";
 import Checkout from "@/views/Checkout.vue";
 import Order from "@/views/Order.vue";
 import SuccessPayment from "@/views/Payment/SuccessPayment.vue";
@@ -98,11 +98,11 @@ const routes = [
     name: "cart-view",
     component: CartView
   },
-  // {
-  //   path: "/wishlist",
-  //   name: "wishlist",
-  //   component: Wishlist
-  // },
+  {
+    path: "/wishlist",
+    name: "wishlist",
+    component: Wishlist
+  },
   {
     path: "/success-payment",
     name: "success-payment",

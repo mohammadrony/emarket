@@ -18,7 +18,6 @@ db.Wishlist       = require("./Wishlist")(sequelize, Sequelize.DataTypes);
 db.Product        = require("./Product")(sequelize, Sequelize.DataTypes);
 db.Review         = require("./Review")(sequelize, Sequelize.DataTypes);
 db.Order          = require("./Order")(sequelize, Sequelize.DataTypes);
-db.Cart           = require("./Cart")(sequelize, Sequelize.DataTypes);
 
 Object.keys(db).forEach((modelName) => {
   if ('associate' in db[modelName]) {

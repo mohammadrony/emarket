@@ -146,9 +146,9 @@
                     width="60px"
                   />
                   <br />
-                  <b-link>{{
-                    review.User.firstName + " " + review.User.lastName
-                  }}</b-link>
+                  <b-link>
+                    {{ review.User.firstName + " " + review.User.lastName }}
+                  </b-link>
                   <br />
                 </b-col>
                 <b-col cols="9">
@@ -208,11 +208,13 @@
                   width="90px"
                 />
                 <br />
-                <b-link>{{
-                  currentUserReview.User.firstName +
-                    " " +
-                    currentUserReview.User.lastName
-                }}</b-link>
+                <b-link>
+                  {{
+                    currentUserReview.User.firstName +
+                      " " +
+                      currentUserReview.User.lastName
+                  }}
+                </b-link>
                 <br />
               </b-col>
               <b-col cols="8">
@@ -313,9 +315,9 @@
           max-rows="10"
         />
       </b-form-group>
-      <b-alert variant="warning" v-if="editReviewAlert">{{
-        editReviewAlert
-      }}</b-alert>
+      <b-alert variant="warning" v-if="editReviewAlert">
+        {{ editReviewAlert }}
+      </b-alert>
       <b-button variant="primary" @click="updateReview" v-if="userLoggedIn">
         Submit
       </b-button>

@@ -39,8 +39,8 @@
                 >
                   <b-dropdown-item @click="subCategorySelect(subCategory)">
                     <b-icon icon="cursor-fill" scale="0.5" />
-                    All {{ subCategory.name }}</b-dropdown-item
-                  >
+                    All {{ subCategory.name }}
+                  </b-dropdown-item>
                   <div
                     v-for="subSubCategory in subSubCategoryList"
                     :key="subSubCategory.id"
@@ -50,7 +50,7 @@
                       style="margin-right: 20px"
                       v-if="
                         subCategory.id == subSubCategory.SubCategoryId &&
-                        subCategory.CategoryId == category.id
+                          subCategory.CategoryId == category.id
                       "
                       href="#"
                     >
@@ -101,8 +101,8 @@
                 >
                   <b-dropdown-item @click="subCategorySelect(subCategory)">
                     <b-icon icon="cursor-fill" scale="0.5" />
-                    All {{ subCategory.name }}</b-dropdown-item
-                  >
+                    All {{ subCategory.name }}
+                  </b-dropdown-item>
                   <div
                     v-for="subSubCategory in subSubCategoryList"
                     :key="subSubCategory.id"
@@ -112,7 +112,7 @@
                       style="margin-right: 20px"
                       v-if="
                         subCategory.id == subSubCategory.SubCategoryId &&
-                        subCategory.CategoryId == category.id
+                          subCategory.CategoryId == category.id
                       "
                       href="#"
                     >
@@ -145,11 +145,11 @@ export default {
       categoryListRow1: null,
       categoryListRow2: null,
       subCategoryList: null,
-      subSubCategoryList: null,
+      subSubCategoryList: null
     };
   },
   computed: {
-    ...mapState({}),
+    ...mapState({})
   },
   async mounted() {
     this.categoryList = (await CategoryService.getCategoryList()).data;
@@ -163,12 +163,12 @@ export default {
       await SubSubCategoryService.getSubSubCategoryList()
     ).data;
 
-    this.$root.$on("bv::dropdown::show", (bvEvent) => {
+    this.$root.$on("bv::dropdown::show", bvEvent => {
       if (bvEvent.componentId === "dropdown-2") {
         this.isDropdown2Visible = true;
       }
     });
-    this.$root.$on("bv::dropdown::hide", (bvEvent) => {
+    this.$root.$on("bv::dropdown::hide", bvEvent => {
       if (bvEvent.componentId === "dropdown-2") {
         this.isDropdown2Visible = false;
       }
@@ -184,17 +184,17 @@ export default {
     },
     subCategorySelect(subCategory) {
       const category = this.categoryList.find(
-        (obj) => obj.id == subCategory.CategoryId
+        obj => obj.id == subCategory.CategoryId
       );
       const route = "/products/" + category.name + "/" + subCategory.name;
       window.location.replace(route);
     },
     subSubCategorySelect(subSubCategory) {
       const subCategory = this.subCategoryList.find(
-        (obj) => obj.id == subSubCategory.SubCategoryId
+        obj => obj.id == subSubCategory.SubCategoryId
       );
       const category = this.categoryList.find(
-        (obj) => obj.id == subCategory.CategoryId
+        obj => obj.id == subCategory.CategoryId
       );
       const route =
         "/products/" +
@@ -204,8 +204,8 @@ export default {
         "/" +
         subSubCategory.name;
       window.location.replace(route);
-    },
-  },
+    }
+  }
 };
 </script>
 

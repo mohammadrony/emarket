@@ -4,14 +4,21 @@ const { Wishlist, Product } = require('../models')
 module.exports = {
   async getWishlist(req, res) {
     try {
-      const userId = req.user.id
-      console.log(req.user.id)
       const wishlist = await Wishlist.findAll({
         where: {
-          UserId: userId
-        }
+          UserId: req.user.id
+        },
+        include: {
+					model: Product,
+					attributes: [
+            "id",
+            "title",
+						"image1",
+						"amount",
+						"currency"
+					]
+				},
       })
-      console.log(wishlist)
       res.send(wishlist)
 
     } catch (err) {
@@ -20,7 +27,7 @@ module.exports = {
       })
     }
   },
-  async getWishlistById(req, res) {
+  async getWishlistItem(req, res) {
     try {
       const wishlistItem = await Wishlist.findOne({
         where: {
@@ -35,12 +42,11 @@ module.exports = {
       })
     }
   },
-  async addToWishlist(req, res) {
+  async createWishlistItem(req, res) {
     try {
-      productId = req.body.productId
       const wishlistItem = await Wishlist.create({
         UserId: req.user.id,
-        ProductId: productId
+        ProductId: req.body.productId
       })
       res.send(wishlistItem)
     } catch (err) {
@@ -49,22 +55,21 @@ module.exports = {
       })
     }
   },
-  async remove(req, res) {
+  async deleteWishlistItem(req, res) {
     try {
-      const wishlistProduct = await Wishlist.findOne({
+      const wishlistItem = await Wishlist.findOne({
         where: {
           UserId: req.user.id,
           ProductId: req.params.productId
         }
       })
-      if (!wishlistProduct) {
+      if (!wishlistItem) {
         return res.status(403).send({
           error: 'No item to remove.'
         })
       }
-      await wishlistProduct.destroy()
-      res.send(wishlistProduct)
-
+      await wishlistItem.destroy()
+      res.send(wishlistItem)
     } catch (err) {
       res.status(500).send({
         error: 'An error occured when trying to remove a wishlist item.'

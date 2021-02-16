@@ -23,12 +23,12 @@
           </b-nav-item>
           <b-nav-item-dropdown right>
             <template #button-content>
-              <em v-if="user.username" style="color: #fff">{{
-                user.username
-              }}</em>
-              <em v-if="!user.username" style="color: #fff"
-                >{{ user.firstName }} {{ user.lastName }}</em
-              >
+              <em v-if="user.username" style="color: #fff">
+                {{ user.username }}
+              </em>
+              <em v-if="!user.username" style="color: #fff">
+                {{ user.firstName }} {{ user.lastName }}
+              </em>
             </template>
             <b-dropdown-item to="/admin/profile">Admin Profile</b-dropdown-item>
             <b-dropdown-item @click="logout()">Log Out</b-dropdown-item>

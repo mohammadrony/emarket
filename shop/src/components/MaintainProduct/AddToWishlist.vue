@@ -1,47 +1,30 @@
 <template>
-  <div class="addtocart">
-    <b-button :size="btn_size" @click="addToCart" variant="outline-primary">
+  <div>
+    <b-button :size="btnType" @click="addToWishlist" variant="outline-danger">
       <b-icon-cart-plus-fill />
-      Add to Cart
+      Add To Wishlist
     </b-button>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
-  name: "AddToCart",
+  name: "AddToWishlist",
   props: {
-    btn_size: String,
-    id: Number,
-    curr: String,
-    title: String,
-    amount: Number,
-    image: String
-  },
-  computed: {
-    ...mapState({
-      user: state => state.CurrentUser.user
-    })
+    btnType: String,
+    productId: Number
   },
   data() {
-    return {
-      productName: this.title,
-      productId: this.id,
-      currency: this.curr,
-      productamount: this.amount
-    };
+    return {};
   },
+  components: {},
+  computed: {},
   mounted() {},
   methods: {
-    async addToCart() {
-      const cartItem = {
-        productId: this.productId,
-        amount: this.amount,
-        currency: this.currency,
-        quantity: 1,
-        title: this.title,
-        image: this.image
+    async addToWishlist() {
+      const wishlistItem = {
+        ProuctId: this.productId,
+        UserId: this.user.id
       };
       const response = await this.$store.dispatch("Cart/addToCart", cartItem);
 
@@ -78,4 +61,5 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped></style>

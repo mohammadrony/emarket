@@ -96,9 +96,9 @@
             <div class="d-flex mt-5">
               <div>
                 <AddToCart
-                  btn_size="sm"
+                  buttonType="sm"
                   :id="displayProduct.id"
-                  :curr="displayProduct.currency"
+                  :currency="displayProduct.currency"
                   :image="displayProduct.image1"
                   :title="displayProduct.title"
                   :amount="displayProduct.amount"
@@ -148,7 +148,7 @@
 import ProductsService from "@/services/ProductsService.js";
 import TopHeader from "@/components/TopHeader.vue";
 import ProductHeader from "@/components/ViewProduct/ProductHeader.vue";
-import AddToCart from "@/components/AddToCart.vue";
+import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import Review from "@/components/ViewProduct/Review.vue";
 import Recommendation from "@/components/ViewProduct/Recommendation.vue";
 import Footer from "@/components/Footer.vue";

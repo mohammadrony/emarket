@@ -24,8 +24,7 @@
                   v-model="product.title"
                   placeholder="Enter Product Name"
                   required
-                >
-                </b-form-input>
+                />
               </b-form-group>
               <b-row>
                 <b-col>
@@ -39,8 +38,7 @@
                       v-model="product.amount"
                       placeholder="Price"
                       required
-                    >
-                    </b-form-input>
+                    />
                   </b-form-group>
                 </b-col>
                 <b-col>
@@ -54,8 +52,7 @@
                       v-model="product.currency"
                       readonly
                       required
-                    >
-                    </b-form-input>
+                    />
                   </b-form-group>
                 </b-col>
               </b-row>
@@ -93,7 +90,7 @@
                         :key="category.id"
                         @click="set_category(category)"
                       >
-                        <a>{{ category.name }}</a>
+                        {{ category.name }}
                       </b-dropdown-item>
                       <b-dropdown-form @submit.stop.prevent="createNewCateg">
                         <b-row>
@@ -213,9 +210,9 @@
                   @change="selectedImage"
                 />
               </b-form-group>
-              <b-alert variant="warning" class="mt-2" :show="imageAlert">{{
-                errorCountImage
-              }}</b-alert>
+              <b-alert variant="warning" class="mt-2" :show="imageAlert">
+                {{ errorCountImage }}
+              </b-alert>
               <div id="preview">
                 <b-row class="mt-2">
                   <b-col cols="3" v-for="(img, index) in dispImg" :key="index">

@@ -2,7 +2,7 @@
   <div>
     <b-row>
       <b-col
-        cols="4"
+        cols="6"
         v-for="product in checkoutProduct"
         :key="product.productId"
       >
@@ -12,20 +12,20 @@
               :src="product.image"
               style="max-width: 14rem; max-height: 14rem"
               alt="Image Not Found"
-            ></b-card-img
-            ><br />
+            />
+            <br />
             <b-link @click="viewProduct(product)">{{ product.title }}</b-link>
             <br />
-            <small class="mt-2"
-              >Price: {{ product.amount }} {{ product.currency }}</small
-            >
+            <small class="mt-2">
+              Price: {{ product.amount }} {{ product.currency }}
+            </small>
             <br />
             <small class="mt-2">Quantity: {{ product.quantity }}</small>
             <br />
-            <small class="mt-2"
-              >Cost: {{ product.amount * product.quantity }}
-              {{ product.currency }}</small
-            >
+            <small class="mt-2">
+              Cost: {{ product.amount * product.quantity }}
+              {{ product.currency }}
+            </small>
           </b-card>
         </b-card-group>
       </b-col>
@@ -39,9 +39,9 @@
               <h5>Sub-Total</h5>
             </b-col>
             <b-col cols="4">
-              <b-card-text
-                >{{ subTotalAmount }} {{ selectedCurrency }}</b-card-text
-              >
+              <b-card-text>
+                {{ subTotalAmount }} {{ selectedCurrency }}
+              </b-card-text>
             </b-col>
           </b-row>
           <b-row>
@@ -49,9 +49,9 @@
               <h5>Shipping Rate</h5>
             </b-col>
             <b-col cols="4">
-              <b-card-text
-                >{{ shippingRate }} {{ selectedCurrency }}</b-card-text
-              >
+              <b-card-text>
+                {{ shippingRate }} {{ selectedCurrency }}
+              </b-card-text>
             </b-col>
           </b-row>
           <hr />
@@ -60,9 +60,9 @@
               <h5>Total</h5>
             </b-col>
             <b-col cols="4">
-              <b-card-text
-                >{{ totalAmount }} {{ selectedCurrency }}</b-card-text
-              >
+              <b-card-text>
+                {{ totalAmount }} {{ selectedCurrency }}
+              </b-card-text>
             </b-col>
           </b-row>
         </b-card>

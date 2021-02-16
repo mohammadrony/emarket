@@ -24,11 +24,11 @@
                   :src="product.image1"
                   style="max-width: 25rem; max-height: 25rem"
                   alt="Image Not Found"
-                ></b-card-img>
+                />
                 <div class="mt-2">
-                  <b-link @click="viewProduct(product)">{{
-                    product.title
-                  }}</b-link>
+                  <b-link @click="viewProduct(product)">
+                    {{ product.title }}
+                  </b-link>
                 </div>
                 <h6 class="mt-1">
                   {{ product.amount }} {{ product.currency }}
@@ -36,9 +36,9 @@
                 <AddToCart
                   :key="cartComponentKey"
                   class="mt-2"
-                  btn_size="sm"
+                  buttonType="sm"
                   :id="product.id"
-                  :curr="product.currency"
+                  :currency="product.currency"
                   :image="product.image1"
                   :title="product.title"
                   :amount="product.amount"
@@ -95,7 +95,7 @@ import TopHeader from "@/components/TopHeader.vue";
 import ProductsNavbar from "@/components/Products/ProductsNavbar.vue";
 import ProductCategorySidebar from "@/components/Products/ProductCategorySidebar.vue";
 import FilterComponent from "@/components/Products/FilterComponent.vue";
-import AddToCart from "@/components/AddToCart.vue";
+import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import Footer from "@/components/Footer.vue";
 import productsService from "@/services/ProductsService.js";
 export default {

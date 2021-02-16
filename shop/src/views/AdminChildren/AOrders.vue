@@ -31,15 +31,16 @@
               :variant="selectedTypeVariant"
               class="ml-2"
             >
-              <b-dropdown-item @click="selectType(anyType)">{{
-                anyType.name
-              }}</b-dropdown-item>
+              <b-dropdown-item @click="selectType(anyType)">
+                {{ anyType.name }}
+              </b-dropdown-item>
               <b-dropdown-item
                 v-for="(status, idx) in orderStatus"
                 :key="idx"
                 @click="selectType(status)"
-                >{{ status.name }}</b-dropdown-item
               >
+                {{ status.name }}
+              </b-dropdown-item>
             </b-dropdown>
           </b-col>
         </b-row>
@@ -51,10 +52,9 @@
             <b-col cols="1" class="text-center">{{ order.id }}</b-col>
             <b-col cols="3">{{ order.name }}</b-col>
             <b-col cols="3">{{ order.email }}</b-col>
-            <b-col cols="2"
-              >{{ order.productCost + order.shippingCost }}
-              {{ order.currency }}</b-col
-            >
+            <b-col cols="2">
+              {{ order.productCost + order.shippingCost }} {{ order.currency }}
+            </b-col>
             <b-col cols="3" class="text-center">
               <b-row>
                 <b-col cols="7">
@@ -69,8 +69,9 @@
                       v-for="(status, idx) in orderStatus"
                       :key="idx"
                       @click="updateStatus(order, status)"
-                      >{{ status.name }}</b-dropdown-item
                     >
+                      {{ status.name }}
+                    </b-dropdown-item>
                   </b-dropdown>
                 </b-col>
                 <b-col cols="5">
