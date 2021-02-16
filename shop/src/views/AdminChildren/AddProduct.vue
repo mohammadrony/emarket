@@ -285,7 +285,7 @@ import CategoryService from "@/services/CategoryService.js";
 import SubCategoryService from "@/services/SubCategoryService.js";
 import SubSubCategoryService from "@/services/SubSubCategoryService.js";
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/Common/Footer.vue";
 import { VueEditor } from "vue2-editor";
 export default {
   name: "AddProduct",

@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import TopHeader from "@/components/TopHeader.vue";
+import TopHeader from "@/components/Common/TopHeader.vue";
 import OrderDetails from "@/components/Order/OrderDetails.vue";
 import OrderItems from "@/components/Order/OrderItems.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/Common/Footer.vue";
 export default {
   name: "Order",
   components: {

@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import TopHeader from "@/components/TopHeader.vue";
+import TopHeader from "@/components/Common/TopHeader.vue";
 import Address from "@/components/Checkout/Address.vue";
 import BuyItem from "@/components/Checkout/BuyItem.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/Common/Footer.vue";
 export default {
   name: "Checkout",
   components: {

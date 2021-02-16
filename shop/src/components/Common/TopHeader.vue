@@ -37,7 +37,7 @@
                 </b-dropdown-item>
               </b-dropdown>
 
-              <b-nav-form v-on:submit.prevent="search">
+              <b-nav-form class="mr-auto" v-on:submit.prevent="search">
                 <b-form-input
                   class="mr-sm-2 searchField"
                   v-model="searchTxt"
@@ -46,29 +46,23 @@
               </b-nav-form>
             </b-navbar-nav>
 
-            <b-navbar-nav>
+            <b-navbar-nav class="ml-auto">
               <b-nav-item class="mr-auto" @click="wishlist">
                 <div>
-                  <b-icon scale="0.7" icon="suit-heart" />
+                  <b-icon scale="0.8" icon="suit-heart" />
                   Wishlist
                 </div>
               </b-nav-item>
-            </b-navbar-nav>
-            <b-navbar-nav>
-              <b-nav-item to="/cart-view">
+              <b-nav-item class="mr-auto" to="/cart-view">
                 <div>
                   <b-icon icon="cart2" />
                   Cart
                 </div>
               </b-nav-item>
-            </b-navbar-nav>
-            <b-navbar-nav v-if="userLoggedIn">
-              <b-nav-item>
+              <b-nav-item class="mr-auto" v-if="userLoggedIn">
                 <b-img height="35px" width="35px" :src="user.profileImage" />
               </b-nav-item>
-            </b-navbar-nav>
-            <b-navbar-nav v-if="userLoggedIn">
-              <b-nav-item-dropdown right>
+              <b-nav-item-dropdown class="mr-auto" right v-if="userLoggedIn">
                 <template #button-content>
                   <em v-if="user.username" style="color: #fff">
                     {{ user.username }}
@@ -83,10 +77,7 @@
                 <b-dropdown-item to="/profile">Profile</b-dropdown-item>
                 <b-dropdown-item @click="logout()">Log Out</b-dropdown-item>
               </b-nav-item-dropdown>
-            </b-navbar-nav>
-
-            <b-navbar-nav v-if="!userLoggedIn">
-              <b-button pill variant="success" to="/login">
+              <b-button class="mr-auto" v-if="!userLoggedIn" pill variant="success" to="/login">
                 Login &amp; Register
               </b-button>
             </b-navbar-nav>

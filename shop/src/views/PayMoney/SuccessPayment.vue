@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import TopHeader from "@/components/TopHeader.vue";
-import Footer from "@/components/Footer.vue";
+import TopHeader from "@/components/Common/TopHeader.vue";
+import Footer from "@/components/Common/Footer.vue";
 import CheckoutService from "@/services/CheckoutService.js";
 import OrderService from "@/services/OrderService";
 import OrderItemService from "@/services/OrderItemService";

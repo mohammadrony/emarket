@@ -2,20 +2,20 @@ import Vue from "vue";
 import store from "@/store"
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
-import Products from "@/views/Products.vue";
-import ViewProduct from "@/views/ViewProduct.vue";
+import Products from "@/views/Product/Products.vue";
+import ViewProduct from "@/views/Product/ViewProduct.vue";
 import Login from "@/views/User/Login.vue";
 import ResetPassword from "@/views/User/ResetPassword.vue";
 import Register from "@/views/User/Register.vue";
 import UserProfile from "@/views/User/Profile.vue";
 import UserVerify from "@/views/User/UserVerify.vue";
 // import AboutUs from "@/views/AboutUs.vue";
-import CartView from "@/views/CartView.vue";
-import Wishlist from "@/views/Wishlist.vue";
-import Checkout from "@/views/Checkout.vue";
-import Order from "@/views/Order.vue";
-import SuccessPayment from "@/views/Payment/SuccessPayment.vue";
-import CancelPayment from "@/views/Payment/CancelPayment.vue";
+import CartView from "@/views/UsersProduct/CartView.vue";
+import Wishlist from "@/views/UsersProduct/Wishlist.vue";
+import Checkout from "@/views/BuyProduct/Checkout.vue";
+import Order from "@/views/BuyProduct/ViewOrder.vue";
+import SuccessPayment from "@/views/PayMoney/SuccessPayment.vue";
+import CancelPayment from "@/views/PayMoney/CancelPayment.vue";
 import ADashboard from "@/views/AdminChildren/ADashboard.vue";
 import AUsers from "@/views/AdminChildren/AUsers.vue";
 import AddProduct from "@/views/AdminChildren/AddProduct.vue";
@@ -189,19 +189,6 @@ router.beforeEach((to, from, next) => {
   else {
     next();
   }
-
-  // if (to.matched.some(record => record.meta.requiresAuth)) {
-  //   if (!auth.loggedIn()) {
-  //     next({
-  //       path: '/login',
-  //       query: { redirect: to.fullPath }
-  //     })
-  //   } else {
-  //     next()
-  //   }
-  // } else {
-  //   next() 
-  // }
 })
 
 export default router;

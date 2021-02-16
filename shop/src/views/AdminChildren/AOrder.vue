@@ -25,7 +25,7 @@
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
 import OrderDetails from "@/components/Admins/Order/OrderDetails.vue";
 import OrderItems from "@/components/Admins/Order/OrderItems.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/Common/Footer.vue";
 export default {
   name: "AOrder",
   components: {

@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import TopHeader from "@/components/TopHeader.vue";
-import Footer from "@/components/Footer.vue";
+import TopHeader from "@/components/Common/TopHeader.vue";
+import Footer from "@/components/Common/Footer.vue";
 export default {
   name: "NotFound",
   components: {

@@ -19,7 +19,7 @@
 
 <script>
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/Common/Footer.vue";
 export default {
   name: "AOverview",
   components: {

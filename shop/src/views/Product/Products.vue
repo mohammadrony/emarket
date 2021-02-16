@@ -91,12 +91,12 @@
 
 <script>
 import { mapState } from "vuex";
-import TopHeader from "@/components/TopHeader.vue";
+import TopHeader from "@/components/Common/TopHeader.vue";
 import ProductsNavbar from "@/components/Products/ProductsNavbar.vue";
 import ProductCategorySidebar from "@/components/Products/ProductCategorySidebar.vue";
 import FilterComponent from "@/components/Products/FilterComponent.vue";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/Common/Footer.vue";
 import productsService from "@/services/ProductsService.js";
 export default {
   name: "Products",

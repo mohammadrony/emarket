@@ -145,7 +145,7 @@
 </template>
 <script>
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/Common/Footer.vue";
 import UserService from "@/services/UserService.js";
 import ReviewService from "@/services/ReviewService.js";
 export default {

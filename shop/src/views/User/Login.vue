@@ -3,7 +3,7 @@
     <TopHeader />
     <b-container class="mt-5">
       <b-row align-h="center">
-        <b-col cols="5">
+        <b-col cols="10" md="7" lg="5">
           <b-card style="color: #001e5f">
             <h4 style="font-weight: bold">Login</h4>
             <b-form @submit.stop.prevent="login" class="mt-4">
@@ -84,9 +84,9 @@
 
 <script>
 import AuthenticationService from "@/services/AuthenticationService.js";
-import TopHeader from "@/components/TopHeader.vue";
+import TopHeader from "@/components/Common/TopHeader.vue";
 import ReqPassToken from "@/components/User/ReqPassToken.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/Common/Footer.vue";
 
 export default {
   name: "Login",

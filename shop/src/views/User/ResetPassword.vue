@@ -77,9 +77,9 @@
 </template>
 
 <script>
-import TopHeader from "@/components/TopHeader.vue";
+import TopHeader from "@/components/Common/TopHeader.vue";
 import ReqPassToken from "@/components/User/ReqPassToken.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/Common/Footer.vue";
 import AuthenticationService from "@/services/AuthenticationService.js";
 
 export default {

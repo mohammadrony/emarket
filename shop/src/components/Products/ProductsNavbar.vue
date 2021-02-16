@@ -2,7 +2,7 @@
   <div>
     <b-row>
       <b-col class="ml-2">
-        <b-navbar size="sm" toggleable="md" type="primary" variant="white">
+        <b-navbar toggleable="lg" type="primary" variant="white">
           <b-navbar-brand href="#" @click="productHome">
             <b-icon variant="primary" icon="house-door-fill" />
             <b-icon class="ml-2" scale=".7" icon="chevron-right" />
@@ -18,15 +18,24 @@
           </b-navbar-toggle>
           <b-collapse id="nav-products-collapse" is-nav>
             <b-navbar-nav class="mr-auto">
-              <b-nav-item @click="setCategory" v-if="category != null">
+              <b-nav-item
+                class="mr-auto"
+                @click="setCategory"
+                v-if="category != null"
+              >
                 {{ category.name }}
                 <b-icon class="ml-2" scale=".7" icon="chevron-right" />
               </b-nav-item>
-              <b-nav-item @click="setSubCategory" v-if="subCategory != null">
+              <b-nav-item
+                class="mr-auto"
+                @click="setSubCategory"
+                v-if="subCategory != null"
+              >
                 {{ subCategory.name }}
                 <b-icon class="ml-2" scale=".7" icon="chevron-right" />
               </b-nav-item>
               <b-nav-item
+                class="mr-auto"
                 @click="setSubSubCategory"
                 v-if="subSubCategory != null"
               >
@@ -34,9 +43,9 @@
                 <b-icon class="ml-2" scale=".7" icon="chevron-right" />
               </b-nav-item>
               <b-button
+                class="mr-auto"
                 to="/admin/add-product"
                 v-if="admin"
-                class=""
                 size="md"
                 variant="outline-dark"
               >
@@ -46,12 +55,11 @@
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">
               <b-nav-form @submit.stop.prevent="search">
-                <b-form-input
-                  v-model="searchText"
-                  size="sm"
-                  class="mr-sm-2"
-                  placeholder="Search here"
-                />
+                    <b-form-input
+                      v-model="searchText"
+                      size="sm"
+                      placeholder="Search here"
+                    />
                 <b-button type="submit" variant="white">
                   <b-icon icon="search"></b-icon
                 ></b-button>

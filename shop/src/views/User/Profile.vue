@@ -33,11 +33,11 @@
 </template>
 
 <script>
-import TopHeader from "@/components/TopHeader.vue";
+import TopHeader from "@/components/Common/TopHeader.vue";
 import UPublicProfile from "@/components/User/Profile/UPublicProfile.vue";
 import UReviews from "@/components/User/Profile/UReviews.vue";
 import UAccount from "@/components/User/Profile/UAccount.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/Common/Footer.vue";
 export default {
   name: "Profile",
   components: {

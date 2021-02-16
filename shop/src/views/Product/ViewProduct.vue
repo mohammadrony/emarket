@@ -146,12 +146,12 @@
 
 <script>
 import ProductsService from "@/services/ProductsService.js";
-import TopHeader from "@/components/TopHeader.vue";
+import TopHeader from "@/components/Common/TopHeader.vue";
 import ProductHeader from "@/components/ViewProduct/ProductHeader.vue";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import Review from "@/components/ViewProduct/Review.vue";
 import Recommendation from "@/components/ViewProduct/Recommendation.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/Common/Footer.vue";
 export default {
   name: "ViewProduct",
   components: {
