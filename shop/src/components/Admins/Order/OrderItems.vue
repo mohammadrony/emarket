@@ -61,8 +61,9 @@
                   disabled
                   block
                   variant="danger"
-                  >Delete</b-button
                 >
+                  Delete
+                </b-button>
                 <b-button
                   v-if="orderStatus == 'complete'"
                   @click="deleteOrder"

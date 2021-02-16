@@ -139,6 +139,7 @@ module.exports = {
                 email: user.email,
                 profileImage: user.profileImage,
                 userType: user.userType,
+                variant: user.variant,
                 priority: user.priority,
                 CompanyId: user.CompanyId
             }

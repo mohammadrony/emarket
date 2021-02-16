@@ -48,8 +48,9 @@
                     class="p-2 mt-2"
                     type="submit"
                     variant="warning"
-                    >Login</b-button
                   >
+                    Login
+                  </b-button>
                 </b-col>
                 <b-col cols="3" />
               </b-row>

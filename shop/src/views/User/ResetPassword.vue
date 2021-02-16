@@ -60,8 +60,9 @@
                     class="p-2 mt-2"
                     @click="passwordReset"
                     variant="warning"
-                    >Submit</b-button
                   >
+                    Submit
+                  </b-button>
                 </b-col>
                 <b-col cols="3" />
                 <b-col cols="3" />

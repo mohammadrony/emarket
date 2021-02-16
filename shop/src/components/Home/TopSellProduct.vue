@@ -9,9 +9,9 @@
             <b-col cols="3" v-for="product in topSellProduct" :key="product.id">
               <b-card deck class="mt-4">
                 <b-card-img class="mb-3" :src="product.image1"></b-card-img>
-                <b-link @click="gotoProduct(product)"
-                  ><h5>{{ product.title }}</h5></b-link
-                >
+                <b-link @click="gotoProduct(product)">
+                  <h5>{{ product.title }}</h5>
+                </b-link>
                 <h6>{{ product.amount }} {{ product.currency }}</h6>
               </b-card>
             </b-col>

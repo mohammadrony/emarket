@@ -30,7 +30,7 @@
                   :value="review.rating"
                   variant="primary"
                   class="mb-2"
-                ></b-form-rating>
+                />
               </b-col>
             </b-row>
             <b-row>

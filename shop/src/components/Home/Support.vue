@@ -74,8 +74,9 @@
                 size="lg"
                 variant="outline-info"
                 href="#newsletter"
-                >Subscribe</b-button
               >
+                Subscribe
+              </b-button>
             </b-col>
           </b-row> -->
         </b-col>

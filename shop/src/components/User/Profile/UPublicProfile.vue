@@ -64,8 +64,9 @@
                   @click="editName ^= 1"
                   size="sm"
                   variant="outline-danger"
-                  >Cancel</b-button
                 >
+                  Cancel
+                </b-button>
               </b-col>
             </b-row>
           </b-form>
@@ -136,8 +137,9 @@
                     @click="editUserName ^= 1"
                     size="sm"
                     variant="outline-danger"
-                    >Cancel</b-button
                   >
+                    Cancel
+                  </b-button>
                 </b-col>
               </b-row>
             </b-form>
@@ -264,9 +266,9 @@
                 </b-button>
               </b-col>
               <b-col cols="4">
-                <b-button block type="submit" variant="success"
-                  >Submit</b-button
-                >
+                <b-button block type="submit" variant="success">
+                  Submit
+                </b-button>
               </b-col>
             </b-row>
           </b-form>

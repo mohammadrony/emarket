@@ -56,8 +56,8 @@ export default {
   mounted() {},
   methods: {
     logout() {
-      this.$store.dispatch("CurrentUser/setToken", null);
-      this.$store.dispatch("CurrentUser/setUser", null);
+      this.$store.dispatch("CurrentUser/setToken", "");
+      this.$store.dispatch("CurrentUser/setUser", {});
       window.location.replace("/");
     }
   },

@@ -125,8 +125,9 @@
                     type="submit"
                     class="p-2"
                     variant="warning"
-                    >Create Account</b-button
                   >
+                    Create Account
+                  </b-button>
                 </b-col>
                 <b-col cols="3" />
               </b-row>

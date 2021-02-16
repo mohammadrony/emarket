@@ -10,7 +10,6 @@ const ProductsController = require("./controllers/ProductsController")
 const CheckoutController = require("./controllers/CheckoutController")
 const CategoryController = require("./controllers/CategoryController")
 const OrderItemController = require("./controllers/OrderItemController")
-const ReviewReplyController = require("./controllers/ReviewReplyController")
 const SubCategoryController = require("./controllers/SubCategoryController")
 const SubSubCategoryController = require("./controllers/SubSubCategoryController")
 const AuthenticationController = require("./controllers/AuthenticationController")
@@ -142,16 +141,6 @@ module.exports = (app) => {
   app.delete("/review/deleteReviewByUser",
     isAuthenticated,
     ReviewController.deleteReviewByUser)
-
-  // review reply
-  app.get("/reviewReply/getReviewReplyList/:reviewId",
-    ReviewReplyController.getReviewReplyList)
-  app.post("/reviewReply/createReviewReply",
-    ReviewReplyController.createReviewReply)
-  app.put("/reviewReply/updateReviewReply",
-    ReviewReplyController.updateReviewReply)
-  app.delete("/reviewReply/deleteReviewReply/:reviewReplyId",
-    ReviewReplyController.deleteReviewReply)
 
   // sub category
   app.get("/subCategory/getSubCategoryByName/:name",

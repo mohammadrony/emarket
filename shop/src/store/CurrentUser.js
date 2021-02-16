@@ -2,8 +2,8 @@ export const CurrentUserModule = {
     namespaced: true,
     strict: true,
     state: {
-        token: null,
-        user: null,
+        token: "",
+        user: {},
         admin: false,
         userId: 0,
         userLoggedIn: false,
@@ -11,7 +11,7 @@ export const CurrentUserModule = {
     mutations: {
         SET_TOKEN(state, token) {
             state.token = token
-            if (token) {
+            if (token!="") {
                 state.userLoggedIn = true
             } else {
                 state.userLoggedIn = false
@@ -20,7 +20,7 @@ export const CurrentUserModule = {
 
         SET_USER(state, user) {
             state.user = user
-            if (user != null) {
+            if (Object.keys(user).length!=0) {
                 state.userId = user.id
                 if (user.priority == 1) {
                     state.admin = true

@@ -2,13 +2,16 @@
   <div class="a-profile">
     <ATopHeader></ATopHeader>
     <b-container class="mt-4">
-      <div v-if="userId != 0">
+      <div>
         <b-tabs nav-wrapper-class="w-25" vertical pills card>
           <b-tab title="Profile" active>
             <UPublicProfile />
           </b-tab>
-          <b-tab lazy title="Company">
-            <CompanyProfile />
+          <b-tab lazy title="Reviews">
+            <UReviews />
+          </b-tab>
+          <b-tab lazy title="Account">
+            <UAccount />
           </b-tab>
         </b-tabs>
       </div>
@@ -20,14 +23,16 @@
 <script>
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
 import UPublicProfile from "@/components/User/Profile/UPublicProfile.vue";
-import CompanyProfile from "@/components/Admins/Profile/CompanyProfile.vue";
+import UReviews from "@/components/User/Profile/UReviews.vue";
+import UAccount from "@/components/User/Profile/UAccount.vue";
 import Footer from "@/components/Footer.vue";
 export default {
   name: "AProfile",
   components: {
     ATopHeader,
     UPublicProfile,
-    CompanyProfile,
+    UReviews,
+    UAccount,
     Footer
   },
   data() {

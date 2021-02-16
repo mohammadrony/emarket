@@ -16,7 +16,7 @@
                   :value="averageRating"
                   variant="primary"
                   class="mb-2"
-                ></b-form-rating>
+                />
               </b-col>
               <b-col cols="2" />
             </b-row>
@@ -159,7 +159,7 @@
                         :value="review.rating"
                         variant="primary"
                         class="mb-2"
-                      ></b-form-rating>
+                      />
                     </b-col>
                   </b-row>
                   <b-row>
@@ -173,15 +173,17 @@
                         <b-link
                           v-if="userId == review.UserId"
                           @click="editReview(review)"
-                          >edit</b-link
                         >
+                          edit
+                        </b-link>
                       </small>
                       <small>
                         <b-link
                           v-if="userId == review.UserId || admin"
                           @click="deleteReview(review)"
-                          >delete</b-link
                         >
+                          delete
+                        </b-link>
                       </small>
                     </b-col>
                   </b-row>
@@ -221,7 +223,7 @@
                       :value="currentUserReview.rating"
                       variant="primary"
                       class="mb-2"
-                    ></b-form-rating>
+                    />
                   </b-col>
                 </b-row>
                 <b-row>
@@ -232,14 +234,14 @@
                 <b-row>
                   <b-col>
                     <small class="mr-2">
-                      <b-link @click="editReview(currentUserReview)"
-                        >edit</b-link
-                      >
+                      <b-link @click="editReview(currentUserReview)">
+                        edit
+                      </b-link>
                     </small>
                     <small>
-                      <b-link @click="deleteReview(currentUserReview)"
-                        >delete</b-link
-                      >
+                      <b-link @click="deleteReview(currentUserReview)">
+                        delete
+                      </b-link>
                     </small>
                   </b-col>
                 </b-row>
@@ -261,7 +263,7 @@
                     v-model="rating"
                     variant="primary"
                     class="mb-4"
-                  ></b-form-rating>
+                  />
                 </b-col>
               </b-row>
               <h6>Review</h6>
@@ -274,19 +276,19 @@
                   placeholder="Write a review"
                   rows="3"
                   max-rows="8"
-                ></b-form-textarea>
+                />
               </b-form-group>
-              <b-button variant="primary" type="submit" v-if="userLoggedIn"
-                >Submit</b-button
-              >
+              <b-button variant="primary" type="submit" v-if="userLoggedIn">
+                Submit
+              </b-button>
             </b-form>
             <div v-if="!userLoggedIn">
               You'll not be able to write a review until you're logged in.
               <b-row>
                 <b-col>
-                  <b-button to="/login" class="mt-3" variant="warning"
-                    >Login</b-button
-                  >
+                  <b-button to="/login" class="mt-3" variant="outline-dark">
+                    Login
+                  </b-button>
                 </b-col>
               </b-row>
             </div>
@@ -298,11 +300,7 @@
       <b-row>
         <b-col cols="5">
           <h6>Rating</h6>
-          <b-form-rating
-            v-model="editRating"
-            variant="primary"
-            class="mb-4"
-          ></b-form-rating>
+          <b-form-rating v-model="editRating" variant="primary" class="mb-4" />
         </b-col>
       </b-row>
       <h6>Review</h6>
@@ -313,21 +311,20 @@
           placeholder="Write a review"
           rows="3"
           max-rows="10"
-        ></b-form-textarea>
+        />
       </b-form-group>
       <b-alert variant="warning" v-if="editReviewAlert">{{
         editReviewAlert
       }}</b-alert>
-      <b-button variant="primary" @click="updateReview" v-if="userLoggedIn"
-        >Submit</b-button
-      >
+      <b-button variant="primary" @click="updateReview" v-if="userLoggedIn">
+        Submit
+      </b-button>
     </b-modal>
   </div>
 </template>
 
 <script>
 import ReviewService from "@/services/ReviewService.js";
-// import ReviewReplyService from "@/services/ReviewReplyService.js";
 export default {
   name: "Review",
   components: {},

@@ -7,15 +7,26 @@
     </b-row>
     <hr class="my-2" />
     <div class="mt-3">
-      Once you delete your account, you'll not be able to revert it.
-      <br />
-      <b-button
-        v-b-modal.delete-account-confirmation
-        class="mt-3"
-        variant="outline-danger"
-      >
-        Close my account
-      </b-button>
+      <div v-if="admin">
+        Role
+        <br />
+        <b-button class="mt-2" :variant="user.variant">{{
+          user.userType
+        }}</b-button>
+      </div>
+      <hr />
+      <div class="mt-3">
+        <b-button
+          v-b-modal.delete-account-confirmation
+          variant="outline-danger"
+        >
+          Close my account
+        </b-button>
+        <br />
+        <p class="mt-2">
+          Once you delete your account, you'll not be able to revert it.
+        </p>
+      </div>
     </div>
     <b-modal
       @shown="focusPasswordField"
@@ -75,6 +86,8 @@ export default {
   data() {
     return {
       userId: 0,
+      user: {},
+      admin: false,
       modalAlert: null,
       deleteAccountError: "",
       currentPassword: null
@@ -82,6 +95,8 @@ export default {
   },
   mounted() {
     this.userId = this.$store.state.CurrentUser.userId;
+    this.user = this.$store.state.CurrentUser.user;
+    this.admin = this.$store.state.CurrentUser.admin;
   },
   methods: {
     focusPasswordField() {
@@ -110,8 +125,8 @@ export default {
           this.modalAlert = true;
           this.deleteAccountError = error.response.data.error;
         }
-        this.$store.dispatch("CurrentUser/setToken", null);
-        this.$store.dispatch("CurrentUser/setUser", null);
+        this.$store.dispatch("CurrentUser/setToken", "");
+        this.$store.dispatch("CurrentUser/setUser", {});
         window.location.replace("/");
       }
     }

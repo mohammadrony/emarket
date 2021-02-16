@@ -42,7 +42,7 @@
                 size="sm"
                 variant="primary"
                 @click="quantityInc(product)"
-                >+
+              >+
               </b-button>
               <a class="ml-4">{{ product.quantity }}</a>
               <b-button
@@ -50,8 +50,8 @@
                 variant="warning"
                 class="ml-4"
                 @click="quantityDec(product)"
-                >-</b-button
-              >
+              >-
+              </b-button>
               <b-button
                 size="sm"
                 class="ml-5"

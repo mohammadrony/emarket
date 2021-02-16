@@ -268,9 +268,9 @@
                   <b-button type="reset" variant="danger" block>Reset</b-button>
                 </b-col>
                 <b-col>
-                  <b-button variant="primary" block type="submit"
-                    >Submit</b-button
-                  >
+                  <b-button variant="primary" block type="submit">
+                    Submit
+                  </b-button>
                 </b-col>
               </b-row>
             </b-col>
