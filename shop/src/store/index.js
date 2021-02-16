@@ -20,6 +20,7 @@ export default new Vuex.Store({
         Category: CategoryModule,
         Products: ProductsModule,
         Checkout: CheckoutModule,
+        Wishlist: WishlistModule,
         CurrentUser: CurrentUserModule,
     }
 });

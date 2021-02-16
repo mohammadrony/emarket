@@ -67,20 +67,20 @@ export const CategoryModule = {
             }
             return state.subSubCategoryList
         },
-        async getCategoryName({ dispatch }, categoryId) {
+        async getCategoryName({ state, dispatch }, categoryId) {
             const categoryList = await dispatch("getCategoryList")
-            const category = categoryList.filter(obj => obj.id == categoryId)
-            return category[0].name;
+            const index = categoryList.findIndex(obj => obj.id == categoryId)
+            return state.categoryList[index].name;
         },
-        async getSubCategoryName({ dispatch }, subCategoryId) {
+        async getSubCategoryName({ state, dispatch }, subCategoryId) {
             const subCategoryList = await dispatch("getSubCategoryList")
-            const subCategory = subCategoryList.filter(obj => obj.id == subCategoryId)
-            return subCategory[0].name;
+            const index = subCategoryList.findIndex(obj => obj.id == subCategoryId)
+            return state.subCategoryList[index].name;
         },
-        async getSubSubCategoryName({ dispatch }, subSubCategoryId) {
+        async getSubSubCategoryName({ state, dispatch }, subSubCategoryId) {
             const subSubCategoryList = await dispatch("getSubSubCategoryList")
-            const subSubCategory = subSubCategoryList.filter(obj => obj.id == subSubCategoryId)
-            return subSubCategory[0].name;
+            const index = subSubCategoryList.findIndex(obj => obj.id == subSubCategoryId)
+            return state.subSubCategoryList[index].name;
         }
     }
 }

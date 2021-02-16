@@ -1,30 +1,31 @@
 <template>
   <div>
     <b-dropdown
+      v-if="!validWishlistItem"
       :size="buttonType"
       variant="warning"
-      @click="addToWishlist"
       class="mt-0"
     >
       <template #button-content>
         Added To Wishlist
       </template>
-      <b-dropdown-item href="#">
+      <b-dropdown-item @click="removeWishlistItem">
         Remove from wishlist
       </b-dropdown-item>
     </b-dropdown>
-    <!-- <b-button
+    <b-button
+      v-if="validWishlistItem"
       :size="buttonType"
-      @click="addToWishlist"
-      variant="outline-danger"
+      variant="warning"
+      @click="addWishlistItem"
     >
-      <b-icon-cart-plus-fill />
       Add To Wishlist
-    </b-button> -->
+    </b-button>
   </div>
 </template>
 
 <script>
+import WishlistService from '@/services/WishlistService.js';
 export default {
   name: "AddToWishlist",
   props: {
@@ -32,30 +33,38 @@ export default {
     productId: Number
   },
   data() {
-    return {};
+    return {
+      wishlistItem: {},
+      validWishlistItem: false,
+    };
   },
   components: {},
   computed: {},
-  mounted() {},
+  mounted() {
+    this.wishlistItem = await this.$store.dispatch("Wishlist/getWishlistItem", this.productId)
+    this.validWishlistItem = Object.keys(this.wishlistItem).length!=0
+  },
   methods: {
-    async addToWishlist() {
-      const userId = this.$store.state.CurrentUser.userId;
-      const wishlistItem = {
-        ProuctId: this.productId,
-        UserId: userId
-      };
-      console.log(wishlistItem);
+    async addWishlistItem() {
+      try {
+        this.wishlistItem = (await WishlistService.createWishlistItem({
+          productId: this.productId
+        })).data
+        this.validWishlistItem = true;
+      } catch(error) {
+        console.log(error.response.data.error)
+      }
+    },
+    async removeWishlistItem(){
+      try {
+        await WishlistService.deleteWishlistItem(this.productId)
+        this.wishlistItem = {}
+        this.validWishlistItem = false
+        await this.$store.dispatch("Wishlist/setWishlist")
+      } catch(error) {
+        console.log(error.response.data.error)
+      }
     }
-    // async remove() {
-    //   const cartItem = { productId: this.productId };
-    //   const remove_response = await this.$store.dispatch(
-    //     "Cart/removeFromCart",
-    //     cartItem
-    //   );
-    //   if (remove_response) {
-    //     this.addedToCart = false;
-    //   }
-    // }
   }
 };
 </script>
