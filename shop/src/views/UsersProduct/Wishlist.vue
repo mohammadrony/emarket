@@ -41,7 +41,7 @@
                     <AddToCart
                       class="mt-2"
                       buttonType="sm"
-                      :id="wishItem.Product.id"
+                      :productId="wishItem.Product.id"
                       :currency="wishItem.Product.currency"
                       :image="wishItem.Product.image1"
                       :title="wishItem.Product.title"
@@ -65,11 +65,11 @@
 </template>
 
 <script>
-import WishlistService from "@/services/WishlistService.js";
 import TopHeader from "@/components/Common/TopHeader.vue";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Footer from "@/components/Common/Footer.vue";
+import { mapState } from "vuex";
 export default {
   name: "Wishlist",
   components: {
@@ -80,9 +80,16 @@ export default {
   },
   data() {
     return {
-      myWishlist: [],
       userId: 0
     };
+  },
+  computed: {
+    ...mapState({
+      myWishlist: state => state.Wishlist.wishlist
+    }),
+    wishlistItemCount() {
+      return this.myWishlist.length;
+    }
   },
   async mounted() {
     this.userId = this.$store.state.CurrentUser.userId;
@@ -96,11 +103,6 @@ export default {
       });
       return;
     }
-    try {
-      this.myWishlist = (await WishlistService.getWishlist()).data;
-    } catch (error) {
-      console.log(error.response.data.error);
-    }
   },
   methods: {
     viewProduct(product) {
@@ -111,5 +113,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

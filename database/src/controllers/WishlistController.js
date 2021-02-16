@@ -55,7 +55,7 @@ module.exports = {
       })
     }
   },
-  async deleteWishlistItem(req, res) {
+  async removeWishlistItem(req, res) {
     try {
       const wishlistItem = await Wishlist.findOne({
         where: {

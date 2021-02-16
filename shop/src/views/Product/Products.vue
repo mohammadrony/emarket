@@ -37,7 +37,7 @@
                   :key="cartComponentKey"
                   class="mt-2"
                   buttonType="sm"
-                  :id="product.id"
+                  :productId="product.id"
                   :currency="product.currency"
                   :image="product.image1"
                   :title="product.title"
@@ -47,7 +47,7 @@
                   :key="wishlistKey"
                   class="mt-2"
                   buttonType="sm"
-                  :productId="wishItem.Product.id"
+                  :productId="product.id"
                 />
                 <b-button
                   v-if="admin"
@@ -102,6 +102,7 @@ import ProductsNavbar from "@/components/Products/ProductsNavbar.vue";
 import ProductCategorySidebar from "@/components/Products/ProductCategorySidebar.vue";
 import FilterComponent from "@/components/Products/FilterComponent.vue";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
+import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Footer from "@/components/Common/Footer.vue";
 import productsService from "@/services/ProductsService.js";
 export default {
@@ -111,6 +112,7 @@ export default {
     ProductsNavbar,
     ProductCategorySidebar,
     FilterComponent,
+    AddToWishlist,
     AddToCart,
     Footer
   },
@@ -120,8 +122,8 @@ export default {
       route: null,
       admin: null,
       componentKey: 0,
-      wishlistKey: 0,
-      cartComponentKey: 0,
+      wishlistKey: 4,
+      cartComponentKey: 2,
       categoryList: null,
       subCategoryList: null,
       subSubCategoryList: null,

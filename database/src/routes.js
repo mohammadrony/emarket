@@ -179,7 +179,7 @@ module.exports = (app) => {
   app.post("/wishlist/createWishlistItem",
     isAuthenticated,
     WishlistController.createWishlistItem)
-  app.delete("/wishlist/deleteWishlistItem/:productId",
+  app.delete("/wishlist/removeWishlistItem/:productId",
     isAuthenticated,
-    WishlistController.deleteWishlistItem)
+    WishlistController.removeWishlistItem)
 }

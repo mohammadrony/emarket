@@ -35,7 +35,7 @@
             <img class="product-image" :src="product.image" alt="No Image" />
           </b-col>
           <b-col cols="3">
-            <b-link @click="routeChangetoProduct(product)">
+            <b-link @click="viewProduct(product)">
               {{ product.title }}
             </b-link>
           </b-col>
@@ -62,7 +62,7 @@
               <b-button
                 size="sm"
                 class="ml-5"
-                @click="remove(product)"
+                @click="removeCartItem(product)"
                 variant="danger"
               >
                 remove
@@ -122,10 +122,10 @@ export default {
     ...mapState({
       cartProducts: state => state.Cart.cartProducts
     }),
-    cartItemCount: function() {
+    cartItemCount() {
       return this.cartProducts.length;
     },
-    totalAmount: function() {
+    totalAmount() {
       var i,
         amount = 0;
       for (i = 0; i < this.cartProducts.length; i++) {
@@ -135,28 +135,38 @@ export default {
     }
   },
   methods: {
-    routeChangetoProduct(product) {
-      window.location.replace(`/product/${product.productId}`);
+    viewProduct(product) {
+      const newRoute = "/product/" + product.productId;
+      window.location.replace(newRoute);
     },
     async quantityInc(product) {
-      const cartItem = {
+      await this.$store.dispatch("Cart/updateCartItemQuantity", {
         productId: product.productId,
-        quantity: 1
-      };
-      await this.$store.dispatch("Cart/cartQuantityRelative", cartItem);
+        quantity: product.quantity + 1
+      });
     },
     async quantityDec(product) {
       if (product.quantity > 1) {
-        const cartItem = {
+        await this.$store.dispatch("Cart/updateCartItemQuantity", {
           productId: product.productId,
-          quantity: -1
-        };
-        await this.$store.dispatch("Cart/cartQuantityRelative", cartItem);
+          quantity: product.quantity - 1
+        });
       }
     },
-    async remove(product) {
-      const cartItem = { productId: product.productId };
-      await this.$store.dispatch("Cart/removeFromCart", cartItem);
+    async removeCartItem(product) {
+      const itemIndex = await this.$store.dispatch(
+        "Cart/removeCartItem",
+        product.productId
+      );
+      if (itemIndex == -1) {
+        this.$bvToast.toast("Product removed from cart", {
+          title: "Cart",
+          variant: "success",
+          toaster: "b-toaster-top-center",
+          noCloseButton: false,
+          solid: true
+        });
+      }
     }
   }
 };

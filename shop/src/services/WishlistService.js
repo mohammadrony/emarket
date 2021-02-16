@@ -10,7 +10,7 @@ export default {
     createWishlistItem(credentials) {
         return Api().post('/wishlist/createWishlistItem', credentials)
     },
-    remove(productId) {
-        return Api().delete(`/wishlist/deleteWishlistItem/${productId}`)
+    removeWishlistItem(productId) {
+        return Api().delete(`/wishlist/removeWishlistItem/${productId}`)
     }
 }

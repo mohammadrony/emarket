@@ -97,7 +97,7 @@
               <div>
                 <AddToCart
                   buttonType="sm"
-                  :id="displayProduct.id"
+                  :productId="displayProduct.id"
                   :currency="displayProduct.currency"
                   :image="displayProduct.image1"
                   :title="displayProduct.title"

@@ -11,59 +11,36 @@ export const CartModule = {
         UPDATE_CART_ITEM_QUANTITY(state, { index, quantity }) {
             state.cartProducts[index].quantity = quantity
         },
-        DELETE_CART_ITEM(state, index) {
+        REMOVE_CART_ITEM(state, index) {
             state.cartProducts.splice(index, 1)
         }
     },
     actions: {
-        checkCartItem({ state }, item) {
-            const index = state.cartProducts.findIndex(cartItem => cartItem.productId === item.productId)
+        getCartItem({ state }, productId) {
+            const index = state.cartProducts.findIndex(obj => obj.productId == productId)
             return index;
         },
-        async cartQuantity({ commit, dispatch }, cartItem) {
-            const index = (await dispatch("checkCartItem", cartItem));
+        async addToCart({ commit, dispatch }, cartItem) {
+            const index = await dispatch("getCartItem", cartItem.productId)
             if (index == -1) {
-                console.log("Error updating quantity")
-                return false;
-            }
-            else {
-                const quantity = cartItem.quantity
-                commit("UPDATE_CART_ITEM_QUANTITY", { index, quantity })
-                return true;
-            }
-        },
-        async cartQuantityRelative({ commit, state, dispatch }, cartItem) {
-            const index = (await dispatch("checkCartItem", cartItem));
-            if (index == -1) {
-                console.log("Error updating quantity")
-                return false;
-            }
-            else {
-                const quantity = state.cartProducts[index].quantity + cartItem.quantity
-                commit("UPDATE_CART_ITEM_QUANTITY", { index, quantity })
-                return true;
+                commit("ADD_CART_ITEM", cartItem);
+                return 0
             }
         },
 
-        async addToCart({ commit, dispatch, state }, cartItem) {
-            const index = (await dispatch("checkCartItem", cartItem));
-            if (index == -1) {
-                commit("ADD_CART_ITEM", cartItem);
-                return true;
-            }
-            else {
-                const quantity = state.cartProducts[index].quantity + cartItem.quantity
+        async updateCartItemQuantity({ commit, dispatch }, { productId, quantity }) {
+            const index = await dispatch("getCartItem", productId)
+            if (index != -1) {
                 commit("UPDATE_CART_ITEM_QUANTITY", { index, quantity })
-                return false;
             }
         },
-        async removeFromCart({ commit, dispatch }, cartItem) {
-            const index = (await dispatch("checkCartItem", cartItem));
-            if (index == -1) return false;
-            else {
-                commit("DELETE_CART_ITEM", index)
-                return true;
+
+        async removeCartItem({ commit, dispatch }, productId) {
+            const index = await dispatch("getCartItem", productId);
+            if (index != -1) {
+                commit("REMOVE_CART_ITEM", index)
+                return -1;
             }
-        },
+        }
     }
 }

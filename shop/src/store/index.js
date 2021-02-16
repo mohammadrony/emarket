@@ -5,6 +5,7 @@ import { CompanyModule } from "./Company.js";
 import { CategoryModule } from "./Category.js";
 import { ProductsModule } from "./Products.js";
 import { CheckoutModule } from "./Checkout.js";
+import { WishlistModule } from "./Wishlist.js";
 import { CurrentUserModule } from "./CurrentUser.js"
 import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);

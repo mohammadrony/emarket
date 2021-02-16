@@ -1,9 +1,9 @@
 <template>
   <div>
     <b-dropdown
-      v-if="!validWishlistItem"
+      v-if="validWishlistItem != -1"
       :size="buttonType"
-      variant="warning"
+      variant="primary"
       class="mt-0"
     >
       <template #button-content>
@@ -14,9 +14,9 @@
       </b-dropdown-item>
     </b-dropdown>
     <b-button
-      v-if="validWishlistItem"
+      v-if="validWishlistItem == -1"
       :size="buttonType"
-      variant="warning"
+      variant="outline-primary"
       @click="addWishlistItem"
     >
       Add To Wishlist
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import WishlistService from '@/services/WishlistService.js';
 export default {
   name: "AddToWishlist",
   props: {
@@ -34,35 +33,60 @@ export default {
   },
   data() {
     return {
-      wishlistItem: {},
-      validWishlistItem: false,
+      validWishlistItem: -1,
+      userId: 0
     };
   },
   components: {},
   computed: {},
-  mounted() {
-    this.wishlistItem = await this.$store.dispatch("Wishlist/getWishlistItem", this.productId)
-    this.validWishlistItem = Object.keys(this.wishlistItem).length!=0
+  async mounted() {
+    this.userId = this.$store.state.CurrentUser.userId;
+    if (this.userId != 0) {
+      this.validWishlistItem = await this.$store.dispatch(
+        "Wishlist/getWishlistItem",
+        this.productId
+      );
+    }
   },
   methods: {
     async addWishlistItem() {
-      try {
-        this.wishlistItem = (await WishlistService.createWishlistItem({
-          productId: this.productId
-        })).data
-        this.validWishlistItem = true;
-      } catch(error) {
-        console.log(error.response.data.error)
+      if (this.userId == 0) {
+        this.$bvToast.toast("Please login to save on wishlist", {
+          title: "Wishlist",
+          variant: "primary",
+          toaster: "b-toaster-top-center",
+          noCloseButton: false,
+          solid: true
+        });
+        return;
+      }
+      this.validWishlistItem = await this.$store.dispatch(
+        "Wishlist/addToWishlist",
+        this.productId
+      );
+      if (this.validWishlistItem != -1) {
+        this.$bvToast.toast("Product added to wishlist", {
+          title: "Add To Wishlist",
+          variant: "success",
+          toaster: "b-toaster-top-center",
+          noCloseButton: false,
+          solid: true
+        });
       }
     },
-    async removeWishlistItem(){
-      try {
-        await WishlistService.deleteWishlistItem(this.productId)
-        this.wishlistItem = {}
-        this.validWishlistItem = false
-        await this.$store.dispatch("Wishlist/setWishlist")
-      } catch(error) {
-        console.log(error.response.data.error)
+    async removeWishlistItem() {
+      this.validWishlistItem = await this.$store.dispatch(
+        "Wishlist/removeWishlistItem",
+        this.productId
+      );
+      if (this.validWishlistItem == -1) {
+        this.$bvToast.toast("Product removed from wishlist", {
+          title: "Wishlist",
+          variant: "success",
+          toaster: "b-toaster-top-center",
+          noCloseButton: false,
+          solid: true
+        });
       }
     }
   }
