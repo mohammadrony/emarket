@@ -11,11 +11,31 @@
   },
   {
     "id": 3,
-    "UserId": 2,
+    "UserId": 1,
     "ProductId": 3
   },
   {
     "id": 4,
+    "UserId": 1,
+    "ProductId": 4
+  },
+  {
+    "id": 5,
+    "UserId": 1,
+    "ProductId": 5
+  },
+  {
+    "id": 6,
+    "UserId": 1,
+    "ProductId": 6
+  },
+  {
+    "id": 7,
+    "UserId": 2,
+    "ProductId": 3
+  },
+  {
+    "id": 8,
     "UserId": 2,
     "ProductId": 4
   }

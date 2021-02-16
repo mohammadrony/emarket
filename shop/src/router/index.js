@@ -10,7 +10,7 @@ import Checkout from "@/views/BuyProduct/Checkout.vue";
 import Order from "@/views/BuyProduct/ViewOrder.vue";
 import SuccessPayment from "@/views/PayMoney/SuccessPayment.vue";
 import CancelPayment from "@/views/PayMoney/CancelPayment.vue";
-// import AboutUs from "@/views/AboutUs.vue";
+import AboutUs from "@/views/AboutUs.vue";
 import Register from "@/views/User/Register.vue";
 import Login from "@/views/User/Login.vue";
 import UserProfile from "@/views/User/Profile.vue";
@@ -58,11 +58,6 @@ const routes = [
     name: "product",
     component: ViewProduct
   },
-  // {
-  //   path: "/about",
-  //   name: "about-page",
-  //   component: AboutUs
-  // },
   {
     path: "/cart-view",
     name: "cart-view",
@@ -92,6 +87,11 @@ const routes = [
     path: "/cancel-payment",
     name: "/cancel-payment",
     component: CancelPayment
+  },
+  {
+    path: "/about-us",
+    name: "about-us",
+    component: AboutUs
   },
   {
     path: "/register",

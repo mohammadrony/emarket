@@ -1,9 +1,26 @@
 <template>
   <div>
-    <b-button :size="btnType" @click="addToWishlist" variant="outline-danger">
+    <b-dropdown
+      :size="buttonType"
+      variant="warning"
+      @click="addToWishlist"
+      class="mt-0"
+    >
+      <template #button-content>
+        Added To Wishlist
+      </template>
+      <b-dropdown-item href="#">
+        Remove from wishlist
+      </b-dropdown-item>
+    </b-dropdown>
+    <!-- <b-button
+      :size="buttonType"
+      @click="addToWishlist"
+      variant="outline-danger"
+    >
       <b-icon-cart-plus-fill />
       Add To Wishlist
-    </b-button>
+    </b-button> -->
   </div>
 </template>
 
@@ -11,7 +28,7 @@
 export default {
   name: "AddToWishlist",
   props: {
-    btnType: String,
+    buttonType: String,
     productId: Number
   },
   data() {
@@ -22,42 +39,23 @@ export default {
   mounted() {},
   methods: {
     async addToWishlist() {
+      const userId = this.$store.state.CurrentUser.userId;
       const wishlistItem = {
         ProuctId: this.productId,
-        UserId: this.user.id
+        UserId: userId
       };
-      const response = await this.$store.dispatch("Cart/addToCart", cartItem);
-
-      if (response) {
-        this.addedToCart = true;
-        this.$bvToast.toast("Product added to cart", {
-          title: "Add to Cart",
-          variant: "success",
-          toaster: "b-toaster-top-center",
-          noCloseButton: false,
-          solid: true
-        });
-        return;
-      } else {
-        this.$bvToast.toast("Cart item increased", {
-          title: "Already in Cart",
-          variant: "primary",
-          toaster: "b-toaster-top-center",
-          noCloseButton: false,
-          solid: true
-        });
-      }
-    },
-    async remove() {
-      const cartItem = { productId: this.productId };
-      const remove_response = await this.$store.dispatch(
-        "Cart/removeFromCart",
-        cartItem
-      );
-      if (remove_response) {
-        this.addedToCart = false;
-      }
+      console.log(wishlistItem);
     }
+    // async remove() {
+    //   const cartItem = { productId: this.productId };
+    //   const remove_response = await this.$store.dispatch(
+    //     "Cart/removeFromCart",
+    //     cartItem
+    //   );
+    //   if (remove_response) {
+    //     this.addedToCart = false;
+    //   }
+    // }
   }
 };
 </script>

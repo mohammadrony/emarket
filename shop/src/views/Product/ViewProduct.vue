@@ -102,7 +102,7 @@
                   :image="displayProduct.image1"
                   :title="displayProduct.title"
                   :amount="displayProduct.amount"
-                ></AddToCart>
+                />
               </div>
               <div class="mt-2 ml-3">
                 <a href="#review_section">

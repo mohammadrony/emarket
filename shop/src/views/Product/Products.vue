@@ -42,7 +42,13 @@
                   :image="product.image1"
                   :title="product.title"
                   :amount="product.amount"
-                ></AddToCart>
+                />
+                <AddToWishlist
+                  :key="wishlistKey"
+                  class="mt-2"
+                  buttonType="sm"
+                  :productId="wishItem.Product.id"
+                />
                 <b-button
                   v-if="admin"
                   class="mt-2"
@@ -114,6 +120,7 @@ export default {
       route: null,
       admin: null,
       componentKey: 0,
+      wishlistKey: 0,
       cartComponentKey: 0,
       categoryList: null,
       subCategoryList: null,
@@ -153,6 +160,7 @@ export default {
     },
     refreshCartBtn() {
       this.cartComponentKey += 1;
+      this.wishlistKey += 1;
     },
     async deleteProduct(product) {
       await productsService.deleteProduct(product.id);
