@@ -94,16 +94,22 @@
             </h5>
             <div v-html="displayProduct.subtitle"></div>
             <div class="d-flex mt-5">
-              <div>
-                <AddToCart
-                  buttonType="sm"
-                  :productId="displayProduct.id"
-                  :currency="displayProduct.currency"
-                  :image="displayProduct.image1"
-                  :title="displayProduct.title"
-                  :amount="displayProduct.amount"
-                />
-              </div>
+              <AddToCart
+                buttonType="sm"
+                addButtonTitle="Cart"
+                addedButtonTitle="Added"
+                :productId="displayProduct.id"
+                :currency="displayProduct.currency"
+                :image="displayProduct.image1"
+                :title="displayProduct.title"
+                :amount="displayProduct.amount"
+              />
+              <AddToWishlist
+                addButtonTitle="Wishlist"
+                addedButtonTitle="Added"
+                buttonType="sm"
+                :productId="displayProduct.id"
+              />
               <div class="mt-2 ml-3">
                 <a href="#review_section">
                   <b-icon-pen />&nbsp;<strong>Write a review</strong>
@@ -149,6 +155,7 @@ import ProductsService from "@/services/ProductsService.js";
 import TopHeader from "@/components/Common/TopHeader.vue";
 import ProductHeader from "@/components/ViewProduct/ProductHeader.vue";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
+import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Review from "@/components/ViewProduct/Review.vue";
 import Recommendation from "@/components/ViewProduct/Recommendation.vue";
 import Footer from "@/components/Common/Footer.vue";
@@ -158,6 +165,7 @@ export default {
     TopHeader,
     ProductHeader,
     AddToCart,
+    AddToWishlist,
     Review,
     Recommendation,
     Footer

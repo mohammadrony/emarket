@@ -1,24 +1,24 @@
 <template>
   <div>
     <b-dropdown
-      v-b-tooltip.hover
-      title="Added To Wishlist"
+      id="wishlist-dd"
       v-if="validWishlistItem != -1"
-      
-      
       :size="buttonType"
       variant="primary"
       class="mt-0"
     >
       <template #button-content>
         <b-icon shift-v="-1" icon="suit-heart-fill" />
+        {{ addedButtonTitle }}
       </template>
+      <b-tooltip target="wishlist-dd" triggers="hover">
+        Added To Wishlist
+      </b-tooltip>
       <b-dropdown-item @click="removeWishlistItem">
         Remove from wishlist
       </b-dropdown-item>
     </b-dropdown>
     <b-button
-      
       v-b-tooltip.hover
       title="Add To Wishlist"
       v-if="validWishlistItem == -1"
@@ -27,6 +27,7 @@
       @click="addWishlistItem"
     >
       <b-icon shift-v="-1" icon="suit-heart-fill" />
+      {{ addButtonTitle }}
     </b-button>
   </div>
 </template>
@@ -35,6 +36,14 @@
 export default {
   name: "AddToWishlist",
   props: {
+    addButtonTitle: {
+      default: "",
+      type: String
+    },
+    addedButtonTitle: {
+      default: "",
+      type: String
+    },
     buttonType: String,
     productId: Number
   },

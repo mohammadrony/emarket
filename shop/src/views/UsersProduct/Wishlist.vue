@@ -41,6 +41,8 @@
                     <AddToCart
                       class="mt-2"
                       buttonType="sm"
+                      addButtonTitle="Cart"
+                      addedButtonTitle="Added"
                       :productId="wishItem.Product.id"
                       :currency="wishItem.Product.currency"
                       :image="wishItem.Product.image1"
@@ -49,6 +51,8 @@
                     />
                     <AddToWishlist
                       class="mt-2"
+                      addButtonTitle="Wishlist"
+                      addedButtonTitle="Added"
                       buttonType="sm"
                       :productId="wishItem.Product.id"
                     />

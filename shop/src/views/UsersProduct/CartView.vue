@@ -29,7 +29,7 @@
         </b-row>
         <hr />
       </div>
-      <div v-for="product in cartProducts" :key="product.id">
+      <div v-for="product in cartProducts" :key="product.productId">
         <b-row>
           <b-col cols="3">
             <img class="product-image" :src="product.image" alt="No Image" />
@@ -38,6 +38,13 @@
             <b-link @click="viewProduct(product)">
               {{ product.title }}
             </b-link>
+            <AddToWishlist
+              class="mt-2"
+              addButtonTitle="Wishlist"
+              addedButtonTitle="Added"
+              buttonType="sm"
+              :productId="product.productId"
+            />
           </b-col>
           <b-col cols="2">
             {{ product.amount * product.quantity }}
@@ -104,12 +111,14 @@
 
 <script>
 import TopHeader from "@/components/Common/TopHeader.vue";
+import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Footer from "@/components/Common/Footer.vue";
 import { mapState } from "vuex";
 export default {
   name: "MyCart",
   components: {
     TopHeader,
+    AddToWishlist,
     Footer
   },
   data() {

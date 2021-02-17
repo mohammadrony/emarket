@@ -1,23 +1,21 @@
 <template>
   <div>
     <b-dropdown
-      v-b-tooltip.hover
-      title="Added To Cart"
-      
-      
+      id="cart-dd"
       v-if="validCartItem != -1"
       :size="buttonType"
       variant="info"
     >
       <template #button-content>
         <b-icon scale="1.2" icon="cart-check-fill" />
+        {{ addedButtonTitle }}
       </template>
+      <b-tooltip target="cart-dd" triggers="hover">Added To Cart</b-tooltip>
       <b-dropdown-item @click="removeCartItem">
         Remove from Cart
       </b-dropdown-item>
     </b-dropdown>
     <b-button
-      
       v-b-tooltip.hover
       title="Add To Cart"
       v-if="validCartItem == -1"
@@ -26,6 +24,7 @@
       @click="addToCart"
     >
       <b-icon scale="1.2" icon="cart-plus-fill" />
+      {{ addButtonTitle }}
     </b-button>
   </div>
 </template>
@@ -34,6 +33,14 @@
 export default {
   name: "AddToCart",
   props: {
+    addButtonTitle: {
+      default: "",
+      type: String
+    },
+    addedButtonTitle: {
+      default: "",
+      type: String
+    },
     buttonType: String,
     productId: Number,
     currency: String,
