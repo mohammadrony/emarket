@@ -20,7 +20,7 @@
     </b-dropdown>
     <b-button
       v-b-tooltip.hover
-      title="Add To Wishlist"
+      title="Save To Wishlist"
       v-if="validWishlistItem == -1"
       :size="buttonType"
       variant="outline-primary"
@@ -82,7 +82,7 @@ export default {
       );
       if (this.validWishlistItem != -1) {
         this.$bvToast.toast("Product added to wishlist", {
-          title: "Add To Wishlist",
+          title: "Wishlist",
           variant: "success",
           toaster: "b-toaster-top-center",
           noCloseButton: false,

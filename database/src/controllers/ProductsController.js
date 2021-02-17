@@ -89,6 +89,18 @@ module.exports = {
 			})
 		}
 	},
+	async getProductRating(req, res) {
+		try {
+			const product = await Product.findByPk(req.params.productId, {
+				attributes: ["rating", "peopleRated"]
+			})
+			res.send(product)
+		} catch (err) {
+			res.status(500).send({
+				error: 'An error occured when trying to fetch a product.'
+			})
+		}
+	},
 	async createProduct(req, res) {
 		try {
 			req.body.image1 = "http://localhost:8084/" + req.files[0].path

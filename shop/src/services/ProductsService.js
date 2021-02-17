@@ -19,6 +19,9 @@ export default {
     getProduct(productId) {
         return Api().get(`/products/getProduct/${productId}`)
     },
+    getProductRating(productId) {
+        return Api().get(`/products/getProductRating/${productId}`)
+    },
     createProduct(credentials) {
         return Api().post('/products/createProduct', credentials)
     },

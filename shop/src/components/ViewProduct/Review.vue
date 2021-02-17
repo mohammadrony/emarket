@@ -15,7 +15,6 @@
                   readonly
                   :value="averageRating"
                   variant="primary"
-                  class="mb-2"
                 />
               </b-col>
               <b-col cols="2" />
@@ -140,13 +139,11 @@
               <b-row>
                 <b-col cols="3">
                   <b-img
-                    class="mb-2"
                     :src="review.User.profileImage"
                     height="60px"
                     width="60px"
                   />
-                  <br />
-                  <b-link>
+                  <b-link class="mt-3">
                     {{ review.User.firstName + " " + review.User.lastName }}
                   </b-link>
                   <br />
@@ -158,11 +155,10 @@
                         readonly
                         :value="review.rating"
                         variant="primary"
-                        class="mb-2"
                       />
                     </b-col>
                   </b-row>
-                  <b-row>
+                  <b-row class="mt-2">
                     <b-col>
                       <p>{{ review.comment }}</p>
                     </b-col>
@@ -193,22 +189,16 @@
           </div>
         </b-col>
         <b-col cols="6">
-          <b-card
-            bg-variant="white"
-            text-variant="dark"
-            v-if="currentUserReview"
-          >
+          <b-card bg-variant="white" text-variant="dark" v-if="userReviewFlag">
             <b-card-title> Your Review </b-card-title>
             <b-row>
               <b-col cols="4">
                 <b-img
-                  class="mb-2"
                   :src="currentUserReview.User.profileImage"
                   height="90px"
                   width="90px"
                 />
-                <br />
-                <b-link>
+                <b-link class="mt-3">
                   {{
                     currentUserReview.User.firstName +
                       " " +
@@ -224,11 +214,10 @@
                       readonly
                       :value="currentUserReview.rating"
                       variant="primary"
-                      class="mb-2"
                     />
                   </b-col>
                 </b-row>
-                <b-row>
+                <b-row class="mt-2">
                   <b-col>
                     <p>{{ currentUserReview.comment }}</p>
                   </b-col>
@@ -250,7 +239,7 @@
               </b-col>
             </b-row>
           </b-card>
-          <b-card v-if="!currentUserReview">
+          <b-card v-if="!userReviewFlag">
             <div class="mt-2 ml-3">
               <a variant="primary">
                 <b-icon-pen />&nbsp;<strong>Write a review</strong>
@@ -261,18 +250,14 @@
               <b-row>
                 <b-col cols="5">
                   <h6>Rating</h6>
-                  <b-form-rating
-                    v-model="rating"
-                    variant="primary"
-                    class="mb-4"
-                  />
+                  <b-form-rating v-model="rating" variant="primary" />
                 </b-col>
               </b-row>
-              <h6>Review</h6>
+              <div class="mt-4">
+                Comment
+              </div>
               <b-form-group>
                 <b-form-textarea
-                  @keyup="loginAlert = true"
-                  class="mb-3"
                   required
                   v-model="comment"
                   placeholder="Write a review"
@@ -280,7 +265,10 @@
                   max-rows="8"
                 />
               </b-form-group>
-              <b-button variant="primary" type="submit" v-if="userLoggedIn">
+              <b-alert class="mt-3" variant="warning" :show="reviewAlert">
+                {{ reviewMessage }}
+              </b-alert>
+              <b-button variant="primary" type="submit">
                 Submit
               </b-button>
             </b-form>
@@ -302,21 +290,22 @@
       <b-row>
         <b-col cols="5">
           <h6>Rating</h6>
-          <b-form-rating v-model="editRating" variant="primary" class="mb-4" />
+          <b-form-rating v-model="editRating" variant="primary" />
         </b-col>
       </b-row>
-      <h6>Review</h6>
+      <div class="mt-4">
+        Comment
+      </div>
       <b-form-group>
         <b-form-textarea
-          class="mb-4"
           v-model="editComment"
           placeholder="Write a review"
           rows="3"
           max-rows="10"
         />
       </b-form-group>
-      <b-alert variant="warning" v-if="editReviewAlert">
-        {{ editReviewAlert }}
+      <b-alert class="mt-3" variant="warning" :show="editReviewAlert">
+        {{ editReviewMessage }}
       </b-alert>
       <b-button variant="primary" @click="updateReview" v-if="userLoggedIn">
         Submit
@@ -327,6 +316,7 @@
 
 <script>
 import ReviewService from "@/services/ReviewService.js";
+import ProductsService from "@/services/ProductsService.js";
 export default {
   name: "Review",
   components: {},
@@ -347,19 +337,22 @@ export default {
       ratingCount: 0,
       averageRating: 0,
       commentCount: 0,
-      currentUserReview: null,
+      currentUserReview: {},
+      userReviewFlag: false,
       userId: 0,
       admin: false,
       userLoggedIn: false,
-      reviewAlert: null,
-      editReviewAlert: null,
-      rating: null,
+      reviewAlert: false,
+      reviewMessage: "Please add a rating or review to submit.",
+      editReviewAlert: false,
+      editReviewMessage: "Please add a rating or review to submit.",
+      rating: 0,
       comment: "",
       editReviewId: 0,
-      editRating: null,
+      editRating: 0,
       editComment: "",
       productId: 0,
-      loginAlert: false,
+      productRating: {},
       reviewList: []
     };
   },
@@ -368,6 +361,13 @@ export default {
     this.admin = this.$store.state.CurrentUser.admin;
     this.userLoggedIn = this.$store.state.CurrentUser.userLoggedIn;
     this.productId = parseInt(this.$store.state.route.params.productId);
+    try {
+      this.productRating = (
+        await ProductsService.getProductRating(this.productId)
+      ).data;
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
     try {
       this.reviewList = (
         await ReviewService.getReviewList(this.productId)
@@ -387,6 +387,7 @@ export default {
 
       if (this.reviewList[i].UserId == this.userId)
         this.currentUserReview = this.reviewList[i];
+      this.userReviewFlag = Object.keys(this.currentUserReview).length != 0;
       if (!this.reviewList[i].mode) {
         this.reviewList[i].mode = 0;
       }
@@ -408,14 +409,8 @@ export default {
               1 * this.oneStar)) /
             this.ratingCount
         ) / 10;
-      this.oneStarPercent = Math.round(
-        (this.oneStar * 100) / this.ratingCount,
-        1
-      );
-      this.twoStarPercent = Math.round(
-        (this.twoStar * 100) / this.ratingCount,
-        1
-      );
+      this.oneStarPercent = Math.round((this.oneStar * 100) / this.ratingCount);
+      this.twoStarPercent = Math.round((this.twoStar * 100) / this.ratingCount);
       this.threeStarPercent = Math.round(
         (this.threeStar * 100) / this.ratingCount
       );
@@ -429,23 +424,19 @@ export default {
   },
   methods: {
     async createReview() {
-      if (this.rating == null) this.rating = 0;
-      if (this.comment == null) this.comment = "";
-      if (this.rating != 0 || this.comment != "") {
-        try {
-          await ReviewService.createReview({
-            rating: this.rating,
-            comment: this.comment,
-            productId: this.productId
-          });
-          window.location.reload();
-        } catch (error) {
-          console.log(error.response.data.error);
-        }
-      } else {
-        this.reviewAlert = "Please add a rating or review to submit.";
+      if (this.rating == 0 || this.comment == "") {
+        this.reviewAlert = true;
+        return;
       }
+      await this.$store.dispatch("Review/createReview", {
+        rating: this.rating,
+        comment: this.comment,
+        productId: this.productId,
+        productRating: this.productRating
+      });
+      window.location.reload();
     },
+
     editReview(review) {
       this.editRating = review.rating;
       this.editComment = review.comment;
@@ -453,37 +444,34 @@ export default {
       this.$bvModal.show("editReviewModal");
     },
     async updateReview() {
-      if (this.editRating == null) this.editRating = 0;
-      if (this.editComment == null) this.editComment = "";
       this.$bvModal.hide("editReviewModal");
-      if (this.editRating != 0 || this.editComment != "") {
-        try {
-          await ReviewService.updateReview({
-            id: this.editReviewId,
-            rating: this.editRating,
-            comment: this.editComment,
-            productId: this.productId
-          });
-          window.location.reload();
-        } catch (error) {
-          console.log(error.response.data.error);
-        }
-      } else {
-        this.editReviewAlert = "Please add a rating or review to submit.";
+
+      if (this.editRating == 0 || this.editComment == "") {
+        this.editReviewAlert = true;
+        return;
       }
+      await this.$store.dispatch("Review/updateReview", {
+        id: this.editReviewId,
+        rating: this.editRating,
+        comment: this.editComment,
+        productId: this.productId,
+        productRating: this.productRating,
+        oldRating: this.currentUserReview.rating
+      });
+      window.location.reload();
     },
+
     async deleteReview(review) {
       if (this.userLoggedIn) {
-        try {
-          await ReviewService.deleteReview(review.id);
-          window.location.reload();
-        } catch (error) {
-          console.log(error.response.data.error);
-        }
+        await this.$store.dispatch("Review/deleteReview", {
+          review: review,
+          productId: this.productId,
+          productRating: this.productRating
+        });
+        window.location.reload();
       }
     }
-  },
-  computed: {}
+  }
 };
 </script>
 

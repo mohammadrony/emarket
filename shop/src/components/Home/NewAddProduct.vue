@@ -8,8 +8,8 @@
           <b-row>
             <b-col cols="3" v-for="product in newAddProduct" :key="product.id">
               <b-card deck class="mt-4">
-                <b-card-img class="mb-3" :src="product.image1" />
-                <b-link @click="gotoProduct(product)">
+                <b-card-img :src="product.image1" />
+                <b-link class="mt-3" @click="gotoProduct(product)">
                   <h5>{{ product.title }}</h5>
                 </b-link>
                 <h6>{{ product.amount }} {{ product.currency }}</h6>

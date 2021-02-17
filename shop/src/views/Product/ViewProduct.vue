@@ -87,16 +87,32 @@
             <h3>
               {{ displayProduct.title }}
             </h3>
-
             <h5>
               <b>Price : </b>{{ displayProduct.amount }}
               {{ displayProduct.currency }}
             </h5>
-            <div v-html="displayProduct.subtitle"></div>
-            <div class="d-flex mt-5">
+
+            <div v-html="displayProduct.subtitle" />
+            <div class="mt-4">
+              <b-row align-v="center">
+                <b-col cols="7">
+                  <b-form-rating
+                    readonly
+                    :value="displayProduct.rating"
+                    variant="primary"
+                  />
+                  <h5 class="mt-2">
+                    <b-badge variant="primary" size="lg">
+                      {{ Math.round(10 * displayProduct.rating) / 10 }} of 5
+                    </b-badge>
+                  </h5>
+                </b-col>
+              </b-row>
+            </div>
+            <div class="d-flex mt-3">
               <AddToCart
                 buttonType="sm"
-                addButtonTitle="Cart"
+                addButtonTitle="Add To Cart"
                 addedButtonTitle="Added"
                 :productId="displayProduct.id"
                 :currency="displayProduct.currency"
@@ -105,12 +121,13 @@
                 :amount="displayProduct.amount"
               />
               <AddToWishlist
-                addButtonTitle="Wishlist"
+                class="ml-3"
+                addButtonTitle="Save"
                 addedButtonTitle="Added"
                 buttonType="sm"
                 :productId="displayProduct.id"
               />
-              <div class="mt-2 ml-3">
+              <div class="ml-3">
                 <a href="#review_section">
                   <b-icon-pen />&nbsp;<strong>Write a review</strong>
                 </a>
@@ -136,7 +153,7 @@
       <div class="mt-5 p-4" style="background-color: #eeeeee">
         <div class="product-detail-feature">
           <h3>Feature</h3>
-          <div v-html="displayProduct.description"></div>
+          <div v-html="displayProduct.description" />
         </div>
       </div>
     </b-container>

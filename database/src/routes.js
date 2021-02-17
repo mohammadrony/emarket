@@ -60,6 +60,8 @@ module.exports = (app) => {
   // company
   app.get("/company/getCompanyLogo/:companyId",
     CompanyController.getCompanyLogo)
+  app.get("/company/getCompanyName/:companyId",
+    CompanyController.getCompanyName)
 
   // order
   app.get("/order/getOrderList",
@@ -98,6 +100,8 @@ module.exports = (app) => {
     ProductsController.getProductSales)
   app.get("/products/getProduct/:productId",
     ProductsController.getProduct)
+  app.get("/products/getProductRating/:productId",
+    ProductsController.getProductRating)
   app.get("/products/getRecommendation/:subSubCategoryId/:limit",
     ProductsController.getRecommendation)
   app.post("/products/createProduct",

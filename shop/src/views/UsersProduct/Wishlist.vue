@@ -41,7 +41,7 @@
                     <AddToCart
                       class="mt-2"
                       buttonType="sm"
-                      addButtonTitle="Cart"
+                      addButtonTitle="Add To Cart"
                       addedButtonTitle="Added"
                       :productId="wishItem.Product.id"
                       :currency="wishItem.Product.currency"
@@ -51,7 +51,7 @@
                     />
                     <AddToWishlist
                       class="mt-2"
-                      addButtonTitle="Wishlist"
+                      addButtonTitle="Save"
                       addedButtonTitle="Added"
                       buttonType="sm"
                       :productId="wishItem.Product.id"
@@ -84,7 +84,8 @@ export default {
   },
   data() {
     return {
-      userId: 0
+      userId: 0,
+      companyName: ""
     };
   },
   computed: {

@@ -30,7 +30,7 @@
         </b-card-group>
       </b-col>
     </b-row>
-    <b-row class="mb-3 mt-5">
+    <b-row class="mt-5">
       <b-col cols="2" />
       <b-col cols="10">
         <b-card class="mt-5" v-if="subTotalAmount != 0">
@@ -68,14 +68,14 @@
         </b-card>
       </b-col>
     </b-row>
-    <b-row class="mb-3">
+    <b-row>
       <b-col>
         <b-alert variant="primary" class="my-2 p-1 pl-2" :show="!formValidate">
           {{ message }}
         </b-alert>
       </b-col>
     </b-row>
-    <b-row v-if="subTotalAmount != 0">
+    <b-row class="mt-5" v-if="subTotalAmount != 0">
       <b-col cols="5">
         <b-button block variant="warning" to="/cart-view">Edit Cart</b-button>
       </b-col>

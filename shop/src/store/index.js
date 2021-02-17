@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { CartModule } from "./Cart.js";
+import { ReviewModule } from "./Review.js";
 import { CompanyModule } from "./Company.js";
 import { CategoryModule } from "./Category.js";
 import { ProductsModule } from "./Products.js";
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     ],
     modules: {
         Cart: CartModule,
+        Review: ReviewModule,
         Company: CompanyModule,
         Category: CategoryModule,
         Products: ProductsModule,
