@@ -33,27 +33,32 @@
                 <h6 class="mt-1">
                   {{ product.amount }} {{ product.currency }}
                 </h6>
-                <AddToCart
-                  :key="cartComponentKey"
-                  class="mt-2"
-                  buttonType="sm"
-                  :productId="product.id"
-                  :currency="product.currency"
-                  :image="product.image1"
-                  :title="product.title"
-                  :amount="product.amount"
-                />
-                <AddToWishlist
-                  :key="wishlistKey"
-                  class="mt-2"
-                  buttonType="sm"
-                  :productId="product.id"
-                />
+                <b-row class="mt-2">
+                  <b-col>
+                    <div class="d-flex">
+                      <AddToCart
+                        :key="cartComponentKey"
+                        buttonType="md"
+                        :productId="product.id"
+                        :currency="product.currency"
+                        :image="product.image1"
+                        :title="product.title"
+                        :amount="product.amount"
+                      />
+                      <AddToWishlist
+                        class="ml-2"
+                        :key="wishlistKey"
+                        buttonType="md"
+                        :productId="product.id"
+                      />
+                    </div>
+                  </b-col>
+                </b-row>
                 <b-button
                   v-if="admin"
                   class="mt-2"
                   @click="deleteProduct(product)"
-                  size="sm"
+                  size="md"
                   variant="danger"
                 >
                   <b-icon icon="trash" />

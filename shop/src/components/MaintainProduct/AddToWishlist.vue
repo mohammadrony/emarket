@@ -1,25 +1,32 @@
 <template>
   <div>
     <b-dropdown
+      v-b-tooltip.hover
+      title="Added To Wishlist"
       v-if="validWishlistItem != -1"
+      
+      
       :size="buttonType"
       variant="primary"
       class="mt-0"
     >
       <template #button-content>
-        Added To Wishlist
+        <b-icon shift-v="-1" icon="suit-heart-fill" />
       </template>
       <b-dropdown-item @click="removeWishlistItem">
         Remove from wishlist
       </b-dropdown-item>
     </b-dropdown>
     <b-button
+      
+      v-b-tooltip.hover
+      title="Add To Wishlist"
       v-if="validWishlistItem == -1"
       :size="buttonType"
       variant="outline-primary"
       @click="addWishlistItem"
     >
-      Add To Wishlist
+      <b-icon shift-v="-1" icon="suit-heart-fill" />
     </b-button>
   </div>
 </template>

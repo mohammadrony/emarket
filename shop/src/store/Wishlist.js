@@ -40,10 +40,15 @@ export const WishlistModule = {
       const index = await dispatch("getWishlistItem", productId)
       if (index == -1) {
         try {
-          const wishlistItem = (await WishlistService.createWishlistItem({
+          await WishlistService.createWishlistItem({
             productId: productId
-          })).data
-          console.log(wishlistItem)
+          })
+        } catch (error) {
+          console.log(error.response.data.error)
+        }
+        try {
+          const wishlistItem = (await WishlistService.getWishlistItem(productId)).data
+
           commit("ADD_WISHLIST_ITEM", wishlistItem);
           return 0
         } catch (error) {

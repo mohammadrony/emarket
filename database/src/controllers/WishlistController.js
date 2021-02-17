@@ -1,4 +1,3 @@
-const _ = require('lodash')
 const { Wishlist, Product } = require('../models')
 
 module.exports = {
@@ -9,15 +8,15 @@ module.exports = {
           UserId: req.user.id
         },
         include: {
-					model: Product,
-					attributes: [
+          model: Product,
+          attributes: [
             "id",
             "title",
-						"image1",
-						"amount",
-						"currency"
-					]
-				},
+            "image1",
+            "amount",
+            "currency"
+          ]
+        }
       })
       res.send(wishlist)
 
@@ -33,6 +32,16 @@ module.exports = {
         where: {
           UserId: req.user.id,
           ProductId: req.params.productId
+        },
+        include: {
+          model: Product,
+          attributes: [
+            "id",
+            "title",
+            "image1",
+            "amount",
+            "currency"
+          ]
         }
       })
       res.send(wishlistItem)

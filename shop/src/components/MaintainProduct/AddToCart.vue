@@ -1,25 +1,31 @@
 <template>
   <div>
     <b-dropdown
+      v-b-tooltip.hover
+      title="Added To Cart"
+      
+      
       v-if="validCartItem != -1"
       :size="buttonType"
       variant="info"
-      class="mt-0"
     >
       <template #button-content>
-        Added To Cart
+        <b-icon scale="1.2" icon="cart-check-fill" />
       </template>
       <b-dropdown-item @click="removeCartItem">
         Remove from Cart
       </b-dropdown-item>
     </b-dropdown>
     <b-button
+      
+      v-b-tooltip.hover
+      title="Add To Cart"
       v-if="validCartItem == -1"
       :size="buttonType"
       variant="outline-info"
       @click="addToCart"
     >
-      Add To Cart
+      <b-icon scale="1.2" icon="cart-plus-fill" />
     </b-button>
   </div>
 </template>
