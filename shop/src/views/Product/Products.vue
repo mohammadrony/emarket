@@ -123,7 +123,7 @@ import FilterComponent from "@/components/Products/FilterComponent.vue";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Footer from "@/components/Common/Footer.vue";
-import productsService from "@/services/ProductsService.js";
+import ProductsService from "@/services/ProductsService.js";
 import WishlistService from "@/services/WishlistService.js";
 export default {
   name: "Products",
@@ -186,7 +186,7 @@ export default {
     },
     async deleteProduct(product) {
       await WishlistService.deleteWishItemByProduct(product.id);
-      await productsService.deleteProduct(product.id);
+      await ProductsService.deleteProduct(product.id);
       await this.$store.dispatch("Products/setAllBackupProduct");
       await this.$store.dispatch("Wishlist/setWishlist");
       window.location.reload();

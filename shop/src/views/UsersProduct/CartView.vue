@@ -38,6 +38,18 @@
             <b-link @click="viewProduct(product)">
               {{ product.title }}
             </b-link>
+            <b-row class="mt-2" align-v="center">
+              <b-col>
+                <b-form-rating
+                  size="sm"
+                  readonly
+                  show-value
+                  show-value-max
+                  :value="product.rating"
+                  variant="primary"
+                />
+              </b-col>
+            </b-row>
             <AddToWishlist
               class="mt-2"
               addButtonTitle="Save"

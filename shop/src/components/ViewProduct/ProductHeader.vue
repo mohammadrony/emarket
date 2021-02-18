@@ -33,8 +33,9 @@
           </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-          <b-button pill variant="warning">
-            Edit Item
+          <b-button v-if="admin" @click="deleteProduct" variant="danger">
+            <b-icon icon="trash" />
+            Delete Item
           </b-button>
         </b-navbar-nav>
       </b-collapse>
@@ -44,10 +45,14 @@
 </template>
 
 <script>
+import WishlistService from "@/services/WishlistService.js";
+import ProductsService from "@/services/ProductsService.js";
 export default {
   name: "ProductHeader",
   data() {
     return {
+      admin: false,
+      productId: 0,
       productName: this.pName,
       categoryId: this.categId,
       categoryName: "",
@@ -66,6 +71,8 @@ export default {
   components: {},
   computed: {},
   async mounted() {
+    this.admin = this.$store.state.CurrentUser.admin;
+    this.productId = this.$store.state.route.params.productId;
     if (this.categoryId && this.subCategoryId && this.subSubCategoryId) {
       this.categoryName = await this.$store.dispatch(
         "Category/getCategoryName",
@@ -82,6 +89,13 @@ export default {
     }
   },
   methods: {
+    async deleteProduct() {
+      await WishlistService.deleteWishItemByProduct(this.productId);
+      await ProductsService.deleteProduct(this.productId);
+      await this.$store.dispatch("Products/setAllBackupProduct");
+      await this.$store.dispatch("Wishlist/setWishlist");
+      window.location.replace("/products");
+    },
     async productHome() {
       await this.$store.dispatch("Products/resetSearchParameter");
       window.location.replace("/products");

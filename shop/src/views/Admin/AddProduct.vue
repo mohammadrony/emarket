@@ -319,6 +319,8 @@ export default {
         amount: null,
         sales: 0,
         subtitle: "",
+        rating: 0,
+        peopleRated: 0,
         description: "",
         currency: "USD",
         CategoryId: 0,
