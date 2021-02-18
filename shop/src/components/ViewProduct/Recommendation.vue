@@ -3,16 +3,55 @@
     <b-container class="mt-5">
       <b-row v-if="recommendation">
         <b-col>
-          <h3>You May Also Like</h3>
-          <hr />
+          <div v-if="recommendation.length != 0">
+            <h3>You May Also Like</h3>
+            <hr />
+          </div>
           <b-row>
             <b-col cols="3" v-for="product in recommendation" :key="product.id">
               <b-card deck class="mt-4">
-                <b-card-img class="mb-3" :src="product.image1" />
+                <b-card-img
+                  @click="gotoProduct(product)"
+                  class="mb-3"
+                  :src="product.image1"
+                />
                 <b-link @click="gotoProduct(product)">
                   <h5>{{ product.title }}</h5>
                 </b-link>
-                <h6>{{ product.amount }} {{ product.currency }}</h6>
+                <h6>Price: {{ product.amount }} {{ product.currency }}</h6>
+                <b-row class="mt-2" align-v="center">
+                  <b-col cols="12">
+                    <b-form-rating
+                      size="sm"
+                      show-value
+                      show-value-max
+                      readonly
+                      :value="product.rating"
+                      variant="primary"
+                    />
+                  </b-col>
+                </b-row>
+                <div class="d-flex justify-content-between">
+                  <AddToCart
+                    class="mt-2"
+                    addButtonTitle="Add To Cart"
+                    addedButtonTitle="In Cart"
+                    buttonType="sm"
+                    :productId="product.id"
+                    :rating="product.rating"
+                    :currency="product.currency"
+                    :image="product.image1"
+                    :title="product.title"
+                    :amount="product.amount"
+                  />
+                  <AddToWishlist
+                    class="mt-2"
+                    addButtonTitle="Save"
+                    addedButtonTitle="Saved"
+                    buttonType="sm"
+                    :productId="product.id"
+                  />
+                </div>
               </b-card>
             </b-col>
           </b-row>
@@ -24,17 +63,22 @@
 
 <script>
 import ProductsService from "@/services/ProductsService.js";
+import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
+import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 export default {
   name: "Name",
   props: {
     subSubCatId: Number
   },
-  components: {},
+  components: {
+    AddToCart,
+    AddToWishlist
+  },
   data() {
     return {
       limit: 8,
       subSubCategoryId: this.subSubCatId,
-      recommendation: [],
+      recommendation: []
     };
   },
   async mounted() {
@@ -49,7 +93,11 @@ export default {
       console.log(error.response.data.error);
     }
   },
-  methods: {},
+  methods: {
+    gotoProduct(product) {
+      window.location.replace(`/product/${product.id}`);
+    }
+  },
   computed: {}
 };
 </script>

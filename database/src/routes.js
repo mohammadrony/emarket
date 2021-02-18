@@ -186,4 +186,7 @@ module.exports = (app) => {
   app.delete("/wishlist/removeWishlistItem/:productId",
     isAuthenticated,
     WishlistController.removeWishlistItem)
+  app.delete("/wishlist/deleteWishItemByProduct/:productId",
+    isAuthenticated,
+    WishlistController.deleteWishItemByProduct)
 }

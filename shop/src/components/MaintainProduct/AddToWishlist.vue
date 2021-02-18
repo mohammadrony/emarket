@@ -1,12 +1,16 @@
 <template>
   <div>
     <b-dropdown
+      split
       id="wishlist-dd"
       v-if="validWishlistItem != -1"
       :size="buttonType"
-      variant="primary"
+      variant="success"
       class="mt-0"
     >
+      <b-tooltip target="wishlist-dd" triggers="hover">
+        Saved To Wishlist
+      </b-tooltip>
       <template #button-content>
         <b-icon shift-v="-1" icon="suit-heart-fill" />
         {{ addedButtonTitle }}
@@ -16,9 +20,11 @@
       </b-dropdown-item>
     </b-dropdown>
     <b-button
+      v-b-tooltip.hover
+      title="Save To Wishlist"
       v-if="validWishlistItem == -1"
       :size="buttonType"
-      variant="outline-primary"
+      variant="outline-success"
       @click="addWishlistItem"
     >
       <b-icon shift-v="-1" icon="suit-heart-fill" />
@@ -64,7 +70,7 @@ export default {
       if (this.userId == 0) {
         this.$bvToast.toast("Please login to save on wishlist", {
           title: "danger",
-          variant: "primary",
+          variant: "success",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
           solid: true
@@ -76,9 +82,9 @@ export default {
         this.productId
       );
       if (this.validWishlistItem != -1) {
-        this.$bvToast.toast("Product added to wishlist", {
+        this.$bvToast.toast("Product saved to wishlist", {
           title: "Wishlist",
-          variant: "success",
+          variant: "info",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
           solid: true
@@ -93,7 +99,7 @@ export default {
       if (this.validWishlistItem == -1) {
         this.$bvToast.toast("Product removed from wishlist", {
           title: "Wishlist",
-          variant: "success",
+          variant: "info",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
           solid: true

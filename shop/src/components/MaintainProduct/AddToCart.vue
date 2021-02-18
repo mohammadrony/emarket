@@ -1,6 +1,7 @@
 <template>
   <div>
     <b-dropdown
+      split
       id="cart-dd"
       v-if="validCartItem != -1"
       :size="buttonType"
@@ -76,7 +77,7 @@ export default {
 
       if (this.validCartItem != -1) {
         this.$bvToast.toast("Product added to cart", {
-          title: "Add To Cart",
+          title: "Cart",
           variant: "success",
           toaster: "b-toaster-top-center",
           noCloseButton: false,

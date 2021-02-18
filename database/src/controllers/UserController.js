@@ -27,20 +27,21 @@ module.exports = {
     },
     async deleteAccount(req, res) {
         try {
-            if (req.params.userId != req.user.id && req.user.priority != 1) {
-                console.log(req.params.userId != req.user.id)
+            if (req.params.userId == req.user.id || req.user.priority == 1) {
+                const user = await User.findByPk(req.params.userId)
+                if (!user) {
+                    return res.status(403).send({
+                        error: 'No user to delete.'
+                    })
+                }
+                await user.destroy();
+                res.send({ id: user.id })
+            }
+            else {
                 return res.status(403).send({
                     error: "You don't have permits to do that."
                 })
             }
-            const user = await User.findByPk(req.params.userId)
-            if (!user) {
-                return res.status(403).send({
-                    error: 'No user to delete.'
-                })
-            }
-            await user.destroy();
-            res.send({ id: user.id })
         } catch (error) {
             res.status(500).send({
                 error: "An error occured when trying to delete an user account"

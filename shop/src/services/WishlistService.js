@@ -12,5 +12,8 @@ export default {
     },
     removeWishlistItem(productId) {
         return Api().delete(`/wishlist/removeWishlistItem/${productId}`)
+    },
+    deleteWishItemByProduct(productId) {
+        return Api().delete(`/wishlist/deleteWishItemByProduct/${productId}`)
     }
 }

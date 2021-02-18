@@ -45,32 +45,28 @@
                     />
                   </b-col>
                 </b-row>
-                <div class="d-flex">
-                  <b-row>
-                    <b-col>
-                      <AddToCart
-                        class="mt-2"
-                        :key="cartComponentKey"
-                        addButtonTitle="Add To Cart"
-                        addedButtonTitle="Added To Cart"
-                        buttonType="sm"
-                        :productId="product.id"
-                        :rating="product.rating"
-                        :currency="product.currency"
-                        :image="product.image1"
-                        :title="product.title"
-                        :amount="product.amount"
-                      />
-                      <AddToWishlist
-                        class="mt-2"
-                        addButtonTitle="Add To Wishlist"
-                        addedButtonTitle="Added To Wishlist"
-                        :key="wishlistKey"
-                        buttonType="sm"
-                        :productId="product.id"
-                      />
-                    </b-col>
-                  </b-row>
+                <div class="d-flex justify-content-between">
+                  <AddToCart
+                    class="mt-2"
+                    addButtonTitle="Add To Cart"
+                    addedButtonTitle="In Cart"
+                    :key="cartComponentKey"
+                    buttonType="sm"
+                    :productId="product.id"
+                    :rating="product.rating"
+                    :currency="product.currency"
+                    :image="product.image1"
+                    :title="product.title"
+                    :amount="product.amount"
+                  />
+                  <AddToWishlist
+                    class="mt-2"
+                    addButtonTitle="Save"
+                    addedButtonTitle="Saved"
+                    :key="wishlistKey"
+                    buttonType="sm"
+                    :productId="product.id"
+                  />
                 </div>
                 <b-button
                   v-if="admin"
@@ -128,6 +124,7 @@ import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Footer from "@/components/Common/Footer.vue";
 import productsService from "@/services/ProductsService.js";
+import WishlistService from "@/services/WishlistService.js";
 export default {
   name: "Products",
   components: {
@@ -188,8 +185,10 @@ export default {
       this.wishlistKey += 1;
     },
     async deleteProduct(product) {
+      await WishlistService.deleteWishItemByProduct(product.id);
       await productsService.deleteProduct(product.id);
       await this.$store.dispatch("Products/setAllBackupProduct");
+      await this.$store.dispatch("Wishlist/setWishlist");
       window.location.reload();
     },
     viewProduct(product) {

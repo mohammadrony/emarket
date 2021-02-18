@@ -126,7 +126,8 @@ export default {
         window.location.replace("/wishlist");
       }
     },
-    logout() {
+    async logout() {
+      this.$store.dispatch("Wishlist/clearWishlist")
       this.$store.dispatch("CurrentUser/setToken", "");
       this.$store.dispatch("CurrentUser/setUser", {});
       window.location.reload();

@@ -87,4 +87,40 @@ module.exports = {
       })
     }
   },
+  async deleteWishItemByProduct(req, res) {
+    try {
+      if (req.user && req.user.priority == 1) {
+        await Wishlist.destroy({
+          where: {
+            ProductId: req.params.productId
+          }
+        })
+        res.send({ productId: req.body.productId })
+      } else {
+        return res.status(403).send({
+          error: "You don't have permits to do that."
+        })
+      }
+    } catch (err) {
+      res.status(500).send({
+        error: 'An error occured when trying to delete wishlist item by product.'
+      })
+    }
+    try {
+
+      const user = await User.findByPk(req.params.userId)
+      if (!user) {
+        return res.status(403).send({
+          error: 'No user to delete.'
+        })
+      }
+      await user.destroy();
+      res.send({ id: user.id })
+    } catch (error) {
+      res.status(500).send({
+        error: "An error occured when trying to delete an user account"
+      })
+    }
+  },
+
 }

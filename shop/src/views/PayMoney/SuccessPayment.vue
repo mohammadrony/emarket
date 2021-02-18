@@ -54,6 +54,7 @@ export default {
       console.log(error.response.data.error);
     }
     if (previousOrder) return;
+    this.$store.dispatch("Cart/clearCart");
     try {
       this.session = (
         await CheckoutService.retrieveCheckoutSession(sessionId)

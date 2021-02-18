@@ -5,6 +5,9 @@ export const CartModule = {
         cartProducts: []
     },
     mutations: {
+        SET_CART_PRODUCTS(state, cartProducts) {
+            state.cartProducts = cartProducts
+        },
         ADD_CART_ITEM(state, newItem) {
             state.cartProducts.unshift(newItem);
         },
@@ -16,6 +19,9 @@ export const CartModule = {
         }
     },
     actions: {
+        clearCart({ commit }) {
+            commit("SET_CART_PRODUCTS", [])
+        },
         getCartItem({ state }, productId) {
             const index = state.cartProducts.findIndex(obj => obj.productId == productId)
             return index;

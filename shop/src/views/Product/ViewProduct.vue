@@ -110,7 +110,7 @@
               <AddToCart
                 buttonType="sm"
                 addButtonTitle="Add To Cart"
-                addedButtonTitle="Added To Cart"
+                addedButtonTitle="In Cart"
                 :productId="displayProduct.id"
                 :rating="displayProduct.rating"
                 :currency="displayProduct.currency"
@@ -120,8 +120,8 @@
               />
               <AddToWishlist
                 class="ml-3"
-                addButtonTitle="Add To Wishlist"
-                addedButtonTitle="Added To Wishlist"
+                addButtonTitle="Save"
+                addedButtonTitle="Saved"
                 buttonType="sm"
                 :productId="displayProduct.id"
               />

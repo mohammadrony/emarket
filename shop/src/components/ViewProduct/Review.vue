@@ -143,10 +143,11 @@
                     height="60px"
                     width="60px"
                   />
-                  <b-link class="mt-3">
-                    {{ review.User.firstName + " " + review.User.lastName }}
-                  </b-link>
-                  <br />
+                  <div class="mt-3">
+                    <b-link>
+                      {{ review.User.firstName + " " + review.User.lastName }}
+                    </b-link>
+                  </div>
                 </b-col>
                 <b-col cols="9">
                   <b-row>
@@ -198,14 +199,15 @@
                   height="90px"
                   width="90px"
                 />
-                <b-link class="mt-3">
-                  {{
-                    currentUserReview.User.firstName +
-                      " " +
-                      currentUserReview.User.lastName
-                  }}
-                </b-link>
-                <br />
+                <div class="mt-2">
+                  <b-link>
+                    {{
+                      currentUserReview.User.firstName +
+                        " " +
+                        currentUserReview.User.lastName
+                    }}
+                  </b-link>
+                </div>
               </b-col>
               <b-col cols="8">
                 <b-row>
@@ -434,6 +436,7 @@ export default {
         productId: this.productId,
         productRating: this.productRating
       });
+      await this.$store.dispatch("Products/setAllBackupProduct");
       window.location.reload();
     },
 
@@ -458,6 +461,7 @@ export default {
         productRating: this.productRating,
         oldRating: this.currentUserReview.rating
       });
+      await this.$store.dispatch("Products/setAllBackupProduct");
       window.location.reload();
     },
 
@@ -468,6 +472,7 @@ export default {
           productId: this.productId,
           productRating: this.productRating
         });
+        await this.$store.dispatch("Products/setAllBackupProduct");
         window.location.reload();
       }
     }

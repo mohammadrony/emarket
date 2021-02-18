@@ -56,7 +56,7 @@
                         <AddToCart
                           buttonType="sm"
                           addButtonTitle="Add To Cart"
-                          addedButtonTitle="Added To Cart"
+                          addedButtonTitle="In Cart"
                           :productId="wishItem.Product.id"
                           :rating="wishItem.Product.rating"
                           :currency="wishItem.Product.currency"
@@ -66,8 +66,8 @@
                         />
                         <AddToWishlist
                           class="mt-2"
-                          addButtonTitle="Add To Wishlist"
-                          addedButtonTitle="Added To Wishlist"
+                          addButtonTitle="Save"
+                          addedButtonTitle="Saved"
                           buttonType="sm"
                           :productId="wishItem.Product.id"
                         />

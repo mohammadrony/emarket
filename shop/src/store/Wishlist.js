@@ -17,6 +17,9 @@ export const WishlistModule = {
     }
   },
   actions: {
+    async clearWishlist({ commit }) {
+      commit("SET_WISHLIST", [])
+    },
     async setWishlist({ commit }) {
       try {
         const wishlist = (await WishlistService.getWishlist()).data;
