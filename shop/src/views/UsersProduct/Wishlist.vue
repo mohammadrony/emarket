@@ -38,24 +38,41 @@
                       {{ wishItem.Product.amount }}
                       {{ wishItem.Product.currency }}
                     </h6>
-                    <AddToCart
-                      class="mt-2"
-                      buttonType="sm"
-                      addButtonTitle="Add To Cart"
-                      addedButtonTitle="Added"
-                      :productId="wishItem.Product.id"
-                      :currency="wishItem.Product.currency"
-                      :image="wishItem.Product.image1"
-                      :title="wishItem.Product.title"
-                      :amount="wishItem.Product.amount"
-                    />
-                    <AddToWishlist
-                      class="mt-2"
-                      addButtonTitle="Save"
-                      addedButtonTitle="Added"
-                      buttonType="sm"
-                      :productId="wishItem.Product.id"
-                    />
+                    <b-row class="mt-2" align-v="center">
+                      <b-col>
+                        <b-form-rating
+                          size="sm"
+                          readonly
+                          show-value
+                          show-value-max
+                          :value="wishItem.Product.rating"
+                          variant="primary"
+                        />
+                      </b-col>
+                    </b-row>
+
+                    <b-row class="mt-2">
+                      <b-col>
+                        <AddToCart
+                          buttonType="sm"
+                          addButtonTitle="Add To Cart"
+                          addedButtonTitle="Added To Cart"
+                          :productId="wishItem.Product.id"
+                          :rating="wishItem.Product.rating"
+                          :currency="wishItem.Product.currency"
+                          :image="wishItem.Product.image1"
+                          :title="wishItem.Product.title"
+                          :amount="wishItem.Product.amount"
+                        />
+                        <AddToWishlist
+                          class="mt-2"
+                          addButtonTitle="Add To Wishlist"
+                          addedButtonTitle="Added To Wishlist"
+                          buttonType="sm"
+                          :productId="wishItem.Product.id"
+                        />
+                      </b-col>
+                    </b-row>
                   </div>
                 </b-col>
               </b-row>
@@ -73,7 +90,6 @@ import TopHeader from "@/components/Common/TopHeader.vue";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Footer from "@/components/Common/Footer.vue";
-import { mapState } from "vuex";
 export default {
   name: "Wishlist",
   components: {
@@ -85,19 +101,17 @@ export default {
   data() {
     return {
       userId: 0,
-      companyName: ""
+      myWishlist: [],
+      wishlistItemCount: 0
     };
   },
-  computed: {
-    ...mapState({
-      myWishlist: state => state.Wishlist.wishlist
-    }),
-    wishlistItemCount() {
-      return this.myWishlist.length;
-    }
-  },
+  computed: {},
   async mounted() {
     this.userId = this.$store.state.CurrentUser.userId;
+    if (this.userId != 0) {
+      this.myWishlist = await this.$store.dispatch("Wishlist/getWishlist");
+      this.wishlistItemCount = this.myWishlist.length;
+    }
     if (this.userId == 0) {
       this.$bvToast.toast("Please login for the wishlist", {
         title: "Wishlist",

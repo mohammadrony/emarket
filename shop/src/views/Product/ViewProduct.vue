@@ -98,14 +98,11 @@
                 <b-col cols="7">
                   <b-form-rating
                     readonly
+                    show-value-max
+                    show-value
                     :value="displayProduct.rating"
                     variant="primary"
                   />
-                  <h5 class="mt-2">
-                    <b-badge variant="primary" size="lg">
-                      {{ Math.round(10 * displayProduct.rating) / 10 }} of 5
-                    </b-badge>
-                  </h5>
                 </b-col>
               </b-row>
             </div>
@@ -113,8 +110,9 @@
               <AddToCart
                 buttonType="sm"
                 addButtonTitle="Add To Cart"
-                addedButtonTitle="Added"
+                addedButtonTitle="Added To Cart"
                 :productId="displayProduct.id"
+                :rating="displayProduct.rating"
                 :currency="displayProduct.currency"
                 :image="displayProduct.image1"
                 :title="displayProduct.title"
@@ -122,16 +120,11 @@
               />
               <AddToWishlist
                 class="ml-3"
-                addButtonTitle="Save"
-                addedButtonTitle="Added"
+                addButtonTitle="Add To Wishlist"
+                addedButtonTitle="Added To Wishlist"
                 buttonType="sm"
                 :productId="displayProduct.id"
               />
-              <div class="ml-3">
-                <a href="#review_section">
-                  <b-icon-pen />&nbsp;<strong>Write a review</strong>
-                </a>
-              </div>
             </div>
             <b-row>
               <b-col cols="8">

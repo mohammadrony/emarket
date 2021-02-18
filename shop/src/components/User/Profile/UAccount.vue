@@ -3,19 +3,19 @@
     <b-row>
       <b-col>
         <h5>Account</h5>
+        <hr />
       </b-col>
     </b-row>
-    <hr class="my-2" />
-    <div class="mt-3">
+    <div>
       <div v-if="admin">
         Role
         <br />
         <b-button class="mt-2" :variant="user.variant">
           {{ user.userType }}
         </b-button>
+        <hr />
       </div>
-      <hr />
-      <div class="mt-3">
+      <div>
         <b-button
           v-b-modal.delete-account-confirmation
           variant="outline-danger"

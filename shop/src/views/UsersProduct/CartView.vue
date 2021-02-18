@@ -40,8 +40,8 @@
             </b-link>
             <AddToWishlist
               class="mt-2"
-              addButtonTitle="Save"
-              addedButtonTitle="Added"
+              addButtonTitle="Add To Wishlist"
+              addedButtonTitle="Added To Wishlist"
               buttonType="sm"
               :productId="product.productId"
             />

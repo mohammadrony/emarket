@@ -10,14 +10,11 @@
         <b-icon scale="1.2" icon="cart-check-fill" />
         {{ addedButtonTitle }}
       </template>
-      <b-tooltip target="cart-dd" triggers="hover">Added To Cart</b-tooltip>
       <b-dropdown-item @click="removeCartItem">
         Remove from Cart
       </b-dropdown-item>
     </b-dropdown>
     <b-button
-      v-b-tooltip.hover
-      title="Add To Cart"
       v-if="validCartItem == -1"
       :size="buttonType"
       variant="outline-info"
@@ -44,6 +41,7 @@ export default {
     buttonType: String,
     productId: Number,
     currency: String,
+    rating: Number,
     image: String,
     title: String,
     amount: Number
@@ -66,6 +64,7 @@ export default {
         productId: this.productId,
         currency: this.currency,
         image: this.image,
+        rating: this.rating,
         title: this.title,
         amount: this.amount,
         quantity: 1

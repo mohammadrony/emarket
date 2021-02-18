@@ -13,6 +13,7 @@ module.exports = {
             "id",
             "title",
             "image1",
+            "rating",
             "amount",
             "currency"
           ]
@@ -39,6 +40,7 @@ module.exports = {
             "id",
             "title",
             "image1",
+            "rating",
             "amount",
             "currency"
           ]

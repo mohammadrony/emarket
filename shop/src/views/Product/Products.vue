@@ -31,34 +31,52 @@
                   </b-link>
                 </div>
                 <h6 class="mt-1">
-                  {{ product.amount }} {{ product.currency }}
+                  Price: {{ product.amount }} {{ product.currency }}
                 </h6>
-                <b-row class="mt-2">
-                  <b-col>
-                    <div class="d-flex">
+                <b-row class="mt-2" align-v="center">
+                  <b-col cols="12">
+                    <b-form-rating
+                      size="sm"
+                      show-value
+                      show-value-max
+                      readonly
+                      :value="product.rating"
+                      variant="primary"
+                    />
+                  </b-col>
+                </b-row>
+                <div class="d-flex">
+                  <b-row>
+                    <b-col>
                       <AddToCart
+                        class="mt-2"
                         :key="cartComponentKey"
-                        buttonType="md"
+                        addButtonTitle="Add To Cart"
+                        addedButtonTitle="Added To Cart"
+                        buttonType="sm"
                         :productId="product.id"
+                        :rating="product.rating"
                         :currency="product.currency"
                         :image="product.image1"
                         :title="product.title"
                         :amount="product.amount"
                       />
                       <AddToWishlist
-                        class="ml-2"
+                        class="mt-2"
+                        addButtonTitle="Add To Wishlist"
+                        addedButtonTitle="Added To Wishlist"
                         :key="wishlistKey"
-                        buttonType="md"
+                        buttonType="sm"
                         :productId="product.id"
                       />
-                    </div>
-                  </b-col>
-                </b-row>
+                    </b-col>
+                  </b-row>
+                </div>
                 <b-button
                   v-if="admin"
                   class="mt-2"
                   @click="deleteProduct(product)"
-                  size="md"
+                  size="sm"
                   variant="danger"
                 >
                   <b-icon icon="trash" />
