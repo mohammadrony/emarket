@@ -58,8 +58,7 @@ export default {
       var user;
       try {
         this.mailSent = false;
-        user = (await UserService.getUserByEmail(this.emailResetPassword))
-          .data;
+        user = (await UserService.getUserByEmail(this.emailResetPassword)).data;
       } catch (error) {
         this.tokenAlert = true;
         this.tokenAlertMessage = error.response.data.error;
@@ -71,6 +70,7 @@ export default {
           });
           this.tokenAlert = false;
           this.mailSent = true;
+          this.emailResetPassword = "";
         } catch (error) {
           this.tokenAlert = true;
           this.tokenAlertMessage = error.response.data.error;
