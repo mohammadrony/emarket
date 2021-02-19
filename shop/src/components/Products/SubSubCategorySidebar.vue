@@ -13,7 +13,7 @@
             <div :class="{ 'col-12': !admin, 'col-8': admin }">
               <b-link
                 variant="white"
-                @click="subSubCategorySelect(subSubCategory)"
+                :to="`${$route.path}/${subSubCategory.name}`"
               >
                 <small>{{ subSubCategory.name }}</small>
                 <b-icon
@@ -142,10 +142,6 @@ export default {
     }));
   },
   methods: {
-    subSubCategorySelect(subSubCategory) {
-      const newRoute = this.$store.state.route.path + "/" + subSubCategory.name;
-      window.location.replace(newRoute);
-    },
     async createNewSubSubCateg() {
       try {
         await SubSubCategoryService.createSubSubCategory({

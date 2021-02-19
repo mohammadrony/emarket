@@ -40,7 +40,7 @@ export default {
     };
   },
   mounted() {
-    this.orderId = this.$store.state.route.params.orderId
+    this.orderId = this.$route.params.orderId
   },
   methods: {},
   computed: {},

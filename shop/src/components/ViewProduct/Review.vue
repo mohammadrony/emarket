@@ -1,238 +1,179 @@
 <template>
   <div>
-    <b-container id="review_section">
-      <b-row align-v="center">
-        <b-col />
-        <b-col cols="4" class="text-center">
-          <b-card class="py-4">
-            <br />
-            <span class="product-rating">{{ averageRating }}</span
-            ><span>/5</span>
+    <b-row align-v="center">
+      <b-col />
+      <b-col cols="4" class="text-center">
+        <b-card class="py-4">
+          <br />
+          <span class="product-rating">{{ averageRating }}</span
+          ><span>/5</span>
+          <b-row>
+            <b-col cols="2" />
+            <b-col cols="8">
+              <b-form-rating
+                readonly
+                :value="averageRating"
+                variant="primary"
+              />
+            </b-col>
+            <b-col cols="2" />
+          </b-row>
+          <h6 class="mt-2">
+            {{ ratingCount }} ratings & {{ commentCount }} reviews
+          </h6>
+          <br />
+        </b-card>
+      </b-col>
+      <b-col cols="4" class="justify-content-center">
+        <b-row align-v="center" class="my-2">
+          <b-col cols="2">
+            <small>5 star</small>
+          </b-col>
+          <b-col cols="7">
+            <b-progress variant="primary">
+              <b-progress-bar
+                :value="fiveStarPercent"
+                :label="`${fiveStar}`"
+              ></b-progress-bar>
+            </b-progress>
+          </b-col>
+          <b-col cols="3">
+            <small
+              >{{ fiveStarPercent }} <b-icon icon="percent"></b-icon
+            ></small>
+          </b-col>
+        </b-row>
+
+        <b-row align-v="center" class="my-2">
+          <b-col cols="2">
+            <small>4 star</small>
+          </b-col>
+          <b-col cols="7">
+            <b-progress variant="primary">
+              <b-progress-bar
+                :value="fourStarPercent"
+                :label="`${fourStar}`"
+              ></b-progress-bar>
+            </b-progress>
+          </b-col>
+          <b-col cols="3">
+            <small>
+              {{ fourStarPercent }}
+              <b-icon icon="percent"></b-icon>
+            </small>
+          </b-col>
+        </b-row>
+
+        <b-row align-v="center" class="my-2">
+          <b-col cols="2">
+            <small>3 star</small>
+          </b-col>
+          <b-col cols="7">
+            <b-progress variant="primary">
+              <b-progress-bar
+                :value="threeStarPercent"
+                :label="`${threeStar}`"
+              ></b-progress-bar>
+            </b-progress>
+          </b-col>
+          <b-col cols="3">
+            <small
+              >{{ threeStarPercent }} <b-icon icon="percent"></b-icon
+            ></small>
+          </b-col>
+        </b-row>
+
+        <b-row align-v="center" class="my-2">
+          <b-col cols="2">
+            <small>2 star</small>
+          </b-col>
+          <b-col cols="7">
+            <b-progress variant="primary">
+              <b-progress-bar
+                :value="twoStarPercent"
+                :label="`${twoStar}`"
+              ></b-progress-bar>
+            </b-progress>
+          </b-col>
+          <b-col cols="3">
+            <small>{{ twoStarPercent }} <b-icon icon="percent"></b-icon></small>
+          </b-col>
+        </b-row>
+
+        <b-row align-v="center" class="my-2">
+          <b-col cols="2">
+            <small>1 star</small>
+          </b-col>
+          <b-col cols="7">
+            <b-progress variant="primary">
+              <b-progress-bar
+                :value="oneStarPercent"
+                :label="`${oneStar}`"
+              ></b-progress-bar>
+            </b-progress>
+          </b-col>
+          <b-col cols="3">
+            <small>{{ oneStarPercent }} <b-icon icon="percent"></b-icon></small>
+          </b-col>
+        </b-row>
+      </b-col>
+      <b-col />
+    </b-row>
+
+    <hr />
+    <b-row>
+      <b-col cols="6">
+        <h4>Customer Review</h4>
+        <hr />
+        <div v-for="review in reviewList" :key="review.id" class="mb-2">
+          <b-card
+            bg-variant="white"
+            text-variant="dark"
+            v-if="review.comment != null && review.UserId != userId"
+          >
             <b-row>
-              <b-col cols="2" />
-              <b-col cols="8">
-                <b-form-rating
-                  readonly
-                  :value="averageRating"
-                  variant="primary"
-                />
-              </b-col>
-              <b-col cols="2" />
-            </b-row>
-            <h6 class="mt-2">
-              {{ ratingCount }} ratings & {{ commentCount }} reviews
-            </h6>
-            <br />
-          </b-card>
-        </b-col>
-        <b-col cols="4" class="justify-content-center">
-          <b-row align-v="center" class="my-2">
-            <b-col cols="2">
-              <small>5 star</small>
-            </b-col>
-            <b-col cols="7">
-              <b-progress variant="primary">
-                <b-progress-bar
-                  :value="fiveStarPercent"
-                  :label="`${fiveStar}`"
-                ></b-progress-bar>
-              </b-progress>
-            </b-col>
-            <b-col cols="3">
-              <small
-                >{{ fiveStarPercent }} <b-icon icon="percent"></b-icon
-              ></small>
-            </b-col>
-          </b-row>
-
-          <b-row align-v="center" class="my-2">
-            <b-col cols="2">
-              <small>4 star</small>
-            </b-col>
-            <b-col cols="7">
-              <b-progress variant="primary">
-                <b-progress-bar
-                  :value="fourStarPercent"
-                  :label="`${fourStar}`"
-                ></b-progress-bar>
-              </b-progress>
-            </b-col>
-            <b-col cols="3">
-              <small>
-                {{ fourStarPercent }}
-                <b-icon icon="percent"></b-icon>
-              </small>
-            </b-col>
-          </b-row>
-
-          <b-row align-v="center" class="my-2">
-            <b-col cols="2">
-              <small>3 star</small>
-            </b-col>
-            <b-col cols="7">
-              <b-progress variant="primary">
-                <b-progress-bar
-                  :value="threeStarPercent"
-                  :label="`${threeStar}`"
-                ></b-progress-bar>
-              </b-progress>
-            </b-col>
-            <b-col cols="3">
-              <small
-                >{{ threeStarPercent }} <b-icon icon="percent"></b-icon
-              ></small>
-            </b-col>
-          </b-row>
-
-          <b-row align-v="center" class="my-2">
-            <b-col cols="2">
-              <small>2 star</small>
-            </b-col>
-            <b-col cols="7">
-              <b-progress variant="primary">
-                <b-progress-bar
-                  :value="twoStarPercent"
-                  :label="`${twoStar}`"
-                ></b-progress-bar>
-              </b-progress>
-            </b-col>
-            <b-col cols="3">
-              <small
-                >{{ twoStarPercent }} <b-icon icon="percent"></b-icon
-              ></small>
-            </b-col>
-          </b-row>
-
-          <b-row align-v="center" class="my-2">
-            <b-col cols="2">
-              <small>1 star</small>
-            </b-col>
-            <b-col cols="7">
-              <b-progress variant="primary">
-                <b-progress-bar
-                  :value="oneStarPercent"
-                  :label="`${oneStar}`"
-                ></b-progress-bar>
-              </b-progress>
-            </b-col>
-            <b-col cols="3">
-              <small
-                >{{ oneStarPercent }} <b-icon icon="percent"></b-icon
-              ></small>
-            </b-col>
-          </b-row>
-        </b-col>
-        <b-col />
-      </b-row>
-
-      <hr />
-      <b-row>
-        <b-col cols="6">
-          <h4>Customer Review</h4>
-          <hr />
-          <div v-for="review in reviewList" :key="review.id" class="mb-2">
-            <b-card
-              bg-variant="white"
-              text-variant="dark"
-              v-if="review.comment != null && review.UserId != userId"
-            >
-              <b-row>
-                <b-col cols="3">
-                  <b-img
-                    :src="review.User.profileImage"
-                    height="60px"
-                    width="60px"
-                  />
-                  <div class="mt-3">
-                    <b-link>
-                      {{ review.User.firstName + " " + review.User.lastName }}
-                    </b-link>
-                  </div>
-                </b-col>
-                <b-col cols="9">
-                  <b-row>
-                    <b-col cols="7">
-                      <b-form-rating
-                        readonly
-                        :value="review.rating"
-                        variant="primary"
-                      />
-                    </b-col>
-                  </b-row>
-                  <b-row class="mt-2">
-                    <b-col>
-                      <p>{{ review.comment }}</p>
-                    </b-col>
-                  </b-row>
-                  <b-row>
-                    <b-col>
-                      <small class="mr-2">
-                        <b-link
-                          v-if="userId == review.UserId"
-                          @click="editReview(review)"
-                        >
-                          edit
-                        </b-link>
-                      </small>
-                      <small>
-                        <b-link
-                          v-if="userId == review.UserId || admin"
-                          @click="deleteReview(review)"
-                        >
-                          delete
-                        </b-link>
-                      </small>
-                    </b-col>
-                  </b-row>
-                </b-col>
-              </b-row>
-            </b-card>
-          </div>
-        </b-col>
-        <b-col cols="6">
-          <b-card bg-variant="white" text-variant="dark" v-if="userReviewFlag">
-            <b-card-title> Your Review </b-card-title>
-            <b-row>
-              <b-col cols="4">
+              <b-col cols="3">
                 <b-img
-                  :src="currentUserReview.User.profileImage"
-                  height="90px"
-                  width="90px"
+                  :src="review.User.profileImage"
+                  height="60px"
+                  width="60px"
                 />
-                <div class="mt-2">
+                <div class="mt-3">
                   <b-link>
-                    {{
-                      currentUserReview.User.firstName +
-                        " " +
-                        currentUserReview.User.lastName
-                    }}
+                    {{ review.User.firstName + " " + review.User.lastName }}
                   </b-link>
                 </div>
               </b-col>
-              <b-col cols="8">
+              <b-col cols="9">
                 <b-row>
                   <b-col cols="7">
                     <b-form-rating
                       readonly
-                      :value="currentUserReview.rating"
+                      :value="review.rating"
                       variant="primary"
                     />
                   </b-col>
                 </b-row>
                 <b-row class="mt-2">
                   <b-col>
-                    <p>{{ currentUserReview.comment }}</p>
+                    <p>{{ review.comment }}</p>
                   </b-col>
                 </b-row>
                 <b-row>
                   <b-col>
                     <small class="mr-2">
-                      <b-link @click="editReview(currentUserReview)">
+                      <b-link
+                        v-if="userId == review.UserId"
+                        @click="editReview(review)"
+                      >
                         edit
                       </b-link>
                     </small>
                     <small>
-                      <b-link @click="deleteReview(currentUserReview)">
+                      <b-link
+                        v-if="userId == review.UserId || admin"
+                        @click="deleteReview(review)"
+                      >
                         delete
                       </b-link>
                     </small>
@@ -241,53 +182,106 @@
               </b-col>
             </b-row>
           </b-card>
-          <b-card v-if="!userReviewFlag">
-            <div class="mt-2 ml-3">
-              <a variant="primary">
-                <b-icon-pen />&nbsp;<strong>Write a review</strong>
-              </a>
-            </div>
-            <hr />
-            <b-form v-if="userLoggedIn" @submit.stop.prevent="createReview">
+        </div>
+      </b-col>
+      <b-col cols="6">
+        <b-card bg-variant="white" text-variant="dark" v-if="userReviewFlag">
+          <b-card-title> Your Review </b-card-title>
+          <b-row>
+            <b-col cols="4">
+              <b-img
+                :src="currentUserReview.User.profileImage"
+                height="90px"
+                width="90px"
+              />
+              <div class="mt-2">
+                <b-link>
+                  {{
+                    currentUserReview.User.firstName +
+                      " " +
+                      currentUserReview.User.lastName
+                  }}
+                </b-link>
+              </div>
+            </b-col>
+            <b-col cols="8">
               <b-row>
-                <b-col cols="5">
-                  <h6>Rating</h6>
-                  <b-form-rating v-model="rating" variant="primary" />
+                <b-col cols="7">
+                  <b-form-rating
+                    readonly
+                    :value="currentUserReview.rating"
+                    variant="primary"
+                  />
                 </b-col>
               </b-row>
-              <div class="mt-4">
-                Comment
-              </div>
-              <b-form-group>
-                <b-form-textarea
-                  required
-                  v-model="comment"
-                  placeholder="Write a review"
-                  rows="3"
-                  max-rows="8"
-                />
-              </b-form-group>
-              <b-alert class="mt-3" variant="warning" :show="reviewAlert">
-                {{ reviewMessage }}
-              </b-alert>
-              <b-button variant="primary" type="submit">
-                Submit
-              </b-button>
-            </b-form>
-            <div v-if="!userLoggedIn">
-              You'll not be able to write a review until you're logged in.
+              <b-row class="mt-2">
+                <b-col>
+                  <p>{{ currentUserReview.comment }}</p>
+                </b-col>
+              </b-row>
               <b-row>
                 <b-col>
-                  <b-button to="/login" class="mt-3" variant="outline-dark">
-                    Login
-                  </b-button>
+                  <small class="mr-2">
+                    <b-link @click="editReview(currentUserReview)">
+                      edit
+                    </b-link>
+                  </small>
+                  <small>
+                    <b-link @click="deleteReview(currentUserReview)">
+                      delete
+                    </b-link>
+                  </small>
                 </b-col>
               </b-row>
+            </b-col>
+          </b-row>
+        </b-card>
+        <b-card v-if="!userReviewFlag">
+          <div class="mt-2 ml-3">
+            <a variant="primary">
+              <b-icon-pen />&nbsp;<strong>Write a review</strong>
+            </a>
+          </div>
+          <hr />
+          <b-form v-if="userLoggedIn" @submit.stop.prevent="createReview">
+            <b-row>
+              <b-col cols="5">
+                <h6>Rating</h6>
+                <b-form-rating v-model="rating" variant="primary" />
+              </b-col>
+            </b-row>
+            <div class="mt-4">
+              Comment
             </div>
-          </b-card>
-        </b-col>
-      </b-row>
-    </b-container>
+            <b-form-group>
+              <b-form-textarea
+                required
+                v-model="comment"
+                placeholder="Write a review"
+                rows="3"
+                max-rows="8"
+              />
+            </b-form-group>
+            <b-alert class="mt-3" variant="warning" :show="reviewAlert">
+              {{ reviewMessage }}
+            </b-alert>
+            <b-button variant="primary" type="submit">
+              Submit
+            </b-button>
+          </b-form>
+          <div v-if="!userLoggedIn">
+            You'll not be able to write a review until you're logged in.
+            <b-row>
+              <b-col>
+                <b-button to="/login" class="mt-3" variant="outline-dark">
+                  Login
+                </b-button>
+              </b-col>
+            </b-row>
+          </div>
+        </b-card>
+      </b-col>
+    </b-row>
     <b-modal hide-footer id="editReviewModal" title="Write a review">
       <b-row>
         <b-col cols="5">
@@ -362,7 +356,7 @@ export default {
     this.userId = this.$store.state.CurrentUser.userId;
     this.admin = this.$store.state.CurrentUser.admin;
     this.userLoggedIn = this.$store.state.CurrentUser.userLoggedIn;
-    this.productId = parseInt(this.$store.state.route.params.productId);
+    this.productId = parseInt(this.$route.params.productId);
     try {
       this.productRating = (
         await ProductsService.getProductRating(this.productId)

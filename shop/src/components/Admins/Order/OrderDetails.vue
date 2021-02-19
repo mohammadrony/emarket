@@ -51,7 +51,7 @@ export default {
     };
   },
   async mounted() {
-    const orderId = this.$store.state.route.params.orderId;
+    const orderId = this.$route.params.orderId;
     try {
       this.orderInfo = (await OrderService.getOrder(orderId)).data;
     } catch (error) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="product-details">
+  <div>
     <TopHeader />
     <ProductHeader
       :key="componentKey"
@@ -149,13 +149,13 @@
           <div v-html="displayProduct.description" />
         </div>
       </div>
+      <Review class="mt-3" />
+      <Recommendation
+        class="mt-5"
+        :key="recommendationKey"
+        :subSubCatId="displayProduct.SubSubCategoryId"
+      />
     </b-container>
-    <Review class="mt-3" />
-    <Recommendation
-      class="mt-5"
-      :key="recommendationKey"
-      :subSubCatId="displayProduct.SubSubCategoryId"
-    />
     <Footer class="mt-5" />
   </div>
 </template>
@@ -180,6 +180,9 @@ export default {
     Recommendation,
     Footer
   },
+  beforeRouteUpdate(to, from, next) {
+    next();
+  },
   data() {
     return {
       current_image: "",
@@ -191,7 +194,7 @@ export default {
   },
   async mounted() {
     this.user = this.$store.state.CurrentUser.user;
-    const productId = parseInt(this.$store.state.route.params.productId);
+    const productId = parseInt(this.$route.params.productId);
     try {
       this.displayProduct = (await ProductsService.getProduct(productId)).data;
       this.forceRerender();

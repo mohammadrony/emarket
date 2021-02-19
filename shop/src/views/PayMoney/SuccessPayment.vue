@@ -46,7 +46,7 @@ export default {
     };
   },
   async mounted() {
-    const sessionId = this.$store.state.route.query.id;
+    const sessionId = this.$route.query.id;
     var previousOrder;
     try {
       previousOrder = (await OrderService.getOrderBySessionId(sessionId)).data;

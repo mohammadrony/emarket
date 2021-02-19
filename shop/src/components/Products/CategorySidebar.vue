@@ -4,7 +4,7 @@
       <li v-for="category in categoryList" :key="category.id" class="mb-2">
         <b-row v-if="category.mode == 0">
           <div :class="{ 'col-12': !admin, 'col-8': admin }">
-            <b-link variant="white" @click="categorySelect(category)">
+            <b-link variant="white" :to="`/products/${category.name}`">
               <small>{{ category.name }}</small>
               <b-icon
                 variant="primary"
@@ -128,10 +128,6 @@ export default {
     }));
   },
   methods: {
-    categorySelect(category) {
-      const newRoute = "/products/" + category.name;
-      window.location.replace(newRoute);
-    },
     async createNewCateg() {
       try {
         await CategoryService.createCategory({ name: this.newCategory });

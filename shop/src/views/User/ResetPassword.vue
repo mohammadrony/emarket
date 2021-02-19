@@ -105,7 +105,7 @@ export default {
     };
   },
   async mounted() {
-    const token = this.$store.state.route.params.token;
+    const token = this.$route.params.token;
     if (token) {
       try {
         this.tokenList = true;

@@ -76,7 +76,7 @@ export default {
   computed: {},
   async mounted() {
     this.admin = this.$store.state.CurrentUser.admin;
-    this.productId = this.$store.state.route.params.productId;
+    this.productId = this.$route.params.productId;
     if (this.categoryId && this.subCategoryId && this.subSubCategoryId) {
       this.categoryName = await this.$store.dispatch(
         "Category/getCategoryName",

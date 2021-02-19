@@ -167,7 +167,7 @@ export default {
 
   async mounted() {
     this.admin = this.$store.state.CurrentUser.admin;
-    this.route = this.$store.state.route;
+    this.route = this.$route;
     await this.$store.dispatch("Products/setSearchParameter", this.route);
     this.forceRerender();
     await this.$store.dispatch("Products/setAllProduct");

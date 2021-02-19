@@ -18,7 +18,7 @@
       <b-row v-if="myWishlist.length != 0">
         <b-col v-for="wishItem in myWishlist" :key="wishItem.id" cols="6">
           <b-card-group deck>
-            <b-card no-body class="overflow-hidden mb-4">
+            <b-card no-body class="mb-4">
               <b-row no-gutters>
                 <b-col md="6">
                   <b-card-img

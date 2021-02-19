@@ -127,7 +127,7 @@ export default {
     };
   },
   async mounted() {
-    this.orderId = this.$store.state.route.params.orderId;
+    this.orderId = this.$route.params.orderId;
     try {
       this.orderItems = (
         await OrderItemService.getOrderItemList(this.orderId)

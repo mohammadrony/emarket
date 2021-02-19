@@ -39,13 +39,13 @@ export default {
     };
   },
   mounted() {
-    this.minPrice = this.$store.state.route.query.lo;
-    this.maxPrice = this.$store.state.route.query.hi;
+    this.minPrice = this.$route.query.lo;
+    this.maxPrice = this.$route.query.hi;
   },
   computed: {},
   methods: {
     priceFilter() {
-      const route = this.$store.state.route;
+      const route = this.$route;
       var newRoute = route.path;
       if (route.query.q) {
         newRoute += "?q=" + route.query.q;

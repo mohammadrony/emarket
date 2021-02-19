@@ -61,7 +61,7 @@ export default {
     };
   },
   async mounted() {
-    const sessionId = this.$store.state.route.params.sessionId;
+    const sessionId = this.$route.params.sessionId;
     console.log("order items", sessionId);
     try {
       this.orderInfo = (await OrderService.getOrderBySessionId(sessionId)).data;

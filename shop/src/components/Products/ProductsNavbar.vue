@@ -3,7 +3,7 @@
     <b-row>
       <b-col class="ml-2">
         <b-navbar toggleable="lg" type="primary" variant="white">
-          <b-navbar-brand href="#" @click="productHome">
+          <b-navbar-brand href="#" to="/products">
             <b-icon variant="primary" icon="house-door-fill" />
             <b-icon class="ml-2" scale=".7" icon="chevron-right" />
           </b-navbar-brand>
@@ -20,24 +20,26 @@
             <b-navbar-nav class="mr-auto">
               <b-nav-item
                 class="mr-auto"
-                @click="setCategory"
-                v-if="category != null"
+                :to="`/products/${category.name}`"
+                v-if="category"
               >
                 {{ category.name }}
                 <b-icon class="ml-2" scale=".7" icon="chevron-right" />
               </b-nav-item>
               <b-nav-item
                 class="mr-auto"
-                @click="setSubCategory"
-                v-if="subCategory != null"
+                :to="`/products/${category.name}/${subCategory.name}`"
+                v-if="subCategory"
               >
                 {{ subCategory.name }}
                 <b-icon class="ml-2" scale=".7" icon="chevron-right" />
               </b-nav-item>
               <b-nav-item
                 class="mr-auto"
-                @click="setSubSubCategory"
-                v-if="subSubCategory != null"
+                :to="
+                  `/products/${category.name}/${subCategory.name}/${subSubCategory.name}`
+                "
+                v-if="subSubCategory"
               >
                 {{ subSubCategory.name }}
                 <b-icon class="ml-2" scale=".7" icon="chevron-right" />
@@ -82,68 +84,44 @@ export default {
   components: {},
   data() {
     return {
-      admin: null,
-      searchText: null,
-      category: null,
-      subCategory: null,
-      subSubCategory: null
+      admin: false,
+      searchText: "",
+      category: "",
+      subCategory: "",
+      subSubCategory: ""
     };
   },
   async mounted() {
     this.admin = this.$store.state.CurrentUser.admin;
-    const route = this.$store.state.route;
-    if (route.query.q) this.searchText = route.query.q;
+    if (this.$route.query.q) this.searchText = this.$route.query.q;
 
-    if (route.params.subSubCategory) {
+    if (this.$route.params.subSubCategory) {
       this.subSubCategory = (
         await SubSubCategoryService.getSubSubCategoryByName(
-          route.params.subSubCategory
+          this.$route.params.subSubCategory
         )
       ).data;
     }
-    if (route.params.subCategory) {
+    if (this.$route.params.subCategory) {
       this.subCategory = (
-        await SubCategoryService.getSubCategoryByName(route.params.subCategory)
+        await SubCategoryService.getSubCategoryByName(
+          this.$route.params.subCategory
+        )
       ).data;
     }
-    if (route.params.category) {
+    if (this.$route.params.category) {
       this.category = (
-        await CategoryService.getCategoryByName(route.params.category)
+        await CategoryService.getCategoryByName(this.$route.params.category)
       ).data;
     }
   },
   methods: {
     search() {
       if (this.searchText) {
-        var newRoute = this.$store.state.route.path;
-        console.log(newRoute);
-        if (this.searchText != "") {
-          newRoute += "?q=" + this.searchText;
-        }
-        window.location.replace(newRoute);
+        this.$router.push({
+          path: `${this.$route.path}/?q=${this.searchText}`
+        });
       }
-    },
-    async productHome() {
-      window.location.replace("/products");
-    },
-    setCategory() {
-      const route = "/products/" + this.category.name;
-      window.location.replace(route);
-    },
-    setSubCategory() {
-      const route =
-        "/products/" + this.category.name + "/" + this.subCategory.name;
-      window.location.replace(route);
-    },
-    setSubSubCategory() {
-      const route =
-        "/products/" +
-        this.category.name +
-        "/" +
-        this.subCategory.name +
-        "/" +
-        this.subSubCategory.name;
-      window.location.replace(route);
     }
   }
 };
