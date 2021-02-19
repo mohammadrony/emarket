@@ -3,8 +3,7 @@
     <TopHeader />
     <SecondHeader />
     <b-container>
-      <TopCarousel class="mt-3" />
-      <Advertise class="mt-5" />
+      <Showcase class="mt-3" />
       <TopSellProduct class="mt-5" />
       <NewAddProduct class="mt-5" />
       <Support class="mt-5" />
@@ -17,8 +16,7 @@
 // @ is an alias to /src
 import TopHeader from "@/components/Common/TopHeader.vue";
 import SecondHeader from "@/components/Home/SecondHeader.vue";
-import TopCarousel from "@/components/Home/TopCarousel.vue";
-import Advertise from "@/components/Home/Advertise.vue";
+import Showcase from "@/components/Home/Showcase.vue";
 import TopSellProduct from "@/components/Home/TopSellProduct.vue";
 import NewAddProduct from "@/components/Home/NewAddProduct.vue";
 import Support from "@/components/Home/Support.vue";
@@ -28,16 +26,13 @@ export default {
   components: {
     TopHeader,
     SecondHeader,
-    TopCarousel,
-    Advertise,
+    Showcase,
     TopSellProduct,
     NewAddProduct,
     Support,
     Footer
   },
-  mounted() {
-    this.$store.dispatch("Products/resetSearchParameter");
-  }
+  mounted() {}
 };
 </script>
 

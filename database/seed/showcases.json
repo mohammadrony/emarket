@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "type": "carousel",
+    "caption": "A New Online Shop Experience.",
+    "image": "http://localhost:8084/public/display-images/home_slider_1.jpg",
+    "routerLink": "/products/Electronics",
+    "priority": 1,
+    "CompanyId": 1
+  },
+  {
+    "id": 2,
+    "type": "carousel",
+    "caption": "",
+    "image": "http://localhost:8084/public/display-images/home_slider_0.jpg",
+    "routerLink": "/products/Electronics",
+    "priority": 1,
+    "CompanyId": 1
+  },
+  {
+    "id": 3,
+    "type": "card",
+    "caption": "",
+    "image": "http://localhost:8084/public/display-images/mac-mini.png",
+    "routerLink": "/products/Electronics",
+    "priority": 1,
+    "CompanyId": 1
+  },
+  {
+    "id": 4,
+    "type": "card",
+    "caption": "",
+    "image": "http://localhost:8084/public/display-images/ipad-2020.jpeg",
+    "routerLink": "/products/Electronics",
+    "priority": 1,
+    "CompanyId": 1
+  },
+  {
+    "id": 5,
+    "type": "card",
+    "caption": "",
+    "image": "http://localhost:8084/public/display-images/razer-opus.jpeg",
+    "routerLink": "/products/Electronics",
+    "priority": 1,
+    "CompanyId": 1
+  },
+  {
+    "id": 6,
+    "type": "card",
+    "caption": "",
+    "image": "http://localhost:8084/public/display-images/p120.jpeg",
+    "routerLink": "/products/Electronics",
+    "priority": 1,
+    "CompanyId": 1
+  },
+  {
+    "id": 7,
+    "type": "big card",
+    "caption": "",
+    "image": "http://localhost:8084/public/display-images/smart-watches.jpeg",
+    "routerLink": "/products/Electronics",
+    "priority": 1,
+    "CompanyId": 1
+  },
+  {
+    "id": 8,
+    "type": "big card",
+    "caption": "",
+    "image": "http://localhost:8084/public/display-images/lenovo-yoga.jpeg",
+    "routerLink": "/products/Electronics",
+    "priority": 1,
+    "CompanyId": 1
+  }
+]

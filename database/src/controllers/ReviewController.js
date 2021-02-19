@@ -18,7 +18,7 @@ module.exports = {
 					]
 				},
 				order: [
-					['createdAt', 'ASC']
+					['createdAt', 'DESC']
 				]
 			})
 			res.send(reviews)

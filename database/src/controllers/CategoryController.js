@@ -29,7 +29,6 @@ module.exports = {
 	async createCategory(req, res) {
 		try {
 			const category = await Category.create(req.body)
-			console.log(category, req.body)
 			res.send(category)
 		} catch (err) {
 			res.status(500).send({

@@ -1,4 +1,4 @@
-const isAuthenticated = require('./policies/isAuthenticated')
+const isAuthenticated = require("./policies/isAuthenticated")
 const UserController = require("./controllers/UserController")
 const ImageController = require("./controllers/ImageController")
 const OrderController = require("./controllers/OrderController")
@@ -8,11 +8,12 @@ const WishlistController = require("./controllers/WishlistController")
 const ProductsController = require("./controllers/ProductsController")
 const CheckoutController = require("./controllers/CheckoutController")
 const CategoryController = require("./controllers/CategoryController")
+const ShowcaseController = require("./controllers/ShowcaseController")
 const OrderItemController = require("./controllers/OrderItemController")
 const SubCategoryController = require("./controllers/SubCategoryController")
 const SubSubCategoryController = require("./controllers/SubSubCategoryController")
 const AuthenticationController = require("./controllers/AuthenticationController")
-const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy');
+const AuthenticationControllerPolicy = require("./policies/AuthenticationControllerPolicy");
 
 module.exports = (app) => {
   // authentication
@@ -130,6 +131,19 @@ module.exports = (app) => {
   app.delete("/review/deleteReviewByUser",
     isAuthenticated,
     ReviewController.deleteReviewByUser)
+
+  // showcase
+  app.get("/showcase/getShowcaseItems",
+    ShowcaseController.getShowcaseItems)
+  app.post("/showcase/createShowcaseItem",
+    isAuthenticated,
+    ShowcaseController.createShowcaseItem)
+  app.put("/showcase/updateShowcaseItem",
+    isAuthenticated,
+    ShowcaseController.updateShowcaseItem)
+  app.delete("/showcase/deleteShowcaseItem/:showcaseItemId",
+    isAuthenticated,
+    ShowcaseController.deleteShowcaseItem)
 
   // sub category
   app.get("/subCategory/getSubCategoryByName/:name",

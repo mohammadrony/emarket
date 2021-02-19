@@ -1,8 +1,9 @@
-const { sequelize, Company, User, Category, SubCategory, SubSubCategory, Order, OrderItem, Product, Review, Wishlist } = require('../src/models')
+const { sequelize, Company, User, Showcase, Category, SubCategory, SubSubCategory, Order, OrderItem, Product, Review, Wishlist } = require('../src/models')
 
 const Promise = require('bluebird')
-const users = require('./users.json')
 const companies = require('./companies.json')
+const users = require('./users.json')
+const showcases = require('./showcases.json')
 const categories = require('./categories.json')
 const orders = require('./orders.json')
 const orderItems = require('./orderItems.json')
@@ -22,6 +23,11 @@ sequelize.sync({ force: true })
 		await Promise.all(
 			users.map(user => {
 				User.create(user)
+			})
+		)
+		await Promise.all(
+			showcases.map(showcase => {
+				Showcase.create(showcase)
 			})
 		)
 		await Promise.all(

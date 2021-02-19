@@ -55,15 +55,6 @@ export const ProductsModule = {
         }
     },
     actions: {
-        resetSearchParameter({ commit }) {
-            commit("SET_SEARCH_TEXT", "");
-            commit("SET_SEARCH_CATEGORY_ID", 0);
-            commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
-            commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", 0);
-            commit("SET_LOWEST_AMOUNT", 0);
-            commit("SET_MAXIMUM_AMOUNT", 1000000000);
-
-        },
         async setSearchParameter({ commit }, route) {
             if (route.params.subSubCategory) {
                 try {
@@ -108,6 +99,10 @@ export const ProductsModule = {
                 } catch (error) {
                     console.log("error get cat id by name", error);
                 }
+            } else {
+                commit("SET_SEARCH_CATEGORY_ID", 0);
+                commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
+                commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", 0);
             }
             if (route.query.q) {
                 commit("SET_SEARCH_TEXT", route.query.q)

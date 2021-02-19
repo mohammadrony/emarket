@@ -55,11 +55,11 @@
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">
               <b-nav-form @submit.stop.prevent="search">
-                    <b-form-input
-                      v-model="searchText"
-                      size="sm"
-                      placeholder="Search here"
-                    />
+                <b-form-input
+                  v-model="searchText"
+                  size="sm"
+                  placeholder="Search here"
+                />
                 <b-button type="submit" variant="white">
                   <b-icon icon="search"></b-icon
                 ></b-button>
@@ -124,7 +124,6 @@ export default {
       }
     },
     async productHome() {
-      await this.$store.dispatch("Products/resetSearchParameter");
       window.location.replace("/products");
     },
     setCategory() {

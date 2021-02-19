@@ -10,6 +10,7 @@ const sequelize = new Sequelize(config.db.database, config.db.user, config.db.pa
 const db = {}
 db.User           = require("./User")(sequelize, Sequelize.DataTypes);
 db.Company        = require("./Company")(sequelize, Sequelize.DataTypes);
+db.Showcase       = require("./Showcase")(sequelize, Sequelize.DataTypes);
 db.Category       = require("./Category")(sequelize, Sequelize.DataTypes);
 db.SubCategory    = require("./SubCategory")(sequelize, Sequelize.DataTypes);
 db.SubSubCategory = require("./SubSubCategory")(sequelize, Sequelize.DataTypes);

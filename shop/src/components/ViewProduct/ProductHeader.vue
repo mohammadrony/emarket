@@ -97,7 +97,6 @@ export default {
       window.location.replace("/products");
     },
     async productHome() {
-      await this.$store.dispatch("Products/resetSearchParameter");
       window.location.replace("/products");
     },
     setCategory() {
