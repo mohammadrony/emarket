@@ -22,7 +22,9 @@
               <b-row no-gutters>
                 <b-col md="6">
                   <b-card-img
-                    @click="viewProduct(wishItem.Product)"
+                    @click="
+                      $router.push({ path: `/product/${wishItem.Product.id}` })
+                    "
                     :src="wishItem.Product.image1"
                     alt="Image"
                     class="rounded-0"
@@ -123,11 +125,7 @@ export default {
       return;
     }
   },
-  methods: {
-    viewProduct(product) {
-      this.$router.push({ path: `/product/${product.id}` });
-    }
-  }
+  methods: {}
 };
 </script>
 

@@ -9,11 +9,13 @@
             <b-col cols="3" v-for="product in topSellProduct" :key="product.id">
               <b-card deck class="mt-4">
                 <b-card-img
-                  @click="gotoProduct(product)"
+                  @click="$router.push({ path: `/product/${product.id}` })"
                   class="mb-3"
                   :src="product.image1"
                 />
-                <b-link @click="gotoProduct(product)">
+                <b-link
+                  @click="$router.push({ path: `/product/${product.id}` })"
+                >
                   <h5>{{ product.title }}</h5>
                 </b-link>
                 <h6>Price: {{ product.amount }} {{ product.currency }}</h6>
@@ -90,10 +92,7 @@ export default {
     forceRerender() {
       this.cartComponentKey += 1;
       this.wishlistKey += 1;
-    },
-    gotoProduct(product) {
-      this.$router.push({ path: `/product/${product.id}` });
-    }
+    } 
   },
   computed: {}
 };

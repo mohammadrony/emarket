@@ -29,7 +29,8 @@
         cols="3"
       >
         <b-img
-          @click="goto(showcaseCard.routerLink)"
+          fluid
+          @click="$router.push({ link: showcaseCard.routerLink })"
           :src="showcaseCard.image"
         />
       </b-col>
@@ -41,7 +42,8 @@
         cols="6"
       >
         <b-img
-          @click="goto(showcaseBigCard.routerLink)"
+          fluid
+          @click="$router.push({ link: showcaseBigCard.routerLink })"
           :src="showcaseBigCard.image"
         />
       </b-col>
@@ -88,11 +90,7 @@ export default {
       console.log(error.response.data.error);
     }
   },
-  methods: {
-    goto(link) {
-      this.$router.push({path: `${link}`})
-    }
-  }
+  methods: {}
 };
 </script>
 

@@ -16,7 +16,7 @@
             <b-card-group deck>
               <b-card img-top style="max-width: 25rem" class="mb-4">
                 <b-card-img
-                  @click="viewProduct(product)"
+                  @click="$router.push({ link: `/product/${product.id}` })"
                   :src="product.image1"
                   style="max-width: 25rem; max-height: 25rem"
                   alt="Image Not Found"
@@ -186,9 +186,6 @@ export default {
       await this.$store.dispatch("Products/setAllBackupProduct");
       await this.$store.dispatch("Wishlist/setWishlist");
       window.location.reload();
-    },
-    viewProduct(product) {
-      this.$router.push({ path: `/product/${product.id}` });
     },
     async paginate(currentPage) {
       await this.$store.dispatch("Products/paginate", currentPage);
