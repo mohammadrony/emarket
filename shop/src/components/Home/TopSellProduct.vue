@@ -35,6 +35,7 @@
                     addButtonTitle="Add To Cart"
                     addedButtonTitle="In Cart"
                     buttonType="sm"
+                    :key="cartComponentKey"
                     :productId="product.id"
                     :rating="product.rating"
                     :currency="product.currency"
@@ -44,6 +45,7 @@
                   />
                   <AddToWishlist
                     class="mt-2"
+                    :key="wishlistKey"
                     addButtonTitle="Save"
                     addedButtonTitle="Saved"
                     buttonType="sm"
@@ -72,6 +74,8 @@ export default {
   data() {
     return {
       topSellProduct: null,
+      cartComponentKey: 0,
+      wishlistKey: 2,
       topSellLimit: 8,
       topSellViewTitle: "Top Selling Products"
     };
@@ -80,8 +84,13 @@ export default {
     this.topSellProduct = (
       await ProductsService.topSellProduct(this.topSellLimit)
     ).data;
+    this.forceRerender();
   },
   methods: {
+    forceRerender() {
+      this.cartComponentKey += 1;
+      this.wishlistKey += 1;
+    },
     gotoProduct(product) {
       this.$router.push({ path: `/product/${product.id}` });
     }

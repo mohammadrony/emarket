@@ -34,6 +34,7 @@
                     addButtonTitle="Add To Cart"
                     addedButtonTitle="In Cart"
                     buttonType="sm"
+                    :key="cartComponentKey"
                     :productId="product.id"
                     :rating="product.rating"
                     :currency="product.currency"
@@ -43,6 +44,7 @@
                   />
                   <AddToWishlist
                     class="mt-2"
+                    :key="wishlistKey"
                     addButtonTitle="Save"
                     addedButtonTitle="Saved"
                     buttonType="sm"
@@ -71,6 +73,8 @@ export default {
   data() {
     return {
       newAddProduct: null,
+      cartComponentKey: 0,
+      wishlistKey: 2,
       newAddLimit: 4,
       newAddViewTitle: "New 2021 Fresh Stock"
     };
@@ -79,8 +83,13 @@ export default {
     this.newAddProduct = (
       await ProductsService.newAddProduct(this.newAddLimit)
     ).data;
+    this.forceRerender()
   },
   methods: {
+    forceRerender(){
+      this.cartComponentKey+=1;
+      this.wishlistKey+=1
+    },
     viewProduct(product) {
       this.$router.push({ path: `/product/${product.id}` });
     }

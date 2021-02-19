@@ -109,6 +109,7 @@
             <div class="d-flex mt-3">
               <AddToCart
                 buttonType="sm"
+                :key="cartComponentKey"
                 addButtonTitle="Add To Cart"
                 addedButtonTitle="In Cart"
                 :productId="displayProduct.id"
@@ -120,6 +121,7 @@
               />
               <AddToWishlist
                 class="ml-3"
+                :key="wishlistKey"
                 addButtonTitle="Save"
                 addedButtonTitle="Saved"
                 buttonType="sm"
@@ -180,14 +182,13 @@ export default {
     Recommendation,
     Footer
   },
-  beforeRouteUpdate(to, from, next) {
-    next();
-  },
   data() {
     return {
       current_image: "",
       user: {},
       componentKey: 0,
+      wishlistKey: 6,
+      cartComponentKey: 4,
       recommendationKey: 2,
       displayProduct: {}
     };
@@ -207,6 +208,8 @@ export default {
   methods: {
     forceRerender() {
       this.componentKey += 1;
+      this.wishlistKey += 1;
+      this.cartComponentKey += 1;
       this.recommendationKey += 1;
     },
     changeImage(image) {
