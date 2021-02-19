@@ -35,7 +35,7 @@
                     </b-link>
 
                     <h6 class="mt-2">
-                      {{ wishItem.Product.amount }}
+                      Price: {{ wishItem.Product.amount }}
                       {{ wishItem.Product.currency }}
                     </h6>
                     <b-row class="mt-2" align-v="center">

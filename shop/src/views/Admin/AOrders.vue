@@ -134,7 +134,7 @@ export default {
           variant: "dark"
         },
         {
-          name: "processing",
+          name: "preparing",
           variant: "info"
         },
         {

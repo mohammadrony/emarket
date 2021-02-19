@@ -63,6 +63,7 @@ export default {
       console.log(error.response.data.error);
     }
     const lineItems = this.session.line_items.data;
+    const shipCost = lineItems[lineItems.length - 1].amount_total;
     try {
       this.order = (
         await OrderService.createOrder({
@@ -73,9 +74,9 @@ export default {
           status: "paid",
           variant: "dark",
           checkoutSessionId: sessionId,
-          productCost: this.session.amount_total / 100,
+          productCost: (this.session.amount_total - shipCost) / 100,
           currency: this.session.currency.toUpperCase(),
-          shippingCost: lineItems[lineItems.length - 1].amount_total / 100
+          shippingCost: shipCost / 100
         })
       ).data;
     } catch (error) {
