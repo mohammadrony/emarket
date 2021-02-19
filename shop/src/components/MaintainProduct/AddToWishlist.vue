@@ -69,8 +69,8 @@ export default {
     async addWishlistItem() {
       if (this.userId == 0) {
         this.$bvToast.toast("Please login to save on wishlist", {
-          title: "danger",
-          variant: "success",
+          title: "Wishlist",
+          variant: "danger",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
           solid: true

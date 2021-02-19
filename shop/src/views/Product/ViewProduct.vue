@@ -169,6 +169,7 @@ import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Review from "@/components/ViewProduct/Review.vue";
 import Recommendation from "@/components/ViewProduct/Recommendation.vue";
 import Footer from "@/components/Common/Footer.vue";
+import router from "@/router";
 export default {
   name: "ViewProduct",
   components: {
@@ -219,7 +220,7 @@ export default {
         image: this.displayProduct.image
       };
       await this.$store.dispatch("Cart/addToCart", buyProduct);
-      window.location.replace("/checkout");
+      router.push({ path: "/checkout" });
     }
   }
 };

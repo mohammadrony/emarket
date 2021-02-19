@@ -47,6 +47,7 @@
 
 <script>
 import { mapState } from "vuex";
+import router from "@/router";
 export default {
   name: "ATopHeader",
   components: {},
@@ -59,7 +60,7 @@ export default {
       this.$store.dispatch("Wishlist/clearWishlist");
       this.$store.dispatch("CurrentUser/setToken", "");
       this.$store.dispatch("CurrentUser/setUser", {});
-      window.location.replace("/");
+      router.push({ path: '/' });
     }
   },
   computed: {

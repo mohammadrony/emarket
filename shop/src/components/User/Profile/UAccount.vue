@@ -79,6 +79,7 @@
 import AuthenticationService from "@/services/AuthenticationService.js";
 import UserService from "@/services/UserService.js";
 import ReviewService from "@/services/ReviewService.js";
+import router from "@/router";
 export default {
   name: "UAccount",
   components: {},
@@ -126,7 +127,7 @@ export default {
         }
         this.$store.dispatch("CurrentUser/setToken", "");
         this.$store.dispatch("CurrentUser/setUser", {});
-        window.location.replace("/");
+        router.push({ path: "/" });
       }
     }
   },

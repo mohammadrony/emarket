@@ -30,7 +30,7 @@
                 </b-col>
                 <b-col md="6">
                   <div class="m-3">
-                    <b-link @click="viewProduct(wishItem.Product)">
+                    <b-link :to="`/product/${wishItem.Product.id}`">
                       {{ wishItem.Product.title }}
                     </b-link>
 
@@ -90,6 +90,7 @@ import TopHeader from "@/components/Common/TopHeader.vue";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Footer from "@/components/Common/Footer.vue";
+import router from "@/router";
 export default {
   name: "Wishlist",
   components: {
@@ -125,8 +126,7 @@ export default {
   },
   methods: {
     viewProduct(product) {
-      const newRoute = "/product/" + product.id;
-      window.location.replace(newRoute);
+      router.push({ path: `/product/${product.id}` });
     }
   }
 };

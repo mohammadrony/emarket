@@ -77,7 +77,13 @@
                 <b-dropdown-item to="/profile">Profile</b-dropdown-item>
                 <b-dropdown-item @click="logout()">Log Out</b-dropdown-item>
               </b-nav-item-dropdown>
-              <b-button class="mr-auto" v-if="!userLoggedIn" pill variant="success" to="/login">
+              <b-button
+                class="mr-auto"
+                v-if="!userLoggedIn"
+                pill
+                variant="success"
+                to="/login"
+              >
                 Login &amp; Register
               </b-button>
             </b-navbar-nav>
@@ -90,6 +96,7 @@
 </template>
 
 <script>
+import router from "@/router";
 export default {
   name: "TopHeader",
   data() {
@@ -123,11 +130,11 @@ export default {
           solid: true
         });
       } else {
-        window.location.replace("/wishlist");
+        router.push({ path: "/wishlist" });
       }
     },
     async logout() {
-      this.$store.dispatch("Wishlist/clearWishlist")
+      this.$store.dispatch("Wishlist/clearWishlist");
       this.$store.dispatch("CurrentUser/setToken", "");
       this.$store.dispatch("CurrentUser/setUser", {});
       window.location.reload();
@@ -145,7 +152,7 @@ export default {
       if (this.searchTxt != "") {
         const text = this.searchTxt;
         newRoute += "?q=" + text;
-        window.location.replace(newRoute);
+        router.push({ path: newRoute });
       }
     }
   }

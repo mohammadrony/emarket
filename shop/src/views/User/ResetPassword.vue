@@ -81,7 +81,7 @@ import TopHeader from "@/components/Common/TopHeader.vue";
 import ReqPassToken from "@/components/User/ReqPassToken.vue";
 import Footer from "@/components/Common/Footer.vue";
 import AuthenticationService from "@/services/AuthenticationService.js";
-
+import router from "@/router";
 export default {
   name: "ResetPassword",
   components: {
@@ -150,7 +150,7 @@ export default {
             })
           ).data;
         } catch (error) {
-          console.log("error reset pass", error.response.data.error);
+          console.log(error.response.data.error);
         }
         try {
           const response = await AuthenticationService.login({
@@ -159,7 +159,7 @@ export default {
           });
           this.$store.dispatch("CurrentUser/setToken", response.data.token);
           this.$store.dispatch("CurrentUser/setUser", response.data.user);
-          window.location.replace("/");
+          router.push({ path: "/" });
         } catch (error) {
           console.log(error.response.data.error);
         }

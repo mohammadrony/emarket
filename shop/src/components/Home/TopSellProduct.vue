@@ -8,7 +8,11 @@
           <b-row>
             <b-col cols="3" v-for="product in topSellProduct" :key="product.id">
               <b-card deck class="mt-4">
-                <b-card-img @click="gotoProduct(product)" class="mb-3" :src="product.image1" />
+                <b-card-img
+                  @click="gotoProduct(product)"
+                  class="mb-3"
+                  :src="product.image1"
+                />
                 <b-link @click="gotoProduct(product)">
                   <h5>{{ product.title }}</h5>
                 </b-link>
@@ -59,6 +63,7 @@
 import ProductsService from "@/services/ProductsService.js";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
+import router from "@/router";
 export default {
   name: "TopSellProduct",
   components: {
@@ -79,7 +84,7 @@ export default {
   },
   methods: {
     gotoProduct(product) {
-      window.location.replace(`/product/${product.id}`);
+      router.push({ path: `/product/${product.id}` });
     }
   },
   computed: {}

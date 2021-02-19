@@ -287,6 +287,7 @@ import SubSubCategoryService from "@/services/SubSubCategoryService.js";
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
 import Footer from "@/components/Common/Footer.vue";
 import { VueEditor } from "vue2-editor";
+import router from "@/router";
 export default {
   name: "AddProduct",
   components: {
@@ -390,7 +391,7 @@ export default {
       try {
         const newProduct = (await ProductsService.createProduct(formData)).data;
         await this.$store.dispatch("Products/setAllBackupProduct");
-        window.location.replace("/product/" + newProduct.id);
+        router.push({ path: `/product/${newProduct.id}` });
       } catch (error) {
         console.log(error.response.data.error);
       }

@@ -14,7 +14,9 @@
               alt="Image Not Found"
             />
             <br />
-            <b-link @click="viewProduct(product)">{{ product.title }}</b-link>
+            <router-link :to="{ path: `/product/${product.productId}` }">
+              {{ product.title }}
+            </router-link>
             <br />
             <small class="mt-2">
               Price: {{ product.amount }} {{ product.currency }}
@@ -193,11 +195,6 @@ export default {
       } catch (error) {
         console.log(error.response.data.error);
       }
-    },
-    viewProduct(product) {
-      const route = "/product/" + product.productId;
-      console.log(route, product);
-      window.location.replace(route);
     }
   }
 };

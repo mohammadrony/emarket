@@ -78,7 +78,7 @@ export default {
       if (this.validCartItem != -1) {
         this.$bvToast.toast("Product added to cart", {
           title: "Cart",
-          variant: "success",
+          variant: "primary",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
           solid: true
@@ -93,7 +93,7 @@ export default {
       if (this.validCartItem == -1) {
         this.$bvToast.toast("Product removed from cart", {
           title: "Cart",
-          variant: "success",
+          variant: "primary",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
           solid: true

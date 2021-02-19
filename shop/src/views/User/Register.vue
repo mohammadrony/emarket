@@ -145,7 +145,7 @@
 import AuthenticationService from "@/services/AuthenticationService";
 import TopHeader from "@/components/Common/TopHeader.vue";
 import Footer from "@/components/Common/Footer.vue";
-
+import router from "@/router";
 export default {
   name: "Register",
   components: {
@@ -222,7 +222,7 @@ export default {
         });
         this.$store.dispatch("CurrentUser/setToken", response.data.token);
         this.$store.dispatch("CurrentUser/setUser", response.data.user);
-        window.location.replace("/");
+        router.push({ path: "/" });
       } catch (error) {
         this.validEmail = false;
         this.emailMessage = error.response.data.error;

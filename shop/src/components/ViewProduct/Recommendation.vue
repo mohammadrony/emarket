@@ -15,7 +15,7 @@
                   class="mb-3"
                   :src="product.image1"
                 />
-                <b-link @click="gotoProduct(product)">
+                <b-link :to="`/product/${product.id}`">
                   <h5>{{ product.title }}</h5>
                 </b-link>
                 <h6>Price: {{ product.amount }} {{ product.currency }}</h6>
@@ -65,6 +65,7 @@
 import ProductsService from "@/services/ProductsService.js";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
+import router from "@/router";
 export default {
   name: "Name",
   props: {
@@ -95,7 +96,7 @@ export default {
   },
   methods: {
     gotoProduct(product) {
-      window.location.replace(`/product/${product.id}`);
+      router.push({ path: `/product/${product.id}` });
     }
   },
   computed: {}

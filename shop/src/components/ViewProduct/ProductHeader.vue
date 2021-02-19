@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar size="sm" toggleable="md" type="primary" variant="white">
-      <b-navbar-brand href="#" @click="productHome">
+      <b-navbar-brand href="#" to="/products">
         <b-icon variant="primary" icon="house-door-fill" />
         <b-icon class="ml-2" scale=".7" icon="chevron-right" />
       </b-navbar-brand>
@@ -16,15 +16,19 @@
       </b-navbar-toggle>
       <b-collapse id="nav-products-collapse" is-nav>
         <b-navbar-nav class="mr-auto">
-          <b-nav-item @click="setCategory">
+          <b-nav-item :to="`/products/${categoryName}`">
             {{ categoryName }}
             <b-icon class="ml-2" scale=".7" icon="chevron-right" />
           </b-nav-item>
-          <b-nav-item @click="setSubCategory">
+          <b-nav-item :to="`/products/${categoryName}/${subCategoryName}`">
             {{ subCategoryName }}
             <b-icon class="ml-2" scale=".7" icon="chevron-right" />
           </b-nav-item>
-          <b-nav-item @click="setSubSubCategory">
+          <b-nav-item
+            :to="
+              `/products/${categoryName}/${subCategoryName}/${subSubCategoryName}`
+            "
+          >
             {{ subSubCategoryName }}
             <b-icon class="ml-2" scale=".7" icon="chevron-right" />
           </b-nav-item>
@@ -47,6 +51,7 @@
 <script>
 import WishlistService from "@/services/WishlistService.js";
 import ProductsService from "@/services/ProductsService.js";
+import router from "@/router";
 export default {
   name: "ProductHeader",
   data() {
@@ -94,29 +99,7 @@ export default {
       await ProductsService.deleteProduct(this.productId);
       await this.$store.dispatch("Products/setAllBackupProduct");
       await this.$store.dispatch("Wishlist/setWishlist");
-      window.location.replace("/products");
-    },
-    async productHome() {
-      window.location.replace("/products");
-    },
-    setCategory() {
-      const newRoute = "/products/" + this.categoryName;
-      window.location.replace(newRoute);
-    },
-    setSubCategory() {
-      const newRoute =
-        "/products/" + this.categoryName + "/" + this.subCategoryName;
-      window.location.replace(newRoute);
-    },
-    setSubSubCategory() {
-      const newRoute =
-        "/products/" +
-        this.categoryName +
-        "/" +
-        this.subCategoryName +
-        "/" +
-        this.subSubCategoryName;
-      window.location.replace(newRoute);
+      router.push({ path: "/products" });
     }
   }
 };

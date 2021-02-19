@@ -9,10 +9,10 @@
             <b-col cols="3" v-for="product in newAddProduct" :key="product.id">
               <b-card deck class="mt-4">
                 <b-card-img
-                  @click="gotoProduct(product)"
+                  @click="viewProduct(product)"
                   :src="product.image1"
                 />
-                <b-link class="mt-3" @click="gotoProduct(product)">
+                <b-link class="mt-3" @click="viewProduct(product)">
                   <h5>{{ product.title }}</h5>
                 </b-link>
                 <h6>Price: {{ product.amount }} {{ product.currency }}</h6>
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import router from "@/router";
 import ProductsService from "@/services/ProductsService";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
@@ -81,8 +82,8 @@ export default {
     ).data;
   },
   methods: {
-    gotoProduct(product) {
-      window.location.replace(`/product/${product.id}`);
+    viewProduct(product) {
+      router.push({ path: `/product/${product.id}` });
     }
   }
 };

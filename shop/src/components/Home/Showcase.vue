@@ -51,6 +51,7 @@
 
 <script>
 import ShowcaseService from "@/services/ShowcaseService.js";
+import router from '@/router';
 export default {
   name: "Showcase",
   props: {},
@@ -90,7 +91,7 @@ export default {
   },
   methods: {
     goto(link) {
-      window.location.replace(link);
+      router.push({path: `${link}`})
     }
   }
 };

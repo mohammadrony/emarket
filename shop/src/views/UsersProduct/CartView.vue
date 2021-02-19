@@ -35,7 +35,7 @@
             <img class="product-image" :src="product.image" alt="No Image" />
           </b-col>
           <b-col cols="3">
-            <b-link @click="viewProduct(product)">
+            <b-link :to="`/product/${product.productId}`">
               {{ product.title }}
             </b-link>
             <b-row class="mt-2" align-v="center">
@@ -156,10 +156,6 @@ export default {
     }
   },
   methods: {
-    viewProduct(product) {
-      const newRoute = "/product/" + product.productId;
-      window.location.replace(newRoute);
-    },
     async quantityInc(product) {
       await this.$store.dispatch("Cart/updateCartItemQuantity", {
         productId: product.productId,

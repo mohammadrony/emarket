@@ -24,11 +24,12 @@
         Filter
       </b-button>
     </b-row>
-    <hr class="my-4"/>
+    <hr class="my-4" />
   </div>
 </template>
 
 <script>
+import router from "@/router";
 export default {
   name: "FilterComponent",
   components: {},
@@ -66,7 +67,7 @@ export default {
         }
         newRoute += "hi=" + this.maxPrice;
       }
-      window.location.replace(newRoute);
+      router.push({ path: newRoute });
     }
   }
 };

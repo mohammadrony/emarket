@@ -10,9 +10,9 @@
               alt="Image Not Found"
             />
             <br />
-            <b-link @click="viewProduct(orderItem)">
+            <router-link :to="{ path: `/product/${orderItem.Product.id}` }">
               {{ orderItem.Product.title }}
-            </b-link>
+            </router-link>
             <br />
             <small class="mt-2">
               Price: {{ orderItem.Product.amount }}
@@ -97,6 +97,7 @@
 <script>
 import OrderItemService from "@/services/OrderItemService.js";
 import OrderService from "@/services/OrderService.js";
+import router from "@/router";
 export default {
   name: "OrderItems",
   components: {},
@@ -170,11 +171,7 @@ export default {
       } catch (error) {
         console.log(error.response.data.error);
       }
-      window.location.replace("/admin/orders");
-    },
-    viewProduct(orderItem) {
-      const route = "/product/" + orderItem.Product.id;
-      window.location.replace(route);
+      router.push({ path: "/admin/orders" });
     }
   },
   computed: {}

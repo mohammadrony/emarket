@@ -12,11 +12,7 @@
       >
         <FilterComponent />
         <b-row class="mt-4">
-          <b-col
-            cols="4"
-            v-for="(product, index) in displayProducts"
-            :key="index"
-          >
+          <b-col cols="4" v-for="product in displayProducts" :key="product.id">
             <b-card-group deck>
               <b-card img-top style="max-width: 25rem" class="mb-4">
                 <b-card-img
@@ -26,7 +22,7 @@
                   alt="Image Not Found"
                 />
                 <div class="mt-2">
-                  <b-link @click="viewProduct(product)">
+                  <b-link :to="`/product/${product.id}`">
                     {{ product.title }}
                   </b-link>
                 </div>
@@ -125,6 +121,7 @@ import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Footer from "@/components/Common/Footer.vue";
 import ProductsService from "@/services/ProductsService.js";
 import WishlistService from "@/services/WishlistService.js";
+import router from "@/router";
 export default {
   name: "Products",
   components: {
@@ -192,8 +189,7 @@ export default {
       window.location.reload();
     },
     viewProduct(product) {
-      const newRoute = "/product/" + product.id;
-      window.location.replace(newRoute);
+      router.push({ path: `/product/${product.id}` });
     },
     async paginate(currentPage) {
       await this.$store.dispatch("Products/paginate", currentPage);

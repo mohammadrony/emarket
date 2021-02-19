@@ -10,7 +10,7 @@
               alt="Image Not Found"
             />
             <br />
-            <b-link @click="viewProduct(orderItem)">
+            <b-link :to="{ path: `/product/${orderItem.Product.id}` }">
               {{ orderItem.Product.title }}
             </b-link>
             <br />
@@ -80,13 +80,7 @@ export default {
     }
   },
   computed: {},
-  methods: {
-    sendFeedback() {},
-    viewProduct(orderItem) {
-      const route = "/product/" + orderItem.Product.id;
-      window.location.replace(route);
-    }
-  }
+  methods: {}
 };
 </script>
 

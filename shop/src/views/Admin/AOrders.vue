@@ -79,7 +79,7 @@
                     size="sm"
                     block
                     variant="warning"
-                    @click="orderDetails(order)"
+                    :to="`/admin/order/${order.id}`"
                   >
                     Details
                   </b-button>
@@ -192,10 +192,6 @@ export default {
         status: status.name,
         variant: status.variant
       });
-    },
-    orderDetails(order) {
-      const route = "/admin/order/" + order.id;
-      window.location.replace(route);
     },
     paginate(currentPage) {
       const start = (currentPage - 1) * this.perPage;

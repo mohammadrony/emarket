@@ -20,7 +20,7 @@
           </b-col>
           <b-col cols="9">
             your review on&nbsp;
-            <b-link @click="viewProduct(review.ProductId)">
+            <b-link :to="`/product/${review.ProductId}`">
               {{ review.Product.title }}
             </b-link>
             <b-row class="mt-3">
@@ -89,10 +89,6 @@ export default {
     }
   },
   methods: {
-    viewProduct(productId) {
-      const newRoute = "/product/" + productId;
-      window.location.replace(newRoute);
-    },
     paginate(currentPage) {
       const start = (currentPage - 1) * this.perPage;
       this.reviewList2 = this.reviewList.slice(start, start + this.perPage);
