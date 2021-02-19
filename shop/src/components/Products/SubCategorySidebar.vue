@@ -10,7 +10,6 @@
             <div :class="{ 'col-12': !admin, 'col-8': admin }">
               <b-link
                 variant="white"
-                block
                 @click="subCategorySelect(subCategory)"
               >
                 <small>{{ subCategory.name }}</small>
