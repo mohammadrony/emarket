@@ -51,7 +51,6 @@
 <script>
 import WishlistService from "@/services/WishlistService.js";
 import ProductsService from "@/services/ProductsService.js";
-import router from "@/router";
 export default {
   name: "ProductHeader",
   data() {
@@ -99,7 +98,7 @@ export default {
       await ProductsService.deleteProduct(this.productId);
       await this.$store.dispatch("Products/setAllBackupProduct");
       await this.$store.dispatch("Wishlist/setWishlist");
-      router.push({ path: "/products" });
+      this.$router.push({ path: "/products" });
     }
   }
 };

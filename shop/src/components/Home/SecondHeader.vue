@@ -135,7 +135,6 @@ import { mapState } from "vuex";
 import CategoryService from "@/services/CategoryService.js";
 import SubCategoryService from "@/services/SubCategoryService.js";
 import SubSubCategoryService from "@/services/SubSubCategoryService.js";
-import router from "@/router";
 export default {
   name: "HomeSecondHeader",
   components: {},
@@ -180,13 +179,13 @@ export default {
   },
   methods: {
     categorySelect(category) {
-      router.push({ path: `/products/${category.name}` });
+      this.$router.push({ path: `/products/${category.name}` });
     },
     subCategorySelect(subCategory) {
       const category = this.categoryList.find(
         obj => obj.id == subCategory.CategoryId
       );
-      router.push({ path: `/products/${category.name}/${subCategory.name}` });
+      this.$router.push({ path: `/products/${category.name}/${subCategory.name}` });
     },
     subSubCategorySelect(subSubCategory) {
       const subCategory = this.subCategoryList.find(
@@ -195,7 +194,7 @@ export default {
       const category = this.categoryList.find(
         obj => obj.id == subCategory.CategoryId
       );
-      router.push({
+      this.$router.push({
         path: `/products/${category.name}/${subCategory.name}/${subSubCategory.name}`
       });
     }

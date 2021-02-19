@@ -121,7 +121,6 @@ import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Footer from "@/components/Common/Footer.vue";
 import ProductsService from "@/services/ProductsService.js";
 import WishlistService from "@/services/WishlistService.js";
-import router from "@/router";
 export default {
   name: "Products",
   components: {
@@ -189,7 +188,7 @@ export default {
       window.location.reload();
     },
     viewProduct(product) {
-      router.push({ path: `/product/${product.id}` });
+      this.$router.push({ path: `/product/${product.id}` });
     },
     async paginate(currentPage) {
       await this.$store.dispatch("Products/paginate", currentPage);

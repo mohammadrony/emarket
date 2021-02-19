@@ -87,7 +87,6 @@ import AuthenticationService from "@/services/AuthenticationService.js";
 import TopHeader from "@/components/Common/TopHeader.vue";
 import ReqPassToken from "@/components/User/ReqPassToken.vue";
 import Footer from "@/components/Common/Footer.vue";
-import router from "@/router";
 export default {
   name: "Login",
   components: {
@@ -117,7 +116,7 @@ export default {
         ).data;
         this.$store.dispatch("CurrentUser/setToken", response.token);
         this.$store.dispatch("CurrentUser/setUser", response.user);
-        router.push({ path: "/" });
+        this.$router.push({ path: "/" });
       } catch (error) {
         this.loginAlert = true;
         this.loginMessage = error.response.data.error;

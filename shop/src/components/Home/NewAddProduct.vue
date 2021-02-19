@@ -59,7 +59,6 @@
 </template>
 
 <script>
-import router from "@/router";
 import ProductsService from "@/services/ProductsService";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
@@ -83,7 +82,7 @@ export default {
   },
   methods: {
     viewProduct(product) {
-      router.push({ path: `/product/${product.id}` });
+      this.$router.push({ path: `/product/${product.id}` });
     }
   }
 };

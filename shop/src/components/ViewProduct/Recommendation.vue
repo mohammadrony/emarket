@@ -65,7 +65,6 @@
 import ProductsService from "@/services/ProductsService.js";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
-import router from "@/router";
 export default {
   name: "Name",
   props: {
@@ -96,7 +95,7 @@ export default {
   },
   methods: {
     gotoProduct(product) {
-      router.push({ path: `/product/${product.id}` });
+      this.$router.push({ path: `/product/${product.id}` });
     }
   },
   computed: {}

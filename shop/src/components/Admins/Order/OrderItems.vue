@@ -97,7 +97,6 @@
 <script>
 import OrderItemService from "@/services/OrderItemService.js";
 import OrderService from "@/services/OrderService.js";
-import router from "@/router";
 export default {
   name: "OrderItems",
   components: {},
@@ -171,7 +170,7 @@ export default {
       } catch (error) {
         console.log(error.response.data.error);
       }
-      router.push({ path: "/admin/orders" });
+      this.$router.push({ path: "/admin/orders" });
     }
   },
   computed: {}

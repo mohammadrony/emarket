@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import router from "@/router";
 export default {
   name: "FilterComponent",
   components: {},
@@ -67,7 +66,7 @@ export default {
         }
         newRoute += "hi=" + this.maxPrice;
       }
-      router.push({ path: newRoute });
+      this.$router.push({ path: newRoute });
     }
   }
 };

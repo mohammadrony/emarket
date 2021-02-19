@@ -96,7 +96,6 @@
 </template>
 
 <script>
-import router from "@/router";
 export default {
   name: "TopHeader",
   data() {
@@ -130,7 +129,7 @@ export default {
           solid: true
         });
       } else {
-        router.push({ path: "/wishlist" });
+        this.$router.push({ path: "/wishlist" });
       }
     },
     async logout() {
@@ -152,7 +151,7 @@ export default {
       if (this.searchTxt != "") {
         const text = this.searchTxt;
         newRoute += "?q=" + text;
-        router.push({ path: newRoute });
+        this.$router.push({ path: newRoute });
       }
     }
   }
