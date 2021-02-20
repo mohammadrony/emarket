@@ -7,6 +7,7 @@ export const CurrentUserModule = {
         admin: false,
         userId: 0,
         newUserEmail: "",
+        newUserId: 0,
         userLoggedIn: false,
     },
     mutations: {
@@ -40,6 +41,9 @@ export const CurrentUserModule = {
         SET_USERNAME(state, userName) {
             state.user.username = userName
         },
+        SET_NEW_USER_ID(state, id) {
+            state.newUserId = id
+        },
         SET_NEW_USER_EMAIL(state, email) {
             state.newUserEmail = email
         }
@@ -56,6 +60,9 @@ export const CurrentUserModule = {
         },
         setUserName({ commit }, userName) {
             commit("SET_USERNAME", userName)
+        },
+        setNewUserId({ commit }, id) {
+            commit("SET_NEW_USER_ID", id)
         },
         setNewUserEmail({ commit }, email) {
             commit("SET_NEW_USER_EMAIL", email)

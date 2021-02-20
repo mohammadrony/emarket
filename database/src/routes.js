@@ -33,7 +33,7 @@ module.exports = (app) => {
     AuthenticationController.requestToken)
   app.get("/auth/verifyToken/:token",
     AuthenticationController.verifyToken)
-  app.get("/auth/verifyRegsToken/:token",
+  app.get("/auth/verifyRegsToken/:userId/:registerToken",
     AuthenticationController.verifyRegsToken)
   app.post("/auth/resetPassword",
     AuthenticationController.resetPassword)

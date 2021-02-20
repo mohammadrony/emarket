@@ -84,7 +84,20 @@ module.exports = {
             const user = await User.findOne({
                 where: {
                     email: email
-                }
+                },
+                attributes: [
+                    "id",
+                    "username",
+                    "firstName",
+                    "lastName",
+                    "profileImage",
+                    "email",
+                    "phoneNo",
+                    "userType",
+                    "variant",
+                    "priority",
+                    "CompanyId"
+                ]
             })
             if (!user) {
                 console.log("user not found")
@@ -232,7 +245,19 @@ module.exports = {
                 where: {
                     resetPasswordToken: req.params.token
                 },
-                attributes: ["id", "email", "firstName", "lastName", "resetPasswordToken"]
+                attributes: [
+                    "id",
+                    "username",
+                    "firstName",
+                    "lastName",
+                    "profileImage",
+                    "email",
+                    "phoneNo",
+                    "userType",
+                    "variant",
+                    "priority",
+                    "CompanyId"
+                ]
             });
             if (!user) {
                 return res.status(403).send({
@@ -250,16 +275,32 @@ module.exports = {
         try {
             const user = await User.findOne({
                 where: {
-                    registerToken: req.params.token
+                    id: req.params.userId
                 },
-                attributes: ["id", "email", "firstName", "lastName", "registerToken"]
+                attributes: [
+                    "id",
+                    "username",
+                    "firstName",
+                    "lastName",
+                    "profileImage",
+                    "email",
+                    "phoneNo",
+                    "userType",
+                    "registerToken",
+                    "variant",
+                    "priority",
+                    "CompanyId"
+                ]
             });
-            if (!user) {
+            if (!user || user.registerToken != req.params.registerToken) {
                 return res.status(403).send({
-                    error: "invalid token."
+                    error: "invalid token id."
                 })
             }
-            res.send(user)
+            res.send({
+                user: user,
+                token: jwtSignUser(user)
+            })
         } catch (err) {
             res.status(500).send({
                 error: "An error occured when verifying the register token."

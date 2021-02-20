@@ -7,10 +7,10 @@ export default {
   login(credentials) {
     return Api().post("/auth/login", credentials);
   },
-  verifyPassword(currentPassword){
+  verifyPassword(currentPassword) {
     return Api().get(`/auth/verifyPassword/${currentPassword}`)
   },
-  updatePassword(credentials){
+  updatePassword(credentials) {
     return Api().post("/auth/updatePassword", credentials);
   },
   requestToken(credentials) {
@@ -19,8 +19,8 @@ export default {
   verifyToken(token) {
     return Api().get(`/auth/verifyToken/${token}`);
   },
-  verifyRegsToken(token) {
-    return Api().get(`/auth/verifyRegsToken/${token}`);
+  verifyRegsToken({ userId, registerToken }) {
+    return Api().get(`/auth/verifyRegsToken/${userId}/${registerToken}`);
   },
   resetPassword(credentials) {
     return Api().post("/auth/resetPassword", credentials);

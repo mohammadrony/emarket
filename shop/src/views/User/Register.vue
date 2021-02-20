@@ -222,13 +222,17 @@ export default {
       )
         return;
       try {
-        await AuthenticationService.register({
-          firstName: this.firstName,
-          lastName: this.lastName,
-          email: this.email,
-          password: this.password
-        });
-        this.$store.dispatch("CurrentUser/setNewUserEmail", this.email);
+        const user = (
+          await AuthenticationService.register({
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email,
+            password: this.password
+          })
+        ).data;
+        this.$store.dispatch("CurrentUser/setNewUserEmail", user.email);
+        this.$store.dispatch("CurrentUser/setNewUserId", user.id);
+
         this.$router.push({ path: "/user-verify" });
       } catch (error) {
         this.emailUsed.push(this.email);

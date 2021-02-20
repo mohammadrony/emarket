@@ -4,17 +4,18 @@
     <b-container class="mt-5">
       <b-row>
         <b-col cols="6">
-          <b-card v-if="!registerToken">
+          <b-card v-if="userId == 0">
             <h5 class="text-center"><strong>Email Verification</strong></h5>
             <b-alert class="mt-4" variant="warning" show>
               <small>
-                It looks like you clicked on an invalid verification link.
-                Please try again.
+                Please try to
+                <b-link to="/register">Create your account</b-link>
+                first.
               </small>
             </b-alert>
           </b-card>
 
-          <b-card v-if="registerToken" style="color: #001e5f">
+          <b-card v-if="userId != 0" style="color: #001e5f">
             <b-card
               border-variant="info"
               header="Email Verified"
@@ -46,38 +47,44 @@ export default {
   },
   data() {
     return {
-      userId: null,
-      registerToken: null
+      userId: 0,
+      userEmail: "",
+      registerToken: ""
     };
   },
   async mounted() {
-    const token = this.$route.params.token;
-    if (token) {
+    this.userId = this.$store.state.CurrentUser.newUserId;
+    this.userEmail = this.$store.state.CurrentUser.newUserEmail;
+    console.log(this.userEmail);
+  },
+  methods: {
+    async verifyRegsToken() {
+      var user;
       try {
-        const user = (await AuthenticationService.verifyRegsToken(token)).data;
-        if (user.registerToken === token) {
-          this.registerToken = user.registerToken;
-          this.userId = user.id;
-        }
+        user = (
+          await AuthenticationService.verifyRegsToken({
+            userId: this.userId,
+            registerToken: this.registerToken
+          })
+        ).data;
+        console.log(user);
       } catch (error) {
         console.log(error.response.data.error);
       }
-
-      if (this.userId) {
+      if (user) {
         try {
-          (
-            await AuthenticationService.resetRegsToken({
-              id: this.userId,
-              registerToken: this.registerToken
-            })
-          ).data;
+          await AuthenticationService.resetRegsToken({
+            id: this.userId
+          });
+          this.$store.dispatch("CurrentUser/setToken", user.token);
+          this.$store.dispatch("CurrentUser/setUser", user.user);
+          this.$router.push({ path: "/" });
         } catch (error) {
           console.log(error.response.data.error);
         }
       }
     }
   },
-  methods: {},
   computed: {}
 };
 </script>
