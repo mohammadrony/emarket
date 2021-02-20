@@ -23,9 +23,22 @@
               header-text-variant="white"
               align="center"
             >
-              <h1 class="mt-4">You're all set!</h1>
-              <h6>Your account is ready,</h6>
-              <h6>we hope you enjoy your visit!</h6>
+              <b-form @submit.stop.prevent="verifyRegsToken">
+                <b-form-group
+                  label="Verification Code"
+                  label-for="input-verification-code"
+                >
+                  <b-form-input
+                    placeholder="your 6 digit code"
+                    v-model="registerToken"
+                    required
+                    :state="registerTokenValidation"
+                  />
+                </b-form-group>
+                <b-button type="submit" variant="success">
+                  Submit
+                </b-button>
+              </b-form>
             </b-card>
           </b-card>
         </b-col>
@@ -49,8 +62,16 @@ export default {
     return {
       userId: 0,
       userEmail: "",
+      tokenFormat: /^[0-9]{6}$/,
       registerToken: ""
     };
+  },
+  computed: {
+    registerTokenValidation() {
+      if (!this.registerToken) return null;
+      else if (!this.tokenFormat.test(this.registerToken)) return false;
+      else return true;
+    }
   },
   async mounted() {
     this.userId = this.$store.state.CurrentUser.newUserId;
@@ -84,8 +105,7 @@ export default {
         }
       }
     }
-  },
-  computed: {}
+  }
 };
 </script>
 
