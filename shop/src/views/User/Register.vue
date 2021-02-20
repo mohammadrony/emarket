@@ -16,6 +16,7 @@
                   >
                     <b-form-input
                       v-model="firstName"
+                      ref="firstNameField"
                       id="input-first-name"
                       type="text"
                       :state="firstNameValidation"
@@ -60,6 +61,7 @@
                   v-model="email"
                   id="input-email"
                   type="email"
+                  @keyup="validEmail = true"
                   :state="validEmail && emailValidation"
                   required
                 />
@@ -156,6 +158,7 @@ export default {
       firstName: null,
       lastName: null,
       email: null,
+      emailUsed: [],
       formatName: /^.{1,15}$/,
       formatEmail: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
       formatPassword: /^[a-zA-z0-9]{8,32}$/,
@@ -165,6 +168,9 @@ export default {
       emailMessage: null
     };
   },
+  mounted() {
+    this.$refs.firstNameField.focus();
+  },
   computed: {
     tokenAlert() {
       if (this.message == null) return null;
@@ -173,33 +179,36 @@ export default {
     },
     firstNameValidation() {
       if (this.firstName == null) return null;
-      else if (!this.formatName.test(this.firstName)) {
-        return false;
-      } else return true;
+      else if (!this.formatName.test(this.firstName)) return false;
+      else return true;
     },
     lastNameValidation() {
       if (this.lastName == null) return null;
-      else if (!this.formatName.test(this.lastName)) {
-        return false;
-      } else return true;
+      else if (!this.formatName.test(this.lastName)) return false;
+      else return true;
     },
     emailValidation() {
       if (this.email == null) return null;
-      return this.formatEmail.test(this.email);
+      else if (
+        this.emailUsed.includes(this.email) ||
+        !this.formatEmail.test(this.email)
+      )
+        return false;
+      else return true;
     },
     newPasswordValidation() {
       if (this.password == null) return null;
-      else if (!this.formatPassword.test(this.password)) {
-        return false;
-      } else return true;
+      else if (!this.formatPassword.test(this.password)) return false;
+      else return true;
     },
     confirmPasswordValidation() {
       if (this.confirmPassword == null) return null;
-      else if (!this.formatPassword.test(this.confirmPassword)) {
+      else if (
+        this.confirmPassword != this.password ||
+        !this.formatPassword.test(this.confirmPassword)
+      )
         return false;
-      } else if (!this.formatPassword.test(this.confirmPassword)) {
-        return false;
-      } else return true;
+      else return true;
     }
   },
   methods: {
@@ -213,16 +222,16 @@ export default {
       )
         return;
       try {
-        const response = await AuthenticationService.register({
+        await AuthenticationService.register({
           firstName: this.firstName,
           lastName: this.lastName,
           email: this.email,
           password: this.password
         });
-        this.$store.dispatch("CurrentUser/setToken", response.data.token);
-        this.$store.dispatch("CurrentUser/setUser", response.data.user);
-        this.$router.push({ path: "/" });
+        this.$store.dispatch("CurrentUser/setNewUserEmail", this.email);
+        this.$router.push({ path: "/user-verify" });
       } catch (error) {
+        this.emailUsed.push(this.email);
         this.validEmail = false;
         this.emailMessage = error.response.data.error;
       }

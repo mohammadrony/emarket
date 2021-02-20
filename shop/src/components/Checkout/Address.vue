@@ -14,7 +14,7 @@
               v-model="name"
               id="input-name"
               type="text"
-              @keyup="setName"
+              @change="setName"
               :state="nameValidation"
               required
             />
@@ -28,7 +28,7 @@
               v-model="email"
               id="input-email"
               type="email"
-              @keyup="setEmail"
+              @change="setEmail"
               :state="emailValidation"
               required
             />
@@ -42,7 +42,7 @@
               v-model="phoneNo"
               id="input-phone"
               type="text"
-              @keyup="setPhoneNo"
+              @change="setPhoneNo"
               :state="phoneNoValidation"
               required
             />
@@ -66,7 +66,7 @@
                     :state="line1Validation"
                     required
                     v-model="line1"
-                    @keyup="setAddressLine1"
+                    @change="setAddressLine1"
                     id="nested-line1"
                   />
                 </b-form-group>
@@ -80,7 +80,7 @@
                     :state="line2Validation"
                     required
                     v-model="line2"
-                    @keyup="setAddressLine2"
+                    @change="setAddressLine2"
                     id="nested-line2"
                   />
                 </b-form-group>
@@ -95,7 +95,7 @@
                     :state="zipCodeValidation"
                     required
                     v-model="zipCode"
-                    @keyup="setAddressZipCode"
+                    @change="setAddressZipCode"
                     id="nested-zipcode"
                   />
                 </b-form-group>
@@ -110,7 +110,7 @@
                     :state="cityValidation"
                     required
                     v-model="city"
-                    @keyup="setAddressCity"
+                    @change="setAddressCity"
                     id="nested-city"
                   />
                 </b-form-group>
@@ -124,7 +124,7 @@
                     :state="divisionValidation"
                     required
                     v-model="division"
-                    @keyup="setAddressDivision"
+                    @change="setAddressDivision"
                     id="nested-division"
                   />
                 </b-form-group>
@@ -140,7 +140,7 @@
                     :state="countryValidation"
                     required
                     v-model="country"
-                    @keyup="setAddressCountry"
+                    @change="setAddressCountry"
                     id="nested-country"
                   />
                 </b-form-group>
@@ -190,7 +190,7 @@ export default {
       country: null,
       formatNumber: /^[0-9+-]+$/,
       formatEmail: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-      shipping: this.$store.state.Checkout.shipping,
+      shipping: this.$store.state.Checkout.shipping
     };
   },
   computed: {
@@ -242,10 +242,10 @@ export default {
       if (this.country == null) return null;
       else if (this.country.length == 0) return false;
       else return true;
-    },
+    }
   },
   async mounted() {
-    await this.$store.dispatch("Checkout/clearCustomerDetails");
+    await this.$store.dispatch("Checkout/resetCustomerDetails");
   },
   methods: {
     setName() {
@@ -277,8 +277,8 @@ export default {
     },
     setAddressCountry() {
       this.$store.dispatch("Checkout/setCustomerAddressCountry", this.country);
-    },
-  },
+    }
+  }
 };
 </script>
 

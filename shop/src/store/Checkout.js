@@ -3,18 +3,16 @@ export const CheckoutModule = {
     strict: true,
     state: {
         customerDetails: {
-            name: null,
-            email: null,
-            phoneNo: null,
-            phoneNoMin: 6,
-            phoneNoMax: 20,
+            name: "",
+            email: "",
+            phoneNo: "",
             address: {
-                line1: null,
-                line2: null,
-                zipCode: null,
-                city: null,
-                division: null,
-                country: null,
+                line1: "",
+                line2: "",
+                zipCode: "",
+                city: "",
+                division: "",
+                country: "",
             },
         },
         shipping: {
@@ -67,54 +65,31 @@ export const CheckoutModule = {
         }
     },
     actions: {
-        clearCustomerDetails({ commit }) {
-            const emptyString = ""
-            commit("SET_CUSTOMER_NAME", emptyString)
-            commit("SET_CUSTOMER_EMAIL", emptyString)
-            commit("SET_CUSTOMER_PHONE_NO", emptyString)
-            commit("SET_CUSTOMER_ADDRESS_LINE1", emptyString)
-            commit("SET_CUSTOMER_ADDRESS_LINE2", emptyString)
-            commit("SET_CUSTOMER_ADDRESS_ZIP_CODE", emptyString)
-            commit("SET_CUSTOMER_ADDRESS_CITY", emptyString)
-            commit("SET_CUSTOMER_ADDRESS_DIVISION", emptyString)
-            commit("SET_CUSTOMER_ADDRESS_COUNTRY", emptyString)
+        resetCustomerDetails({ commit }) {
+            commit("SET_CUSTOMER_NAME", "")
+            commit("SET_CUSTOMER_EMAIL", "")
+            commit("SET_CUSTOMER_PHONE_NO", "")
+            commit("SET_CUSTOMER_ADDRESS_LINE1", "")
+            commit("SET_CUSTOMER_ADDRESS_LINE2", "")
+            commit("SET_CUSTOMER_ADDRESS_ZIP_CODE", "")
+            commit("SET_CUSTOMER_ADDRESS_CITY", "")
+            commit("SET_CUSTOMER_ADDRESS_DIVISION", "")
+            commit("SET_CUSTOMER_ADDRESS_COUNTRY", "")
         },
-        validPhoneNo({ state }) {
-            const formatNumber = /^[0-9+-]+$/
-
+        informationValidate({ state }) {
+            const emailFormat = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+            const phoneNoFormat = /^[0-9+-]{6,20}$/
             if (
-                state.customerDetails.phoneNo.length >= state.customerDetails.phoneNoMin &&
-                state.customerDetails.phoneNo.length <= state.customerDetails.phoneNoMax &&
-                formatNumber.test(state.customerDetails.phoneNo)
-            )
-                return true;
-            else return false;
-        },
-        validEmail({ state }) {
-            const formatEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-            if (formatEmail.test(state.customerDetails.email)) {
-                return true;
-            } else return false;
-        },
-        informationValidate({ dispatch, state }) {
-            if (!state.customerDetails.name ||
-                !dispatch("validPhoneNo") ||
-                !dispatch("validEmail")) {
-                console.log("customer details invalid")
-                return false;
-            }
-            else if (
+                state.customerDetails.name == "" ||
+                !phoneNoFormat.test(state.customerDetails.phoneNo) ||
+                !emailFormat.test(state.customerDetails.email) ||
                 state.customerDetails.address.line1 == "" ||
                 state.customerDetails.address.line2 == "" ||
                 state.customerDetails.address.zipCode == "" ||
                 state.customerDetails.address.city == "" ||
                 state.customerDetails.address.division == "" ||
                 state.customerDetails.address.country == ""
-            ) {
-                console.log("shipping details invalid")
-
-                return false;
-            }
+            ) return false;
             else {
                 var i, shippingAddress = ""
                 for (i in state.customerDetails.address) {

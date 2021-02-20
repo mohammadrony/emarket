@@ -109,7 +109,7 @@ const routes = [
     component: UserProfile
   },
   {
-    path: "/user-verify/:token",
+    path: "/user-verify",
     name: "user-verify",
     component: UserVerify
   },

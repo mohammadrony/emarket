@@ -6,12 +6,13 @@ export const CurrentUserModule = {
         user: {},
         admin: false,
         userId: 0,
+        newUserEmail: "",
         userLoggedIn: false,
     },
     mutations: {
         SET_TOKEN(state, token) {
             state.token = token
-            if (token!="") {
+            if (token != "") {
                 state.userLoggedIn = true
             } else {
                 state.userLoggedIn = false
@@ -20,7 +21,7 @@ export const CurrentUserModule = {
 
         SET_USER(state, user) {
             state.user = user
-            if (Object.keys(user).length!=0) {
+            if (Object.keys(user).length != 0) {
                 state.userId = user.id
                 if (user.priority == 1) {
                     state.admin = true
@@ -36,8 +37,11 @@ export const CurrentUserModule = {
             state.user.firstName = firstName
             state.user.lastName = lastName
         },
-        SET_USERNAME(state, userName){
+        SET_USERNAME(state, userName) {
             state.user.username = userName
+        },
+        SET_NEW_USER_EMAIL(state, email) {
+            state.newUserEmail = email
         }
     },
     actions: {
@@ -52,6 +56,9 @@ export const CurrentUserModule = {
         },
         setUserName({ commit }, userName) {
             commit("SET_USERNAME", userName)
+        },
+        setNewUserEmail({ commit }, email) {
+            commit("SET_NEW_USER_EMAIL", email)
         }
     }
 }

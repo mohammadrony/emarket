@@ -28,7 +28,7 @@
               title="change name"
               scale="0.8"
               icon="pen"
-             />
+            />
           </b-button>
         </div>
 
@@ -85,7 +85,7 @@
                 title="Add username"
                 scale="0.8"
                 icon="pen"
-               />
+              />
             </b-button>
           </div>
           <div class="mt-1" v-if="user.username && editUserName == 0">
@@ -101,7 +101,7 @@
                 title="Change username"
                 scale="0.8"
                 icon="pen"
-               />
+              />
             </b-button>
           </div>
           <div v-if="editUserName == 1">
@@ -112,7 +112,8 @@
                     size="sm"
                     placeholder="Username"
                     v-model="userName"
-                    @keyup="checkUserName"
+                    debounce="500"
+                    @update="checkUserName"
                     :state="userNameValidation"
                     required
                   />
@@ -164,7 +165,7 @@
               title="change password"
               scale="0.8"
               icon="pen"
-             />
+            />
           </b-button>
         </div>
         <b-modal

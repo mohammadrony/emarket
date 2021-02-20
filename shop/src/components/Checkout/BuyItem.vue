@@ -72,12 +72,12 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-alert variant="primary" class="my-2 p-1 pl-2" :show="!formValidate">
+        <b-alert variant="primary" class="mb-0 mt-5 p-1 pl-2" :show="!formValidate">
           {{ message }}
         </b-alert>
       </b-col>
     </b-row>
-    <b-row class="mt-5" v-if="subTotalAmount != 0">
+    <b-row class="mt-4" v-if="subTotalAmount != 0">
       <b-col cols="5">
         <b-button block variant="warning" to="/cart-view">Edit Cart</b-button>
       </b-col>
@@ -122,7 +122,7 @@ export default {
       payBtnSpin: false,
       subTotalAmount: 0,
       formValidate: true,
-      message: "Please fill out all those field.",
+      message: "form data is not valid",
       shippingRate: this.$store.state.Checkout.shipping.cost,
       totalAmount: 0,
       checkoutProduct: null
