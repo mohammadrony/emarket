@@ -71,9 +71,13 @@ export const ReviewModule = {
       } catch (error) {
         console.log(error.response.data.error);
       }
-
-      const newRatingProduct = Math.round(10 * ((review.Product.peopleRated * review.Product.rating - review.rating)
-        / (review.Product.peopleRated - 1))) / 10;
+      var newRatingProduct;
+      if (review.Product.peopleRated == 1) {
+        newRatingProduct = 0
+      } else {
+        newRatingProduct = Math.round(10 * ((review.Product.peopleRated * review.Product.rating - review.rating)
+          / (review.Product.peopleRated - 1))) / 10;
+      }
 
       try {
         await ProductsService.updateProduct({

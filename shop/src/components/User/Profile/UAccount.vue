@@ -120,6 +120,7 @@ export default {
         } catch (error) {
           console.log(error.response.data.error);
         }
+        var i;
         for (i in reviewList) {
           await this.$store.dispatch("Review/deleteReview", reviewList[i]);
         }
