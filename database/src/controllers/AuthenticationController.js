@@ -59,16 +59,7 @@ module.exports = {
                 }
             });
             const newUser = {
-                id: user.id,
-                username: user.username,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                userType: user.userType,
-                variant: user.variant,
-                profileImage: user.profileImage,
-                priority: user.priority,
-                CompanyId: user.CompanyId
+                id: user.id
             }
             res.send(newUser)
         } catch (err) {
@@ -253,6 +244,45 @@ module.exports = {
             res.status(500).send({
                 error: "An error occured when verifying the password reset token."
             })
+        }
+    },
+    async checkRegsToken(req, res) {
+        try {
+            const user = await User.findById(req.params.userId, {
+                attributes: ["firstName", "lastName", "registerToken"]
+            })
+            if (user.registerToken) {
+                var transporter = await nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: process.env.ESTORE_EMAIL,
+                        pass: process.env.ESTORE_PASSWORD,
+                    },
+                    tls: {
+                        rejectUnauthorized: false
+                    }
+                })
+                var mailOptions = {
+                    from: process.env.ESTORE_EMAIL,
+                    to: req.body.email,
+                    subject: "E-store Email Verification",
+                    text: 'Hi ' + user.firstName + ' ' + user.lastName + ',\n\n' +
+                        'Welcome to E-store!\n\n' +
+                        'Your email verification code is: ' + user.registerToken + '\n\n' +
+                        'Use this code to complete the registration process.\n\n' +
+                        'Enjoy using you E-store account!\n'
+                }
+                await transporter.sendMail(mailOptions, function (err) {
+                    if (err) {
+                        return res.status(403).send({
+                            error: "An error occured when trying to send an email to register."
+                        });
+                    }
+                });
+            }
+            res.send(user)
+        } catch (err) {
+            error: "An error occured when trying to check users registration token."
         }
     },
     async verifyRegsToken(req, res) {

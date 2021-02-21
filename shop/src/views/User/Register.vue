@@ -228,10 +228,7 @@ export default {
           email: this.email,
           password: this.password
         });
-        this.$store.dispatch(
-          "CurrentUser/setNewUserEmail",
-          user.data.email
-        );
+        this.$store.dispatch("CurrentUser/setNewUserEmail", this.email);
         this.$store.dispatch("CurrentUser/setNewUserId", user.data.id);
 
         this.$router.push({ path: "/user-verify" });

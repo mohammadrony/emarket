@@ -108,6 +108,13 @@ export default {
   methods: {
     async login() {
       try {
+        const userId = 2;
+        const user = (await AuthenticationService.checkRegsToken(userId)).data;
+        console.log(user);
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+      try {
         const response = (
           await AuthenticationService.login({
             email: this.email,

@@ -19,6 +19,9 @@ export default {
   verifyPasswordToken(token) {
     return Api().get(`/auth/verifyPasswordToken/${token}`);
   },
+  checkRegsToken(userId) {
+    return Api().get(`/auth/checkRegsToken/${userId}`);
+  },
   verifyRegsToken({ userId, registerToken }) {
     return Api().get(`/auth/verifyRegsToken/${userId}/${registerToken}`);
   },
