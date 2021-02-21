@@ -113,10 +113,15 @@ export default {
         console.log(error.response.data.error);
       }
       if (correctPassword) {
+        var reviewList = [];
         try {
-          await ReviewService.deleteReviewByUser(this.userId);
+          reviewList = (await ReviewService.getUsersReviewList(this.userId))
+            .data;
         } catch (error) {
           console.log(error.response.data.error);
+        }
+        for (i in reviewList) {
+          await this.$store.dispatch("Review/deleteReview", reviewList[i]);
         }
         try {
           await UserService.deleteAccount(this.userId);

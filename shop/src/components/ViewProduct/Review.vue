@@ -344,7 +344,7 @@ export default {
       editReviewMessage: "Please add a rating or review to submit.",
       rating: 0,
       comment: "",
-      editReviewId: 0,
+      reviewEditing: {},
       editRating: 0,
       editComment: "",
       productId: 0,
@@ -437,7 +437,7 @@ export default {
     editReview(review) {
       this.editRating = review.rating;
       this.editComment = review.comment;
-      this.editReviewId = review.id;
+      this.reviewEditing = review;
       this.$bvModal.show("editReviewModal");
     },
     async updateReview() {
@@ -448,12 +448,9 @@ export default {
         return;
       }
       await this.$store.dispatch("Review/updateReview", {
-        id: this.editReviewId,
-        rating: this.editRating,
-        comment: this.editComment,
-        productId: this.productId,
-        productRating: this.productRating,
-        oldRating: this.currentUserReview.rating
+        review: this.reviewEditing,
+        newRating: this.editRating,
+        newComment: this.editComment
       });
       await this.$store.dispatch("Products/setAllBackupProduct");
       window.location.reload();
@@ -461,11 +458,7 @@ export default {
 
     async deleteReview(review) {
       if (this.userLoggedIn) {
-        await this.$store.dispatch("Review/deleteReview", {
-          review: review,
-          productId: this.productId,
-          productRating: this.productRating
-        });
+        await this.$store.dispatch("Review/deleteReview", review);
         await this.$store.dispatch("Products/setAllBackupProduct");
         window.location.reload();
       }

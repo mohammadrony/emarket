@@ -97,8 +97,12 @@
           <b-col>
             <h6>
               SHOWING {{ (currentPage - 1) * perPage + 1 }} TO
-              {{ perPage >= apCount ? apCount : currentPage * perPage }} OF
-              {{ apCount }} ({{ Math.ceil(apCount / perPage) }}
+              {{
+                currentPage * perPage > apCount
+                  ? apCount
+                  : currentPage * perPage
+              }}
+              OF {{ apCount }} ({{ Math.ceil(apCount / perPage) }}
               PAGES)
             </h6>
           </b-col>

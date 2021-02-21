@@ -78,7 +78,9 @@ export default {
     this.userId = this.$store.state.CurrentUser.userId;
     this.user = this.$store.state.CurrentUser.user;
     try {
-      this.reviewList = (await ReviewService.getUsersReviewList()).data;
+      this.reviewList = (
+        await ReviewService.getUsersReviewList(this.userId)
+      ).data;
       if (this.reviewList) {
         this.reviews = this.reviewList.length;
         const start = 0;

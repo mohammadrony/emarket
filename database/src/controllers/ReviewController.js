@@ -9,14 +9,20 @@ module.exports = {
 				where: {
 					ProductId: productId
 				},
-				include: {
+				include: [{
 					model: User,
 					attributes: [
 						'profileImage',
 						'firstName',
 						'lastName'
 					]
-				},
+				}, {
+					model: Product,
+					attributes: [
+						'rating',
+						'peopleRated'
+					]
+				}],
 				order: [
 					['createdAt', 'DESC']
 				]
@@ -32,12 +38,14 @@ module.exports = {
 		try {
 			const reviewList = await Review.findAll({
 				where: {
-					UserId: req.user.id
+					UserId: req.params.userId
 				},
 				include: {
 					model: Product,
 					attributes: [
 						"title",
+						"rating",
+						"peopleRated",
 						"image1"
 					]
 				}
@@ -92,19 +100,5 @@ module.exports = {
 				error: 'An error occured when trying to delete a review.'
 			})
 		}
-	},
-	async deleteReviewByUser(req, res) {
-		try {
-			await Review.destroy({
-				where: {
-					UserId: req.user.id
-				}
-			})
-			res.send({ id: req.user.id })
-		} catch (err) {
-			res.status(500).send({
-				error: 'An error occured when trying to delete users review.'
-			})
-		}
-	},
+	}
 }

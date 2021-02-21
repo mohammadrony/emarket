@@ -256,11 +256,16 @@ export default {
       });
     },
     async deleteAccount(user) {
+      var reviewList = [];
       try {
-        await ReviewService.deleteReviewByUser(user.id);
+        reviewList = (await ReviewService.getUsersReviewList(user.id)).data;
       } catch (error) {
         console.log(error.response.data.error);
       }
+      for (i in reviewList) {
+        await this.$store.dispatch("Review/deleteReview", reviewList[i]);
+      }
+
       try {
         await UserService.deleteAccount(user.id);
         window.location.reload();

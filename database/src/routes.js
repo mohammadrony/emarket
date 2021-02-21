@@ -118,8 +118,7 @@ module.exports = (app) => {
   // review
   app.get("/review/getReviewList/:productId",
     ReviewController.getReviewList)
-  app.get("/review/getUsersReviewList",
-    isAuthenticated,
+  app.get("/review/getUsersReviewList/:userId",
     ReviewController.getUsersReviewList)
   app.post("/review/createReview",
     isAuthenticated,
@@ -130,9 +129,6 @@ module.exports = (app) => {
   app.delete("/review/deleteReview/:reviewId",
     isAuthenticated,
     ReviewController.deleteReview)
-  app.delete("/review/deleteReviewByUser",
-    isAuthenticated,
-    ReviewController.deleteReviewByUser)
 
   // showcase
   app.get("/showcase/getShowcaseItems",

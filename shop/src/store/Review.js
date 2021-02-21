@@ -37,50 +37,49 @@ export const ReviewModule = {
         }
       }
     },
-    async updateReview({ commit }, { id, rating, comment, productId, productRating, oldRating }) {
+    async updateReview({ commit }, { review, newRating, newComment }) {
       commit("DO_SOMETHING")
       try {
         await ReviewService.updateReview({
-          id: id,
-          rating: rating,
-          comment: comment,
-          productId: productId
+          id: review.id,
+          rating: newRating,
+          comment: newComment,
+          productId: review.ProductId
         });
       } catch (error) {
         console.log(error.response.data.error);
       }
-      if (rating != 0 && rating != oldRating) {
-        const newRating = Math.round(10 * (productRating.rating + ((rating - oldRating)
-          / productRating.peopleRated))) / 10
+      if (newRating != 0 && newRating != review.rating) {
+        const newRatingProduct = Math.round(10 * (review.Product.rating + ((newRating - review.rating)
+          / review.Product.peopleRated))) / 10
 
         try {
           await ProductsService.updateProduct({
-            id: productId,
-            rating: newRating,
+            id: review.ProductId,
+            rating: newRatingProduct,
           });
         } catch (error) {
           console.log(error.response.data.error);
         }
       }
     },
-    async deleteReview({ commit }, { review, productId, productRating }) {
+    async deleteReview({ commit }, review) {
       commit("DO_SOMETHING")
 
       try {
         await ReviewService.deleteReview(review.id);
-        window.location.reload();
       } catch (error) {
         console.log(error.response.data.error);
       }
 
-      const newRating = Math.round(10 * ((productRating.peopleRated * productRating.rating - review.rating)
-        / (productRating.peopleRated - 1))) / 10;
+      const newRatingProduct = Math.round(10 * ((review.Product.peopleRated * review.Product.rating - review.rating)
+        / (review.Product.peopleRated - 1))) / 10;
 
       try {
         await ProductsService.updateProduct({
-          id: productId,
-          rating: newRating,
-          peopleRated: productRating.peopleRated - 1
+          id: review.ProductId,
+          rating: newRatingProduct,
+          peopleRated: review.Product.peopleRated - 1
         });
       } catch (error) {
         console.log(error.response.data.error);

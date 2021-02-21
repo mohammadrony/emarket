@@ -4,8 +4,8 @@ export default {
     getReviewList(productId) {
         return Api().get(`/review/getReviewList/${productId}`)
     },
-    getUsersReviewList() {
-        return Api().get("/review/getUsersReviewList")
+    getUsersReviewList(userId) {
+        return Api().get(`/review/getUsersReviewList/${userId}`)
     },
     createReview(credentials) {
         return Api().post('/review/createReview', credentials)
@@ -15,8 +15,5 @@ export default {
     },
     deleteReview(reviewId) {
         return Api().delete(`/review/deleteReview/${reviewId}`)
-    },
-    deleteReviewByUser() {
-        return Api().delete("/review/deleteReviewByUser")
     }
 }
