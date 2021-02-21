@@ -60,7 +60,7 @@ module.exports = {
 					'Please follow the link to keep track on your order.\n\n' +
 					'http://' + 'localhost:8080' + '/order/' + order.checkoutSessionId + '\n\n' +
 					'Your session Id: ' + order.checkoutSessionId + '\n\n' +
-					'!!!\n'
+					'Thanks for using E-store\n'
 			}
 			await transporter.sendMail(mailOptions, function (err) {
 				if (err) {

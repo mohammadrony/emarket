@@ -67,8 +67,8 @@
                 </b-button>
                 <b-button
                   v-if="orderStatus == 'complete'"
-                  @click="deleteOrder"
                   block
+                  disabled
                   variant="danger"
                 >
                   Delete
@@ -83,7 +83,12 @@
             <b-row class="mt-2" v-if="orderStatus == 'complete'">
               <b-col>
                 <small>
-                  you can keep this order in this stage for later analysis.
+                  We don't allow anyone to delete any order information. If you
+                  delete this order from here. This same order could be create
+                  by this session id. For this we need to delete this order from
+                  stripe also. But stripe don't allow us to delete order
+                  information (as admin knows). We're trying to find a different
+                  way to solve this issue. Until then please wait.
                 </small>
               </b-col>
             </b-row>
