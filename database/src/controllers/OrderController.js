@@ -1,4 +1,5 @@
 const { Order } = require('../models')
+const nodemailer = require('nodemailer')
 
 module.exports = {
 	async getOrderList(req, res) {
@@ -40,6 +41,34 @@ module.exports = {
 	async createOrder(req, res) {
 		try {
 			const order = await Order.create(req.body)
+			var transporter = await nodemailer.createTransport({
+				service: 'gmail',
+				auth: {
+					user: process.env.ESTORE_EMAIL,
+					pass: process.env.ESTORE_PASSWORD,
+				},
+				tls: {
+					rejectUnauthorized: false
+				}
+			})
+			var mailOptions = {
+				from: process.env.ESTORE_EMAIL,
+				to: order.email,
+				subject: "E-store Order Status",
+				text: 'Hi ' + order.name + ',\n\n' +
+					'Thanks for your purchase!\n\n' +
+					'Please follow the link to keep track on your order.\n\n' +
+					'http://' + 'localhost:8080' + '/order/' + order.checkoutSessionId + '\n\n' +
+					'Your session Id: ' + order.checkoutSessionId + '\n\n' +
+					'!!!\n'
+			}
+			await transporter.sendMail(mailOptions, function (err) {
+				if (err) {
+					return res.status(403).send({
+						error: "An error occured when trying to send an email to register."
+					});
+				}
+			});
 			res.send(order)
 		} catch (err) {
 			res.status(500).send({

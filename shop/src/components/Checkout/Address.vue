@@ -246,6 +246,13 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch("Checkout/resetCustomerDetails");
+    const user = this.$store.state.CurrentUser.user;
+    if (Object.keys(user).length != 0) {
+      this.name = user.firstName + " " + user.lastName;
+      this.email = user.email;
+      this.setName();
+      this.setEmail();
+    }
   },
   methods: {
     setName() {
