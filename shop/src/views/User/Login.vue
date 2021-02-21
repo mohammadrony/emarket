@@ -17,8 +17,12 @@
                   id="input-email"
                   type="email"
                   ref="emailField"
+                  :state="emailValidation"
                   required
                 />
+                <b-form-invalid-feedback :state="emailValidation">
+                  {{ invalidEmailMessage }}
+                </b-form-invalid-feedback>
               </b-form-group>
 
               <b-form-group
@@ -98,6 +102,8 @@ export default {
     return {
       email: null,
       password: null,
+      emailValidation: null,
+      invalidEmailMessage: "",
       loginMessage: null,
       loginAlert: false
     };
@@ -107,13 +113,25 @@ export default {
   },
   methods: {
     async login() {
+      var user;
       try {
-        const userId = 2;
-        const user = (await AuthenticationService.checkRegsToken(userId)).data;
-        console.log(user);
+        user = (
+          await AuthenticationService.checkRegsToken({
+            email: this.email
+          })
+        ).data;
       } catch (error) {
-        console.log(error.response.data.error);
+        console.log(error);
+        this.emailValidation = false;
+        this.invalidEmailMessage = error.response.data.error;
       }
+      if (!user.verificationStatus) {
+        this.$store.dispatch("CurrentUser/setNewUserId", user.id);
+        this.$store.dispatch("CurrentUser/setNewUserEmail", this.email);
+        this.$router.push({ path: "/user-verify" });
+        return;
+      }
+
       try {
         const response = (
           await AuthenticationService.login({

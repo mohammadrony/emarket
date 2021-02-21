@@ -58,10 +58,7 @@ module.exports = {
                     });
                 }
             });
-            const newUser = {
-                id: user.id
-            }
-            res.send(newUser)
+            res.send({ id: user.id })
         } catch (err) {
             res.status(400).send({
                 error: 'This account is already in use.'
@@ -241,17 +238,30 @@ module.exports = {
             }
             res.send(user)
         } catch (err) {
-            res.status(500).send({
+            return res.status(500).send({
                 error: "An error occured when verifying the password reset token."
             })
         }
     },
     async checkRegsToken(req, res) {
         try {
-            const user = await User.findById(req.params.userId, {
-                attributes: ["firstName", "lastName", "registerToken"]
-            })
+            const user = await User.findOne({
+                where: {
+                    email: req.body.email
+                },
+                attributes: ["id", "firstName", "lastName", "registerToken"]
+            });
+            if (!user) {
+                return res.status(403).status({
+                    error: "Invalid email address."
+                })
+            }
+            var retUser = {
+                id: user.id,
+                verificationStatus: true
+            }
             if (user.registerToken) {
+                retUser.verificationStatus = false
                 var transporter = await nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
@@ -280,17 +290,17 @@ module.exports = {
                     }
                 });
             }
-            res.send(user)
+
+            res.send(retUser)
         } catch (err) {
-            error: "An error occured when trying to check users registration token."
+            return res.status(500).send({
+                error: "An error occured when trying to check users registration token."
+            })
         }
     },
     async verifyRegsToken(req, res) {
         try {
-            const user = await User.findOne({
-                where: {
-                    id: req.params.userId
-                },
+            const user = await User.findByPk(req.body.userId, {
                 attributes: [
                     "id",
                     "username",
@@ -304,8 +314,10 @@ module.exports = {
                     "priority",
                     "CompanyId"
                 ]
-            });
-            if (!user || user.registerToken != req.params.registerToken) {
+            }
+            );
+
+            if (!user || user.registerToken != req.body.registerToken) {
                 return res.status(403).send({
                     error: "invalid token id."
                 })

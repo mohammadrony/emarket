@@ -19,11 +19,11 @@ export default {
   verifyPasswordToken(token) {
     return Api().get(`/auth/verifyPasswordToken/${token}`);
   },
-  checkRegsToken(userId) {
-    return Api().get(`/auth/checkRegsToken/${userId}`);
+  checkRegsToken(credentials) {
+    return Api().post("/auth/checkRegsToken", credentials);
   },
-  verifyRegsToken({ userId, registerToken }) {
-    return Api().get(`/auth/verifyRegsToken/${userId}/${registerToken}`);
+  verifyRegsToken(credentials) {
+    return Api().post('/auth/verifyRegsToken', credentials);
   },
   resetPassword(credentials) {
     return Api().post("/auth/resetPassword", credentials);

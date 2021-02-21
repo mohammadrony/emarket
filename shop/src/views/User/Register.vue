@@ -158,7 +158,6 @@ export default {
       firstName: null,
       lastName: null,
       email: null,
-      emailUsed: [],
       formatName: /^.{1,15}$/,
       formatEmail: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
       formatPassword: /^[a-zA-z0-9]{8,32}$/,
@@ -189,11 +188,7 @@ export default {
     },
     emailValidation() {
       if (this.email == null) return null;
-      else if (
-        this.emailUsed.includes(this.email) ||
-        !this.formatEmail.test(this.email)
-      )
-        return false;
+      else if (!this.formatEmail.test(this.email)) return false;
       else return true;
     },
     newPasswordValidation() {
@@ -228,12 +223,11 @@ export default {
           email: this.email,
           password: this.password
         });
-        this.$store.dispatch("CurrentUser/setNewUserEmail", this.email);
         this.$store.dispatch("CurrentUser/setNewUserId", user.data.id);
+        this.$store.dispatch("CurrentUser/setNewUserEmail", this.email);
 
         this.$router.push({ path: "/user-verify" });
       } catch (error) {
-        this.emailUsed.push(this.email);
         this.validEmail = false;
         this.emailMessage = error.response.data.error;
       }

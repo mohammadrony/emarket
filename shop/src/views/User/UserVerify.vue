@@ -15,32 +15,48 @@
             </b-alert>
           </b-card>
 
-          <b-card v-if="userId != 0" style="color: #001e5f">
-            <b-card
-              border-variant="info"
-              header="Verify email"
-              header-bg-variant="info"
-              header-text-variant="white"
-              header-class="text-center"
-            >
-              <b-form @submit.stop.prevent="verifyRegsToken">
+          <b-card
+            style="color: #001e5f"
+            v-if="userId != 0"
+            border-variant="info"
+            header="Verify email"
+            header-bg-variant="info"
+            header-text-variant="white"
+            header-class="text-center"
+          >
+            <b-form @submit.stop.prevent="verifyRegsToken">
+              <b-form-group>
                 <label for="input-verification-code">
-                  Enter the code we send to <strong>{{ userEmail }}.</strong>
-                  If it doesn’t appear within a few minutes, check your spam
-                  folder.
+                  Enter the code we send to <strong>{{ userEmail }}.</strong> If
+                  it doesn’t appear within a few minutes, check your spam folder
                 </label>
                 <b-form-input
                   id="input-verification-code"
-                  placeholder="your 8 character code"
                   v-model="registerToken"
                   required
                   :state="registerTokenValidation"
                 />
-                <b-button class="mt-3" type="submit" variant="success">
-                  Submit
+                <b-form-invalid-feedback :state="registerTokenValidation">
+                  {{ codeVerificationMessage }}
+                </b-form-invalid-feedback>
+              </b-form-group>
+              <b-button type="submit" variant="success">
+                Submit
+              </b-button>
+              <div class="mt-4">
+                you can resend the verification code if you have not received
+                the email.
+                <br />
+                <b-button
+                  class="mt-2"
+                  size="sm"
+                  variant="info"
+                  @click="tryAgain"
+                >
+                  Resend Email
                 </b-button>
-              </b-form>
-            </b-card>
+              </div>
+            </b-form>
           </b-card>
         </b-col>
       </b-row>
@@ -63,22 +79,34 @@ export default {
     return {
       userId: 0,
       userEmail: "",
-      tokenFormat: /^[a-zA-Z0-9]{8,16}$/,
+      registerTokenValidation: null,
+      codeVerificationMessage: "",
       registerToken: ""
     };
   },
-  computed: {
-    registerTokenValidation() {
-      if (!this.registerToken) return null;
-      else if (!this.tokenFormat.test(this.registerToken)) return false;
-      else return true;
-    }
-  },
+  computed: {},
   async mounted() {
     this.userId = this.$store.state.CurrentUser.newUserId;
     this.userEmail = this.$store.state.CurrentUser.newUserEmail;
   },
   methods: {
+    async tryAgain() {
+      try {
+        const user = (
+          await AuthenticationService.checkRegsToken({
+            email: this.userEmail,
+            password: this.$store.state.CurrentUser.newUserPassword
+          })
+        ).data;
+        if (user.verificationStatus) {
+          this.$router.push({ path: "/login" });
+        } else {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+    },
     async verifyRegsToken() {
       var user;
       try {
@@ -89,7 +117,8 @@ export default {
           })
         ).data;
       } catch (error) {
-        console.log(error.response.data.error);
+        this.registerTokenValidation = false;
+        this.codeVerificationMessage = error.response.data.error;
       }
       if (user) {
         try {
@@ -98,6 +127,8 @@ export default {
           });
           this.$store.dispatch("CurrentUser/setToken", user.token);
           this.$store.dispatch("CurrentUser/setUser", user.user);
+          this.$store.dispatch("CurrentUser/setNewUserId", 0);
+          this.$store.dispatch("CurrentUser/setNewUserEmail", "");
           this.$router.push({ path: "/" });
         } catch (error) {
           console.log(error.response.data.error);
