@@ -1,9 +1,8 @@
 <template>
   <div>
     <div class="p-2 mt-2" style="background-color: #f4f6f8">
-      <b-form @submit.stop.prevent="requestToken">
+      <b-form @submit.stop.prevent="requestPasswordToken">
         <b-form-group
-          @submit.prevent="requestToken"
           class="mb-2"
           style="font-weight: bold"
           label="Enter your email address"
@@ -42,7 +41,7 @@
 import AuthenticationService from "@/services/AuthenticationService.js";
 import UserService from "@/services/UserService.js";
 export default {
-  name: "RequestToken",
+  name: "ReqPassToken",
   components: {},
   data() {
     return {
@@ -54,7 +53,7 @@ export default {
   },
   computed: {},
   methods: {
-    async requestToken() {
+    async requestPasswordToken() {
       var user;
       try {
         this.mailSent = false;
@@ -65,7 +64,7 @@ export default {
       }
       if (user) {
         try {
-          await AuthenticationService.requestToken({
+          await AuthenticationService.requestPasswordToken({
             email: this.emailResetPassword
           });
           this.tokenAlert = false;

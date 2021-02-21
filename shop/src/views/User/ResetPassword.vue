@@ -110,7 +110,7 @@ export default {
       try {
         this.tokenList = true;
         this.tokenValidate = true;
-        const user = (await AuthenticationService.verifyToken(token)).data;
+        const user = (await AuthenticationService.verifyPasswordToken(token)).data;
         if (user.resetPasswordToken === token) {
           this.tokenValidate = true;
           this.userId = user.id;

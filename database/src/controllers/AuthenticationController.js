@@ -25,8 +25,8 @@ module.exports = {
                 req.body.priority = 1
                 req.body.CompanyId = 1
             }
-            var buf = crypto.randomInt(100000, 999999);
-            var token = buf.toString();
+            var buf = crypto.randomBytes(4);
+            var token = buf.toString('hex');
             req.body.registerToken = token;
             req.body.profileImage = "http://localhost:8084/public/user-image/default-man.png"
             const user = await User.create(req.body)
@@ -64,14 +64,13 @@ module.exports = {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
+                userType: user.userType,
+                variant: user.variant,
                 profileImage: user.profileImage,
                 priority: user.priority,
                 CompanyId: user.CompanyId
             }
-            res.send({
-                user: newUser,
-                token: jwtSignUser(newUser)
-            })
+            res.send(newUser)
         } catch (err) {
             res.status(400).send({
                 error: 'This account is already in use.'
@@ -84,20 +83,7 @@ module.exports = {
             const user = await User.findOne({
                 where: {
                     email: email
-                },
-                attributes: [
-                    "id",
-                    "username",
-                    "firstName",
-                    "lastName",
-                    "profileImage",
-                    "email",
-                    "phoneNo",
-                    "userType",
-                    "variant",
-                    "priority",
-                    "CompanyId"
-                ]
+                }
             })
             if (!user) {
                 console.log("user not found")
@@ -143,22 +129,21 @@ module.exports = {
                     error: 'Incorrect login information.'
                 })
             }
-
-            const retUser = {
+            const newUser = {
                 id: user.id,
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
-                profileImage: user.profileImage,
                 userType: user.userType,
                 variant: user.variant,
+                profileImage: user.profileImage,
                 priority: user.priority,
                 CompanyId: user.CompanyId
             }
             res.send({
-                user: retUser,
-                token: jwtSignUser(retUser)
+                user: newUser,
+                token: jwtSignUser(newUser)
             })
         } catch (err) {
             res.status(500).send({
@@ -196,7 +181,7 @@ module.exports = {
             })
         }
     },
-    async requestToken(req, res) {
+    async requestPasswordToken(req, res) {
         try {
             var buf = crypto.randomBytes(20);
             var token = buf.toString('hex');
@@ -239,7 +224,7 @@ module.exports = {
             })
         }
     },
-    async verifyToken(req, res) {
+    async verifyPasswordToken(req, res) {
         try {
             const user = await User.findOne({
                 where: {
@@ -252,7 +237,6 @@ module.exports = {
                     "lastName",
                     "profileImage",
                     "email",
-                    "phoneNo",
                     "userType",
                     "variant",
                     "priority",
@@ -284,7 +268,6 @@ module.exports = {
                     "lastName",
                     "profileImage",
                     "email",
-                    "phoneNo",
                     "userType",
                     "registerToken",
                     "variant",
@@ -297,9 +280,21 @@ module.exports = {
                     error: "invalid token id."
                 })
             }
+            const newUser = {
+                id: user.id,
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                userType: user.userType,
+                variant: user.variant,
+                profileImage: user.profileImage,
+                priority: user.priority,
+                CompanyId: user.CompanyId
+            }
             res.send({
-                user: user,
-                token: jwtSignUser(user)
+                user: newUser,
+                token: jwtSignUser(newUser)
             })
         } catch (err) {
             res.status(500).send({

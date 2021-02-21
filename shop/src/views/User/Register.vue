@@ -230,9 +230,9 @@ export default {
         });
         this.$store.dispatch(
           "CurrentUser/setNewUserEmail",
-          user.response.email
+          user.data.email
         );
-        this.$store.dispatch("CurrentUser/setNewUserId", user.response.id);
+        this.$store.dispatch("CurrentUser/setNewUserId", user.data.id);
 
         this.$router.push({ path: "/user-verify" });
       } catch (error) {

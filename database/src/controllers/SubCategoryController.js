@@ -28,9 +28,6 @@ module.exports = {
 	async createSubCategory(req, res) {
 		try {
 			const subCategory = await SubCategory.create(req.body)
-			console.log("----------------------------")
-			console.log(req.body)
-			console.log("----------------------------")
 			res.send(subCategory)
 		} catch (err) {
 			res.status(500).send({

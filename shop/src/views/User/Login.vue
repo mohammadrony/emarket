@@ -58,13 +58,13 @@
             <b-row class="mt-2">
               <b-col class="text-center">
                 <small>
-                  <b-link v-b-toggle.collapse-requestToken>
+                  <b-link v-b-toggle.request-password-token>
                     forget your password?
                   </b-link>
                 </small>
               </b-col>
             </b-row>
-            <b-collapse id="collapse-requestToken">
+            <b-collapse id="request-password-token">
               <ReqPassToken />
             </b-collapse>
             <hr />

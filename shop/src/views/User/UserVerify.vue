@@ -18,24 +18,25 @@
           <b-card v-if="userId != 0" style="color: #001e5f">
             <b-card
               border-variant="info"
-              header="Email Verified"
+              header="Verify email"
               header-bg-variant="info"
               header-text-variant="white"
-              align="center"
+              header-class="text-center"
             >
               <b-form @submit.stop.prevent="verifyRegsToken">
-                <b-form-group
-                  label="Verification Code"
-                  label-for="input-verification-code"
-                >
-                  <b-form-input
-                    placeholder="your 6 digit code"
-                    v-model="registerToken"
-                    required
-                    :state="registerTokenValidation"
-                  />
-                </b-form-group>
-                <b-button type="submit" variant="success">
+                <label for="input-verification-code">
+                  Enter the code we send to <strong>{{ userEmail }}.</strong>
+                  If it doesn’t appear within a few minutes, check your spam
+                  folder.
+                </label>
+                <b-form-input
+                  id="input-verification-code"
+                  placeholder="your 8 character code"
+                  v-model="registerToken"
+                  required
+                  :state="registerTokenValidation"
+                />
+                <b-button class="mt-3" type="submit" variant="success">
                   Submit
                 </b-button>
               </b-form>
@@ -62,7 +63,7 @@ export default {
     return {
       userId: 0,
       userEmail: "",
-      tokenFormat: /^[0-9]{6}$/,
+      tokenFormat: /^[a-zA-Z0-9]{8,16}$/,
       registerToken: ""
     };
   },
@@ -76,7 +77,6 @@ export default {
   async mounted() {
     this.userId = this.$store.state.CurrentUser.newUserId;
     this.userEmail = this.$store.state.CurrentUser.newUserEmail;
-    console.log(this.userEmail);
   },
   methods: {
     async verifyRegsToken() {
@@ -88,7 +88,6 @@ export default {
             registerToken: this.registerToken
           })
         ).data;
-        console.log(user);
       } catch (error) {
         console.log(error.response.data.error);
       }

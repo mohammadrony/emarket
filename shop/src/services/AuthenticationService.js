@@ -13,11 +13,11 @@ export default {
   updatePassword(credentials) {
     return Api().post("/auth/updatePassword", credentials);
   },
-  requestToken(credentials) {
-    return Api().post("/auth/requestToken", credentials);
+  requestPasswordToken(credentials) {
+    return Api().post("/auth/requestPasswordToken", credentials);
   },
-  verifyToken(token) {
-    return Api().get(`/auth/verifyToken/${token}`);
+  verifyPasswordToken(token) {
+    return Api().get(`/auth/verifyPasswordToken/${token}`);
   },
   verifyRegsToken({ userId, registerToken }) {
     return Api().get(`/auth/verifyRegsToken/${userId}/${registerToken}`);

@@ -29,10 +29,10 @@ module.exports = (app) => {
     isAuthenticated,
     AuthenticationControllerPolicy.updatePassword,
     AuthenticationController.updatePassword)
-  app.post("/auth/requestToken",
-    AuthenticationController.requestToken)
-  app.get("/auth/verifyToken/:token",
-    AuthenticationController.verifyToken)
+  app.post("/auth/requestPasswordToken",
+    AuthenticationController.requestPasswordToken)
+  app.get("/auth/verifyPasswordToken/:token",
+    AuthenticationController.verifyPasswordToken)
   app.get("/auth/verifyRegsToken/:userId/:registerToken",
     AuthenticationController.verifyRegsToken)
   app.post("/auth/resetPassword",
