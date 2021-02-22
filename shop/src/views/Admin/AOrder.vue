@@ -51,6 +51,7 @@ export default {
   },
   data() {
     return {
+      orderId: 0,
       orderInfo: {},
       orderItems: [],
       componentKey: 0,
@@ -58,15 +59,18 @@ export default {
     };
   },
   async mounted() {
-    const orderId = this.$route.params.orderId;
+    this.orderId = this.$route.params.orderId;
     try {
-      this.orderInfo = (await OrderService.getOrder(orderId)).data;
+      this.orderInfo = (await OrderService.getOrder(this.orderId)).data;
       this.validParam = Object.keys(this.orderInfo).length != 0;
     } catch (error) {
       console.log(error.response.data.error);
     }
     try {
-      this.orderItems = (await OrderItemService.getOrderItemList(orderId)).data;
+      this.orderItems = (
+        await OrderItemService.getOrderItemList(this.orderId)
+      ).data;
+      this.componentKey += 1;
     } catch (error) {
       console.log(error.response.data.error);
     }

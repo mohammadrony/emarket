@@ -57,30 +57,12 @@
             <hr />
             <b-row>
               <b-col cols="5">
-                <b-button
-                  v-if="orderStatus != 'complete'"
-                  disabled
-                  block
-                  variant="danger"
-                >
-                  Delete
-                </b-button>
-                <b-button
-                  v-if="orderStatus == 'complete'"
-                  block
-                  disabled
-                  variant="danger"
-                >
+                <b-button block disabled variant="danger">
                   Delete
                 </b-button>
               </b-col>
             </b-row>
-            <b-row class="mt-2" v-if="orderStatus != 'complete'">
-              <b-col>
-                <small>you can't delete an order until its complete</small>
-              </b-col>
-            </b-row>
-            <b-row class="mt-2" v-if="orderStatus == 'complete'">
+            <b-row class="mt-2">
               <b-col>
                 <small>
                   We don't allow anyone to delete any order information. If you

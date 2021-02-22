@@ -69,7 +69,6 @@ export default {
       this.orderItems = (
         await OrderItemService.getOrderItemList(this.orderInfo.id)
       ).data;
-      this.validOrder = this.orderItems.length != 0;
       this.componentKey += 1;
     } catch (error) {
       console.log(error.response.data.error);
