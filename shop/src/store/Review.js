@@ -50,8 +50,14 @@ export const ReviewModule = {
         console.log(error.response.data.error);
       }
       if (newRating != 0 && newRating != review.rating) {
-        const newRatingProduct = Math.round(10 * (review.Product.rating + ((newRating - review.rating)
-          / review.Product.peopleRated))) / 10
+        var newRatingProduct;
+        if (review.rating == 0) {
+          newRatingProduct = Math.round(10 * (review.Product.rating + (newRating
+            / (review.Product.peopleRated + 1)))) / 10
+        } else {
+          newRatingProduct = Math.round(10 * (review.Product.rating + ((newRating - review.rating)
+            / review.Product.peopleRated))) / 10
+        }
 
         try {
           await ProductsService.updateProduct({
@@ -71,22 +77,23 @@ export const ReviewModule = {
       } catch (error) {
         console.log(error.response.data.error);
       }
-      var newRatingProduct;
-      if (review.Product.peopleRated == 1) {
-        newRatingProduct = 0
-      } else {
-        newRatingProduct = Math.round(10 * ((review.Product.peopleRated * review.Product.rating - review.rating)
-          / (review.Product.peopleRated - 1))) / 10;
-      }
-
-      try {
-        await ProductsService.updateProduct({
-          id: review.ProductId,
-          rating: newRatingProduct,
-          peopleRated: review.Product.peopleRated - 1
-        });
-      } catch (error) {
-        console.log(error.response.data.error);
+      if (review.rating != 0) {
+        var newRatingProduct;
+        if (review.Product.peopleRated == 1) {
+          newRatingProduct = 0
+        } else {
+          newRatingProduct = Math.round(10 * ((review.Product.peopleRated * review.Product.rating - review.rating)
+            / (review.Product.peopleRated - 1))) / 10;
+        }
+        try {
+          await ProductsService.updateProduct({
+            id: review.ProductId,
+            rating: newRatingProduct,
+            peopleRated: review.Product.peopleRated - 1
+          });
+        } catch (error) {
+          console.log(error.response.data.error);
+        }
       }
     }
   }

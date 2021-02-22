@@ -1,101 +1,103 @@
 <template>
   <div>
-    <b-row>
-      <b-col cols="6" v-for="orderItem in orderItems" :key="orderItem.id">
-        <b-card-group deck>
-          <b-card img-top style="max-width: 14rem" class="mb-4">
-            <b-card-img
-              :src="orderItem.Product.image1"
-              style="max-width: 14rem; max-height: 14rem"
-              alt="Image Not Found"
-            />
-            <br />
-            <router-link :to="{ path: `/product/${orderItem.Product.id}` }">
-              {{ orderItem.Product.title }}
-            </router-link>
-            <br />
-            <small class="mt-2">
-              Price: {{ orderItem.Product.amount }}
-              {{ orderItem.Product.currency }}
-            </small>
-            <br />
-            <small class="mt-2">Quantity: {{ orderItem.quantity }}</small>
-            <br />
-            <small class="mt-2">
-              Cost: {{ orderItem.Product.amount * orderItem.quantity }}
-              {{ orderItem.Product.currency }}
-            </small>
-          </b-card>
-        </b-card-group>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col>
-        <h5 style="font-weight: bold">Update Status</h5>
-        <hr />
-        <b-row>
-          <b-col cols="5">
-            <b-dropdown
-              id="dropdown-left"
-              :text="orderStatus"
-              block
-              :variant="statusVariant"
-            >
-              <b-dropdown-item
-                v-for="(status, idx) in allStatus"
-                :key="idx"
-                @click="updateStatus(status)"
+    <div v-if="validOrder">
+      <b-row>
+        <b-col cols="6" v-for="orderItem in orderItems" :key="orderItem.id">
+          <b-card-group deck>
+            <b-card img-top style="max-width: 14rem" class="mb-4">
+              <b-card-img
+                :src="orderItem.Product.image1"
+                style="max-width: 14rem; max-height: 14rem"
+                alt="Image Not Found"
+              />
+              <br />
+              <router-link :to="{ path: `/product/${orderItem.Product.id}` }">
+                {{ orderItem.Product.title }}
+              </router-link>
+              <br />
+              <small class="mt-2">
+                Price: {{ orderItem.Product.amount }}
+                {{ orderItem.Product.currency }}
+              </small>
+              <br />
+              <small class="mt-2">Quantity: {{ orderItem.quantity }}</small>
+              <br />
+              <small class="mt-2">
+                Cost: {{ orderItem.Product.amount * orderItem.quantity }}
+                {{ orderItem.Product.currency }}
+              </small>
+            </b-card>
+          </b-card-group>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <h5 style="font-weight: bold">Update Status</h5>
+          <hr />
+          <b-row>
+            <b-col cols="5">
+              <b-dropdown
+                id="dropdown-left"
+                :text="orderStatus"
+                block
+                :variant="statusVariant"
               >
-                {{ status.name }}
-              </b-dropdown-item>
-            </b-dropdown>
-          </b-col>
-        </b-row>
-        <b-row class="mt-4">
-          <b-col>
-            <h5 style="font-weight: bold">Delete Order</h5>
-            <hr />
-            <b-row>
-              <b-col cols="5">
-                <b-button
-                  v-if="orderStatus != 'complete'"
-                  disabled
-                  block
-                  variant="danger"
+                <b-dropdown-item
+                  v-for="(status, idx) in allStatus"
+                  :key="idx"
+                  @click="updateStatus(status)"
                 >
-                  Delete
-                </b-button>
-                <b-button
-                  v-if="orderStatus == 'complete'"
-                  block
-                  disabled
-                  variant="danger"
-                >
-                  Delete
-                </b-button>
-              </b-col>
-            </b-row>
-            <b-row class="mt-2" v-if="orderStatus != 'complete'">
-              <b-col>
-                <small>you can't delete an order until its complete</small>
-              </b-col>
-            </b-row>
-            <b-row class="mt-2" v-if="orderStatus == 'complete'">
-              <b-col>
-                <small>
-                  We don't allow anyone to delete any order information. If you
-                  delete this order from here. This same order could be create
-                  by this session id. For this we need to delete this order from
-                  stripe also. But stripe don't allow us to delete order
-                  information (as admin knows). We're trying to find a different
-                  way to solve this issue. Until then please wait.
-                </small>
-              </b-col>
-            </b-row>
-          </b-col>
-        </b-row>
-      </b-col>
-    </b-row>
+                  {{ status.name }}
+                </b-dropdown-item>
+              </b-dropdown>
+            </b-col>
+          </b-row>
+          <b-row class="mt-4">
+            <b-col>
+              <h5 style="font-weight: bold">Delete Order</h5>
+              <hr />
+              <b-row>
+                <b-col cols="5">
+                  <b-button
+                    v-if="orderStatus != 'complete'"
+                    disabled
+                    block
+                    variant="danger"
+                  >
+                    Delete
+                  </b-button>
+                  <b-button
+                    v-if="orderStatus == 'complete'"
+                    block
+                    disabled
+                    variant="danger"
+                  >
+                    Delete
+                  </b-button>
+                </b-col>
+              </b-row>
+              <b-row class="mt-2" v-if="orderStatus != 'complete'">
+                <b-col>
+                  <small>you can't delete an order until its complete</small>
+                </b-col>
+              </b-row>
+              <b-row class="mt-2" v-if="orderStatus == 'complete'">
+                <b-col>
+                  <small>
+                    We don't allow anyone to delete any order information. If
+                    you delete this order from here. This same order could be
+                    create by this session id. For this we need to delete this
+                    order from stripe also. But we didn't find any way to delete
+                    order information from stripe. We're trying to find a
+                    different way to solve this issue. Until then please wait.
+                  </small>
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
@@ -107,10 +109,11 @@ export default {
   components: {},
   data() {
     return {
-      orderId: null,
-      orderItems: null,
-      orderStatus: null,
-      statusVariant: null,
+      orderId: 0,
+      validOrder: false,
+      orderItems: [],
+      orderStatus: "",
+      statusVariant: "",
       allStatus: [
         {
           name: "paid",
@@ -137,6 +140,7 @@ export default {
       this.orderItems = (
         await OrderItemService.getOrderItemList(this.orderId)
       ).data;
+      this.validOrder = this.orderItems.length != 0;
     } catch (error) {
       console.log(error.response.data.error);
     }

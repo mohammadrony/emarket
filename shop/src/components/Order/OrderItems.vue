@@ -55,7 +55,6 @@ export default {
   components: {},
   data() {
     return {
-      message: null,
       orderItems: [],
       validOrder: false,
       orderStatus: "",
