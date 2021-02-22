@@ -7,6 +7,7 @@ export const ProductsModule = {
     namespaced: true,
     strict: true,
     state: {
+        productsRouteValidate: true,
         allProduct: null,
         allBackupProduct: null,
         displayProducts: null,
@@ -52,10 +53,49 @@ export const ProductsModule = {
         },
         SET_MAXIMUM_AMOUNT(state, maximumAmount) {
             state.searchParameter.maximumAmount = maximumAmount;
+        },
+        SET_ROUTE_STATUS(state, productsRouteValidate) {
+            console.log("in products.js before set", state.productsRouteValidate)
+            state.productsRouteValidate = productsRouteValidate
+            console.log("in products.js after set", state.productsRouteValidate)
         }
     },
     actions: {
         async setSearchParameter({ commit }, route) {
+            commit("SET_SEARCH_CATEGORY_ID", 0);
+            commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
+            commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", 0);
+            commit("SET_ROUTE_STATUS", true)
+            if (route.params.category) {
+                try {
+                    const category = (
+                        await CategoryService.getCategoryByName(route.params.category)
+                    ).data;
+                    if (Object.keys(category).length == 0) {
+                        commit("SET_ROUTE_STATUS", false)
+                    }
+                    commit("SET_SEARCH_CATEGORY_ID", category.id);
+
+                } catch (error) {
+                    console.log(error.response.data.error);
+                }
+            }
+            if (route.params.subCategory) {
+                try {
+                    const subCategory = (
+                        await SubCategoryService.getSubCategoryByName(
+                            route.params.subCategory
+                        )
+                    ).data;
+                    if (Object.keys(subCategory).length == 0) {
+                        commit("SET_ROUTE_STATUS", false)
+                    }
+                    commit("SET_SEARCH_SUB_CATEGORY_ID", subCategory.id);
+
+                } catch (error) {
+                    console.log(error.response.data.error);
+                }
+            }
             if (route.params.subSubCategory) {
                 try {
                     const subSubCategory = (
@@ -63,43 +103,16 @@ export const ProductsModule = {
                             route.params.subSubCategory
                         )
                     ).data;
-
-                    commit("SET_SEARCH_CATEGORY_ID", 0);
-                    commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
+                    if (Object.keys(subSubCategory).length == 0) {
+                        commit("SET_ROUTE_STATUS", false)
+                    }
                     commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", subSubCategory.id);
 
                 } catch (error) {
-                    console.log("error get sub sub cat id by name", error);
+                    console.log(error.response.data.error);
                 }
-            } else if (route.params.subCategory) {
-                try {
-                    const subCategory = (
-                        await SubCategoryService.getSubCategoryByName(
-                            route.params.subCategory
-                        )
-                    ).data;
-
-                    commit("SET_SEARCH_CATEGORY_ID", 0);
-                    commit("SET_SEARCH_SUB_CATEGORY_ID", subCategory.id);
-                    commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", 0);
-
-                } catch (error) {
-                    console.log("error get sub cat id by name", error);
-                }
-            } else if (route.params.category) {
-                try {
-                    const category = (
-                        await CategoryService.getCategoryByName(route.params.category)
-                    ).data;
-
-                    commit("SET_SEARCH_CATEGORY_ID", category.id);
-                    commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
-                    commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", 0);
-
-                } catch (error) {
-                    console.log("error get cat id by name", error);
-                }
-            } else {
+            }
+            else {
                 commit("SET_SEARCH_CATEGORY_ID", 0);
                 commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
                 commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", 0);

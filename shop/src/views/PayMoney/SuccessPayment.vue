@@ -42,7 +42,8 @@ export default {
   data() {
     return {
       order: {},
-      session: {}
+      session: {},
+      validSession: false
     };
   },
   async mounted() {
@@ -59,9 +60,12 @@ export default {
       this.session = (
         await CheckoutService.retrieveCheckoutSession(sessionId)
       ).data;
+      this.validSession = Object.keys(this.session).length != 0;
     } catch (error) {
       console.log(error.response.data.error);
     }
+    console.log(this.session);
+    if (!this.validSession) return;
     const lineItems = this.session.line_items.data;
     const shipCost = lineItems[lineItems.length - 1].amount_total;
     try {

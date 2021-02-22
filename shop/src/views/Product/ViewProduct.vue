@@ -1,163 +1,186 @@
 <template>
   <div>
     <TopHeader />
-    <ProductHeader
-      :key="componentKey"
-      :pName="displayProduct.title"
-      :categId="displayProduct.CategoryId"
-      :subCategId="displayProduct.SubCategoryId"
-      :subSubCategId="displayProduct.SubSubCategoryId"
-    />
-    <b-container class="mt-5">
-      <b-row align-h="center">
-        <b-col cols="5">
-          <b-row align-h="center">
-            <b-img
-              class="mb-2"
-              fluid
-              :src="current_image"
-              alt="Image Not Found"
-            />
-          </b-row>
-          <b-row class="justify-content-left">
-            <b-img
-              class="mr-1 mb-1"
-              height="90px"
-              @click="changeImage(displayProduct.image1)"
-              :src="displayProduct.image1"
-            />
-            <b-img
-              class="mr-1 mb-1"
-              height="90px"
-              @click="changeImage(displayProduct.image2)"
-              :src="displayProduct.image2"
-            />
-            <b-img
-              class="mr-1 mb-1"
-              height="90px"
-              @click="changeImage(displayProduct.image3)"
-              :src="displayProduct.image3"
-            />
-            <b-img
-              class="mr-1 mb-1"
-              height="90px"
-              @click="changeImage(displayProduct.image4)"
-              :src="displayProduct.image4"
-            />
-            <b-img
-              class="mr-1 mb-1"
-              height="90px"
-              @click="changeImage(displayProduct.image5)"
-              :src="displayProduct.image5"
-            />
-            <b-img
-              class="mr-1 mb-1"
-              height="90px"
-              @click="changeImage(displayProduct.image6)"
-              :src="displayProduct.image6"
-            />
-            <b-img
-              class="mr-1 mb-1"
-              height="90px"
-              @click="changeImage(displayProduct.image7)"
-              :src="displayProduct.image7"
-            />
-            <b-img
-              class="mr-1 mb-1"
-              height="90px"
-              @click="changeImage(displayProduct.image8)"
-              :src="displayProduct.image8"
-            />
-            <b-img
-              class="mr-1 mb-1"
-              height="90px"
-              @click="changeImage(displayProduct.image9)"
-              :src="displayProduct.image9"
-            />
-            <b-img
-              class="mr-1 mb-1"
-              height="90px"
-              @click="changeImage(displayProduct.image10)"
-              :src="displayProduct.image10"
-            />
-          </b-row>
-        </b-col>
-        <b-col cols="5">
-          <div>
-            <h3>
-              {{ displayProduct.title }}
-            </h3>
-            <h5>
-              <b>Price : </b>{{ displayProduct.amount }}
-              {{ displayProduct.currency }}
-            </h5>
+    <div v-if="validProduct">
+      <ProductHeader
+        :key="componentKey"
+        :pName="displayProduct.title"
+        :categId="displayProduct.CategoryId"
+        :subCategId="displayProduct.SubCategoryId"
+        :subSubCategId="displayProduct.SubSubCategoryId"
+      />
+      <b-container class="mt-5">
+        <b-row align-h="center">
+          <b-col cols="5">
+            <b-row align-h="center">
+              <b-img
+                class="mb-2"
+                fluid
+                :src="current_image"
+                alt="Image Not Found"
+              />
+            </b-row>
+            <b-row class="justify-content-left">
+              <b-img
+                class="mr-1 mb-1"
+                height="90px"
+                @click="changeImage(displayProduct.image1)"
+                :src="displayProduct.image1"
+              />
+              <b-img
+                class="mr-1 mb-1"
+                height="90px"
+                @click="changeImage(displayProduct.image2)"
+                :src="displayProduct.image2"
+              />
+              <b-img
+                class="mr-1 mb-1"
+                height="90px"
+                @click="changeImage(displayProduct.image3)"
+                :src="displayProduct.image3"
+              />
+              <b-img
+                class="mr-1 mb-1"
+                height="90px"
+                @click="changeImage(displayProduct.image4)"
+                :src="displayProduct.image4"
+              />
+              <b-img
+                class="mr-1 mb-1"
+                height="90px"
+                @click="changeImage(displayProduct.image5)"
+                :src="displayProduct.image5"
+              />
+              <b-img
+                class="mr-1 mb-1"
+                height="90px"
+                @click="changeImage(displayProduct.image6)"
+                :src="displayProduct.image6"
+              />
+              <b-img
+                class="mr-1 mb-1"
+                height="90px"
+                @click="changeImage(displayProduct.image7)"
+                :src="displayProduct.image7"
+              />
+              <b-img
+                class="mr-1 mb-1"
+                height="90px"
+                @click="changeImage(displayProduct.image8)"
+                :src="displayProduct.image8"
+              />
+              <b-img
+                class="mr-1 mb-1"
+                height="90px"
+                @click="changeImage(displayProduct.image9)"
+                :src="displayProduct.image9"
+              />
+              <b-img
+                class="mr-1 mb-1"
+                height="90px"
+                @click="changeImage(displayProduct.image10)"
+                :src="displayProduct.image10"
+              />
+            </b-row>
+          </b-col>
+          <b-col cols="5">
+            <div>
+              <h3>
+                {{ displayProduct.title }}
+              </h3>
+              <h5>
+                <b>Price : </b>{{ displayProduct.amount }}
+                {{ displayProduct.currency }}
+              </h5>
 
-            <div v-html="displayProduct.subtitle" />
-            <div class="mt-4">
-              <b-row align-v="center">
-                <b-col cols="7">
-                  <b-form-rating
-                    readonly
-                    show-value-max
-                    show-value
-                    :value="displayProduct.rating"
-                    variant="primary"
-                  />
+              <div v-html="displayProduct.subtitle" />
+              <div class="mt-4">
+                <b-row align-v="center">
+                  <b-col cols="7">
+                    <b-form-rating
+                      readonly
+                      show-value-max
+                      show-value
+                      :value="displayProduct.rating"
+                      variant="primary"
+                    />
+                  </b-col>
+                </b-row>
+              </div>
+              <div class="d-flex mt-3">
+                <AddToCart
+                  buttonType="sm"
+                  :key="cartComponentKey"
+                  addButtonTitle="Add To Cart"
+                  addedButtonTitle="In Cart"
+                  :productId="displayProduct.id"
+                  :rating="displayProduct.rating"
+                  :currency="displayProduct.currency"
+                  :image="displayProduct.image1"
+                  :title="displayProduct.title"
+                  :amount="displayProduct.amount"
+                />
+                <AddToWishlist
+                  class="ml-3"
+                  :key="wishlistKey"
+                  addButtonTitle="Save"
+                  addedButtonTitle="Saved"
+                  buttonType="sm"
+                  :productId="displayProduct.id"
+                />
+              </div>
+              <b-row>
+                <b-col cols="8">
+                  <b-button
+                    @click="buyNow"
+                    class="mt-3"
+                    size="lg"
+                    variant="success"
+                    block
+                  >
+                    <b-icon-cart-fill />
+                    Buy Now
+                  </b-button>
                 </b-col>
               </b-row>
             </div>
-            <div class="d-flex mt-3">
-              <AddToCart
-                buttonType="sm"
-                :key="cartComponentKey"
-                addButtonTitle="Add To Cart"
-                addedButtonTitle="In Cart"
-                :productId="displayProduct.id"
-                :rating="displayProduct.rating"
-                :currency="displayProduct.currency"
-                :image="displayProduct.image1"
-                :title="displayProduct.title"
-                :amount="displayProduct.amount"
-              />
-              <AddToWishlist
-                class="ml-3"
-                :key="wishlistKey"
-                addButtonTitle="Save"
-                addedButtonTitle="Saved"
-                buttonType="sm"
-                :productId="displayProduct.id"
-              />
-            </div>
-            <b-row>
-              <b-col cols="8">
-                <b-button
-                  @click="buyNow"
-                  class="mt-3"
-                  size="lg"
-                  variant="success"
-                  block
-                >
-                  <b-icon-cart-fill />
-                  Buy Now
-                </b-button>
-              </b-col>
-            </b-row>
+          </b-col>
+        </b-row>
+        <div class="mt-5 p-4" style="background-color: #eeeeee">
+          <div class="product-detail-feature">
+            <h3>Feature</h3>
+            <div v-html="displayProduct.description" />
           </div>
-        </b-col>
-      </b-row>
-      <div class="mt-5 p-4" style="background-color: #eeeeee">
-        <div class="product-detail-feature">
-          <h3>Feature</h3>
-          <div v-html="displayProduct.description" />
         </div>
-      </div>
-      <Review class="mt-3" />
-      <Recommendation
-        class="mt-5"
-        :key="recommendationKey"
-        :subSubCatId="displayProduct.SubSubCategoryId"
-      />
-    </b-container>
+        <Review class="mt-3" />
+        <Recommendation
+          class="mt-5"
+          :key="recommendationKey"
+          :subSubCatId="displayProduct.SubSubCategoryId"
+        />
+      </b-container>
+    </div>
+    <div v-if="!validProduct">
+      <b-container>
+        <b-row>
+          <b-col cols="6">
+            <b-card class="mt-5">
+              <b-alert variant="warning" class="mb-0" show>
+                It looks like you clicked on an invalid link.
+                <br />
+                Please check your product id.
+                <br />
+                Go to
+                <b-link to="/products">
+                  Products Page
+                  <b-icon icon="arrow-right" />
+                </b-link>
+              </b-alert>
+            </b-card>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
     <Footer class="mt-5" />
   </div>
 </template>
@@ -188,6 +211,7 @@ export default {
       user: {},
       componentKey: 0,
       wishlistKey: 6,
+      validProduct: true,
       cartComponentKey: 4,
       recommendationKey: 2,
       displayProduct: {}
@@ -198,6 +222,7 @@ export default {
     const productId = parseInt(this.$route.params.productId);
     try {
       this.displayProduct = (await ProductsService.getProduct(productId)).data;
+      this.validProduct = Object.keys(this.displayProduct).length != 0;
       this.forceRerender();
       this.current_image = this.displayProduct.image1;
     } catch (error) {

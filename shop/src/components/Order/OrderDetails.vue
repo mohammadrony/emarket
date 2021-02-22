@@ -46,6 +46,12 @@
               It looks like you clicked on an invalid link.
               <br />
               Please check your order session id.
+              <br />
+              Go to
+              <b-link to="/">
+                Home Page
+                <b-icon icon="arrow-right" />
+              </b-link>
             </b-alert>
           </b-card>
         </b-col>

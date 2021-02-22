@@ -74,7 +74,6 @@ module.exports = {
                 }
             })
             if (!user) {
-                console.log("user not found")
                 return res.status(403).send({
                     error: 'Incorrect login information.'
                 })

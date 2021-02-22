@@ -117,7 +117,6 @@ export default {
           this.name = user.firstName + " " + user.lastName;
           this.email = user.email;
         }
-        console.log("token", token);
       } catch (error) {
         this.tokenValidate = false;
         console.log(error.response.data.error);

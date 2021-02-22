@@ -262,9 +262,6 @@
                 max-rows="8"
               />
             </b-form-group>
-            <b-alert class="mt-3" variant="warning" :show="reviewAlert">
-              {{ reviewMessage }}
-            </b-alert>
             <b-button variant="primary" type="submit">
               Submit
             </b-button>
@@ -282,30 +279,35 @@
         </b-card>
       </b-col>
     </b-row>
-    <b-modal hide-footer id="editReviewModal" title="Write a review">
-      <b-row>
-        <b-col cols="5">
-          <h6>Rating</h6>
-          <b-form-rating v-model="editRating" variant="primary" />
-        </b-col>
-      </b-row>
-      <div class="mt-4">
-        Comment
-      </div>
-      <b-form-group>
-        <b-form-textarea
-          v-model="editComment"
-          placeholder="Write a review"
-          rows="3"
-          max-rows="10"
-        />
-      </b-form-group>
-      <b-alert class="mt-3" variant="warning" :show="editReviewAlert">
-        {{ editReviewMessage }}
-      </b-alert>
-      <b-button variant="primary" @click="updateReview" v-if="userLoggedIn">
-        Submit
-      </b-button>
+    <b-modal
+      v-if="userLoggedIn"
+      hide-footer
+      id="editReviewModal"
+      title="Write a review"
+    >
+      <b-form @submit.stop.prevent="updateReview">
+        <b-row>
+          <b-col cols="5">
+            <h6>Rating</h6>
+            <b-form-rating v-model="editRating" variant="primary" />
+          </b-col>
+        </b-row>
+        <div class="mt-4">
+          Comment
+        </div>
+        <b-form-group>
+          <b-form-textarea
+            v-model="editComment"
+            placeholder="Write a review"
+            rows="3"
+            required
+            max-rows="10"
+          />
+        </b-form-group>
+        <b-button type="submit" variant="primary">
+          Submit
+        </b-button>
+      </b-form>
     </b-modal>
   </div>
 </template>
@@ -338,10 +340,6 @@ export default {
       userId: 0,
       admin: false,
       userLoggedIn: false,
-      reviewAlert: false,
-      reviewMessage: "Please add a rating or review to submit.",
-      editReviewAlert: false,
-      editReviewMessage: "Please add a rating or review to submit.",
       rating: 0,
       comment: "",
       reviewEditing: {},
@@ -420,10 +418,6 @@ export default {
   },
   methods: {
     async createReview() {
-      if (this.rating == 0 || this.comment == "") {
-        this.reviewAlert = true;
-        return;
-      }
       await this.$store.dispatch("Review/createReview", {
         rating: this.rating,
         comment: this.comment,
@@ -442,11 +436,6 @@ export default {
     },
     async updateReview() {
       this.$bvModal.hide("editReviewModal");
-
-      if (this.editRating == 0 || this.editComment == "") {
-        this.editReviewAlert = true;
-        return;
-      }
       await this.$store.dispatch("Review/updateReview", {
         review: this.reviewEditing,
         newRating: this.editRating,

@@ -46,6 +46,12 @@
               We don't have any order with this id.
               <br />
               Please try again.
+              <br />
+              Go to
+              <b-link to="/admin/orders">
+                Orders Page
+                <b-icon icon="arrow-right" />
+              </b-link>
             </b-alert>
           </b-card>
         </b-col>

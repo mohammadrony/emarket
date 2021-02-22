@@ -3,9 +3,6 @@ import ReviewService from "@/services/ReviewService.js";
 export const ReviewModule = {
   namespaced: true,
   strict: true,
-  state: {
-    data: "hello world"
-  },
   mutations: {
     DO_SOMETHING() {
       return;
@@ -50,19 +47,21 @@ export const ReviewModule = {
         console.log(error.response.data.error);
       }
       if (newRating != 0 && newRating != review.rating) {
-        var newRatingProduct;
+        var newRatingProduct, peopleRated;
         if (review.rating == 0) {
+          peopleRated = review.Product.peopleRated + 1
           newRatingProduct = Math.round(10 * (review.Product.rating + (newRating
-            / (review.Product.peopleRated + 1)))) / 10
+            / peopleRated))) / 10
         } else {
+          peopleRated = review.Product.peopleRated
           newRatingProduct = Math.round(10 * (review.Product.rating + ((newRating - review.rating)
-            / review.Product.peopleRated))) / 10
+            / peopleRated))) / 10
         }
-
         try {
           await ProductsService.updateProduct({
             id: review.ProductId,
             rating: newRatingProduct,
+            peopleRated: peopleRated
           });
         } catch (error) {
           console.log(error.response.data.error);
@@ -71,7 +70,6 @@ export const ReviewModule = {
     },
     async deleteReview({ commit }, review) {
       commit("DO_SOMETHING")
-
       try {
         await ReviewService.deleteReview(review.id);
       } catch (error) {

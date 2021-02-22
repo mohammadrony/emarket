@@ -144,9 +144,6 @@ export default {
       componentKey: 0,
       wishlistKey: 4,
       cartComponentKey: 2,
-      categoryList: null,
-      subCategoryList: null,
-      subSubCategoryList: null,
       searchParameter: {
         param: {},
         query: {}
