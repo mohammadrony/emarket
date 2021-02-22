@@ -19,7 +19,9 @@
             <b-col cols="2" />
           </b-row>
           <h6 class="mt-2">
-            {{ ratingCount }} ratings & {{ commentCount }} reviews
+            {{ ratingCount }}
+            {{ ratingCount >= 1 ? "rating" : "ratings" }} &amp;
+            {{ commentCount }} {{ commentCount >= 1 ? "comment" : "comments" }}
           </h6>
           <br />
         </b-card>
@@ -424,7 +426,7 @@ export default {
         productId: this.productId,
         productRating: this.productRating
       });
-      await this.$store.dispatch("Products/setAllBackupProduct");
+      await this.$store.dispatch("Products/setAllBackupProducts");
       window.location.reload();
     },
 
@@ -441,14 +443,14 @@ export default {
         newRating: this.editRating,
         newComment: this.editComment
       });
-      await this.$store.dispatch("Products/setAllBackupProduct");
+      await this.$store.dispatch("Products/setAllBackupProducts");
       window.location.reload();
     },
 
     async deleteReview(review) {
       if (this.userLoggedIn) {
         await this.$store.dispatch("Review/deleteReview", review);
-        await this.$store.dispatch("Products/setAllBackupProduct");
+        await this.$store.dispatch("Products/setAllBackupProducts");
         window.location.reload();
       }
     }

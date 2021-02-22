@@ -8,8 +8,8 @@ export const ProductsModule = {
     strict: true,
     state: {
         productsRouteValidate: true,
-        allProduct: null,
-        allBackupProduct: null,
+        allProducts: null,
+        allBackupProducts: null,
         displayProducts: null,
         apCount: null,
         perPage: null,
@@ -23,11 +23,11 @@ export const ProductsModule = {
         }
     },
     mutations: {
-        SET_ALL_BACKUP_PRODUCT(state, allProduct) {
-            state.allBackupProduct = allProduct;
+        SET_ALL_BACKUP_PRODUCTS(state, allProducts) {
+            state.allBackupProducts = allProducts;
         },
-        SET_ALL_PRODUCT(state, allProduct) {
-            state.allProduct = allProduct;
+        SET_ALL_PRODUCTS(state, allProducts) {
+            state.allProducts = allProducts;
             state.perPage = 9
         },
         SET_DISPLAY_PRODUCTS(state, displayProducts) {
@@ -55,9 +55,7 @@ export const ProductsModule = {
             state.searchParameter.maximumAmount = maximumAmount;
         },
         SET_ROUTE_STATUS(state, productsRouteValidate) {
-            console.log("in products.js before set", state.productsRouteValidate)
             state.productsRouteValidate = productsRouteValidate
-            console.log("in products.js after set", state.productsRouteValidate)
         }
     },
     actions: {
@@ -112,11 +110,6 @@ export const ProductsModule = {
                     console.log(error.response.data.error);
                 }
             }
-            else {
-                commit("SET_SEARCH_CATEGORY_ID", 0);
-                commit("SET_SEARCH_SUB_CATEGORY_ID", 0);
-                commit("SET_SEARCH_SUB_SUB_CATEGORY_ID", 0);
-            }
             if (route.query.q) {
                 commit("SET_SEARCH_TEXT", route.query.q)
             } else commit("SET_SEARCH_TEXT", "")
@@ -129,61 +122,61 @@ export const ProductsModule = {
                 commit("SET_MAXIMUM_AMOUNT", hi)
             } else commit("SET_MAXIMUM_AMOUNT", 1000000000)
         },
-        async setAllBackupProduct({ commit }) {
-            const allProduct = (await ProductsService.getAllProducts()).data;
-            commit("SET_ALL_BACKUP_PRODUCT", allProduct)
+        async setAllBackupProducts({ commit }) {
+            const allProducts = (await ProductsService.getAllProducts()).data;
+            commit("SET_ALL_BACKUP_PRODUCTS", allProducts)
         },
-        async getAllBackupProduct({ dispatch, state }) {
+        async getAllBackupProducts({ dispatch, state }) {
 
-            if (state.allBackupProduct == null || state.allBackupProduct.length == 0) {
-                await dispatch("setAllBackupProduct")
+            if (state.allBackupProducts == null || state.allBackupProducts.length == 0) {
+                await dispatch("setAllBackupProducts")
             }
-            return state.allBackupProduct;
+            return state.allBackupProducts;
         },
-        async setAllProduct({ commit, state, dispatch }) {
-            const allProduct = await dispatch("filterProducts");
-            commit("SET_ALL_PRODUCT", allProduct);
-            commit("SET_AP_COUNT", allProduct.length);
-            const displayProducts = allProduct.slice(0, state.perPage);
+        async setAllProducts({ commit, state, dispatch }) {
+            const allProducts = await dispatch("filterProducts");
+            commit("SET_ALL_PRODUCTS", allProducts);
+            commit("SET_AP_COUNT", allProducts.length);
+            const displayProducts = allProducts.slice(0, state.perPage);
             commit("SET_DISPLAY_PRODUCTS", displayProducts)
         },
         paginate({ commit, state }, currentPage) {
             const start = (currentPage - 1) * state.perPage;
-            const displayProducts = state.allProduct.slice(start, start + state.perPage);
+            const displayProducts = state.allProducts.slice(start, start + state.perPage);
             commit("SET_DISPLAY_PRODUCTS", displayProducts);
         },
         async filterProducts({ state, dispatch }) {
-            var allProduct = await dispatch("getAllBackupProduct");
-            if (state.searchParameter.categoryId != 0) {
-                allProduct = allProduct.filter(val => {
-                    return (
-                        val.CategoryId == state.searchParameter.categoryId);
-                });
-            }
-            else if (state.searchParameter.subCategoryId != 0) {
-                allProduct = allProduct.filter(val => {
-                    return (
-                        val.SubCategoryId == state.searchParameter.subCategoryId);
-                });
-            }
-            else if (state.searchParameter.subSubCategoryId != 0) {
-                allProduct = allProduct.filter(val => {
+            var allProducts = await dispatch("getAllBackupProducts");
+            if (state.searchParameter.subSubCategoryId != 0) {
+                allProducts = allProducts.filter(val => {
                     return (
                         val.SubSubCategoryId == state.searchParameter.subSubCategoryId);
                 });
             }
-            allProduct = allProduct.filter(val => {
+            else if (state.searchParameter.subCategoryId != 0) {
+                allProducts = allProducts.filter(val => {
+                    return (
+                        val.SubCategoryId == state.searchParameter.subCategoryId);
+                });
+            }
+            else if (state.searchParameter.categoryId != 0) {
+                allProducts = allProducts.filter(val => {
+                    return (
+                        val.CategoryId == state.searchParameter.categoryId);
+                });
+            }
+            allProducts = allProducts.filter(val => {
                 return (
                     val.title.toLowerCase().includes(state.searchParameter.text.toLowerCase())
                 );
             });
-            allProduct = allProduct.filter(val => {
+            allProducts = allProducts.filter(val => {
                 return (
                     val.amount >= state.searchParameter.lowestAmount &&
                     val.amount <= state.searchParameter.maximumAmount
                 );
             });
-            return allProduct;
+            return allProducts;
         },
     }
 }

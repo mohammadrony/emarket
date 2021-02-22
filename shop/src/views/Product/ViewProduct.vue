@@ -1,13 +1,13 @@
 <template>
   <div>
     <TopHeader />
-    <div v-if="validProduct">
+    <div v-if="validParam">
       <ProductHeader
         :key="componentKey"
-        :pName="displayProduct.title"
-        :categId="displayProduct.CategoryId"
-        :subCategId="displayProduct.SubCategoryId"
-        :subSubCategId="displayProduct.SubSubCategoryId"
+        :productName="displayProduct.title"
+        :categoryId="displayProduct.CategoryId"
+        :subCategoryId="displayProduct.SubCategoryId"
+        :subSubCategoryId="displayProduct.SubSubCategoryId"
       />
       <b-container class="mt-5">
         <b-row align-h="center">
@@ -160,26 +160,12 @@
         />
       </b-container>
     </div>
-    <div v-if="!validProduct">
-      <b-container>
-        <b-row>
-          <b-col cols="6">
-            <b-card class="mt-5">
-              <b-alert variant="warning" class="mb-0" show>
-                It looks like you clicked on an invalid link.
-                <br />
-                Please check your product id.
-                <br />
-                Go to
-                <b-link to="/products">
-                  Products Page
-                  <b-icon icon="arrow-right" />
-                </b-link>
-              </b-alert>
-            </b-card>
-          </b-col>
-        </b-row>
-      </b-container>
+    <div v-if="!validParam">
+      <InvalidParameter
+        paramName="product"
+        pageToNavigate="Products Page"
+        routerLink="/products"
+      />
     </div>
     <Footer class="mt-5" />
   </div>
@@ -190,6 +176,7 @@ import ProductsService from "@/services/ProductsService.js";
 import TopHeader from "@/components/Common/TopHeader.vue";
 import ProductHeader from "@/components/ViewProduct/ProductHeader.vue";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
+import InvalidParameter from "@/components/NotFound/InvalidParameter.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Review from "@/components/ViewProduct/Review.vue";
 import Recommendation from "@/components/ViewProduct/Recommendation.vue";
@@ -200,6 +187,7 @@ export default {
     TopHeader,
     ProductHeader,
     AddToCart,
+    InvalidParameter,
     AddToWishlist,
     Review,
     Recommendation,
@@ -211,7 +199,7 @@ export default {
       user: {},
       componentKey: 0,
       wishlistKey: 6,
-      validProduct: true,
+      validParam: true,
       cartComponentKey: 4,
       recommendationKey: 2,
       displayProduct: {}
@@ -222,7 +210,7 @@ export default {
     const productId = parseInt(this.$route.params.productId);
     try {
       this.displayProduct = (await ProductsService.getProduct(productId)).data;
-      this.validProduct = Object.keys(this.displayProduct).length != 0;
+      this.validParam = Object.keys(this.displayProduct).length != 0;
       this.forceRerender();
       this.current_image = this.displayProduct.image1;
     } catch (error) {

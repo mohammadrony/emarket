@@ -2,7 +2,10 @@ import Vue from "vue";
 import store from "@/store"
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
-import Products from "@/views/Product/Products.vue";
+import AllProducts from "@/views/Product/AllProducts.vue";
+import CategoryProducts from "@/views/Product/CategoryProducts.vue";
+import SubCategoryProducts from "@/views/Product/SubCategoryProducts.vue";
+import SubSubCategoryProducts from "@/views/Product/SubSubCategoryProducts.vue";
 import ViewProduct from "@/views/Product/ViewProduct.vue";
 import CartView from "@/views/UsersProduct/CartView.vue";
 import Wishlist from "@/views/UsersProduct/Wishlist.vue";
@@ -35,23 +38,23 @@ const routes = [
   },
   {
     path: "/products",
-    name: "products",
-    component: Products
+    name: "all-products",
+    component: AllProducts
   },
   {
     path: "/products/:category",
-    name: "products",
-    component: Products
+    name: "category-products",
+    component: CategoryProducts
   },
   {
     path: "/products/:category/:subCategory",
-    name: "products",
-    component: Products
+    name: "sub-category-products",
+    component: SubCategoryProducts
   },
   {
     path: "/products/:category/:subCategory/:subSubCategory",
-    name: "products",
-    component: Products
+    name: "sub-sub-category-products",
+    component: SubSubCategoryProducts
   },
   {
     path: "/product/:productId",
@@ -112,11 +115,6 @@ const routes = [
     path: "/user-verify",
     name: "user-verify",
     component: UserVerify
-  },
-  {
-    path: "/reset-password",
-    name: "reset-password",
-    component: ResetPassword
   },
   {
     path: "/reset-password/:token",

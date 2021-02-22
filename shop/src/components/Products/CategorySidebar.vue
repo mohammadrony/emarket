@@ -109,7 +109,6 @@ export default {
   data() {
     return {
       newCategory: "",
-      searchParameter: {},
       categoryList: []
     };
   },
@@ -120,7 +119,6 @@ export default {
   },
 
   async mounted() {
-    this.searchParameter = this.$store.state.Products.searchParameter;
     this.categoryList = await this.$store.dispatch("Category/getCategoryList");
     this.categoryList = this.categoryList.map(obj => ({
       ...obj,

@@ -64,7 +64,6 @@ export default {
     } catch (error) {
       console.log(error.response.data.error);
     }
-    console.log(this.session);
     if (!this.validSession) return;
     const lineItems = this.session.line_items.data;
     const shipCost = lineItems[lineItems.length - 1].amount_total;

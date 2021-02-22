@@ -389,7 +389,7 @@ export default {
       }
       try {
         const newProduct = (await ProductsService.createProduct(formData)).data;
-        await this.$store.dispatch("Products/setAllBackupProduct");
+        await this.$store.dispatch("Products/setAllBackupProducts");
         this.$router.push({ path: `/product/${newProduct.id}` });
       } catch (error) {
         console.log(error.response.data.error);

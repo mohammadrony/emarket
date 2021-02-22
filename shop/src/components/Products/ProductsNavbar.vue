@@ -119,7 +119,7 @@ export default {
     search() {
       if (this.searchText) {
         this.$router.push({
-          path: `${this.$route.path}/?q=${this.searchText}`
+          path: `${this.$route.path}?q=${this.searchText}`
         });
       }
     }

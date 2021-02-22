@@ -6,10 +6,10 @@
 export default {
   name: "Name",
   props: {},
+  components: {},
   data() {
     return {};
   },
-  components: {},
   computed: {},
   mounted() {},
   methods: {}

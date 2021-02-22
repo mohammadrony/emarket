@@ -72,7 +72,11 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-alert variant="primary" class="mb-0 mt-5 p-1 pl-2" :show="!formValidate">
+        <b-alert
+          variant="primary"
+          class="mb-0 mt-5 p-1 pl-2"
+          :show="!formValidate"
+        >
           {{ message }}
         </b-alert>
       </b-col>
@@ -184,9 +188,6 @@ export default {
           stripe
             .redirectToCheckout({
               sessionId: checkoutSession.id
-            })
-            .then(function(result) {
-              console.log(result);
             })
             .catch(function(error) {
               console.error(error);

@@ -49,7 +49,7 @@ module.exports = {
                     'Welcome to E-store!\n\n' +
                     'Your email verification code is: ' + token + '\n\n' +
                     'Use this code to complete the registration process.\n\n' +
-                    'Enjoy using you E-store account!\n'
+                    'Enjoy using your E-store account!\n'
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {
@@ -366,12 +366,9 @@ module.exports = {
             var mailOptions = {
                 from: process.env.ESTORE_EMAIL,
                 to: req.body.email,
-                subject: 'Password changed on e-store',
-                text: 'Hello ' + req.body.name + '\n\n'
-                    + 'We wanted to let you know that your e-store password was reset\n'
-                    + 'If you did not perform this action, you can recover access by entering ' + req.body.email + ' into the form at ' + 'http://localhost:8080/reset-password' + ' \n'
-                    + 'If you run into problems, please contact support by visiting ' + 'http://localhost:8080/contact' + ' \n'
-                    + 'Please do not reply to this email with your password. We will never ask for your password, and we strongly discourage you from sharing it with anyone.\n'
+                subject: 'E-store Password Changed',
+                text: 'Hello ' + req.body.name + '\n\n' +
+                    'We wanted to let you know that your e-store password was reset\n'
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {

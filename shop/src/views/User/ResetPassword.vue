@@ -3,21 +3,24 @@
     <TopHeader />
     <b-container class="mt-5">
       <b-row class="ml-5">
-        <b-col cols="6">
+        <b-col cols="10" md="8" lg="6">
           <b-card v-if="!tokenValidate">
             <h5 class="text-center"><strong>Reset your password</strong></h5>
-            <b-alert v-if="tokenList" class="mt-4" variant="warning" show>
+            <b-alert class="mt-4" variant="warning" show>
               <small>
                 It looks like you clicked on an invalid password reset link.
-                Please try again.
+                <br />
+                <b-link to="/login">
+                  Login here
+                  <b-icon icon="arrow-right" />
+                </b-link>
               </small>
             </b-alert>
-            <ReqPassToken />
           </b-card>
 
           <b-card v-if="tokenValidate" style="color: #001e5f">
             <h4 style="font-weight: bold">Change password for {{ email }}</h4>
-            <b-form class="mt-4">
+            <b-form @submit.stop.prevent="passwordReset" class="mt-4">
               <b-form-group
                 style="font-weight: bold"
                 id="input-group-password"
@@ -28,10 +31,16 @@
                   v-model="newPassword"
                   id="input-password"
                   type="password"
-                  @keyup="error = null"
-                  @keyup.enter="passwordReset"
                   required
+                  :state="newPasswordValidation"
                 />
+                <b-form-invalid-feedback
+                  v-if="newPassword"
+                  :state="newPasswordValidation"
+                >
+                  Your password could be 8-32 character long, contain letters,
+                  numbers and must not contain space.
+                </b-form-invalid-feedback>
               </b-form-group>
 
               <b-form-group
@@ -44,28 +53,28 @@
                   v-model="confirmPassword"
                   id="input-2-password"
                   type="password"
-                  @keyup="error = null"
-                  @keyup.enter="passwordReset"
                   required
+                  :state="confirmPasswordValidation"
                 />
+                <b-form-invalid-feedback
+                  v-if="confirmPassword"
+                  :state="confirmPasswordValidation"
+                >
+                  Password didn't match
+                </b-form-invalid-feedback>
               </b-form-group>
-              <h6 style="color: #f00">
-                {{ error }}
-              </h6>
               <b-row>
                 <b-col cols="6">
                   <b-button
                     style="font-weight: bold"
                     block
+                    type="submit"
                     class="p-2 mt-2"
-                    @click="passwordReset"
                     variant="warning"
                   >
                     Submit
                   </b-button>
                 </b-col>
-                <b-col cols="3" />
-                <b-col cols="3" />
               </b-row>
             </b-form>
           </b-card>
@@ -78,93 +87,81 @@
 
 <script>
 import TopHeader from "@/components/Common/TopHeader.vue";
-import ReqPassToken from "@/components/User/ReqPassToken.vue";
 import Footer from "@/components/Common/Footer.vue";
 import AuthenticationService from "@/services/AuthenticationService.js";
 export default {
   name: "ResetPassword",
   components: {
     TopHeader,
-    ReqPassToken,
     Footer
   },
   data() {
     return {
-      tokenList: false,
-      error: null,
       userId: null,
       emailResetPassword: null,
-      tokenAlert: null,
       mailSent: false,
       name: null,
-      tokenAlertMessage: null,
       email: null,
       newPassword: null,
+      formatPassword: /^[a-zA-z0-9]{8,32}$/,
       confirmPassword: null,
-      tokenValidate: false
+      tokenValidate: true
     };
+  },
+  computed: {
+    newPasswordValidation() {
+      if (this.newPassword == null) return null;
+      else if (!this.formatPassword.test(this.newPassword)) return false;
+      else return true;
+    },
+    confirmPasswordValidation() {
+      if (this.confirmPassword == null) return null;
+      else if (
+        this.confirmPassword != this.newPassword ||
+        !this.formatPassword.test(this.confirmPassword)
+      )
+        return false;
+      else return true;
+    }
   },
   async mounted() {
     const token = this.$route.params.token;
-    if (token) {
-      try {
-        this.tokenList = true;
-        this.tokenValidate = true;
-        const user = (await AuthenticationService.verifyPasswordToken(token)).data;
-        if (user.resetPasswordToken === token) {
-          this.tokenValidate = true;
-          this.userId = user.id;
-          this.name = user.firstName + " " + user.lastName;
-          this.email = user.email;
-        }
-      } catch (error) {
-        this.tokenValidate = false;
-        console.log(error.response.data.error);
-      }
-    } else {
-      this.tokenList = false;
-      console.log(this.tokenList);
+    try {
+      const user = (await AuthenticationService.verifyPasswordToken(token))
+        .data;
+      this.userId = user.id;
+      this.name = user.firstName + " " + user.lastName;
+      this.email = user.email;
+    } catch (error) {
+      this.tokenValidate = false;
+      console.log(error.response.data.error);
     }
   },
   methods: {
     async passwordReset() {
-      console.log(
-        this.newPassword,
-        this.confirmPassword,
-        this.newPassword.length
-      );
-      if (this.newPassword != this.confirmPassword) {
-        this.error = "Password didn't match!";
-      } else if (this.newPassword.length < 8) {
-        this.error = "Password must have at least 8 character.";
-      } else if (this.newPassword.length > 32) {
-        this.error = "Password could not have over 32 character.";
-      } else {
-        try {
-          (
-            await AuthenticationService.resetPassword({
-              id: this.userId,
-              password: this.newPassword
-            })
-          ).data;
-        } catch (error) {
-          console.log(error.response.data.error);
-        }
-        try {
-          const response = await AuthenticationService.login({
-            email: this.email,
-            password: this.newPassword
-          });
-          this.$store.dispatch("CurrentUser/setToken", response.data.token);
-          this.$store.dispatch("CurrentUser/setUser", response.data.user);
-          this.$router.push({ path: "/" });
-        } catch (error) {
-          console.log(error.response.data.error);
-        }
+      if (!this.newPasswordValidation || !this.confirmPasswordValidation)
+        return;
+      try {
+        await AuthenticationService.resetPassword({
+          id: this.userId,
+          password: this.newPassword
+        });
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
+      try {
+        const response = await AuthenticationService.login({
+          email: this.email,
+          password: this.newPassword
+        });
+        this.$store.dispatch("CurrentUser/setToken", response.data.token);
+        this.$store.dispatch("CurrentUser/setUser", response.data.user);
+        this.$router.push({ path: "/" });
+      } catch (error) {
+        console.log(error.response.data.error);
       }
     }
-  },
-  computed: {}
+  }
 };
 </script>
 

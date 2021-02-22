@@ -57,20 +57,16 @@ export default {
     return {
       admin: false,
       productId: 0,
-      productName: this.pName,
-      categoryId: this.categId,
       categoryName: "",
-      subCategoryId: this.subCategId,
       subCategoryName: "",
-      subSubCategoryId: this.subSubCategId,
       subSubCategoryName: ""
     };
   },
   props: {
-    pName: String,
-    categId: Number,
-    subCategId: Number,
-    subSubCategId: Number
+    productName: String,
+    categoryId: Number,
+    subCategoryId: Number,
+    subSubCategoryId: Number
   },
   components: {},
   computed: {},
@@ -96,7 +92,7 @@ export default {
     async deleteProduct() {
       await WishlistService.deleteWishItemByProduct(this.productId);
       await ProductsService.deleteProduct(this.productId);
-      await this.$store.dispatch("Products/setAllBackupProduct");
+      await this.$store.dispatch("Products/setAllBackupProducts");
       await this.$store.dispatch("Wishlist/setWishlist");
       this.$router.push({ path: "/products" });
     }

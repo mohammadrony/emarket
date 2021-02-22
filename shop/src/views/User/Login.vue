@@ -121,7 +121,7 @@ export default {
           })
         ).data;
       } catch (error) {
-        console.log(error);
+        console.log(error.response.data.error);
         this.emailValidation = false;
         this.invalidEmailMessage = error.response.data.error;
       }
