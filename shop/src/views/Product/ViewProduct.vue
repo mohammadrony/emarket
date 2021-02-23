@@ -98,7 +98,12 @@
                 <b-row align-v="center">
                   <b-col cols="7">
                     <b-form-rating
-                      precision="1"
+                      :precision="
+                        Math.round(displayProduct.rating) ==
+                        displayProduct.rating
+                          ? 0
+                          : 1
+                      "
                       readonly
                       show-value-max
                       show-value

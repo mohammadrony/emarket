@@ -19,7 +19,9 @@
               <b-row class="mt-2" align-v="center">
                 <b-col cols="12">
                   <b-form-rating
-                    precision="1"
+                    :precision="
+                      Math.round(product.rating) == product.rating ? 0 : 1
+                    "
                     size="sm"
                     show-value
                     show-value-max
