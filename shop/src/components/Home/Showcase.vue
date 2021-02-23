@@ -30,7 +30,7 @@
       >
         <b-img
           fluid
-          @click="$router.push({ link: showcaseCard.routerLink })"
+          @click="$router.push({ path: showcaseCard.routerLink })"
           :src="showcaseCard.image"
         />
       </b-col>
@@ -43,7 +43,7 @@
       >
         <b-img
           fluid
-          @click="$router.push({ link: showcaseBigCard.routerLink })"
+          @click="$router.push({ path: showcaseBigCard.routerLink })"
           :src="showcaseBigCard.image"
         />
       </b-col>

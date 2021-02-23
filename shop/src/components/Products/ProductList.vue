@@ -5,7 +5,7 @@
         <b-card-group deck>
           <b-card img-top style="max-width: 25rem" class="mb-4">
             <b-card-img
-              @click="$router.push({ link: `/product/${product.id}` })"
+              @click="$router.push({ path: `/product/${product.id}` })"
               :src="product.image1"
               style="max-width: 25rem; max-height: 25rem"
               alt="Image Not Found"
