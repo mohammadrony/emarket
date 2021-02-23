@@ -41,6 +41,7 @@
             <b-row class="mt-2" align-v="center">
               <b-col>
                 <b-form-rating
+                  precision="1"
                   size="sm"
                   readonly
                   show-value

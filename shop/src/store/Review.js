@@ -21,8 +21,8 @@ export const ReviewModule = {
         console.log(error.response.data.error);
       }
       if (rating != 0) {
-        const newRating = Math.round(10 * ((productRating.peopleRated * productRating.rating + rating)
-          / (productRating.peopleRated + 1))) / 10;
+        const newRating = (productRating.peopleRated * productRating.rating + rating)
+          / (productRating.peopleRated + 1);
         try {
           await ProductsService.updateProduct({
             id: productId,
@@ -50,12 +50,12 @@ export const ReviewModule = {
         var newRatingProduct, peopleRated;
         if (review.rating == 0) {
           peopleRated = review.Product.peopleRated + 1
-          newRatingProduct = Math.round(10 * (review.Product.rating + (newRating
-            / peopleRated))) / 10
+          newRatingProduct = (review.Product.peopleRated * review.Product.rating + newRating)
+            / peopleRated
         } else {
           peopleRated = review.Product.peopleRated
-          newRatingProduct = Math.round(10 * (review.Product.rating + ((newRating - review.rating)
-            / peopleRated))) / 10
+          newRatingProduct = (review.Product.peopleRated * review.Product.rating + newRating - review.rating)
+            / peopleRated
         }
         try {
           await ProductsService.updateProduct({
@@ -80,8 +80,8 @@ export const ReviewModule = {
         if (review.Product.peopleRated == 1) {
           newRatingProduct = 0
         } else {
-          newRatingProduct = Math.round(10 * ((review.Product.peopleRated * review.Product.rating - review.rating)
-            / (review.Product.peopleRated - 1))) / 10;
+          newRatingProduct = (review.Product.peopleRated * review.Product.rating - review.rating)
+            / (review.Product.peopleRated - 1);
         }
         try {
           await ProductsService.updateProduct({

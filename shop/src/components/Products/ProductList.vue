@@ -21,6 +21,7 @@
             <b-row class="mt-2" align-v="center">
               <b-col cols="12">
                 <b-form-rating
+                  precision="1"
                   size="sm"
                   show-value
                   show-value-max
