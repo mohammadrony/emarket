@@ -4,37 +4,39 @@ export const CompanyModule = {
     strict: true,
     state: {
         companyId: 1,
-        companyLogo: "",
-        companyName: "",
+        company: {},
     },
     mutations: {
-        SET_COMPANY_LOGO(state, companyLogo) {
-            state.companyLogo = companyLogo
-        },
-        SET_COMPANY_NAME(state, companyName) {
-            state.companyName = companyName
+        SET_COMPANY(state, company) {
+            state.company = company
         }
     },
     actions: {
-        async setCompanyLogo({ state, commit }) {
-            const company = (await CompanyService.getCompanyLogo(state.companyId)).data
-            commit("SET_COMPANY_LOGO", company.logo)
+        async setCompany({ state, commit }) {
+            try {
+                const company = (await CompanyService.getCompany(state.companyId)).data
+                commit("SET_COMPANY", company)
+            } catch (error) {
+                console.log(error.response.data.error)
+            }
+        },
+        async getCompany({ state, dispatch }) {
+            if (Object.keys(state.company).length == 0) {
+                await dispatch("setCompany")
+            }
+            return state.company
         },
         async getCompanyLogo({ state, dispatch }) {
-            if (state.companyLogo == "") {
-                await dispatch("setCompanyLogo")
+            if (!state.company.logo) {
+                await dispatch("setCompany")
             }
-            return state.companyLogo
-        },
-        async setCompanyName({ state, commit }) {
-            const company = (await CompanyService.getCompanyName(state.companyId)).data
-            commit("SET_COMPANY_NAME", company.name)
+            return state.company.logo
         },
         async getCompanyName({ state, dispatch }) {
-            if (state.companyName == "") {
-                await dispatch("setCompanyName")
+            if (!state.company.name) {
+                await dispatch("setCompany")
             }
-            return state.companyName
+            return state.company.name
         }
     }
 }

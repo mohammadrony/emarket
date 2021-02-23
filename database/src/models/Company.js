@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     logo:             DataTypes.STRING,
     code:             DataTypes.STRING,
     header:           DataTypes.STRING,
-    subTitle:         DataTypes.STRING,
+    motive:           DataTypes.STRING,
     details:          DataTypes.TEXT,
     location:         DataTypes.STRING,
   })

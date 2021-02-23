@@ -61,10 +61,8 @@ module.exports = (app) => {
     CheckoutController.retrieveCheckoutSession)
 
   // company
-  app.get("/company/getCompanyLogo/:companyId",
-    CompanyController.getCompanyLogo)
-  app.get("/company/getCompanyName/:companyId",
-    CompanyController.getCompanyName)
+  app.get("/company/getCompany/:companyId",
+    CompanyController.getCompany)
 
   // order
   app.get("/order/getOrderList",
