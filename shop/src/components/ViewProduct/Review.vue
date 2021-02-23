@@ -5,9 +5,11 @@
       <b-col cols="4" class="text-center">
         <b-card class="py-4">
           <br />
-          <span class="product-rating">{{ averageRating }}</span
-          ><span>/5</span>
-          <b-row>
+          <strong>
+            <span>{{ averageRating }}</span>
+            <span>/5</span>
+          </strong>
+          <b-row class="mt-2">
             <b-col cols="2" />
             <b-col cols="8">
               <b-form-rating
