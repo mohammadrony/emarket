@@ -30,6 +30,7 @@ export const WishlistModule = {
         try {
           const wishlist = (await WishlistService.getWishlist()).data;
           commit("SET_WISHLIST", wishlist)
+          console.log(state.dataLoaded)
           commit("SET_DATA_LOADED", true)
         } catch (error) {
           console.log(error.response.data.error)
@@ -37,7 +38,7 @@ export const WishlistModule = {
       }
     },
     async getWishlist({ state, dispatch }) {
-      if (state.wishlist.length == 0) {
+      if (!state.dataLoaded && state.wishlist.length == 0) {
         await dispatch("setWishlist")
       }
       return state.wishlist

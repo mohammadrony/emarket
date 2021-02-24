@@ -115,7 +115,6 @@ export default {
     this.user = this.$store.state.CurrentUser.user;
     this.admin = this.$store.state.CurrentUser.admin;
     this.userLoggedIn = this.$store.state.CurrentUser.userLoggedIn;
-    if (this.userLoggedIn) await this.$store.dispatch("Wishlist/setWishlist");
     this.categoryList = await this.$store.dispatch("Category/getCategoryList");
   },
   computed: {},
@@ -134,9 +133,9 @@ export default {
       }
     },
     async logout() {
-      this.$store.dispatch("Wishlist/clearWishlist");
       this.$store.dispatch("CurrentUser/setToken", "");
       this.$store.dispatch("CurrentUser/setUser", {});
+      this.$store.dispatch("Wishlist/clearWishlist");
       window.location.reload();
     },
     set_category(category) {

@@ -141,6 +141,7 @@ export default {
         ).data;
         this.$store.dispatch("CurrentUser/setToken", response.token);
         this.$store.dispatch("CurrentUser/setUser", response.user);
+        this.$store.dispatch("Wishlist/setWishlist");
         this.$router.push({ path: "/" });
       } catch (error) {
         this.loginAlert = true;

@@ -127,6 +127,7 @@ export default {
           });
           this.$store.dispatch("CurrentUser/setToken", user.token);
           this.$store.dispatch("CurrentUser/setUser", user.user);
+          this.$store.dispatch("Wishlist/setWishlist");
           this.$store.dispatch("CurrentUser/setNewUserId", 0);
           this.$store.dispatch("CurrentUser/setNewUserEmail", "");
           this.$router.push({ path: "/" });

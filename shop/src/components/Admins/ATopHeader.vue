@@ -56,9 +56,9 @@ export default {
   mounted() {},
   methods: {
     logout() {
-      this.$store.dispatch("Wishlist/clearWishlist");
       this.$store.dispatch("CurrentUser/setToken", "");
       this.$store.dispatch("CurrentUser/setUser", {});
+      this.$store.dispatch("Wishlist/clearWishlist");
       this.$router.push({ path: "/" });
     }
   },

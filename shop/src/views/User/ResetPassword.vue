@@ -156,6 +156,7 @@ export default {
         });
         this.$store.dispatch("CurrentUser/setToken", response.data.token);
         this.$store.dispatch("CurrentUser/setUser", response.data.user);
+        this.$store.dispatch("Wishlist/setWishlist");
         this.$router.push({ path: "/" });
       } catch (error) {
         console.log(error.response.data.error);
