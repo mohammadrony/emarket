@@ -30,7 +30,6 @@ export const WishlistModule = {
         try {
           const wishlist = (await WishlistService.getWishlist()).data;
           commit("SET_WISHLIST", wishlist)
-          console.log(state.dataLoaded)
           commit("SET_DATA_LOADED", true)
         } catch (error) {
           console.log(error.response.data.error)
@@ -60,7 +59,6 @@ export const WishlistModule = {
         }
         try {
           const wishlistItem = (await WishlistService.getWishlistItem(productId)).data
-
           commit("ADD_WISHLIST_ITEM", wishlistItem);
           return 0
         } catch (error) {

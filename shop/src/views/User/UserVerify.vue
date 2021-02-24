@@ -123,7 +123,9 @@ export default {
       if (user) {
         try {
           await AuthenticationService.resetRegsToken({
-            id: this.userId
+            id: user.user.id,
+            email: user.user.email,
+            name: user.user.firstName + " " + user.user.lastName
           });
           this.$store.dispatch("CurrentUser/setToken", user.token);
           this.$store.dispatch("CurrentUser/setUser", user.user);

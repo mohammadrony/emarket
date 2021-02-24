@@ -406,9 +406,9 @@ module.exports = {
             var mailOptions = {
                 from: process.env.ESTORE_EMAIL,
                 to: req.body.email,
-                subject: 'e-store',
-                text: "Hello" + req.body.name + "\n\n"
-                    + "your email is now verified on our store.\n\n"
+                subject: 'Welcome to E-store',
+                text: "Hello " + req.body.name + ",\n\n"
+                    + "Your email is now verified on E-store.\n\n"
                     + "Thank you.\n"
             }
             await transporter.sendMail(mailOptions, function (err) {
