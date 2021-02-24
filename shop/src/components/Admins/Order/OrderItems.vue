@@ -10,9 +10,9 @@
               alt="Image Not Found"
             />
             <br />
-            <router-link :to="{ path: `/product/${orderItem.Product.id}` }">
+            <b-link :to="{ path: `/product/${orderItem.Product.id}` }">
               {{ orderItem.Product.title }}
-            </router-link>
+            </b-link>
             <br />
             <small class="mt-2">
               Price: {{ orderItem.Product.amount }}
