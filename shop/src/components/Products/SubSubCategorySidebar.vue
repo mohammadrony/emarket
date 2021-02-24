@@ -146,7 +146,7 @@ export default {
       try {
         await SubSubCategoryService.createSubSubCategory({
           name: this.newSubCategory,
-          SubSubCategoryId: this.searchParameter.subCategoryId
+          SubCategoryId: this.searchParameter.subCategoryId
         });
         await this.$store.dispatch("Category/setSubSubCategoryList");
         window.location.reload();
