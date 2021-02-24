@@ -25,8 +25,8 @@ module.exports = {
                 req.body.priority = 1
                 req.body.CompanyId = 1
             }
-            var buf = crypto.randomBytes(4);
-            var token = buf.toString('hex');
+            var buf = crypto.randomInt(100000, 999999);
+            var token = buf.toString();
             req.body.registerToken = token;
             req.body.profileImage = "http://localhost:8084/public/user-image/default-man.png"
             const user = await User.create(req.body)

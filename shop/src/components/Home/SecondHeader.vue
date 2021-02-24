@@ -131,37 +131,33 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import CategoryService from "@/services/CategoryService.js";
-import SubCategoryService from "@/services/SubCategoryService.js";
-import SubSubCategoryService from "@/services/SubSubCategoryService.js";
 export default {
   name: "HomeSecondHeader",
   components: {},
   data() {
     return {
-      categoryList: null,
+      categoryList: [],
       categoryeachRow: 6,
-      categoryListRow1: null,
-      categoryListRow2: null,
-      subCategoryList: null,
-      subSubCategoryList: null
+      categoryListRow1: [],
+      categoryListRow2: [],
+      subCategoryList: [],
+      subSubCategoryList: []
     };
   },
-  computed: {
-    ...mapState({})
-  },
+  computed: {},
   async mounted() {
-    this.categoryList = (await CategoryService.getCategoryList()).data;
+    this.categoryList = await this.$store.dispatch("Category/getCategoryList");
     this.categoryListRow1 = this.categoryList.slice(0, this.categoryeachRow);
     this.categoryListRow2 = this.categoryList.slice(
       this.categoryeachRow,
       this.categoryList.length
     );
-    this.subCategoryList = (await SubCategoryService.getSubCategoryList()).data;
-    this.subSubCategoryList = (
-      await SubSubCategoryService.getSubSubCategoryList()
-    ).data;
+    this.subCategoryList = await this.$store.dispatch(
+      "Category/getSubCategoryList"
+    );
+    this.subSubCategoryList = await this.$store.dispatch(
+      "Category/getSubSubCategoryList"
+    );
 
     this.$root.$on("bv::dropdown::show", bvEvent => {
       if (bvEvent.componentId === "dropdown-2") {
@@ -185,7 +181,9 @@ export default {
       const category = this.categoryList.find(
         obj => obj.id == subCategory.CategoryId
       );
-      this.$router.push({ path: `/products/${category.name}/${subCategory.name}` });
+      this.$router.push({
+        path: `/products/${category.name}/${subCategory.name}`
+      });
     },
     subSubCategorySelect(subSubCategory) {
       const subCategory = this.subCategoryList.find(

@@ -19,6 +19,7 @@
                       ref="firstNameField"
                       id="input-first-name"
                       type="text"
+                      debounce="500"
                       :state="firstNameValidation"
                       required
                     />
@@ -40,6 +41,7 @@
                       v-model="lastName"
                       id="input-last-name"
                       type="text"
+                      debounce="500"
                       :state="lastNameValidation"
                       required
                     />
@@ -61,6 +63,7 @@
                   v-model="email"
                   id="input-email"
                   type="email"
+                  debounce="500"
                   @keyup="validEmail = true"
                   :state="validEmail && emailValidation"
                   required
@@ -84,6 +87,7 @@
                       v-model="password"
                       id="input-password"
                       type="password"
+                      debounce="500"
                       :state="newPasswordValidation"
                       required
                     />
@@ -106,6 +110,7 @@
                       v-model="confirmPassword"
                       id="input-confirm-password"
                       type="password"
+                      debounce="500"
                       :state="confirmPasswordValidation"
                       required
                     />

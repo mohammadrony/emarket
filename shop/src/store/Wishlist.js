@@ -3,6 +3,7 @@ export const WishlistModule = {
   namespaced: true,
   strict: true,
   state: {
+    dataLoaded: false,
     wishlist: [],
   },
   mutations: {
@@ -14,22 +15,29 @@ export const WishlistModule = {
     },
     REMOVE_WISHLIST_ITEM(state, index) {
       state.wishlist.splice(index, 1)
+    },
+    SET_DATA_LOADED(state, dataLoaded) {
+      state.dataLoaded = dataLoaded
     }
   },
   actions: {
     async clearWishlist({ commit }) {
       commit("SET_WISHLIST", [])
+      commit("SET_DATA_LOADED", false)
     },
-    async setWishlist({ commit }) {
-      try {
-        const wishlist = (await WishlistService.getWishlist()).data;
-        commit("SET_WISHLIST", wishlist)
-      } catch (error) {
-        console.log(error.response.data.error)
+    async setWishlist({ state, commit }) {
+      if (!state.dataLoaded) {
+        try {
+          const wishlist = (await WishlistService.getWishlist()).data;
+          commit("SET_WISHLIST", wishlist)
+          commit("SET_DATA_LOADED", true)
+        } catch (error) {
+          console.log(error.response.data.error)
+        }
       }
     },
     async getWishlist({ state, dispatch }) {
-      if (state.wishlist && state.wishlist.length == 0) {
+      if (state.wishlist.length == 0) {
         await dispatch("setWishlist")
       }
       return state.wishlist
