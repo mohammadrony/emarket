@@ -128,7 +128,7 @@ export default {
       this.statusVariant = status.variant;
       try {
         await OrderService.updateOrder({
-          id: this.orderId,
+          id: this.orderInfo.id,
           status: status.name,
           variant: status.variant
         });
@@ -145,7 +145,7 @@ export default {
         }
       }
       try {
-        await OrderService.deleteOrder(this.orderId);
+        await OrderService.deleteOrder(this.orderInfo.id);
       } catch (error) {
         console.log(error.response.data.error);
       }
