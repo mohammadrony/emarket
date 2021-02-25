@@ -144,6 +144,8 @@ export default {
       try {
         await AuthenticationService.resetPassword({
           id: this.userId,
+          email: this.email,
+          name: this.name,
           password: this.newPassword
         });
       } catch (error) {
