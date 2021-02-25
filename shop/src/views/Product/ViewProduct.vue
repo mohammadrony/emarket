@@ -113,7 +113,7 @@
                   </b-col>
                 </b-row>
               </div>
-              <div class="d-flex mt-3">
+              <div class="d-flex justify-content-left mt-3">
                 <AddToCart
                   buttonType="sm"
                   :key="cartComponentKey"
@@ -162,7 +162,7 @@
         <Recommendation
           class="mt-5"
           :key="recommendationKey"
-          :subSubCatId="displayProduct.SubSubCategoryId"
+          :subSubCategoryId="displayProduct.SubSubCategoryId"
         />
       </b-container>
     </div>

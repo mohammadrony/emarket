@@ -69,7 +69,7 @@ import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 export default {
   name: "Name",
   props: {
-    subSubCatId: Number
+    subSubCategoryId: Number
   },
   components: {
     AddToCart,
@@ -78,7 +78,6 @@ export default {
   data() {
     return {
       limit: 8,
-      subSubCategoryId: this.subSubCatId,
       recommendation: []
     };
   },

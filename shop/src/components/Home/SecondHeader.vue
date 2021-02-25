@@ -25,7 +25,6 @@
               :text="category.name"
               variant="info"
               block
-              menu-class="category-menu"
             >
               <div v-for="subCategory in subCategoryList" :key="subCategory.id">
                 <b-dropdown
@@ -88,7 +87,6 @@
               :text="category.name"
               variant="info"
               block
-              menu-class="category-menu"
             >
               <div v-for="subCategory in subCategoryList" :key="subCategory.id">
                 <b-dropdown

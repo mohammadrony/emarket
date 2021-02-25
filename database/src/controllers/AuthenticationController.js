@@ -368,7 +368,7 @@ module.exports = {
                 to: req.body.email,
                 subject: 'E-store Password Changed',
                 text: 'Hello ' + req.body.name + '\n\n' +
-                    'We wanted to let you know that your e-store password was reset\n'
+                    'We wanted to let you know that your E-store password was reset.\n'
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {

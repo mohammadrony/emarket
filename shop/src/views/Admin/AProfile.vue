@@ -1,5 +1,5 @@
 <template>
-  <div class="a-profile">
+  <div>
     <ATopHeader></ATopHeader>
     <b-container class="mt-4">
       <div>

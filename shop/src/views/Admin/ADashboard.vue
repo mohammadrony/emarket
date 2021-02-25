@@ -1,5 +1,5 @@
 <template>
-  <div class="a-overview">
+  <div>
     <ATopHeader></ATopHeader>
     <b-container class="mt-5">
       <b-row align-v="center">

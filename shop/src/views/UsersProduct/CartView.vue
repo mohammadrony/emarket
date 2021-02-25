@@ -1,5 +1,5 @@
 <template>
-  <div class="cart">
+  <div>
     <TopHeader></TopHeader>
     <b-container class="mt-3">
       <b-row>
@@ -31,8 +31,8 @@
       </div>
       <div v-for="product in cartProducts" :key="product.productId">
         <b-row>
-          <b-col cols="3">
-            <img class="product-image" :src="product.image" alt="No Image" />
+          <b-col class="text-center" cols="3">
+            <b-img style="max-width:66%" :src="product.image" alt="No Image" />
           </b-col>
           <b-col cols="3">
             <b-link :to="`/product/${product.productId}`">
@@ -192,9 +192,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.product-image {
-  width: 66%;
-  margin: 0, auto;
-}
-</style>
+<style scoped lang="scss"></style>
