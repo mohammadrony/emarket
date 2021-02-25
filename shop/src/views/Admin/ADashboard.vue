@@ -4,7 +4,6 @@
     <b-container class="mt-5">
       <b-row align-v="center">
         <b-col>
-          <!-- <h3>Admin Dashboard</h3> -->
           <h3>Hello {{ user.firstName }} {{ user.lastName }},</h3>
           <h5>Welcome to admin dashboard</h5>
         </b-col>
