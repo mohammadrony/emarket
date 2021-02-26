@@ -153,7 +153,7 @@
           </b-col>
         </b-row>
         <div class="mt-5 p-4" style="background-color: #eeeeee">
-          <div class="product-detail-feature">
+          <div>
             <h3>Feature</h3>
             <div v-html="displayProduct.description" />
           </div>

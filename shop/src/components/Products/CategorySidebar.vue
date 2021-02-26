@@ -1,7 +1,7 @@
 <template>
-  <div class="productCategories">
-    <ul>
-      <li v-for="category in categoryList" :key="category.id" class="mb-2">
+  <div>
+    <ul style="list-style: none">
+      <li v-for="category in categoryList" :key="category.id" class="mb-1">
         <b-row v-if="category.mode == 0">
           <div :class="{ 'col-12': !admin, 'col-8': admin }">
             <b-link variant="white" :to="`/products/${category.name}`">
@@ -16,7 +16,7 @@
             </b-link>
           </div>
 
-          <b-col v-if="admin" cols="4">
+          <b-col cols="4" v-if="admin">
             <b-button-toolbar>
               <b-button-group size="sm">
                 <b-button @click="category.mode ^= 1" variant="white">
@@ -158,13 +158,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.productCategories {
-  // overflow-block: hidden;
-  float: left;
-  padding: 10px 0px 10px 7px;
-}
-.productCategories ul li {
-  list-style: none;
-}
-</style>
+<style scoped lang="scss"></style>

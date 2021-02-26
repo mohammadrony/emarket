@@ -36,12 +36,6 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-
-    <div class="row mb">
-      <b-row>
-        <b-icon icon="list" scale="2" v-b-toggle.categoryList />
-      </b-row>
-    </div>
   </div>
 </template>
 

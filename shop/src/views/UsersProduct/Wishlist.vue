@@ -1,7 +1,6 @@
 <template>
-  <div class="wishlist">
+  <div>
     <TopHeader></TopHeader>
-
     <b-container class="mt-3">
       <b-row>
         <b-col class="text-center">
@@ -16,7 +15,7 @@
         </b-col>
       </b-row>
       <b-row v-if="myWishlist.length != 0">
-        <b-col v-for="wishItem in myWishlist" :key="wishItem.id" cols="6">
+        <b-col cols="6" v-for="wishItem in myWishlist" :key="wishItem.id">
           <b-card-group deck>
             <b-card no-body class="mb-4">
               <b-row no-gutters>
@@ -27,7 +26,6 @@
                     "
                     :src="wishItem.Product.image1"
                     alt="Image"
-                    class="rounded-0"
                   ></b-card-img>
                 </b-col>
                 <b-col md="6">

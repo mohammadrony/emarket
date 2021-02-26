@@ -31,7 +31,7 @@
       </div>
       <div v-for="product in cartProducts" :key="product.productId">
         <b-row>
-          <b-col class="text-center" cols="3">
+          <b-col cols="3" class="text-center">
             <b-img style="max-width:66%" :src="product.image" alt="No Image" />
           </b-col>
           <b-col cols="3">
@@ -66,7 +66,7 @@
             {{ product.currency }}</b-col
           >
           <b-col cols="4">
-            <div class="quantity-style">
+            <div>
               <b-button
                 size="sm"
                 variant="primary"

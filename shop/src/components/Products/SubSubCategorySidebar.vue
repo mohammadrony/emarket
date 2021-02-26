@@ -1,13 +1,13 @@
 <template>
-  <div class="productCategories">
-    <ul>
+  <div>
+    <ul style="list-style: none">
       <div
         v-for="subSubCategory in subSubCategoryList"
         :key="subSubCategory.id"
       >
         <li
           v-if="searchParameter.subCategoryId == subSubCategory.SubCategoryId"
-          class="mb-2"
+          class="mb-1"
         >
           <b-row v-if="subSubCategory.mode == 0">
             <div :class="{ 'col-12': !admin, 'col-8': admin }">
@@ -26,7 +26,7 @@
               </b-link>
             </div>
 
-            <b-col v-if="admin" cols="4">
+            <b-col cols="4" v-if="admin">
               <b-button-toolbar>
                 <b-button-group size="sm">
                   <b-button @click="subSubCategory.mode ^= 1" variant="white">
@@ -177,13 +177,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.productCategories {
-  // overflow-block: hidden;
-  float: left;
-  padding: 10px 0px 10px 7px;
-}
-.productCategories ul li {
-  list-style: none;
-}
-</style>
+<style scoped lang="scss"></style>

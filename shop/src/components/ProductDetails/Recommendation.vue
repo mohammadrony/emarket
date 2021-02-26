@@ -19,7 +19,7 @@
               </b-link>
               <h6>Price: {{ product.amount }} {{ product.currency }}</h6>
               <b-row class="mt-2" align-v="center">
-                <b-col cols="12">
+                <b-col>
                   <b-form-rating
                     :precision="
                       Math.round(product.rating) == product.rating ? 0 : 1
