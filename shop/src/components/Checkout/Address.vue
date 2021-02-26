@@ -3,7 +3,7 @@
     <b-row>
       <b-col>
         <b-form>
-          <h5 style="font-weight: bold">Personal Details</h5>
+          <h5 class="font-weight-bold">Personal Details</h5>
           <hr />
           <b-form-group
             id="input-group-name"
@@ -147,7 +147,7 @@
               </b-form-group>
             </b-card>
           </div>
-          <h5 style="font-weight: bold" class="mt-3">Shipping Options</h5>
+          <h5 class="mt-3 font-weight-bold">Shipping Options</h5>
           <hr />
           <b-form-group>
             <b-form-radio-group
@@ -156,15 +156,6 @@
               v-model="shipping.selectedMethod"
             />
           </b-form-group>
-          <!-- <h5 style="font-weight: bold" class="mt-5">Billing Options</h5>
-          <hr />
-          <b-form-group>
-            <b-form-radio-group
-              :options="payment.options"
-              stacked
-              v-model="payment.selectedMethod"
-            />
-          </b-form-group> -->
         </b-form>
       </b-col>
     </b-row>

@@ -19,10 +19,10 @@
           </b-card>
 
           <b-card v-if="tokenValidate" style="color: #001e5f">
-            <h4 style="font-weight: bold">Change password for {{ email }}</h4>
+            <h4 class="font-weight-bold">Change password for {{ email }}</h4>
             <b-form @submit.stop.prevent="passwordReset" class="mt-4">
               <b-form-group
-                style="font-weight: bold"
+                class="font-weight-bold"
                 id="input-group-password"
                 label="New password"
                 label-for="input-password"
@@ -44,7 +44,7 @@
               </b-form-group>
 
               <b-form-group
-                style="font-weight: bold"
+                class="font-weight-bold"
                 id="input-group-2-password"
                 label="Confirm password"
                 label-for="input-2-password"
@@ -66,10 +66,9 @@
               <b-row>
                 <b-col cols="6">
                   <b-button
-                    style="font-weight: bold"
+                    class="p-2 mt-2 font-weight-bold"
                     block
                     type="submit"
-                    class="p-2 mt-2"
                     variant="warning"
                   >
                     Submit

@@ -5,7 +5,7 @@
       <b-row align-h="center">
         <b-col cols="7">
           <b-card style="color: #001e5f">
-            <h4 style="font-weight: bold">Create Account</h4>
+            <h4 class="font-weight-bold">Create Account</h4>
             <b-form @submit.stop.prevent="createAccount" class="mt-4">
               <b-row>
                 <b-col>

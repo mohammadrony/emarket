@@ -3,8 +3,7 @@
     <div class="p-2 mt-2" style="background-color: #f4f6f8">
       <b-form @submit.stop.prevent="requestPasswordToken">
         <b-form-group
-          class="mb-2"
-          style="font-weight: bold"
+          class="mb-2 font-weight-bold"
           label="Enter your email address"
           label-for="input-email-for-token"
         >

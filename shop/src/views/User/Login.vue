@@ -5,7 +5,7 @@
       <b-row align-h="center">
         <b-col cols="10" md="7" lg="5">
           <b-card style="color: #001e5f">
-            <h4 style="font-weight: bold">Login</h4>
+            <h4 class="font-weight-bold">Login</h4>
             <b-form @submit.stop.prevent="login" class="mt-4">
               <b-form-group
                 id="input-group-email"

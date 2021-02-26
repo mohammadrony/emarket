@@ -31,7 +31,7 @@
     </b-row>
     <b-row>
       <b-col>
-        <h5 style="font-weight: bold">Current State</h5>
+        <h5 class="font-weight-bold">Current State</h5>
         <hr />
         <b-row>
           <b-col cols="5">

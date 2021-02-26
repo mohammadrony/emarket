@@ -31,7 +31,7 @@
     </b-row>
     <b-row>
       <b-col>
-        <h5 style="font-weight: bold">Update Status</h5>
+        <h5 class="font-weight-bold">Update Status</h5>
         <hr />
         <b-row>
           <b-col cols="5">
@@ -53,7 +53,7 @@
         </b-row>
         <b-row class="mt-4">
           <b-col>
-            <h5 style="font-weight: bold">Delete Order</h5>
+            <h5 class="font-weight-bold">Delete Order</h5>
             <hr />
             <b-row>
               <b-col cols="5">
