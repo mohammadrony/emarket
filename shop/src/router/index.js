@@ -6,7 +6,7 @@ import AllProducts from "@/views/Product/AllProducts.vue";
 import CategoryProducts from "@/views/Product/CategoryProducts.vue";
 import SubCategoryProducts from "@/views/Product/SubCategoryProducts.vue";
 import SubSubCategoryProducts from "@/views/Product/SubSubCategoryProducts.vue";
-import ViewProduct from "@/views/Product/ViewProduct.vue";
+import ProductDetails from "@/views/Product/ProductDetails.vue";
 import CartView from "@/views/UsersProduct/CartView.vue";
 import Wishlist from "@/views/UsersProduct/Wishlist.vue";
 import Checkout from "@/views/BuyProduct/Checkout.vue";
@@ -58,8 +58,8 @@ const routes = [
   },
   {
     path: "/product/:productId",
-    name: "product",
-    component: ViewProduct
+    name: "product-details",
+    component: ProductDetails
   },
   {
     path: "/cart-view",

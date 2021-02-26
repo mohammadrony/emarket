@@ -180,15 +180,15 @@
 <script>
 import ProductsService from "@/services/ProductsService.js";
 import TopHeader from "@/components/Common/TopHeader.vue";
-import ProductHeader from "@/components/ViewProduct/ProductHeader.vue";
+import ProductHeader from "@/components/ProductDetails/ProductHeader.vue";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import InvalidParameter from "@/components/NotFound/InvalidParameter.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
-import Review from "@/components/ViewProduct/Review.vue";
-import Recommendation from "@/components/ViewProduct/Recommendation.vue";
+import Review from "@/components/ProductDetails/Review.vue";
+import Recommendation from "@/components/ProductDetails/Recommendation.vue";
 import Footer from "@/components/Common/Footer.vue";
 export default {
-  name: "ViewProduct",
+  name: "ProductDetails",
   components: {
     TopHeader,
     ProductHeader,
