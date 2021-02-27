@@ -144,7 +144,7 @@
 </template>
 
 <script>
-import AuthenticationService from "@/services/AuthenticationService";
+import AuthenticationService from "@/services/AuthenticationService.js";
 import TopHeader from "@/components/Common/TopHeader.vue";
 import Footer from "@/components/Common/Footer.vue";
 export default {

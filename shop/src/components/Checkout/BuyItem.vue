@@ -115,7 +115,7 @@ import { loadStripe } from "@stripe/stripe-js";
 const stripeInit = loadStripe(
   "pk_test_51I4mbiGV3mLAYJeQ13BCPtt0b0DWMHAJALhdOaAVp2sA5P0WgjPcH21Ziw8fQpbBn8kZsNgT513t7htPCDlwnfzh00gkYylUV1"
 );
-import CheckoutService from "@/services/CheckoutService";
+import CheckoutService from "@/services/CheckoutService.js";
 
 export default {
   name: "BuyItem",
@@ -134,6 +134,7 @@ export default {
   },
   computed: {},
   mounted() {
+    console.log(process.env)
     this.checkoutProduct = this.$store.state.Cart.cartProducts;
     var i;
     for (i = 0; i < this.checkoutProduct.length; i++) {

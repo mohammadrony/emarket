@@ -30,9 +30,9 @@
 import TopHeader from "@/components/Common/TopHeader.vue";
 import Footer from "@/components/Common/Footer.vue";
 import CheckoutService from "@/services/CheckoutService.js";
-import OrderService from "@/services/OrderService";
-import OrderItemService from "@/services/OrderItemService";
-import ProductsService from "@/services/ProductsService";
+import OrderService from "@/services/OrderService.js";
+import OrderItemService from "@/services/OrderItemService.js";
+import ProductsService from "@/services/ProductsService.js";
 export default {
   name: "SuccessPayment",
   components: {

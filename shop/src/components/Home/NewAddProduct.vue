@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import ProductsService from "@/services/ProductsService";
+import ProductsService from "@/services/ProductsService.js";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 export default {

@@ -1,4 +1,4 @@
-import ProductsService from "../services/ProductsService";
+import ProductsService from "@/services/ProductsService.js";
 import CategoryService from "@/services/CategoryService.js";
 import SubCategoryService from "@/services/SubCategoryService.js";
 import SubSubCategoryService from "@/services/SubSubCategoryService.js";
