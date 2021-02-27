@@ -134,7 +134,6 @@ export default {
   },
   computed: {},
   mounted() {
-    console.log(process.env)
     this.checkoutProduct = this.$store.state.Cart.cartProducts;
     var i;
     for (i = 0; i < this.checkoutProduct.length; i++) {
