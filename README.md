@@ -1,15 +1,25 @@
 # vue2-mysql-web-store
 A Vue js / Express js E-commerce application with MySQL in backend.
 At first install MySQL server in your pc
-### now create a database from mysql command prompt
+### Create a mysql database named mydb
 ```
 CREATE DATABASE mydb
 ``` 
-### now clone the repository on your file system
+### Clone this repository
 ```
 git clone https://github.com/mohammadrony/e-store.git
 ```
-### check database configuration file for user, password and database
+To send email to user and payment with stripe rename `.env_for_github` file in `database` directory to `.env` and set the variable with your data.
+```
+STRIPE_SECRET_KEY=sk_test_qwertyuiopzxcvbnmasdfghjkl
+STRIPE_PUBLIC_KEY=pk_test_qwertyuiopasdfghjklzxcvbnm
+ESTORE_EMAIL=quickemail@gmail.com
+ESTORE_PASSWORD=email_password
+```
+also update stripe public key in `shop/src/components/Checkout/BuyItem.vue`
+notice .gitignore file in top of the directory we do not publish .env file to public github repository.
+this secret information will only save to you device.
+### Now check database configuration file for user, password and database
 ```
 cat database/src/config/config.js
 ```
