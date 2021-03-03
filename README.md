@@ -13,7 +13,7 @@ To send email to user and payment with stripe rename `.env_for_github` file in `
 ```
 STRIPE_SECRET_KEY=sk_test_qwertyuiopzxcvbnmasdfghjkl
 STRIPE_PUBLIC_KEY=pk_test_qwertyuiopasdfghjklzxcvbnm
-ESTORE_EMAIL=quickemail@gmail.com
+ESTORE_EMAIL=youremail@gmail.com
 ESTORE_PASSWORD=email_password
 ```
 also update stripe public key in `shop/src/components/Checkout/BuyItem.vue`
