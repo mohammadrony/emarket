@@ -1,4 +1,4 @@
-# vue2-mysql-web-store
+# vuejs-nodejs-e-commerce-web-application
 A Vue js / Express js E-commerce application with MySQL in backend.
 At first install MySQL server in your pc
 ### Create a mysql database named mydb
