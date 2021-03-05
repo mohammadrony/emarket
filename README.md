@@ -1,14 +1,14 @@
-# vuejs-nodejs-e-commerce-web-application
+# Vuejs-nodejs-e-commerce-web-application
 A Vue js / Express js E-commerce web application using MySQL database.
 ### Clone this repository
 ```
 git clone https://github.com/mohammadrony/e-store.git
 ```
-### install application dependencies for backend
+### Server dependencies - backend
 ```
 cd server && npm install
 ```
-### shop folder relative path from database folder
+### Shop dependencies - frontend
 ```
 cd ../shop && npm install
 ```
@@ -20,7 +20,7 @@ Secure the database server
 ```
 sudo mysql_secure_installation
 ```
-I use password `12345678`. If you use any other password, You need to change the password in `server/src/config/config.js` file.
+I use mysql server password `12345678`. If you use any other password, You need to change the password in `server/src/config/config.js` file.
 you can follow this https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04 to configure database. 
 ### Create a mysql database named mydb
 ```
