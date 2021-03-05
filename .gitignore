@@ -1,4 +1,4 @@
 shop/node_modules/
-database/node_modules/
+server/node_modules/
 shop/.env
-database/.env
+server/.env
