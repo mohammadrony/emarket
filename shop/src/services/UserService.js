@@ -2,21 +2,21 @@ import Api from "./Api";
 
 export default {
   checkUserName(userName) {
-    return Api().get(`/user/checkUserName/${userName}`);
+    return Api().get(`/api/user/checkUserName/${userName}`);
   },
   deleteAccount(userId) {
-    return Api().delete(`/user/deleteAccount/${userId}`);
+    return Api().delete(`/api/user/deleteAccount/${userId}`);
   },
   getUserList() {
-    return Api().get("/user/getUserList");
+    return Api().get("/api/user/getUserList");
   },
   updateUser(credentials) {
-    return Api().post("/user/updateUser", credentials);
+    return Api().post("/api/user/updateUser", credentials);
   },
   getUserById(userId) {
-    return Api().get(`/user/getUserById/${userId}`);
+    return Api().get(`/api/user/getUserById/${userId}`);
   },
   getUserByEmail(email) {
-    return Api().get(`/user/getUserByEmail/${email}`);
+    return Api().get(`/api/user/getUserByEmail/${email}`);
   }
 };

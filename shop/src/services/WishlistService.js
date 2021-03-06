@@ -2,18 +2,18 @@ import Api from "./Api"
 
 export default {
     getWishlist() {
-        return Api().get('/wishlist/getWishlist')
+        return Api().get('/api/wishlist/getWishlist')
     },
     getWishlistItem(productId) {
-        return Api().get(`/wishlist/getWishlistItem/${productId}`)
+        return Api().get(`/api/wishlist/getWishlistItem/${productId}`)
     },
     createWishlistItem(credentials) {
-        return Api().post('/wishlist/createWishlistItem', credentials)
+        return Api().post('/api/wishlist/createWishlistItem', credentials)
     },
     removeWishlistItem(productId) {
-        return Api().delete(`/wishlist/removeWishlistItem/${productId}`)
+        return Api().delete(`/api/wishlist/removeWishlistItem/${productId}`)
     },
     deleteWishItemByProduct(productId) {
-        return Api().delete(`/wishlist/deleteWishItemByProduct/${productId}`)
+        return Api().delete(`/api/wishlist/deleteWishItemByProduct/${productId}`)
     }
 }

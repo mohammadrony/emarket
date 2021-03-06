@@ -17,186 +17,186 @@ const AuthenticationControllerPolicy = require("./policies/AuthenticationControl
 
 module.exports = (app) => {
   // authentication
-  app.post("/auth/register",
+  app.post("/api/auth/register",
     AuthenticationControllerPolicy.register,
     AuthenticationController.register)
-  app.post("/auth/login",
+  app.post("/api/auth/login",
     AuthenticationController.login)
-  app.get("/auth/verifyPassword/:password",
+  app.get("/api/auth/verifyPassword/:password",
     isAuthenticated,
     AuthenticationController.verifyPassword)
-  app.post("/auth/updatePassword",
+  app.post("/api/auth/updatePassword",
     isAuthenticated,
     AuthenticationControllerPolicy.updatePassword,
     AuthenticationController.updatePassword)
-  app.post("/auth/requestPasswordToken",
+  app.post("/api/auth/requestPasswordToken",
     AuthenticationController.requestPasswordToken)
-  app.get("/auth/verifyPasswordToken/:token",
+  app.get("/api/auth/verifyPasswordToken/:token",
     AuthenticationController.verifyPasswordToken)
-  app.post("/auth/checkRegsToken",
+  app.post("/api/auth/checkRegsToken",
     AuthenticationController.checkRegsToken)
-  app.post("/auth/verifyRegsToken",
+  app.post("/api/auth/verifyRegsToken",
     AuthenticationController.verifyRegsToken)
-  app.post("/auth/resetPassword",
+  app.post("/api/auth/resetPassword",
     AuthenticationController.resetPassword)
-  app.post("/auth/resetRegsToken",
+  app.post("/api/auth/resetRegsToken",
     AuthenticationController.resetRegsToken)
 
   // category
-  app.get("/category/getCategoryByName/:name",
+  app.get("/api/category/getCategoryByName/:name",
     CategoryController.getCategoryByName)
-  app.get("/category/getCategoryList",
+  app.get("/api/category/getCategoryList",
     CategoryController.getCategoryList)
-  app.post("/category/createCategory",
+  app.post("/api/category/createCategory",
     CategoryController.createCategory)
-  app.put("/category/updateCategory",
+  app.put("/api/category/updateCategory",
     CategoryController.updateCategory)
-  app.delete("/category/deleteCategory/:categoryId",
+  app.delete("/api/category/deleteCategory/:categoryId",
     CategoryController.deleteCategory)
 
   // checkout
-  app.post("/checkout/createCheckoutSession",
+  app.post("/api/checkout/createCheckoutSession",
     CheckoutController.createCheckoutSession)
-  app.get("/checkout/retrieveCheckoutSession/:sessionId",
+  app.get("/api/checkout/retrieveCheckoutSession/:sessionId",
     CheckoutController.retrieveCheckoutSession)
 
   // company
-  app.get("/company/getCompany/:companyId",
+  app.get("/api/company/getCompany/:companyId",
     CompanyController.getCompany)
 
   // order
-  app.get("/order/getOrderList",
+  app.get("/api/order/getOrderList",
     OrderController.getOrderList)
-  app.get("/order/getOrder/:orderId",
+  app.get("/api/order/getOrder/:orderId",
     OrderController.getOrder),
-    app.get("/order/getOrderBySessionId/:sessionId",
+    app.get("/api/order/getOrderBySessionId/:sessionId",
       OrderController.getOrderBySessionId),
-    app.post("/order/createOrder",
+    app.post("/api/order/createOrder",
       OrderController.createOrder)
-  app.put("/order/updateOrder",
+  app.put("/api/order/updateOrder",
     isAuthenticated,
     OrderController.updateOrder)
-  app.delete("/order/deleteOrder/:orderId",
+  app.delete("/api/order/deleteOrder/:orderId",
     isAuthenticated,
     OrderController.deleteOrder)
 
   // order item
-  app.get("/orderItem/getOrderItemList/:orderId",
+  app.get("/api/orderItem/getOrderItemList/:orderId",
     isAuthenticated,
     OrderItemController.getOrderItemList)
-  app.post("/orderItem/createOrderItem",
+  app.post("/api/orderItem/createOrderItem",
     OrderItemController.createOrderItem)
-  app.delete("/orderItem/deleteOrderItem/:orderItemId",
+  app.delete("/api/orderItem/deleteOrderItem/:orderItemId",
     isAuthenticated,
     OrderItemController.deleteOrderItem)
 
   // product
-  app.get("/products/getAllProducts",
+  app.get("/api/products/getAllProducts",
     ProductsController.getAllProducts)
-  app.get("/products/topSellProduct/:limit",
+  app.get("/api/products/topSellProduct/:limit",
     ProductsController.topSellProduct)
-  app.get("/products/newAddProduct/:limit",
+  app.get("/api/products/newAddProduct/:limit",
     ProductsController.newAddProduct)
-  app.get("/products/getProductSales/:productId",
+  app.get("/api/products/getProductSales/:productId",
     ProductsController.getProductSales)
-  app.get("/products/getProduct/:productId",
+  app.get("/api/products/getProduct/:productId",
     ProductsController.getProduct)
-  app.get("/products/getProductRating/:productId",
+  app.get("/api/products/getProductRating/:productId",
     ProductsController.getProductRating)
-  app.get("/products/getRecommendation/:subSubCategoryId/:limit",
+  app.get("/api/products/getRecommendation/:subSubCategoryId/:limit",
     ProductsController.getRecommendation)
-  app.post("/products/createProduct",
+  app.post("/api/products/createProduct",
     ImageController.uploadProductImage,
     ProductsController.createProduct)
-  app.put("/products/updateProduct",
+  app.put("/api/products/updateProduct",
     ProductsController.updateProduct)
-  app.delete("/products/deleteProduct/:productId",
+  app.delete("/api/products/deleteProduct/:productId",
     ProductsController.deleteProduct)
 
   // review
-  app.get("/review/getReviewList/:productId",
+  app.get("/api/review/getReviewList/:productId",
     ReviewController.getReviewList)
-  app.get("/review/getUsersReviewList/:userId",
+  app.get("/api/review/getUsersReviewList/:userId",
     ReviewController.getUsersReviewList)
-  app.post("/review/createReview",
+  app.post("/api/review/createReview",
     isAuthenticated,
     ReviewController.createReview)
-  app.put("/review/updateReview",
+  app.put("/api/review/updateReview",
     isAuthenticated,
     ReviewController.updateReview)
-  app.delete("/review/deleteReview/:reviewId",
+  app.delete("/api/review/deleteReview/:reviewId",
     isAuthenticated,
     ReviewController.deleteReview)
 
   // showcase
-  app.get("/showcase/getShowcaseItems",
+  app.get("/api/showcase/getShowcaseItems",
     ShowcaseController.getShowcaseItems)
-  app.post("/showcase/createShowcaseItem",
+  app.post("/api/showcase/createShowcaseItem",
     isAuthenticated,
     ShowcaseController.createShowcaseItem)
-  app.put("/showcase/updateShowcaseItem",
+  app.put("/api/showcase/updateShowcaseItem",
     isAuthenticated,
     ShowcaseController.updateShowcaseItem)
-  app.delete("/showcase/deleteShowcaseItem/:showcaseItemId",
+  app.delete("/api/showcase/deleteShowcaseItem/:showcaseItemId",
     isAuthenticated,
     ShowcaseController.deleteShowcaseItem)
 
   // sub category
-  app.get("/subCategory/getSubCategoryByName/:name",
+  app.get("/api/subCategory/getSubCategoryByName/:name",
     SubCategoryController.getSubCategoryByName)
-  app.get("/subCategory/getSubCategoryList",
+  app.get("/api/subCategory/getSubCategoryList",
     SubCategoryController.getSubCategoryList)
-  app.post("/subCategory/createSubCategory",
+  app.post("/api/subCategory/createSubCategory",
     SubCategoryController.createSubCategory)
-  app.put("/subCategory/updateSubCategory",
+  app.put("/api/subCategory/updateSubCategory",
     SubCategoryController.updateSubCategory)
-  app.delete("/subCategory/deleteSubCategory/:subCategoryId",
+  app.delete("/api/subCategory/deleteSubCategory/:subCategoryId",
     SubCategoryController.deleteSubCategory)
 
   // sub sub Category
-  app.get("/subSubCategory/getSubSubCategoryByName/:name",
+  app.get("/api/subSubCategory/getSubSubCategoryByName/:name",
     SubSubCategoryController.getSubSubCategoryByName)
-  app.get("/subSubCategory/getSubSubCategoryList",
+  app.get("/api/subSubCategory/getSubSubCategoryList",
     SubSubCategoryController.getSubSubCategoryList)
-  app.post("/subSubCategory/createSubSubCategory",
+  app.post("/api/subSubCategory/createSubSubCategory",
     SubSubCategoryController.createSubSubCategory)
-  app.put("/subSubCategory/updateSubSubCategory",
+  app.put("/api/subSubCategory/updateSubSubCategory",
     SubSubCategoryController.updateSubSubCategory)
-  app.delete("/subSubCategory/deleteSubSubCategory/:subSubCategoryId",
+  app.delete("/api/subSubCategory/deleteSubSubCategory/:subSubCategoryId",
     SubSubCategoryController.deleteSubSubCategory)
 
   // user
-  app.get("/user/checkUserName/:userName",
+  app.get("/api/user/checkUserName/:userName",
     isAuthenticated,
     UserController.checkUserName)
-  app.delete("/user/deleteAccount/:userId",
+  app.delete("/api/user/deleteAccount/:userId",
     isAuthenticated,
     UserController.deleteAccount)
-  app.get("/user/getUserById/:userId",
+  app.get("/api/user/getUserById/:userId",
     UserController.getUserById)
-  app.get("/user/getUserList",
+  app.get("/api/user/getUserList",
     isAuthenticated,
     UserController.getUserList)
-  app.post("/user/updateUser",
+  app.post("/api/user/updateUser",
     isAuthenticated,
     UserController.updateUser)
-  app.get("/user/getUserByEmail/:email",
+  app.get("/api/user/getUserByEmail/:email",
     UserController.getUserByEmail)
 
   // wishlist
-  app.get("/wishlist/getWishlist",
+  app.get("/api/wishlist/getWishlist",
     isAuthenticated,
     WishlistController.getWishlist)
-  app.get("/wishlist/getWishlistItem/:productId",
+  app.get("/api/wishlist/getWishlistItem/:productId",
     isAuthenticated,
     WishlistController.getWishlistItem)
-  app.post("/wishlist/createWishlistItem",
+  app.post("/api/wishlist/createWishlistItem",
     isAuthenticated,
     WishlistController.createWishlistItem)
-  app.delete("/wishlist/removeWishlistItem/:productId",
+  app.delete("/api/wishlist/removeWishlistItem/:productId",
     isAuthenticated,
     WishlistController.removeWishlistItem)
-  app.delete("/wishlist/deleteWishItemByProduct/:productId",
+  app.delete("/api/wishlist/deleteWishItemByProduct/:productId",
     isAuthenticated,
     WishlistController.deleteWishItemByProduct)
 }
