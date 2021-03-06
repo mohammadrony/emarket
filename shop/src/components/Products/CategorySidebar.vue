@@ -40,44 +40,45 @@
             </b-button-toolbar>
           </b-col>
         </b-row>
-        <div v-if="category.mode == 1">
-          <b-form @submit.stop.prevent="updateCategory(category)">
-            <b-row>
-              <b-col cols="8">
-                <b-form-group>
-                  <b-form-input
-                    size="sm"
-                    required
-                    v-model="category.name"
-                    placeholder="Category Name"
-                  />
-                </b-form-group>
-              </b-col>
-              <b-col cols="4">
-                <b-button-toolbar>
-                  <b-button-group size="sm">
-                    <b-button type="submit" variant="white">
-                      <b-icon
-                        variant="primary"
-                        v-b-tooltip.hover
-                        title="Save"
-                        icon="check2"
-                      />
-                    </b-button>
-                    <b-button @click="category.mode ^= 1" variant="white">
-                      <b-icon
-                        variant="danger"
-                        v-b-tooltip.hover
-                        title="Cancel"
-                        icon="x"
-                      />
-                    </b-button>
-                  </b-button-group>
-                </b-button-toolbar>
-              </b-col>
-            </b-row>
-          </b-form>
-        </div>
+        <b-form
+          v-if="category.mode == 1"
+          @submit.stop.prevent="updateCategory(category)"
+        >
+          <b-row>
+            <b-col cols="8">
+              <b-form-group>
+                <b-form-input
+                  size="sm"
+                  required
+                  v-model="category.name"
+                  placeholder="Category Name"
+                />
+              </b-form-group>
+            </b-col>
+            <b-col cols="4">
+              <b-button-toolbar>
+                <b-button-group size="sm">
+                  <b-button type="submit" variant="white">
+                    <b-icon
+                      variant="primary"
+                      v-b-tooltip.hover
+                      title="Save"
+                      icon="check2"
+                    />
+                  </b-button>
+                  <b-button @click="category.mode ^= 1" variant="white">
+                    <b-icon
+                      variant="danger"
+                      v-b-tooltip.hover
+                      title="Cancel"
+                      icon="x"
+                    />
+                  </b-button>
+                </b-button-group>
+              </b-button-toolbar>
+            </b-col>
+          </b-row>
+        </b-form>
       </li>
       <div v-if="admin">
         <b-card>

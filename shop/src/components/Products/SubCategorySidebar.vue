@@ -50,8 +50,11 @@
               </b-button-toolbar>
             </b-col>
           </b-row>
-          <b-row v-if="subCategory.mode == 1">
-            <b-form @submit.stop.prevent="updateSubCategory(subCategory)">
+          <b-form
+            v-if="subCategory.mode == 1"
+            @submit.stop.prevent="updateSubCategory(subCategory)"
+          >
+            <b-row>
               <b-col cols="8">
                 <b-form-group>
                   <b-form-input
@@ -84,8 +87,8 @@
                   </b-button-group>
                 </b-button-toolbar>
               </b-col>
-            </b-form>
-          </b-row>
+            </b-row>
+          </b-form>
         </li>
       </div>
       <div v-if="admin">
