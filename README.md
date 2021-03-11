@@ -54,5 +54,5 @@ cd shop && npm run serve
 ```
 http://localhost:8080
 ```
-### You can contact me if you have any problem.
+### You can contact with me if you still face any problem
 at `ronyku1829@gmail.com`
