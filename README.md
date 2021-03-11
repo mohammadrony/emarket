@@ -20,25 +20,25 @@ Secure the database server
 ```
 sudo mysql_secure_installation
 ```
-I use mysql server password `12345678`. If you use any other password, You need to change the password in `server/src/config/config.js` file.
-you can follow this https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04 to configure database. 
+You could use mysql server password as `12345678`. If you use any other password, You need to change the password in `server/src/config/config.js` file.
+you can follow this https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04 to configure mysql database server for linux. 
 ### Create a mysql database named mydb
 ```
 CREATE DATABASE mydb
 ``` 
-Now rename `.env_for_github` file in `server` directory to `.env` for sending email and payment with stripe. To fill the field in `server/.env` file please find stripe public key and secret key from your stripe account. and enter your email address and email account password. If you don't want to use gmail account you need to change controller files in `server/src/controllers/` Note that .gitignore file in top of the directory. We do not publish .env file to public github repository. this secret information will only save to you device.
+Now rename `.env_for_github` file in `server` directory to `.env` for sending email and payment with stripe. To get stripe public key and secret key for `server/.env` file create a stripe account and find stripe public key and secret key from https://dashboard.stripe.com/test/apikeys. And now enter your gmail address and gmail account password. If you don't want to use gmail account you need to configure the transporter for sending email in controller files in `server/src/controllers/*`. We do not publish .env file to public github repository. You can check .gitignore file in top of the directory. These secret information will only save to your device. this is the outlook of `.env` file in `server` directory.
 ```
 STRIPE_SECRET_KEY=sk_test_qwertyuiopzxcvbnmasdfghjkl
 STRIPE_PUBLIC_KEY=pk_test_qwertyuiopasdfghjklzxcvbnm
 ESTORE_EMAIL=youremail@gmail.com
 ESTORE_PASSWORD=email_password
 ```
-also update stripe public key in `shop/src/components/Checkout/BuyItem.vue`
-### Check database configuration file for user, password and database
+Also you need to update stripe public key in `shop/src/components/Checkout/BuyItem.vue`.
+### Re-check database configuration file for user, password and database
 ```
-cat server/src/config/config.js
+server/src/config/config.js
 ```
-### Feed some website data
+### Feed some data for the website
 ```
 cd server && npm run seed
 ```
@@ -54,3 +54,5 @@ cd shop && npm run serve
 ```
 http://localhost:8080
 ```
+### You can contact me if you have any problem.
+at `ronyku1829@gmail.com`
