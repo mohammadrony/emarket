@@ -1,5 +1,5 @@
 # Vuejs-nodejs-e-commerce-web-application
-A Vue js / Node js E-commerce web application using MySQL database.
+A Vue js / Node js E-commerce Web Application with MySQL database.
 ### Clone this repository
 ```
 git clone https://github.com/mohammadrony/e-store.git
@@ -26,7 +26,7 @@ you can follow this https://www.digitalocean.com/community/tutorials/how-to-inst
 ```
 CREATE DATABASE mydb
 ``` 
-Now rename `.env_for_github` file in `server` directory to `.env` for sending email and payment with stripe. To get stripe public key and secret key for `server/.env` file create a stripe account and find stripe public key and secret key from https://dashboard.stripe.com/test/apikeys. And now enter your gmail address and gmail account password. If you don't want to use gmail account you need to configure the transporter for sending email in controller files in `server/src/controllers/*`. We do not publish .env file to public github repository. You can check .gitignore file in top of the directory. These secret information will only save to your device. this is the outlook of `.env` file in `server` directory.
+Now rename `.env_for_github` file in `server` directory to `.env` for sending email and payment with stripe. To get stripe public key (named as publishable key) and secret key for `server/.env` file create a stripe account and find stripe public key and secret key from https://dashboard.stripe.com/test/apikeys. To send email from google account using program you need to turn on **allow less secure apps** from https://myaccount.google.com/lesssecureapps. And now enter your google account email address and account password. If you don't want to use gmail account you need to configure the transporter for sending email in controller files in `server/src/controllers/*`. We do not publish .env file to public github repository. You can check .gitignore file in top of the directory. These secret information will only save to your device. this is the outlook of `.env` file in `server` directory.
 ```
 STRIPE_SECRET_KEY=sk_test_qwertyuiopzxcvbnmasdfghjkl
 STRIPE_PUBLIC_KEY=pk_test_qwertyuiopasdfghjklzxcvbnm
