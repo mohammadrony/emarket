@@ -4,11 +4,11 @@ A Vue js / Node js E-commerce web application using MySQL database.
 ```
 git clone https://github.com/mohammadrony/e-store.git
 ```
-### Server dependencies - backend
+### Install server dependencies - backend
 ```
 cd server && npm install
 ```
-### Shop dependencies - frontend
+### Install shop dependencies - frontend
 ```
 cd ../shop && npm install
 ```
