@@ -1,5 +1,5 @@
 # Vuejs-nodejs-e-commerce-web-application
-A Vue js / Express js E-commerce web application using MySQL database.
+A Vue js / Node js E-commerce web application using MySQL database.
 ### Clone this repository
 ```
 git clone https://github.com/mohammadrony/e-store.git
