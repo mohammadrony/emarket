@@ -21,7 +21,7 @@ Secure the database server
 sudo mysql_secure_installation
 ```
 You could use mysql server password as `12345678`. If you use any other password, You need to change the password in `server/src/config/config.js` file.
-you can follow this https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04 to configure mysql database server for linux. 
+you can follow this https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04 to configure mysql database server. 
 ### Create a mysql database named mydb
 ```
 CREATE DATABASE mydb
@@ -50,7 +50,7 @@ cd server && npm start
 ```
 cd shop && npm run serve
 ```
-### Now your application is on
+### Now your application is running locally
 ```
 http://localhost:8080
 ```
