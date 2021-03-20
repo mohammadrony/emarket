@@ -1,16 +1,16 @@
 [
   {
     "id": 1,
-    "name": "e-store",
+    "name": "E Market BD",
     "icon": "",
-    "logo": "http://localhost:8084/public/company/e-store/logo.png",
-    "code": "e-store",
-    "email": "support@estore.com",
+    "logo": "http://localhost:8084/public/company/emarket-bd/logo.png",
+    "code": "emarket-bd",
+    "email": "support@emarket-bd.com",
     "phoneNo": "+8801710000000",
     "location": "29/A, greenroad<br/>Farmgate, Dhaka.<br/>",
     "header": "Find what you need here",
-    "motive": "E-store is dedicated to providing an optimal shopping experience. We helped our customers to find what they are looking for with a vast selection of the best products across the board.",
-    "details": "Large text here. about the e-store"
+    "motive": "emarket-bd is dedicated to providing an optimal shopping experience. We helped our customers to find what they are looking for with a vast selection of the best products across the board.",
+    "details": "Large text here. about the emarket-bd"
   },
   {
     "id": 2,

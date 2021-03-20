@@ -56,7 +56,7 @@
               <p style="font-size: 34px">Subscribe to our newsletter</p>
               <p>
                 Find special offers, coupon codes, and exclusive promotions by
-                Subscribe to the e-store-bd.com Newsletter
+                Subscribe to the emarket-bd.com Newsletter
               </p>
               <b-row>
                 <b-col cols="3" />

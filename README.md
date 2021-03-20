@@ -2,7 +2,7 @@
 A Vue js / Node js E-commerce Web Application with MySQL database.
 ### Clone this repository
 ```
-git clone https://github.com/mohammadrony/e-store.git
+git clone https://github.com/muhammadrony956/emarket-bd.git
 ```
 ### Install server dependencies - backend
 ```

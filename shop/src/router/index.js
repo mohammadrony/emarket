@@ -34,138 +34,158 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: Home
+    component: Home,
+    meta: { title: "E Market BD | Home" }
   },
   {
     path: "/products",
     name: "all-products",
-    component: AllProducts
+    component: AllProducts,
+    meta: { title: "E Market BD | Products page" }
   },
   {
     path: "/products/:category",
     name: "category-products",
-    component: CategoryProducts
+    component: CategoryProducts,
+    meta: { title: "E Market BD | Products page" }
   },
   {
     path: "/products/:category/:subCategory",
     name: "sub-category-products",
-    component: SubCategoryProducts
+    component: SubCategoryProducts,
+    meta: { title: "E Market BD | Products page" }
   },
   {
     path: "/products/:category/:subCategory/:subSubCategory",
     name: "sub-sub-category-products",
-    component: SubSubCategoryProducts
+    component: SubSubCategoryProducts,
+    meta: { title: "E Market BD | Products page" }
   },
   {
     path: "/product/:productId",
     name: "product-details",
-    component: ProductDetails
+    component: ProductDetails,
+    meta: { title: "E Market BD | Product details" }
   },
   {
     path: "/cart-view",
     name: "cart-view",
-    component: CartView
+    component: CartView,
+    meta: { title: "E Market BD | Cart" }
   },
   {
     path: "/wishlist",
     name: "wishlist",
-    component: Wishlist
+    component: Wishlist,
+    meta: { title: "E Market BD | Wishlist" }
   },
   {
     path: "/checkout",
     name: "checkout",
-    component: Checkout
+    component: Checkout,
+    meta: { title: "E Market BD | Checkout" }
   },
   {
     path: "/order/:sessionId",
     name: "order",
-    component: Order
+    component: Order,
+    meta: { title: "E Market BD | Order details" }
   },
   {
     path: "/success-payment",
     name: "success-payment",
-    component: SuccessPayment
+    component: SuccessPayment,
+    meta: { title: "E Market BD | Success payment" }
   },
   {
     path: "/cancel-payment",
     name: "/cancel-payment",
-    component: CancelPayment
+    component: CancelPayment,
+    meta: { title: "E Market BD | Cancel payment" }
   },
   {
     path: "/about-us",
     name: "about-us",
-    component: AboutUs
+    component: AboutUs,
+    meta: { title: "E Market BD | About us" }
   },
   {
     path: "/register",
     name: "register",
-    component: Register
+    component: Register,
+    meta: { title: "E Market BD | Register" }
   },
   {
     path: "/login",
     name: "login",
-    component: Login
+    component: Login,
+    meta: { title: "E Market BD | Login" }
   },
   {
     path: "/profile",
     name: "profile",
-    component: UserProfile
+    component: UserProfile,
+    meta: { title: "E Market BD | Profile" }
   },
   {
     path: "/user-verify",
     name: "user-verify",
-    component: UserVerify
+    component: UserVerify,
+    meta: { title: "E Market BD | Email verification" }
   },
   {
     path: "/reset-password/:token",
     name: "reset-password",
-    component: ResetPassword
+    component: ResetPassword,
+    meta: { title: "E Market BD | Reset password" }
   },
   {
     path: "/admin",
     name: "admin",
     component: ADashboard,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, title: "E Market BD | Admin panel" }
   },
   {
     path: "/admin/users",
     name: "admin-users",
     component: AUsers,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, title: "E Market BD | Shop users" }
   },
   {
     path: "/admin/orders",
     name: "admin-orders",
     component: AOrders,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, title: "E Market BD | Order list" }
   },
   {
     path: "/admin/order/:orderId",
     name: "admin-order",
     component: AOrder,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, title: "E Market BD | Order details" }
   },
   {
     path: "/admin/profile",
     name: "admin-profile",
     component: AProfile,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, title: "E Market BD | Admin profile" }
   },
   {
     path: "/admin/add-product",
     name: "admin-add-product",
     component: AddProduct,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true, title: "E Market BD | Add product" }
   },
   {
     path: "/error/401",
     name: "unauthorized",
-    component: Unauthorized
+    component: Unauthorized,
+    meta: { title: "E Market BD | Unauthorized" }
   },
   {
     path: "/*",
     name: "not-found",
-    component: NotFound
+    component: NotFound,
+    meta: { title: "E Market BD | Not found" }
   }
 ];
 
@@ -176,6 +196,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   const admin = store.state.CurrentUser.admin;
   if (requiresAuth && !admin) {

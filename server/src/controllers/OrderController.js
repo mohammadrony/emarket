@@ -54,13 +54,13 @@ module.exports = {
 			var mailOptions = {
 				from: process.env.ESTORE_EMAIL,
 				to: order.email,
-				subject: "E-store Order Status",
+				subject: "emarket-bd Order Status",
 				text: 'Hi ' + order.name + ',\n\n' +
 					'Thanks for your purchase!\n\n' +
 					'Please follow the link to keep track on your order.\n\n' +
 					'http://' + 'localhost:8080' + '/order/' + order.checkoutSessionId + '\n\n' +
 					'Your session Id: ' + order.checkoutSessionId + '\n\n' +
-					'Thanks for using E-store\n'
+					'Thanks for using emarket-bd\n'
 			}
 			await transporter.sendMail(mailOptions, function (err) {
 				if (err) {

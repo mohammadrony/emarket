@@ -44,12 +44,12 @@ module.exports = {
             var mailOptions = {
                 from: process.env.ESTORE_EMAIL,
                 to: req.body.email,
-                subject: "E-store Email Verification",
+                subject: "emarket-bd Email Verification",
                 text: 'Hi ' + user.firstName + ' ' + user.lastName + ',\n\n' +
-                    'Welcome to E-store!\n\n' +
+                    'Welcome to emarket-bd!\n\n' +
                     'Your email verification code is: ' + token + '\n\n' +
                     'Use this code to complete the registration process.\n\n' +
-                    'Enjoy using your E-store account!\n'
+                    'Enjoy using your emarket-bd account!\n'
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {
@@ -92,8 +92,8 @@ module.exports = {
                 var mailOptions = {
                     from: process.env.ESTORE_EMAIL,
                     to: req.body.email,
-                    subject: 'Verify Account on e-store',
-                    text: 'hello ' + user.firstName + ' ' + user.lastName + ',\n\n' + 'Recently you\'ve requested to create an account on e-store\n\n' +
+                    subject: 'Verify Account on emarket-bd',
+                    text: 'hello ' + user.firstName + ' ' + user.lastName + ',\n\n' + 'Recently you\'ve requested to create an account on emarket-bd\n\n' +
                         'Please verify your email address first\n\n' +
                         'click on the following link, or paste it into your browser to complete this process\n\n' +
                         'http://' + 'localhost:8080' + '/user-verify/' + token + '\n\n' +
@@ -191,7 +191,7 @@ module.exports = {
             var mailOptions = {
                 from: process.env.ESTORE_EMAIL,
                 to: req.body.email,
-                subject: 'Reset Password on e-store',
+                subject: 'Reset Password on emarket-bd',
                 text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                     'http://' + 'localhost:8080' + '/reset-password/' + token + '\n\n' +
@@ -274,12 +274,12 @@ module.exports = {
                 var mailOptions = {
                     from: process.env.ESTORE_EMAIL,
                     to: req.body.email,
-                    subject: "E-store Email Verification",
+                    subject: "emarket-bd Email Verification",
                     text: 'Hi ' + user.firstName + ' ' + user.lastName + ',\n\n' +
-                        'Welcome to E-store!\n\n' +
+                        'Welcome to emarket-bd!\n\n' +
                         'Your email verification code is: ' + user.registerToken + '\n\n' +
                         'Use this code to complete the registration process.\n\n' +
-                        'Enjoy using you E-store account!\n'
+                        'Enjoy using you emarket-bd account!\n'
                 }
                 await transporter.sendMail(mailOptions, function (err) {
                     if (err) {
@@ -366,9 +366,9 @@ module.exports = {
             var mailOptions = {
                 from: process.env.ESTORE_EMAIL,
                 to: req.body.email,
-                subject: 'E-store Password Changed',
+                subject: 'emarket-bd Password Changed',
                 text: 'Hello ' + req.body.name + '\n\n' +
-                    'We wanted to let you know that your E-store password was reset.\n'
+                    'We wanted to let you know that your emarket-bd password was reset.\n'
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {
@@ -406,9 +406,9 @@ module.exports = {
             var mailOptions = {
                 from: process.env.ESTORE_EMAIL,
                 to: req.body.email,
-                subject: 'Welcome to E-store',
+                subject: 'Welcome to emarket-bd',
                 text: "Hello " + req.body.name + ",\n\n"
-                    + "Your email is now verified on E-store.\n\n"
+                    + "Your email is now verified on emarket-bd.\n\n"
                     + "Thank you.\n"
             }
             await transporter.sendMail(mailOptions, function (err) {

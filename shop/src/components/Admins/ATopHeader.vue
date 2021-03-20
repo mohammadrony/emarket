@@ -2,7 +2,7 @@
   <div>
     <b-navbar toggleable="md" type="dark" variant="info">
       <b-navbar-brand href="/">
-        <img src="http://localhost:8084/public/product-image/e-store.png" />
+        <img :src="companyLogo" />
       </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
@@ -45,9 +45,13 @@ export default {
   name: "ATopHeader",
   components: {},
   data() {
-    return {};
+    return {
+      companyLogo: "",
+    };
   },
-  mounted() {},
+  async mounted() {
+    this.companyLogo = await this.$store.dispatch("Company/getCompanyLogo");
+  },
   methods: {
     logout() {
       this.$store.dispatch("CurrentUser/setToken", "");
