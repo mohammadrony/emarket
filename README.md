@@ -1,8 +1,8 @@
-# Vuejs-nodejs-e-commerce-web-application
-A Vue js / Node js E-commerce Web Application with MySQL database.
-### Clone this repository
+# vuejs nodejs web app
+A Vuejs Nodejs E-commerce Web Application with MySQL database.
+### To clone this repository
 ```
-git clone https://github.com/muhammadrony956/emarket-bd.git
+git clone https://github.com/mohammadrony/emarket-bd.git
 ```
 ### Install server dependencies - backend
 ```
