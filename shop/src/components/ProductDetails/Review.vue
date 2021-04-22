@@ -129,7 +129,7 @@
       <b-col cols="6">
         <h4>Customer Review</h4>
         <hr />
-        <div v-for="review in reviewList" :key="review.id" class="mb-2">
+        <div v-for="review in reviewList2" :key="review.id" class="mb-2">
           <b-card
             bg-variant="white"
             text-variant="dark"
@@ -187,6 +187,14 @@
             </b-row>
           </b-card>
         </div>
+        <b-pagination
+          v-if="reviews > perPage"
+          size="md"
+          v-model="currentPage"
+          :total-rows="reviews"
+          :per-page="perPage"
+          @input="paginate(currentPage)"
+        ></b-pagination>
       </b-col>
       <b-col cols="6">
         <b-card bg-variant="white" text-variant="dark" v-if="userReviewFlag">
@@ -350,8 +358,12 @@ export default {
       editRating: 0,
       editComment: "",
       productId: 0,
+      currentPage: 1,
+      perPage: 3,
+      reviews: 0,
       productRating: {},
-      reviewList: []
+      reviewList: [],
+      reviewList2: []
     };
   },
   async mounted() {
@@ -370,6 +382,11 @@ export default {
       this.reviewList = (
         await ReviewService.getReviewList(this.productId)
       ).data;
+      if (this.reviewList) {
+        this.reviews = this.reviewList.length;
+        const start = 0;
+        this.reviewList2 = this.reviewList.slice(start, start + this.perPage);
+      }
     } catch (error) {
       console.log(error.response.data.error);
     }
@@ -421,6 +438,10 @@ export default {
     }
   },
   methods: {
+    paginate(currentPage) {
+      const start = (currentPage - 1) * this.perPage;
+      this.reviewList2 = this.reviewList.slice(start, start + this.perPage);
+    },
     async createReview() {
       await this.$store.dispatch("Review/createReview", {
         rating: this.rating,
