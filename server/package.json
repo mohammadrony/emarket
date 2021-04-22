@@ -26,12 +26,12 @@
     "nodemailer": "^6.5.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "sequelize": "^6.5.0",
-    "stripe": "^8.137.0"
+    "sequelize": "^6.6.2",
+    "stripe": "^8.145.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
-    "eslint": "^7.21.0",
+    "eslint": "^7.24.0",
     "nodemon": "^2.0.7"
   }
 }
