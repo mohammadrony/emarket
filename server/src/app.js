@@ -3,14 +3,14 @@ if(process.env.NODE_ENV !== 'production'){
 	require('dotenv').config({path: "./.env"})
 }
 const express = require("express")
-const bodyParser = require("body-parser")
 const cors = require("cors")
 const morgan = require("morgan")
 const config = require("./config/config")
 const { sequelize } = require("./models")
 const app = express();
 app.use(morgan("combined"));
-app.use(bodyParser.json());
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(cors());
 app.use('/public', express.static('public'));
 
