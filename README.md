@@ -1,7 +1,7 @@
 # Vue.js + Node.js Web Application with MySQL database
 ### To clone this repository
 ```
-git clone https://github.com/mohammadrony/emarket-bd.git
+git clone https://github.com/mohammadrony/emarket.git
 ```
 ### Install server dependencies - backend
 ```
