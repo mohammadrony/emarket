@@ -36,6 +36,7 @@ RESTful Api, authentication management is two most important part of the backend
 [TypeScript - Superset of JavaScript](https://www.typescriptlang.org/)
 #### Community
 [Join Vue js Discord Channel](https://chat.vuejs.org/)\
+[Join Nuxt js Discord Channel](https://discord.nuxtjs.org)\
 [Join BootstrapVue Discord Channel](https://discord.gg/j2Mtcny)
 #### Tutorial Followed
 [YouTube -  The Earth Is Square - Learn Vue 3 for Beginners](https://www.youtube.com/watch?v=ZqgiuPt5QZo)\
@@ -106,6 +107,6 @@ cd shop && npm run serve
 ### Then your application will be running at port 8080 locally
 goto http://localhost:8080
 ### You can contact with me if you face any problem
-at `ronyku1829@gmail.com`
+at `ronyku1829@gmail.com`\
 or [Telegram - Mohammad Rony](https://t.me/mohammadrony)
 Thank you.
