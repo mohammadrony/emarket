@@ -31,17 +31,22 @@ RESTful Api, authentication management is two most important part of the backend
 [MySQL](https://www.mysql.com/)
 ### Some Recommendation
 #### Technology
-[Vue Framework - Nuxt js](https://nuxtjs.org/)\
-[NonRDBMS - mongoDB](https://www.mongodb.com/)\
-[TypeScript](https://www.typescriptlang.org/)
+[Nuxt js - Vue Framework](https://nuxtjs.org/)\
+[mongoDB - NonRDBMS](https://www.mongodb.com/)\
+[TypeScript - superset of JavaScript](https://www.typescriptlang.org/)
 #### Community
 [Join Vue js Discord Channel](https://chat.vuejs.org/)\
 [Join BootstrapVue Discord Channel](https://discord.gg/j2Mtcny)
 #### Tutorial Followed
+[Youtube -  The Earth Is Square - Learn Vue 3 for Beginners](https://www.youtube.com/watch?v=ZqgiuPt5QZo) - This video is with Vue 3 but my project is in Vue 2.
 [Youtube -  Program With Erik - BootstrapVue introduction](https://www.youtube.com/watch?v=-DyKeMa5tYY&list=PL-lxoPS_1OXWb4BlDuSsUrkq66hM5pG33)\
 [YouTube - freeCodeCamp.org - Backend frontend combining](https://www.youtube.com/watch?v=Fa4cRMaTDUI&list=PLWKjhJtqVAbnadueQ-C5keMQQiQau_i0D)\
+[YouTube -  Stripe Developers - Stripe Checkout](https://www.youtube.com/watch?v=UjcSWxPNo18)\
+[YouTube - Academind - Uploading an Image](https://www.youtube.com/watch?v=srPXMt1Q0nY)\
+[Youtube - Esterling Accime - Send Email with Node.js](https://www.youtube.com/watch?v=Va9UKGs1bwI)\
 There are many seperated tutorial for specific feature which I could not include here. I'm too lazy for this. sorry!
 #### Some others tutorial i recommend
+To learn Nuxt.js from beginning. Official tutorial [VueSchool - Nuxt.js Fundamentals](https://vueschool.io/courses/nuxtjs-fundamentals)\
 To learn user authentication. Watch this [Youtube - freeCodeCamp.org - User Authentication in Web Apps (Passport.js, Node, Express)](https://www.youtube.com/watch?v=F-sFp_AvHc8)\
 To use typescript for backend. Watch this [YouTube - AfterAcademy - Build and Learn Node.js Backend Architecture Like a Pro](https://www.youtube.com/watch?v=Nwh7wTtUV5I)\
 **Best of luck**
