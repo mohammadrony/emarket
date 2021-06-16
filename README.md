@@ -108,5 +108,5 @@ cd shop && npm run serve
 goto http://localhost:8080
 ### You can contact with me if you face any problem
 at `ronyku1829@gmail.com`\
-or [Telegram - Mohammad Rony](https://t.me/mohammadrony)
+or [Telegram - Mohammad Rony](https://t.me/mohammadrony)\
 Thank you.
