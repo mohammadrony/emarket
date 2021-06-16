@@ -38,12 +38,12 @@ RESTful Api, authentication management is two most important part of the backend
 [Join Vue js Discord Channel](https://chat.vuejs.org/)\
 [Join BootstrapVue Discord Channel](https://discord.gg/j2Mtcny)
 #### Tutorial Followed
-[Youtube -  The Earth Is Square - Learn Vue 3 for Beginners](https://www.youtube.com/watch?v=ZqgiuPt5QZo) - This video is with Vue 3 but my project is in Vue 2.
-[Youtube -  Program With Erik - BootstrapVue introduction](https://www.youtube.com/watch?v=-DyKeMa5tYY&list=PL-lxoPS_1OXWb4BlDuSsUrkq66hM5pG33)\
+[Youtube -  The Earth Is Square - Learn Vue 3 for Beginners](https://www.youtube.com/watch?v=ZqgiuPt5QZo)  - This video is with Vue 3 but my project is in Vue 2.
+[YouTube -  Program With Erik - BootstrapVue introduction](https://www.youtube.com/watch?v=-DyKeMa5tYY&list=PL-lxoPS_1OXWb4BlDuSsUrkq66hM5pG33)\
 [YouTube - freeCodeCamp.org - Backend frontend combining](https://www.youtube.com/watch?v=Fa4cRMaTDUI&list=PLWKjhJtqVAbnadueQ-C5keMQQiQau_i0D)\
 [YouTube -  Stripe Developers - Stripe Checkout](https://www.youtube.com/watch?v=UjcSWxPNo18)\
 [YouTube - Academind - Uploading an Image](https://www.youtube.com/watch?v=srPXMt1Q0nY)\
-[Youtube - Esterling Accime - Send Email with Node.js](https://www.youtube.com/watch?v=Va9UKGs1bwI)\
+[YouTube - Esterling Accime - Send Email with Node.js](https://www.youtube.com/watch?v=Va9UKGs1bwI)\
 There are many seperated tutorial for specific feature which I could not include here. I'm too lazy for this. sorry!
 #### Some others tutorial i recommend
 To learn Nuxt.js from beginning. Official tutorial [VueSchool - Nuxt.js Fundamentals](https://vueschool.io/courses/nuxtjs-fundamentals)\
