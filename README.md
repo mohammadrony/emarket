@@ -45,8 +45,8 @@ RESTful Api, authentication management is two most important part of the backend
 [YouTube -  Stripe Developers - Stripe Checkout](https://www.youtube.com/watch?v=UjcSWxPNo18)\
 [YouTube - Academind - Uploading an Image](https://www.youtube.com/watch?v=srPXMt1Q0nY)\
 [YouTube - Esterling Accime - Send Email with Node.js](https://www.youtube.com/watch?v=Va9UKGs1bwI)\
-There are many seperated tutorial for specific feature which I could not include here.
-#### Some others tutorial i recommend
+There are many other videos which I don't included here.
+#### Some others tutorial I recommend
 [VueSchool - Nuxt.js Fundamentals](https://vueschool.io/courses/nuxtjs-fundamentals)\
 [YouTube - freeCodeCamp.org - User Authentication in Web Apps (Passport.js, Node, Express)](https://www.youtube.com/watch?v=F-sFp_AvHc8)\
 [YouTube - AfterAcademy - Build and Learn Node.js Backend Architecture Like a Pro](https://www.youtube.com/watch?v=Nwh7wTtUV5I)\
@@ -104,7 +104,7 @@ cd server && npm start
 ```
 cd shop && npm run serve
 ```
-### Then your application will be running at port 8080 locally
+### Then your application should be running at port 8080 locally
 goto http://localhost:8080
 ### You can contact with me if you face any problem
 at `ronyku1829@gmail.com`\
