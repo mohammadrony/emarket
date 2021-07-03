@@ -63,10 +63,10 @@ export default {
     async addToCart() {
       const cartItem = {
         productId: this.productId,
-        currency: this.currency,
+        title: this.title,
         image: this.image,
         rating: this.rating,
-        title: this.title,
+        currency: this.currency,
         amount: this.amount,
         quantity: 1
       };

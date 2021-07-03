@@ -237,11 +237,12 @@ export default {
     async buyNow() {
       const buyProduct = {
         productId: this.displayProduct.id,
-        amount: this.displayProduct.amount,
-        currency: this.displayProduct.amount,
-        quantity: 1,
         title: this.displayProduct.title,
-        image: this.displayProduct.image
+        image: this.displayProduct.image1,
+        rating: this.displayProduct.rating,
+        currency: this.displayProduct.currency,
+        amount: this.displayProduct.amount,
+        quantity: 1,
       };
       await this.$store.dispatch("Cart/addToCart", buyProduct);
       this.$router.push({ path: "/checkout" });
