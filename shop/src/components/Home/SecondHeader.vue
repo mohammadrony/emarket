@@ -130,7 +130,7 @@
 
 <script>
 export default {
-  name: "HomeSecondHeader",
+  name: "SecondHeader",
   components: {},
   data() {
     return {

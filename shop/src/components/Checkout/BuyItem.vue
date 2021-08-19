@@ -127,7 +127,7 @@ export default {
       subTotalAmount: 0,
       formValidate: true,
       message: "form data is not valid",
-      shippingRate: this.$store.state.Checkout.shipping.cost,
+      shippingRate: this.$store.state.Checkout.shippingRate,
       totalAmount: 0,
       checkoutProduct: null
     };

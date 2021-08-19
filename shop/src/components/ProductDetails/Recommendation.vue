@@ -67,7 +67,7 @@ import ProductsService from "@/services/ProductsService.js";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 export default {
-  name: "Name",
+  name: "Recommendation",
   props: {
     subSubCategoryId: Number
   },

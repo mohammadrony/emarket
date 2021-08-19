@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: "Name",
+  name: "InvalidParameter",
   props: {
     paramName: {
       required: true,

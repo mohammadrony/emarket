@@ -147,15 +147,6 @@
               </b-form-group>
             </b-card>
           </div>
-          <h5 class="mt-3 font-weight-bold">Shipping Options</h5>
-          <hr />
-          <b-form-group>
-            <b-form-radio-group
-              :options="shipping.options"
-              stacked
-              v-model="shipping.selectedMethod"
-            />
-          </b-form-group>
         </b-form>
       </b-col>
     </b-row>
@@ -181,7 +172,6 @@ export default {
       country: null,
       formatNumber: /^[0-9+-]+$/,
       formatEmail: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-      shipping: this.$store.state.Checkout.shipping
     };
   },
   computed: {

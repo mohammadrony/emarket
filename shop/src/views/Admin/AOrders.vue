@@ -95,7 +95,7 @@
       </div>
       <b-pagination
         v-if="orders != 0"
-        size="lg"
+        size="md"
         v-model="currentPage"
         :total-rows="orders"
         :per-page="perPage"

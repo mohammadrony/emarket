@@ -87,7 +87,7 @@
 
 <script>
 export default {
-  name: "Name",
+  name: "Support",
   components: {},
   data() {
     return {};

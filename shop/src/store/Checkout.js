@@ -15,25 +15,7 @@ export const CheckoutModule = {
                 country: "",
             },
         },
-        shipping: {
-            cost: 4,
-            selectedMethod: "shippingMethod1",
-            options: [
-                {
-                    text: "Ship to My Billing Address",
-                    value: "shippingMethod1",
-                },
-            ],
-        },
-        payment: {
-            selectedMethod: "stripe",
-            options: [
-                {
-                    text: "Stripe Payment Method",
-                    value: "stripe",
-                },
-            ],
-        }
+        shippingRate: 4
     },
     mutations: {
         SET_CUSTOMER_NAME(state, name) {
