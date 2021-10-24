@@ -91,6 +91,6 @@ cd shop && npm run serve
 ```
 ### Then your application should be running at port 8080 locally
 goto http://localhost:8080
-### You can contact with me if you face any problem.
-My email `ronyku1829@gmail.com`\
+### Any Problem or any suggestion
+**Feel free to open an issue. I may work on that.**\
 Thank you.
