@@ -12,7 +12,7 @@ In this project I've worked with an e-commerce system where you will find three 
 #### Frontend Description
 In this project I presented many good feature of Vue.js <version 2>. You will find **state management** using multiple modules in the store directory. For the front end there's **authentication flow** (obviously there's a lot in backend for this) with reset password feature which includes **email automation**. Then I've added **stripe's payment method** which could process different kind of card and currency supported by stripe. Then from the routing pages you'll find details code about how to restrict someone to visit any route and **show a default page for unauthenticated request or any wrong url** entered. You'll find a lots of feature with **real time update** by not reloading the page and many more. 
 #### Backend Description
-RESTful Api, authentication management is two most important part of the backend. Then session middleware, JWT authentication, those helped to get data from database securely. again most of the part of **email automation** happened in backend. then **payment session generate**. Then **sequelize** orm to work with different type of database. I've worked with MySQL database here. Then **saving media file** and generate public url. You must checkout the repository to learn more about these topic. I tried to keep the project organized. It might help you a lot. If you still have any question I've given my email at the end of the instruction.
+RESTful Api, authentication management is two most important part of the backend. Then session middleware, JWT authentication, those helped to get data from database securely. again most of the part of **email automation** happened in backend. then **payment session generate**. Then **sequelize** orm to work with different type of database. I've worked with MySQL database here. Then **saving media file** and generate public url. You must checkout the repository to learn more about these topic. I tried to keep the project organized. It might help you a lot. If you still have any question create an issue or ask me anyway.
 ### Topics included in project
 #### Frontend
 [Vue js](https://vuejs.org/)\
@@ -92,5 +92,5 @@ cd shop && npm run serve
 ### Then your application should be running at port 8080 locally
 goto http://localhost:8080
 ### Any Problem or any suggestion
-**Feel free to open an issue. I may work on that.**\
+Feel free to open an issue. I may work on that.\
 Thank you.
