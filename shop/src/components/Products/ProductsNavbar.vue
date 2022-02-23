@@ -52,7 +52,7 @@
                 variant="outline-dark"
               >
                 <b-icon class="mr-2" scale="0.8" icon="plus-square" />
-                Create Item
+                Add Product
               </b-button>
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">
