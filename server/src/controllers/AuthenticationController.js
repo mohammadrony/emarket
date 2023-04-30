@@ -252,7 +252,6 @@ module.exports = {
                 },
                 attributes: ["id", "firstName", "lastName", "registerToken"]
             });
-            console.log(user)
             if (!user) {
                 return res.sendStatus(404).status({
                     error: "Invalid email address."
