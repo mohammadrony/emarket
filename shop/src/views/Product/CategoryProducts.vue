@@ -22,7 +22,7 @@
         routerLink="/products"
       />
     </div>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
@@ -33,7 +33,7 @@ import InvalidParameter from "@/components/NotFound/InvalidParameter.vue";
 import SubCategorySidebar from "@/components/Products/SubCategorySidebar.vue";
 import FilterComponent from "@/components/Products/FilterComponent.vue";
 import ProductList from "@/components/Products/ProductList.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "Products",
   components: {
@@ -43,12 +43,12 @@ export default {
     SubCategorySidebar,
     FilterComponent,
     ProductList,
-    Footer
+    MyFooter,
   },
 
   data() {
     return {
-      validParam: true
+      validParam: true,
     };
   },
   computed: {},
@@ -57,7 +57,7 @@ export default {
     this.validParam = this.$store.state.Products.productsRouteValidate;
     await this.$store.dispatch("Products/setAllProducts");
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

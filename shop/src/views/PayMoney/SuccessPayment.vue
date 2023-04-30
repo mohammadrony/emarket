@@ -22,13 +22,13 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
 <script>
 import TopHeader from "@/components/Common/TopHeader.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 import CheckoutService from "@/services/CheckoutService.js";
 import OrderService from "@/services/OrderService.js";
 import OrderItemService from "@/services/OrderItemService.js";
@@ -37,13 +37,13 @@ export default {
   name: "SuccessPayment",
   components: {
     TopHeader,
-    Footer
+    MyFooter,
   },
   data() {
     return {
       order: {},
       session: {},
-      validSession: false
+      validSession: false,
     };
   },
   async mounted() {
@@ -79,7 +79,7 @@ export default {
           checkoutSessionId: sessionId,
           productCost: (this.session.amount_total - shipCost) / 100,
           currency: this.session.currency.toUpperCase(),
-          shippingCost: shipCost / 100
+          shippingCost: shipCost / 100,
         })
       ).data;
     } catch (error) {
@@ -88,12 +88,21 @@ export default {
 
     var i;
     for (i = 0; i < lineItems.length - 1; i++) {
-      const productId = parseInt(lineItems[i].description);
+      var productId;
+      try {
+        productId = (
+          await ProductsService.getProductId(
+            encodeURIComponent(lineItems[i].description)
+          )
+        ).data;
+      } catch (error) {
+        console.log(error.response.data.error);
+      }
       try {
         await OrderItemService.createOrderItem({
           quantity: lineItems[i].quantity,
           ProductId: productId,
-          OrderId: this.order.id
+          OrderId: this.order.id,
         });
       } catch (error) {
         console.log(error.response.data.error);
@@ -107,7 +116,7 @@ export default {
       try {
         await ProductsService.updateProduct({
           id: productId,
-          sales: lineproduct.sales + lineItems[i].quantity
+          sales: lineproduct.sales + lineItems[i].quantity,
         });
       } catch (error) {
         console.log(error.response.data.error);
@@ -115,7 +124,7 @@ export default {
     }
   },
   methods: {},
-  computed: {}
+  computed: {},
 };
 </script>
 

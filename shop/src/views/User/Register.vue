@@ -139,19 +139,19 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
 <script>
 import AuthenticationService from "@/services/AuthenticationService.js";
 import TopHeader from "@/components/Common/TopHeader.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "Register",
   components: {
     TopHeader,
-    Footer
+    MyFooter,
   },
   data() {
     return {
@@ -164,7 +164,7 @@ export default {
       password: null,
       validEmail: true,
       confirmPassword: null,
-      emailMessage: null
+      emailMessage: null,
     };
   },
   mounted() {
@@ -204,7 +204,7 @@ export default {
       )
         return false;
       else return true;
-    }
+    },
   },
   methods: {
     async createAccount() {
@@ -221,7 +221,7 @@ export default {
           firstName: this.firstName,
           lastName: this.lastName,
           email: this.email,
-          password: this.password
+          password: this.password,
         });
         this.$store.dispatch("CurrentUser/setNewUserId", user.data.id);
         this.$store.dispatch("CurrentUser/setNewUserEmail", this.email);
@@ -231,8 +231,8 @@ export default {
         this.validEmail = false;
         this.emailMessage = error.response.data.error;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

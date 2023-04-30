@@ -45,8 +45,8 @@ export default {
   props: {
     orderInfo: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {},
   data() {
@@ -54,7 +54,7 @@ export default {
   },
   mounted() {},
   methods: {},
-  computed: {}
+  computed: {},
 };
 </script>
 

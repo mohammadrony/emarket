@@ -70,7 +70,7 @@ export default {
   name: "TopSellProduct",
   components: {
     AddToCart,
-    AddToWishlist
+    AddToWishlist,
   },
   data() {
     return {
@@ -78,7 +78,7 @@ export default {
       cartComponentKey: 0,
       wishlistKey: 2,
       topSellLimit: 8,
-      topSellViewTitle: "Top Selling Products"
+      topSellViewTitle: "Top Selling Products",
     };
   },
   async mounted() {
@@ -91,9 +91,9 @@ export default {
     forceRerender() {
       this.cartComponentKey += 1;
       this.wishlistKey += 1;
-    }
+    },
   },
-  computed: {}
+  computed: {},
 };
 </script>
 

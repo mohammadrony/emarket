@@ -36,9 +36,7 @@
               </b-nav-item>
               <b-nav-item
                 class="mr-auto"
-                :to="
-                  `/products/${category.name}/${subCategory.name}/${subSubCategory.name}`
-                "
+                :to="`/products/${category.name}/${subCategory.name}/${subSubCategory.name}`"
                 v-if="subSubCategory"
               >
                 {{ subSubCategory.name }}
@@ -88,7 +86,7 @@ export default {
       searchText: "",
       category: "",
       subCategory: "",
-      subSubCategory: ""
+      subSubCategory: "",
     };
   },
   async mounted() {
@@ -119,11 +117,11 @@ export default {
     search() {
       if (this.searchText) {
         this.$router.push({
-          path: `${this.$route.path}?q=${this.searchText}`
+          path: `${this.$route.path}?q=${this.searchText}`,
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

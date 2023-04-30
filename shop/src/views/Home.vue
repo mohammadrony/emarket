@@ -8,7 +8,7 @@
       <NewAddProduct class="mt-5" />
       <Support class="mt-5" />
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
@@ -20,7 +20,7 @@ import Showcase from "@/components/Home/Showcase.vue";
 import TopSellProduct from "@/components/Home/TopSellProduct.vue";
 import NewAddProduct from "@/components/Home/NewAddProduct.vue";
 import Support from "@/components/Home/Support.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "Home",
   components: {
@@ -30,9 +30,9 @@ export default {
     TopSellProduct,
     NewAddProduct,
     Support,
-    Footer
+    MyFooter,
   },
-  mounted() {}
+  mounted() {},
 };
 </script>
 

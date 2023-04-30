@@ -10,35 +10,35 @@
       <hr />
       <b-row>
         <b-col cols="6">
-          <Address />
+          <AddressForm />
         </b-col>
         <b-col cols="6">
           <BuyItem />
         </b-col>
       </b-row>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
 <script>
 import TopHeader from "@/components/Common/TopHeader.vue";
-import Address from "@/components/Checkout/Address.vue";
+import AddressForm from "@/components/Checkout/AddressForm.vue";
 import BuyItem from "@/components/Checkout/BuyItem.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "Checkout",
   components: {
     TopHeader,
-    Address,
+    AddressForm,
     BuyItem,
-    Footer
+    MyFooter,
   },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

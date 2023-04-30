@@ -51,23 +51,23 @@ export default {
   props: {
     orderItems: {
       type: Array,
-      required: true
+      required: true,
     },
     orderInfo: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {},
   data() {
     return {
       orderStatus: this.orderInfo.status,
-      statusVariant: this.orderInfo.variant
+      statusVariant: this.orderInfo.variant,
     };
   },
   mounted() {},
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 

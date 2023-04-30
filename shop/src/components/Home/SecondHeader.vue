@@ -49,7 +49,7 @@
                       style="margin-right: 20px"
                       v-if="
                         subCategory.id == subSubCategory.SubCategoryId &&
-                          subCategory.CategoryId == category.id
+                        subCategory.CategoryId == category.id
                       "
                       href="#"
                     >
@@ -110,7 +110,7 @@
                       style="margin-right: 20px"
                       v-if="
                         subCategory.id == subSubCategory.SubCategoryId &&
-                          subCategory.CategoryId == category.id
+                        subCategory.CategoryId == category.id
                       "
                       href="#"
                     >
@@ -139,7 +139,7 @@ export default {
       categoryListRow1: [],
       categoryListRow2: [],
       subCategoryList: [],
-      subSubCategoryList: []
+      subSubCategoryList: [],
     };
   },
   computed: {},
@@ -157,12 +157,12 @@ export default {
       "Category/getSubSubCategoryList"
     );
 
-    this.$root.$on("bv::dropdown::show", bvEvent => {
+    this.$root.$on("bv::dropdown::show", (bvEvent) => {
       if (bvEvent.componentId === "dropdown-2") {
         this.isDropdown2Visible = true;
       }
     });
-    this.$root.$on("bv::dropdown::hide", bvEvent => {
+    this.$root.$on("bv::dropdown::hide", (bvEvent) => {
       if (bvEvent.componentId === "dropdown-2") {
         this.isDropdown2Visible = false;
       }
@@ -177,24 +177,24 @@ export default {
     },
     subCategorySelect(subCategory) {
       const category = this.categoryList.find(
-        obj => obj.id == subCategory.CategoryId
+        (obj) => obj.id == subCategory.CategoryId
       );
       this.$router.push({
-        path: `/products/${category.name}/${subCategory.name}`
+        path: `/products/${category.name}/${subCategory.name}`,
       });
     },
     subSubCategorySelect(subSubCategory) {
       const subCategory = this.subCategoryList.find(
-        obj => obj.id == subSubCategory.SubCategoryId
+        (obj) => obj.id == subSubCategory.SubCategoryId
       );
       const category = this.categoryList.find(
-        obj => obj.id == subCategory.CategoryId
+        (obj) => obj.id == subCategory.CategoryId
       );
       this.$router.push({
-        path: `/products/${category.name}/${subCategory.name}/${subSubCategory.name}`
+        path: `/products/${category.name}/${subCategory.name}/${subSubCategory.name}`,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -1,7 +1,6 @@
 <template>
   <div>
     <b-dropdown
-      split
       id="wishlist-dd"
       v-if="validWishlistItem != -1"
       :size="buttonType"
@@ -39,19 +38,19 @@ export default {
   props: {
     addButtonTitle: {
       default: "",
-      type: String
+      type: String,
     },
     addedButtonTitle: {
       default: "",
-      type: String
+      type: String,
     },
     buttonType: String,
-    productId: Number
+    productId: Number,
   },
   data() {
     return {
       validWishlistItem: -1,
-      userId: 0
+      userId: 0,
     };
   },
   components: {},
@@ -73,7 +72,7 @@ export default {
           variant: "danger",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
-          solid: true
+          solid: true,
         });
         return;
       }
@@ -87,7 +86,7 @@ export default {
           variant: "info",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
-          solid: true
+          solid: true,
         });
       }
     },
@@ -102,11 +101,11 @@ export default {
           variant: "info",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
-          solid: true
+          solid: true,
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

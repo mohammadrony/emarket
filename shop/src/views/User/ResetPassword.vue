@@ -80,19 +80,19 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
 <script>
 import TopHeader from "@/components/Common/TopHeader.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 import AuthenticationService from "@/services/AuthenticationService.js";
 export default {
   name: "ResetPassword",
   components: {
     TopHeader,
-    Footer
+    MyFooter,
   },
   data() {
     return {
@@ -104,7 +104,7 @@ export default {
       newPassword: null,
       formatPassword: /^[a-zA-z0-9]{8,32}$/,
       confirmPassword: null,
-      tokenValidate: true
+      tokenValidate: true,
     };
   },
   computed: {
@@ -121,7 +121,7 @@ export default {
       )
         return false;
       else return true;
-    }
+    },
   },
   async mounted() {
     const token = this.$route.params.token;
@@ -145,7 +145,7 @@ export default {
           id: this.userId,
           email: this.email,
           name: this.name,
-          password: this.newPassword
+          password: this.newPassword,
         });
       } catch (error) {
         console.log(error.response.data.error);
@@ -153,7 +153,7 @@ export default {
       try {
         const response = await AuthenticationService.login({
           email: this.email,
-          password: this.newPassword
+          password: this.newPassword,
         });
         this.$store.dispatch("CurrentUser/setToken", response.data.token);
         this.$store.dispatch("CurrentUser/setUser", response.data.user);
@@ -162,8 +162,8 @@ export default {
       } catch (error) {
         console.log(error.response.data.error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

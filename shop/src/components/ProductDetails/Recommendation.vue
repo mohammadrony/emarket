@@ -3,7 +3,7 @@
     <b-row v-if="recommendation">
       <b-col>
         <div v-if="recommendation.length != 0">
-          <h3>You May Also Like</h3>
+          <h3>Discover More Like This</h3>
           <hr />
         </div>
         <b-row>
@@ -69,16 +69,16 @@ import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 export default {
   name: "Recommendation",
   props: {
-    subSubCategoryId: Number
+    subSubCategoryId: Number,
   },
   components: {
     AddToCart,
-    AddToWishlist
+    AddToWishlist,
   },
   data() {
     return {
       limit: 8,
-      recommendation: []
+      recommendation: [],
     };
   },
   async mounted() {
@@ -86,7 +86,7 @@ export default {
       this.recommendation = (
         await ProductsService.getRecommendation({
           subSubCategoryId: this.subSubCategoryId,
-          limit: this.limit
+          limit: this.limit,
         })
       ).data;
     } catch (error) {
@@ -94,7 +94,7 @@ export default {
     }
   },
   methods: {},
-  computed: {}
+  computed: {},
 };
 </script>
 

@@ -47,7 +47,7 @@ export default {
       emailResetPassword: null,
       tokenAlert: null,
       mailSent: false,
-      tokenAlertMessage: null
+      tokenAlertMessage: null,
     };
   },
   computed: {},
@@ -64,7 +64,7 @@ export default {
       if (user) {
         try {
           await AuthenticationService.requestPasswordToken({
-            email: this.emailResetPassword
+            email: this.emailResetPassword,
           });
           this.tokenAlert = false;
           this.mailSent = true;
@@ -74,8 +74,8 @@ export default {
           this.tokenAlertMessage = error.response.data.error;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

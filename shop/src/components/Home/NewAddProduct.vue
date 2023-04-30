@@ -72,7 +72,7 @@ export default {
   name: "NewAddProduct",
   components: {
     AddToCart,
-    AddToWishlist
+    AddToWishlist,
   },
   data() {
     return {
@@ -80,7 +80,7 @@ export default {
       cartComponentKey: 0,
       wishlistKey: 2,
       newAddLimit: 4,
-      newAddViewTitle: "New 2021 Fresh Stock"
+      newAddViewTitle: "New Collection 2023",
     };
   },
   async mounted() {
@@ -93,8 +93,8 @@ export default {
     forceRerender() {
       this.cartComponentKey += 1;
       this.wishlistKey += 1;
-    }
-  }
+    },
+  },
 };
 </script>
 

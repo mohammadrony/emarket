@@ -129,7 +129,7 @@ export default {
       message: "form data is not valid",
       shippingRate: this.$store.state.Checkout.shippingRate,
       totalAmount: 0,
-      checkoutProduct: null
+      checkoutProduct: null,
     };
   },
   computed: {},
@@ -160,19 +160,26 @@ export default {
       var checkoutItems = [];
       for (i = 0; i < this.checkoutProduct.length; i++) {
         var obj = {
-          currency: "USD",
-          name: this.checkoutProduct[i].title,
-          description: this.checkoutProduct[i].productId,
-          amount: this.checkoutProduct[i].amount * 100,
-          quantity: this.checkoutProduct[i].quantity
+          price_data: {
+            unit_amount: this.checkoutProduct[i].amount * 100,
+            currency: "USD",
+            product_data: {
+              name: this.checkoutProduct[i].title,
+            },
+          },
+          quantity: this.checkoutProduct[i].quantity,
         };
         checkoutItems.push(obj);
       }
       checkoutItems.push({
-        name: "Shipping Cost",
-        amount: this.shippingRate * 100,
-        currency: "USD",
-        quantity: 1
+        price_data: {
+          unit_amount: this.shippingRate * 100,
+          currency: "USD",
+          product_data: {
+            name: "Shipping Cost",
+          },
+        },
+        quantity: 1,
       });
       try {
         const checkoutSession = (
@@ -181,23 +188,23 @@ export default {
             customerName: customerName,
             customerEmail: customerEmail,
             customerPhoneNo: customerPhoneNo,
-            shippingAddress: shippingAddress
+            shippingAddress: shippingAddress,
           })
         ).data;
-        stripeInit.then(stripe => {
+        stripeInit.then((stripe) => {
           stripe
             .redirectToCheckout({
-              sessionId: checkoutSession.id
+              sessionId: checkoutSession.id,
             })
-            .catch(function(error) {
+            .catch(function (error) {
               console.error(error);
             });
         });
       } catch (error) {
         console.log(error.response.data.error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

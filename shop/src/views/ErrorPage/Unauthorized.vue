@@ -11,25 +11,25 @@
         </div>
       </b-row>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
 <script>
 import TopHeader from "@/components/Common/TopHeader.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "Unauthorized",
   components: {
     TopHeader,
-    Footer
+    MyFooter,
   },
   data() {
     return {};
   },
   mounted() {},
   methods: {},
-  computed: {}
+  computed: {},
 };
 </script>
 

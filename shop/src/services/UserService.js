@@ -18,5 +18,5 @@ export default {
   },
   getUserByEmail(email) {
     return Api().get(`/api/user/getUserByEmail/${email}`);
-  }
+  },
 };

@@ -71,7 +71,7 @@ export default {
       editComment: "",
       productId: 0,
       reviewList: [],
-      reviewList2: []
+      reviewList2: [],
     };
   },
   async mounted() {
@@ -94,9 +94,9 @@ export default {
     paginate(currentPage) {
       const start = (currentPage - 1) * this.perPage;
       this.reviewList2 = this.reviewList.slice(start, start + this.perPage);
-    }
+    },
   },
-  computed: {}
+  computed: {},
 };
 </script>
 

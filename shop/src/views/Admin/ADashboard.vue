@@ -12,24 +12,24 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
 <script>
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "AOverview",
   components: {
     ATopHeader,
-    Footer
+    MyFooter,
   },
   data() {
     return {
-      user: this.$store.state.CurrentUser.user
+      user: this.$store.state.CurrentUser.user,
     };
-  }
+  },
 };
 </script>
 

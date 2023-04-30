@@ -1,4 +1,3 @@
-STRIPE_SECRET_KEY=sk_test_qwertyuiopzxcvbnmasdfghjkl
-STRIPE_PUBLIC_KEY=pk_test_qwertyuiopasdfghjklzxcvbnm
-ESTORE_EMAIL=youremail@gmail.com
-ESTORE_PASSWORD=email_password
+STRIPE_SECRET_KEY=<sk_test_qwertyuiopzxcvb>
+EMARKET_EMAIL=<emarket.email@gmail.com>
+EMARKET_PASSWORD=<app_password>

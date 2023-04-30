@@ -16,7 +16,7 @@
         </b-tabs>
       </div>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
@@ -25,7 +25,7 @@ import ATopHeader from "@/components/Admins/ATopHeader.vue";
 import UPublicProfile from "@/components/User/Profile/UPublicProfile.vue";
 import UReviews from "@/components/User/Profile/UReviews.vue";
 import UAccount from "@/components/User/Profile/UAccount.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "AProfile",
   components: {
@@ -33,14 +33,14 @@ export default {
     UPublicProfile,
     UReviews,
     UAccount,
-    Footer
+    MyFooter,
   },
   data() {
     return {};
   },
   computed: {},
   mounted() {},
-  methods: {}
+  methods: {},
 };
 </script>
 

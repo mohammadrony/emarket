@@ -155,7 +155,7 @@
 
 <script>
 export default {
-  name: "Address",
+  name: "AddressForm",
   components: {},
   data() {
     return {
@@ -223,7 +223,7 @@ export default {
       if (this.country == null) return null;
       else if (this.country.length == 0) return false;
       else return true;
-    }
+    },
   },
   async mounted() {
     await this.$store.dispatch("Checkout/resetCustomerDetails");
@@ -265,8 +265,8 @@ export default {
     },
     setAddressCountry() {
       this.$store.dispatch("Checkout/setCustomerAddressCountry", this.country);
-    }
-  }
+    },
+  },
 };
 </script>
 

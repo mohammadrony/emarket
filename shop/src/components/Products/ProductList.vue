@@ -111,22 +111,22 @@ export default {
   props: {},
   components: {
     AddToWishlist,
-    AddToCart
+    AddToCart,
   },
   data() {
     return {
       admin: false,
       wishlistKey: 4,
       currentPage: 1,
-      cartComponentKey: 2
+      cartComponentKey: 2,
     };
   },
   computed: {
     ...mapState({
-      displayProducts: state => state.Products.displayProducts,
-      apCount: state => state.Products.apCount,
-      perPage: state => state.Products.perPage
-    })
+      displayProducts: (state) => state.Products.displayProducts,
+      apCount: (state) => state.Products.apCount,
+      perPage: (state) => state.Products.perPage,
+    }),
   },
   mounted() {
     this.admin = this.$store.state.CurrentUser.admin;
@@ -146,8 +146,8 @@ export default {
     async paginate(currentPage) {
       await this.$store.dispatch("Products/paginate", currentPage);
       this.refreshCartBtn();
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -9,19 +9,19 @@
       <h5>About Us</h5>
       <h6>About Us</h6>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
 <script>
 import TopHeader from "@/components/Common/TopHeader.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "AboutUs",
   components: {
     TopHeader,
-    Footer
-  }
+    MyFooter,
+  },
 };
 </script>
 

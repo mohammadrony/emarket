@@ -168,7 +168,7 @@
                         <b-dropdown-item
                           v-if="
                             product.SubCategoryId ==
-                              subSubCategory.SubCategoryId
+                            subSubCategory.SubCategoryId
                           "
                           @click="set_subSubCategory(subSubCategory)"
                         >
@@ -275,7 +275,7 @@
         </b-form>
       </b-card>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
@@ -285,14 +285,14 @@ import CategoryService from "@/services/CategoryService.js";
 import SubCategoryService from "@/services/SubCategoryService.js";
 import SubSubCategoryService from "@/services/SubSubCategoryService.js";
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 import { VueEditor } from "vue2-editor";
 export default {
   name: "AddProduct",
   components: {
     ATopHeader,
     VueEditor,
-    Footer
+    MyFooter,
   },
   data() {
     return {
@@ -325,13 +325,13 @@ export default {
         currency: "USD",
         CategoryId: 0,
         SubCategoryId: 0,
-        SubSubCategoryId: 0
+        SubSubCategoryId: 0,
       },
       errorCountImage:
         "You are not allowed to add more than 10 image for any product.",
       maximumImageCount: 10,
       imageAlert: false,
-      dispImg: []
+      dispImg: [],
     };
   },
   computed: {},
@@ -412,7 +412,7 @@ export default {
         const newSubCategory = (
           await SubCategoryService.createSubCategory({
             name: this.newSubCategoryName,
-            CategoryId: this.product.CategoryId
+            CategoryId: this.product.CategoryId,
           })
         ).data;
         this.newSubCategoryName = "";
@@ -427,7 +427,7 @@ export default {
         const newSubSubCategory = (
           await SubSubCategoryService.createSubSubCategory({
             name: this.newSubSubCategoryName,
-            SubCategoryId: this.product.SubCategoryId
+            SubCategoryId: this.product.SubCategoryId,
           })
         ).data;
         this.newSubSubCategoryName = "";
@@ -472,8 +472,8 @@ export default {
           this.dispImg[i] = URL.createObjectURL(this.images[i]);
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped></style>

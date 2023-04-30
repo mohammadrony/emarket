@@ -4,7 +4,10 @@
     <b-container class="mt-3">
       <b-row>
         <b-col class="text-center">
-          <h2>Your Wishlist</h2>
+          <h2>
+            Your Wishlist
+            <b-icon scale="1" icon="suit-heart-fill" />
+          </h2>
           <hr />
         </b-col>
       </b-row>
@@ -87,7 +90,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
@@ -95,20 +98,20 @@
 import TopHeader from "@/components/Common/TopHeader.vue";
 import AddToCart from "@/components/MaintainProduct/AddToCart.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "Wishlist",
   components: {
     TopHeader,
     AddToCart,
     AddToWishlist,
-    Footer
+    MyFooter,
   },
   data() {
     return {
       userId: 0,
       myWishlist: [],
-      wishlistItemCount: 0
+      wishlistItemCount: 0,
     };
   },
   computed: {},
@@ -124,12 +127,12 @@ export default {
         variant: "primary",
         toaster: "b-toaster-top-center",
         noCloseButton: false,
-        solid: true
+        solid: true,
       });
       return;
     }
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

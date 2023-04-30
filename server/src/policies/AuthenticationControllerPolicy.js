@@ -37,7 +37,6 @@ module.exports = {
                     })
                     break
                 default:
-                    console.log(validate)
                     res.status(400).send({
                         error: 'Invalid error in authentication controller.'
                     })
@@ -61,7 +60,6 @@ module.exports = {
                     })
                     break;
                 default:
-                    console.log(validate)
                     res.status(400).send({
                         error: 'Invalid error in authentication controller.'
                     })

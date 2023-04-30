@@ -57,9 +57,7 @@
             <hr />
             <b-row>
               <b-col cols="5">
-                <b-button block disabled variant="danger">
-                  Delete
-                </b-button>
+                <b-button block disabled variant="danger"> Delete </b-button>
               </b-col>
             </b-row>
             <b-row class="mt-2" v-if="orderStatus == 'complete'">
@@ -68,8 +66,9 @@
                   We don't allow anyone to delete any order information. If you
                   delete this order from here this same order could be retrieve
                   from stripe by using given checkout session id. We didn't find
-                  any way to delete order information from stripe yet. If we find
-                  a way to solve this issue we may update it. Until then please wait.
+                  any way to delete order information from stripe yet. If we
+                  find a way to solve this issue we may update it. Until then
+                  please wait.
                 </small>
               </b-col>
             </b-row>
@@ -88,12 +87,12 @@ export default {
   props: {
     orderItems: {
       type: Array,
-      required: true
+      required: true,
     },
     orderInfo: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {},
   data() {
@@ -103,21 +102,21 @@ export default {
       allStatus: [
         {
           name: "paid",
-          variant: "dark"
+          variant: "dark",
         },
         {
           name: "preparing",
-          variant: "info"
+          variant: "info",
         },
         {
           name: "on the way",
-          variant: "warning"
+          variant: "warning",
         },
         {
           name: "complete",
-          variant: "success"
-        }
-      ]
+          variant: "success",
+        },
+      ],
     };
   },
   mounted() {},
@@ -129,7 +128,7 @@ export default {
         await OrderService.updateOrder({
           id: this.orderInfo.id,
           status: status.name,
-          variant: status.variant
+          variant: status.variant,
         });
       } catch (error) {
         console.log(error.response.data.error);
@@ -149,9 +148,9 @@ export default {
         console.log(error.response.data.error);
       }
       this.$router.push({ path: "/admin/orders" });
-    }
+    },
   },
-  computed: {}
+  computed: {},
 };
 </script>
 

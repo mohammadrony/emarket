@@ -5,20 +5,18 @@
         <b-col cols="6">
           <b-card class="mt-5" style="color: #001e5f">
             <h2>
-              <strong>
-                Page not found.
-              </strong>
+              <strong> Page not found. </strong>
             </h2>
             <div class="mt-4">
-              We don't have any information about this {{paramName}}.
+              We don't have any information about this {{ paramName }}.
               <br />
-              This {{paramName}} might removed from the website.
+              This {{ paramName }} might removed from the website.
               <br />
               Or you might clicked on an invalid link.
               <br />
               Go to
               <b-link :to="routerLink">
-                {{pageToNavigate}}
+                {{ pageToNavigate }}
                 <b-icon icon="arrow-right" />
               </b-link>
             </div>
@@ -35,15 +33,15 @@ export default {
   props: {
     paramName: {
       required: true,
-      type: String
+      type: String,
     },
     pageToNavigate: {
       required: true,
-      type: String
+      type: String,
     },
     routerLink: {
       required: true,
-      type: String
+      type: String,
     },
   },
   components: {},
@@ -52,9 +50,8 @@ export default {
   },
   computed: {},
   mounted() {},
-  methods: {}
+  methods: {},
 };
 </script>
 
 <style lang="scss" scoped></style>
-

@@ -71,8 +71,8 @@ export default {
         autoplayHoverPause: false,
         centerMode: true,
         speed: 1000,
-        loop: true
-      }
+        loop: true,
+      },
     };
   },
   components: {},
@@ -81,16 +81,18 @@ export default {
     this.admin = this.$store.state.CurrentUser.admin;
     try {
       const showcaseItems = (await ShowcaseService.getShowcaseItems()).data;
-      this.showcaseSlides = showcaseItems.filter(obj => obj.type == "carousel");
-      this.showcaseCards = showcaseItems.filter(obj => obj.type == "card");
+      this.showcaseSlides = showcaseItems.filter(
+        (obj) => obj.type == "carousel"
+      );
+      this.showcaseCards = showcaseItems.filter((obj) => obj.type == "card");
       this.showcaseBigCards = showcaseItems.filter(
-        obj => obj.type == "big card"
+        (obj) => obj.type == "big card"
       );
     } catch (error) {
       console.log(error.response.data.error);
     }
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

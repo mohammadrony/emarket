@@ -6,28 +6,32 @@ export const ReviewModule = {
   mutations: {
     DO_SOMETHING() {
       return;
-    }
+    },
   },
   actions: {
-    async createReview({ commit }, { rating, comment, productId, productRating }) {
-      commit("DO_SOMETHING")
+    async createReview(
+      { commit },
+      { rating, comment, productId, productRating }
+    ) {
+      commit("DO_SOMETHING");
       try {
         await ReviewService.createReview({
           rating: rating,
           comment: comment,
-          productId: productId
+          productId: productId,
         });
       } catch (error) {
         console.log(error.response.data.error);
       }
       if (rating != 0) {
-        const newRating = (productRating.peopleRated * productRating.rating + rating)
-          / (productRating.peopleRated + 1);
+        const newRating =
+          (productRating.peopleRated * productRating.rating + rating) /
+          (productRating.peopleRated + 1);
         try {
           await ProductsService.updateProduct({
             id: productId,
             rating: newRating,
-            peopleRated: productRating.peopleRated + 1
+            peopleRated: productRating.peopleRated + 1,
           });
         } catch (error) {
           console.log(error.response.data.error);
@@ -35,13 +39,13 @@ export const ReviewModule = {
       }
     },
     async updateReview({ commit }, { review, newRating, newComment }) {
-      commit("DO_SOMETHING")
+      commit("DO_SOMETHING");
       try {
         await ReviewService.updateReview({
           id: review.id,
           rating: newRating,
           comment: newComment,
-          productId: review.ProductId
+          productId: review.ProductId,
         });
       } catch (error) {
         console.log(error.response.data.error);
@@ -49,19 +53,23 @@ export const ReviewModule = {
       if (newRating != 0 && newRating != review.rating) {
         var newRatingProduct, peopleRated;
         if (review.rating == 0) {
-          peopleRated = review.Product.peopleRated + 1
-          newRatingProduct = (review.Product.peopleRated * review.Product.rating + newRating)
-            / peopleRated
+          peopleRated = review.Product.peopleRated + 1;
+          newRatingProduct =
+            (review.Product.peopleRated * review.Product.rating + newRating) /
+            peopleRated;
         } else {
-          peopleRated = review.Product.peopleRated
-          newRatingProduct = (review.Product.peopleRated * review.Product.rating + newRating - review.rating)
-            / peopleRated
+          peopleRated = review.Product.peopleRated;
+          newRatingProduct =
+            (review.Product.peopleRated * review.Product.rating +
+              newRating -
+              review.rating) /
+            peopleRated;
         }
         try {
           await ProductsService.updateProduct({
             id: review.ProductId,
             rating: newRatingProduct,
-            peopleRated: peopleRated
+            peopleRated: peopleRated,
           });
         } catch (error) {
           console.log(error.response.data.error);
@@ -69,7 +77,7 @@ export const ReviewModule = {
       }
     },
     async deleteReview({ commit }, review) {
-      commit("DO_SOMETHING")
+      commit("DO_SOMETHING");
       try {
         await ReviewService.deleteReview(review.id);
       } catch (error) {
@@ -78,21 +86,23 @@ export const ReviewModule = {
       if (review.rating != 0) {
         var newRatingProduct;
         if (review.Product.peopleRated == 1) {
-          newRatingProduct = 0
+          newRatingProduct = 0;
         } else {
-          newRatingProduct = (review.Product.peopleRated * review.Product.rating - review.rating)
-            / (review.Product.peopleRated - 1);
+          newRatingProduct =
+            (review.Product.peopleRated * review.Product.rating -
+              review.rating) /
+            (review.Product.peopleRated - 1);
         }
         try {
           await ProductsService.updateProduct({
             id: review.ProductId,
             rating: newRatingProduct,
-            peopleRated: review.Product.peopleRated - 1
+            peopleRated: review.Product.peopleRated - 1,
           });
         } catch (error) {
           console.log(error.response.data.error);
         }
       }
-    }
-  }
-}
+    },
+  },
+};

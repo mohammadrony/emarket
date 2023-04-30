@@ -82,7 +82,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
@@ -90,13 +90,13 @@
 import AuthenticationService from "@/services/AuthenticationService.js";
 import TopHeader from "@/components/Common/TopHeader.vue";
 import ReqPassToken from "@/components/User/ReqPassToken.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "Login",
   components: {
     TopHeader,
     ReqPassToken,
-    Footer
+    MyFooter,
   },
   data() {
     return {
@@ -105,7 +105,7 @@ export default {
       emailValidation: null,
       invalidEmailMessage: "",
       loginMessage: null,
-      loginAlert: false
+      loginAlert: false,
     };
   },
   mounted() {
@@ -117,13 +117,13 @@ export default {
       try {
         user = (
           await AuthenticationService.checkRegsToken({
-            email: this.email
+            email: this.email,
           })
         ).data;
       } catch (error) {
-        console.log(error.response.data.error);
         this.emailValidation = false;
-        this.invalidEmailMessage = error.response.data.error;
+        this.invalidEmailMessage = "User not found.";
+        return;
       }
       if (!user.verificationStatus) {
         this.$store.dispatch("CurrentUser/setNewUserId", user.id);
@@ -136,7 +136,7 @@ export default {
         const response = (
           await AuthenticationService.login({
             email: this.email,
-            password: this.password
+            password: this.password,
           })
         ).data;
         this.$store.dispatch("CurrentUser/setToken", response.token);
@@ -147,8 +147,8 @@ export default {
         this.loginAlert = true;
         this.loginMessage = error.response.data.error;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

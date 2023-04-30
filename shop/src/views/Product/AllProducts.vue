@@ -13,7 +13,7 @@
       </b-col>
       <b-col />
     </b-row>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
@@ -23,7 +23,7 @@ import ProductsNavbar from "@/components/Products/ProductsNavbar.vue";
 import CategorySidebar from "@/components/Products/CategorySidebar.vue";
 import FilterComponent from "@/components/Products/FilterComponent.vue";
 import ProductList from "@/components/Products/ProductList.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "Products",
   components: {
@@ -32,7 +32,7 @@ export default {
     CategorySidebar,
     FilterComponent,
     ProductList,
-    Footer
+    MyFooter,
   },
 
   data() {
@@ -43,7 +43,7 @@ export default {
     await this.$store.dispatch("Products/setSearchParameter", this.$route);
     await this.$store.dispatch("Products/setAllProducts");
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

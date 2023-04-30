@@ -210,8 +210,8 @@
                 <b-link>
                   {{
                     currentUserReview.User.firstName +
-                      " " +
-                      currentUserReview.User.lastName
+                    " " +
+                    currentUserReview.User.lastName
                   }}
                 </b-link>
               </div>
@@ -262,9 +262,7 @@
                 <b-form-rating v-model="rating" variant="primary" />
               </b-col>
             </b-row>
-            <div class="mt-4">
-              Comment
-            </div>
+            <div class="mt-4">Comment</div>
             <b-form-group>
               <b-form-textarea
                 required
@@ -274,9 +272,7 @@
                 max-rows="8"
               />
             </b-form-group>
-            <b-button variant="primary" type="submit">
-              Submit
-            </b-button>
+            <b-button variant="primary" type="submit"> Submit </b-button>
           </b-form>
           <div v-if="!userLoggedIn">
             You'll not be able to write a review until you're logged in.
@@ -304,9 +300,7 @@
             <b-form-rating v-model="editRating" variant="primary" />
           </b-col>
         </b-row>
-        <div class="mt-4">
-          Comment
-        </div>
+        <div class="mt-4">Comment</div>
         <b-form-group>
           <b-form-textarea
             v-model="editComment"
@@ -316,9 +310,7 @@
             max-rows="10"
           />
         </b-form-group>
-        <b-button type="submit" variant="primary">
-          Submit
-        </b-button>
+        <b-button type="submit" variant="primary"> Submit </b-button>
       </b-form>
     </b-modal>
   </div>
@@ -363,7 +355,7 @@ export default {
       reviews: 0,
       productRating: {},
       reviewList: [],
-      reviewList2: []
+      reviewList2: [],
     };
   },
   async mounted() {
@@ -447,7 +439,7 @@ export default {
         rating: this.rating,
         comment: this.comment,
         productId: this.productId,
-        productRating: this.productRating
+        productRating: this.productRating,
       });
       await this.$store.dispatch("Products/setAllBackupProducts");
       window.location.reload();
@@ -464,7 +456,7 @@ export default {
       await this.$store.dispatch("Review/updateReview", {
         review: this.reviewEditing,
         newRating: this.editRating,
-        newComment: this.editComment
+        newComment: this.editComment,
       });
       await this.$store.dispatch("Products/setAllBackupProducts");
       window.location.reload();
@@ -476,8 +468,8 @@ export default {
         await this.$store.dispatch("Products/setAllBackupProducts");
         window.location.reload();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -40,9 +40,7 @@
                   {{ codeVerificationMessage }}
                 </b-form-invalid-feedback>
               </b-form-group>
-              <b-button type="submit" variant="success">
-                Submit
-              </b-button>
+              <b-button type="submit" variant="success"> Submit </b-button>
               <div class="mt-4">
                 you can resend the verification code if you have not received
                 the email.
@@ -61,19 +59,19 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
 <script>
 import AuthenticationService from "@/services/AuthenticationService.js";
 import TopHeader from "@/components/Common/TopHeader.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "UserVerify",
   components: {
     TopHeader,
-    Footer
+    MyFooter,
   },
   data() {
     return {
@@ -81,7 +79,7 @@ export default {
       userEmail: "",
       registerTokenValidation: null,
       codeVerificationMessage: "",
-      registerToken: ""
+      registerToken: "",
     };
   },
   computed: {},
@@ -95,7 +93,7 @@ export default {
         const user = (
           await AuthenticationService.checkRegsToken({
             email: this.userEmail,
-            password: this.$store.state.CurrentUser.newUserPassword
+            password: this.$store.state.CurrentUser.newUserPassword,
           })
         ).data;
         if (user.verificationStatus) {
@@ -113,7 +111,7 @@ export default {
         user = (
           await AuthenticationService.verifyRegsToken({
             userId: this.userId,
-            registerToken: this.registerToken
+            registerToken: this.registerToken,
           })
         ).data;
       } catch (error) {
@@ -125,7 +123,7 @@ export default {
           await AuthenticationService.resetRegsToken({
             id: user.user.id,
             email: user.user.email,
-            name: user.user.firstName + " " + user.user.lastName
+            name: user.user.firstName + " " + user.user.lastName,
           });
           this.$store.dispatch("CurrentUser/setToken", user.token);
           this.$store.dispatch("CurrentUser/setUser", user.user);
@@ -137,8 +135,8 @@ export default {
           console.log(error.response.data.error);
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

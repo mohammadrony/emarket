@@ -1,7 +1,6 @@
 <template>
   <div>
     <b-dropdown
-      split
       id="cart-dd"
       v-if="validCartItem != -1"
       :size="buttonType"
@@ -33,11 +32,11 @@ export default {
   props: {
     addButtonTitle: {
       default: "",
-      type: String
+      type: String,
     },
     addedButtonTitle: {
       default: "",
-      type: String
+      type: String,
     },
     buttonType: String,
     productId: Number,
@@ -45,12 +44,12 @@ export default {
     rating: Number,
     image: String,
     title: String,
-    amount: Number
+    amount: Number,
   },
   computed: {},
   data() {
     return {
-      validCartItem: -1
+      validCartItem: -1,
     };
   },
   async mounted() {
@@ -68,7 +67,7 @@ export default {
         rating: this.rating,
         currency: this.currency,
         amount: this.amount,
-        quantity: 1
+        quantity: 1,
       };
       this.validCartItem = await this.$store.dispatch(
         "Cart/addToCart",
@@ -81,7 +80,7 @@ export default {
           variant: "primary",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
-          solid: true
+          solid: true,
         });
       }
     },
@@ -96,11 +95,11 @@ export default {
           variant: "primary",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
-          solid: true
+          solid: true,
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped></style>

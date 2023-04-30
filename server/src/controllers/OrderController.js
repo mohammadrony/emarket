@@ -1,6 +1,8 @@
 const { Order } = require('../models')
 const nodemailer = require('nodemailer')
 
+let emailFrom = `Emarket-BD <${process.env.EMARKET_EMAIL}>`
+
 module.exports = {
 	async getOrderList(req, res) {
 		try {
@@ -44,17 +46,17 @@ module.exports = {
 			var transporter = await nodemailer.createTransport({
 				service: 'gmail',
 				auth: {
-					user: process.env.ESTORE_EMAIL,
-					pass: process.env.ESTORE_PASSWORD,
+					user: process.env.EMARKET_EMAIL,
+					pass: process.env.EMARKET_PASSWORD,
 				},
 				tls: {
 					rejectUnauthorized: false
 				}
 			})
 			var mailOptions = {
-				from: process.env.ESTORE_EMAIL,
+				from: emailFrom,
 				to: order.email,
-				subject: "emarket-bd Order Status",
+				subject: "Check Order Status",
 				text: 'Hi ' + order.name + ',\n\n' +
 					'Thanks for your purchase!\n\n' +
 					'Please follow the link to keep track on your order.\n\n' +

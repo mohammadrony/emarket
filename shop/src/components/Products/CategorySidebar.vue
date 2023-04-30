@@ -110,20 +110,20 @@ export default {
   data() {
     return {
       newCategory: "",
-      categoryList: []
+      categoryList: [],
     };
   },
   computed: {
     ...mapState({
-      admin: state => state.CurrentUser.admin
-    })
+      admin: (state) => state.CurrentUser.admin,
+    }),
   },
 
   async mounted() {
     this.categoryList = await this.$store.dispatch("Category/getCategoryList");
-    this.categoryList = this.categoryList.map(obj => ({
+    this.categoryList = this.categoryList.map((obj) => ({
       ...obj,
-      mode: 0
+      mode: 0,
     }));
   },
   methods: {
@@ -154,8 +154,8 @@ export default {
       } catch (error) {
         console.log(error.response.data.error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

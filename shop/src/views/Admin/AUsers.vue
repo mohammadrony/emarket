@@ -84,9 +84,17 @@
                 <b-col>
                   <b-row>
                     <b-col cols="7">
+                      <b-button
+                        size="sm"
+                        block
+                        v-if="user.id == 1"
+                        :variant="user.variant"
+                        >{{ user.userType }}</b-button
+                      >
                       <b-dropdown
                         size="sm"
                         block
+                        v-if="user.id != 1"
                         id="dropdown-left"
                         :text="user.userType"
                         :variant="user.variant"
@@ -105,7 +113,7 @@
                         size="sm"
                         block
                         variant="danger"
-                        v-if="user.id != userId"
+                        v-if="user.id != userId && user.id != 1"
                         @click="deleteAccount(user)"
                       >
                         Delete
@@ -140,25 +148,25 @@
         </b-col>
       </b-row>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 <script>
 import ATopHeader from "@/components/Admins/ATopHeader.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 import UserService from "@/services/UserService.js";
 import ReviewService from "@/services/ReviewService.js";
 export default {
   name: "AUsers",
   components: {
     ATopHeader,
-    Footer
+    MyFooter,
   },
   data() {
     return {
       anyType: {
         name: "All",
-        variant: "dark"
+        variant: "dark",
       },
       userId: 0,
       selectedTypeName: "All",
@@ -173,17 +181,17 @@ export default {
           name: "Admin",
           priority: 1,
           description: "Owner of this system.",
-          variant: "dark"
+          variant: "dark",
         },
         {
           name: "Customer",
           priority: 2,
           description: "End user of the system.",
-          variant: "warning"
-        }
+          variant: "warning",
+        },
       ],
       currentPage: 1,
-      perPage: 20
+      perPage: 20,
     };
   },
   computed: {},
@@ -206,13 +214,13 @@ export default {
   methods: {
     search() {
       if (this.selectedTypeName != "All") {
-        this.userList2 = this.userList2.filter(val => {
+        this.userList2 = this.userList2.filter((val) => {
           return val.userType
             .toLowerCase()
             .includes(this.selectedTypeName.toLowerCase());
         });
       }
-      this.userList2 = this.userList2.filter(val => {
+      this.userList2 = this.userList2.filter((val) => {
         return (
           val.firstName
             .toLowerCase()
@@ -237,7 +245,7 @@ export default {
         this.selectedTypeName = status.name;
         this.selectedTypeVariant = status.variant;
         this.userList2 = this.userList.filter(
-          obj => obj.userType == status.name
+          (obj) => obj.userType == status.name
         );
       }
       this.users = this.userList2.length;
@@ -245,14 +253,14 @@ export default {
       this.secondUserList = this.userList2.slice(start, start + this.perPage);
     },
     async updateStatus(user, status) {
-      const index = this.secondUserList.findIndex(obj => obj.id === user.id);
+      const index = this.secondUserList.findIndex((obj) => obj.id === user.id);
       this.secondUserList[index].userType = status.name;
       this.secondUserList[index].variant = status.variant;
       await UserService.updateUser({
         id: user.id,
         userType: status.name,
         priority: status.priority,
-        variant: status.variant
+        variant: status.variant,
       });
     },
     async deleteAccount(user) {
@@ -276,7 +284,7 @@ export default {
           variant: "danger",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
-          solid: true
+          solid: true,
         });
         console.log(error.response.data.error);
       }
@@ -284,8 +292,8 @@ export default {
     paginate(currentPage) {
       const start = (currentPage - 1) * this.perPage;
       this.secondUserList = this.userList2.slice(start, start + this.perPage);
-    }
-  }
+    },
+  },
 };
 </script>
 

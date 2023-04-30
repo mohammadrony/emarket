@@ -25,9 +25,7 @@
             <b-icon class="ml-2" scale=".7" icon="chevron-right" />
           </b-nav-item>
           <b-nav-item
-            :to="
-              `/products/${categoryName}/${subCategoryName}/${subSubCategoryName}`
-            "
+            :to="`/products/${categoryName}/${subCategoryName}/${subSubCategoryName}`"
           >
             {{ subSubCategoryName }}
             <b-icon class="ml-2" scale=".7" icon="chevron-right" />
@@ -59,14 +57,14 @@ export default {
       productId: 0,
       categoryName: "",
       subCategoryName: "",
-      subSubCategoryName: ""
+      subSubCategoryName: "",
     };
   },
   props: {
     productName: String,
     categoryId: Number,
     subCategoryId: Number,
-    subSubCategoryId: Number
+    subSubCategoryId: Number,
   },
   components: {},
   computed: {},
@@ -95,8 +93,8 @@ export default {
       await this.$store.dispatch("Products/setAllBackupProducts");
       await this.$store.dispatch("Wishlist/setWishlist");
       this.$router.push({ path: "/products" });
-    }
-  }
+    },
+  },
 };
 </script>
 

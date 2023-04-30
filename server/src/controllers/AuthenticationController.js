@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 const crypto = require("crypto")
 
+let emailFrom = `Emarket-BD <${process.env.EMARKET_EMAIL}>`
+
 function jwtSignUser(user) {
     const ONE_WEEK = 60 * 60 * 24 * 7
     return jwt.sign(user, config.authentication.jwtSecret, {
@@ -32,19 +34,19 @@ module.exports = {
             const user = await User.create(req.body)
 
             var transporter = await nodemailer.createTransport({
-                service: 'gmail',
+                service: 'Gmail',
                 auth: {
-                    user: process.env.ESTORE_EMAIL,
-                    pass: process.env.ESTORE_PASSWORD,
+                    user: process.env.EMARKET_EMAIL,
+                    pass: process.env.EMARKET_PASSWORD,
                 },
                 tls: {
                     rejectUnauthorized: false
                 }
             })
             var mailOptions = {
-                from: process.env.ESTORE_EMAIL,
+                from: emailFrom,
                 to: req.body.email,
-                subject: "emarket-bd Email Verification",
+                subject: "Email verification code to register",
                 text: 'Hi ' + user.firstName + ' ' + user.lastName + ',\n\n' +
                     'Welcome to emarket-bd!\n\n' +
                     'Your email verification code is: ' + token + '\n\n' +
@@ -58,9 +60,9 @@ module.exports = {
                     });
                 }
             });
-            res.send({ id: user.id })
+            return res.send({ id: user.id })
         } catch (err) {
-            res.status(400).send({
+            return res.status(400).send({
                 error: 'This account is already in use.'
             })
         }
@@ -82,17 +84,17 @@ module.exports = {
                 var transporter = await nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
-                        user: process.env.ESTORE_EMAIL,
-                        pass: process.env.ESTORE_PASSWORD,
+                        user: process.env.EMARKET_EMAIL,
+                        pass: process.env.EMARKET_PASSWORD,
                     },
                     tls: {
                         rejectUnauthorized: false
                     }
                 })
                 var mailOptions = {
-                    from: process.env.ESTORE_EMAIL,
+                    from: emailFrom,
                     to: req.body.email,
-                    subject: 'Verify Account on emarket-bd',
+                    subject: "Email verification code to login",
                     text: 'hello ' + user.firstName + ' ' + user.lastName + ',\n\n' + 'Recently you\'ve requested to create an account on emarket-bd\n\n' +
                         'Please verify your email address first\n\n' +
                         'click on the following link, or paste it into your browser to complete this process\n\n' +
@@ -181,17 +183,17 @@ module.exports = {
             var transporter = await nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: process.env.ESTORE_EMAIL,
-                    pass: process.env.ESTORE_PASSWORD,
+                    user: process.env.EMARKET_EMAIL,
+                    pass: process.env.EMARKET_PASSWORD,
                 },
                 tls: {
                     rejectUnauthorized: false
                 }
             })
             var mailOptions = {
-                from: process.env.ESTORE_EMAIL,
+                from: emailFrom,
                 to: req.body.email,
-                subject: 'Reset Password on emarket-bd',
+                subject: "Reset Password Confirmation",
                 text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                     'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                     'http://' + 'localhost:8080' + '/reset-password/' + token + '\n\n' +
@@ -250,8 +252,9 @@ module.exports = {
                 },
                 attributes: ["id", "firstName", "lastName", "registerToken"]
             });
+            console.log(user)
             if (!user) {
-                return res.status(403).status({
+                return res.sendStatus(404).status({
                     error: "Invalid email address."
                 })
             }
@@ -264,17 +267,17 @@ module.exports = {
                 var transporter = await nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
-                        user: process.env.ESTORE_EMAIL,
-                        pass: process.env.ESTORE_PASSWORD,
+                        user: process.env.EMARKET_EMAIL,
+                        pass: process.env.EMARKET_PASSWORD,
                     },
                     tls: {
                         rejectUnauthorized: false
                     }
                 })
                 var mailOptions = {
-                    from: process.env.ESTORE_EMAIL,
+                    from: emailFrom,
                     to: req.body.email,
-                    subject: "emarket-bd Email Verification",
+                    subject: "Email Verification to register",
                     text: 'Hi ' + user.firstName + ' ' + user.lastName + ',\n\n' +
                         'Welcome to emarket-bd!\n\n' +
                         'Your email verification code is: ' + user.registerToken + '\n\n' +
@@ -356,17 +359,17 @@ module.exports = {
             var transporter = await nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: process.env.ESTORE_EMAIL,
-                    pass: process.env.ESTORE_PASSWORD,
+                    user: process.env.EMARKET_EMAIL,
+                    pass: process.env.EMARKET_PASSWORD,
                 },
                 tls: {
                     rejectUnauthorized: false
                 }
             })
             var mailOptions = {
-                from: process.env.ESTORE_EMAIL,
+                from: emailFrom,
                 to: req.body.email,
-                subject: 'emarket-bd Password Changed',
+                subject: "Password Update Acknowledgement",
                 text: 'Hello ' + req.body.name + '\n\n' +
                     'We wanted to let you know that your emarket-bd password was reset.\n'
             }
@@ -396,17 +399,17 @@ module.exports = {
             var transporter = await nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: process.env.ESTORE_EMAIL,
-                    pass: process.env.ESTORE_PASSWORD,
+                    user: process.env.EMARKET_EMAIL,
+                    pass: process.env.EMARKET_PASSWORD,
                 },
                 tls: {
                     rejectUnauthorized: false
                 }
             })
             var mailOptions = {
-                from: process.env.ESTORE_EMAIL,
+                from: emailFrom,
                 to: req.body.email,
-                subject: 'Welcome to emarket-bd',
+                subject: "Email Address Verification Confirmed",
                 text: "Hello " + req.body.name + ",\n\n"
                     + "Your email is now verified on emarket-bd.\n\n"
                     + "Thank you.\n"

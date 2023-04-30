@@ -58,14 +58,14 @@ export default {
       this.$store.dispatch("CurrentUser/setUser", {});
       this.$store.dispatch("Wishlist/clearWishlist");
       this.$router.push({ path: "/" });
-    }
+    },
   },
   computed: {
     ...mapState({
-      user: state => state.CurrentUser.user,
-      userLoggedIn: state => state.CurrentUser.userLoggedIn
-    })
-  }
+      user: (state) => state.CurrentUser.user,
+      userLoggedIn: (state) => state.CurrentUser.userLoggedIn,
+    }),
+  },
 };
 </script>
 

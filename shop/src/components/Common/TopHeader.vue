@@ -107,7 +107,7 @@ export default {
       categoryList: [],
       searchTxt: "",
       searchCategoryId: 0,
-      searchCategoryName: "All Category"
+      searchCategoryName: "All Category",
     };
   },
   async mounted() {
@@ -126,7 +126,7 @@ export default {
           variant: "primary",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
-          solid: true
+          solid: true,
         });
       } else {
         this.$router.push({ path: "/wishlist" });
@@ -148,13 +148,13 @@ export default {
         const category = this.searchCategoryName;
         newRoute += "/" + category;
       }
-      if (this.searchTxt != "") {
-        const text = this.searchTxt;
+      if (this.searchTxt.trim() != "") {
+        const text = this.searchTxt.trim();
         newRoute += "?q=" + text;
         this.$router.push({ path: newRoute });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

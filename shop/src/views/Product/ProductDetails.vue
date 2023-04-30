@@ -173,7 +173,7 @@
         routerLink="/products"
       />
     </div>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
@@ -186,7 +186,7 @@ import InvalidParameter from "@/components/NotFound/InvalidParameter.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
 import Review from "@/components/ProductDetails/Review.vue";
 import Recommendation from "@/components/ProductDetails/Recommendation.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "ProductDetails",
   components: {
@@ -197,7 +197,7 @@ export default {
     AddToWishlist,
     Review,
     Recommendation,
-    Footer
+    MyFooter,
   },
   data() {
     return {
@@ -208,7 +208,7 @@ export default {
       validParam: true,
       cartComponentKey: 4,
       recommendationKey: 2,
-      displayProduct: {}
+      displayProduct: {},
     };
   },
   async mounted() {
@@ -246,8 +246,8 @@ export default {
       };
       await this.$store.dispatch("Cart/addToCart", buyProduct);
       this.$router.push({ path: "/checkout" });
-    }
-  }
+    },
+  },
 };
 </script>
 

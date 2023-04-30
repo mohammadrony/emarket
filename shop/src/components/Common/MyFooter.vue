@@ -1,5 +1,5 @@
 <template>
-  <div style="background: #1F2E50;color: #ffffff">
+  <div style="background: #1f2e50; color: #ffffff">
     <b-container class="pb-4">
       <b-row class="pt-5 pb-4">
         <b-col cols="5">
@@ -26,22 +26,22 @@
         </b-col>
       </b-row>
       <hr />
-      <h5>© 2021, All rights reserved</h5>
+      <h5>© 2023, All rights reserved</h5>
     </b-container>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Footer",
+  name: "MyFooter",
   data() {
     return {
-      company: {}
+      company: {},
     };
   },
   async mounted() {
     this.company = await this.$store.dispatch("Company/getCompany");
-  }
+  },
 };
 </script>
 

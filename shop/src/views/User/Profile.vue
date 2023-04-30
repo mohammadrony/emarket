@@ -28,7 +28,7 @@
         <br />
       </div>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
@@ -37,7 +37,7 @@ import TopHeader from "@/components/Common/TopHeader.vue";
 import UPublicProfile from "@/components/User/Profile/UPublicProfile.vue";
 import UReviews from "@/components/User/Profile/UReviews.vue";
 import UAccount from "@/components/User/Profile/UAccount.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "Profile",
   components: {
@@ -45,17 +45,17 @@ export default {
     UPublicProfile,
     UReviews,
     UAccount,
-    Footer
+    MyFooter,
   },
   data() {
     return {
-      userId: 0
+      userId: 0,
     };
   },
   mounted() {
     this.userId = this.$store.state.CurrentUser.userId;
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

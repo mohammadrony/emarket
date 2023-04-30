@@ -16,32 +16,30 @@
             </b-button>
             <h3 class="mt-4">Payment Cancelled</h3>
             <h6>This payment can not be completed.</h6>
-            <b-card-footer class="mt-4">
-              emarket-bd.com
-            </b-card-footer>
+            <b-card-footer class="mt-4"> emarket-bd.com </b-card-footer>
           </b-card>
         </b-col>
       </b-row>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
 <script>
 import TopHeader from "@/components/Common/TopHeader.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "CancelPayment",
   components: {
     TopHeader,
-    Footer
+    MyFooter,
   },
   data() {
     return {};
   },
   mounted() {},
   methods: {},
-  computed: {}
+  computed: {},
 };
 </script>
 

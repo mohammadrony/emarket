@@ -259,9 +259,7 @@
             <b-row class="mt-4">
               <b-col cols="4" />
               <b-col cols="4">
-                <b-button type="reset" block variant="danger">
-                  Reset
-                </b-button>
+                <b-button type="reset" block variant="danger"> Reset </b-button>
               </b-col>
               <b-col cols="4">
                 <b-button block type="submit" variant="success">
@@ -309,7 +307,7 @@ export default {
       confirmPasswordMessage: "",
       currentPassword: null,
       newPassword: null,
-      confirmPassword: null
+      confirmPassword: null,
     };
   },
   computed: {
@@ -331,7 +329,7 @@ export default {
       ) {
         return false;
       } else return true;
-    }
+    },
   },
   async mounted() {
     this.userId = this.$store.state.CurrentUser.userId;
@@ -352,11 +350,11 @@ export default {
         await UserService.updateUser({
           id: this.user.id,
           firstName: this.firstName,
-          lastName: this.lastName
+          lastName: this.lastName,
         });
         this.$store.dispatch("CurrentUser/setName", {
           firstName: this.firstName,
-          lastName: this.lastName
+          lastName: this.lastName,
         });
         this.editName ^= 1;
         window.location.reload();
@@ -403,7 +401,7 @@ export default {
       try {
         await UserService.updateUser({
           id: this.user.id,
-          username: this.userName
+          username: this.userName,
         });
         this.$store.dispatch("CurrentUser/setUserName", this.userName);
         this.editUserName ^= 1;
@@ -436,7 +434,7 @@ export default {
       ) {
         try {
           await AuthenticationService.updatePassword({
-            password: this.newPassword
+            password: this.newPassword,
           });
           window.location.reload();
         } catch (error) {
@@ -444,8 +442,8 @@ export default {
           this.currentPasswordMessage = error.response.data.error;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

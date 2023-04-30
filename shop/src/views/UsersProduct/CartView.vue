@@ -32,7 +32,7 @@
       <div v-for="product in cartProducts" :key="product.productId">
         <b-row>
           <b-col cols="3" class="text-center">
-            <b-img style="max-width:66%" :src="product.image" alt="No Image" />
+            <b-img style="max-width: 66%" :src="product.image" alt="No Image" />
           </b-col>
           <b-col cols="3">
             <b-link :to="`/product/${product.productId}`">
@@ -120,31 +120,31 @@
         </b-row>
       </div>
     </b-container>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
 <script>
 import TopHeader from "@/components/Common/TopHeader.vue";
 import AddToWishlist from "@/components/MaintainProduct/AddToWishlist.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 import { mapState } from "vuex";
 export default {
   name: "MyCart",
   components: {
     TopHeader,
     AddToWishlist,
-    Footer
+    MyFooter,
   },
   data() {
     return {
-      selectedCurrency: "USD"
+      selectedCurrency: "USD",
     };
   },
   mounted() {},
   computed: {
     ...mapState({
-      cartProducts: state => state.Cart.cartProducts
+      cartProducts: (state) => state.Cart.cartProducts,
     }),
     cartItemCount() {
       return this.cartProducts.length;
@@ -156,20 +156,20 @@ export default {
         amount += this.cartProducts[i].amount * this.cartProducts[i].quantity;
       }
       return amount;
-    }
+    },
   },
   methods: {
     async quantityInc(product) {
       await this.$store.dispatch("Cart/updateCartItemQuantity", {
         productId: product.productId,
-        quantity: product.quantity + 1
+        quantity: product.quantity + 1,
       });
     },
     async quantityDec(product) {
       if (product.quantity > 1) {
         await this.$store.dispatch("Cart/updateCartItemQuantity", {
           productId: product.productId,
-          quantity: product.quantity - 1
+          quantity: product.quantity - 1,
         });
       }
     },
@@ -184,11 +184,11 @@ export default {
           variant: "success",
           toaster: "b-toaster-top-center",
           noCloseButton: false,
-          solid: true
+          solid: true,
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

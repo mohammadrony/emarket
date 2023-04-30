@@ -122,13 +122,13 @@ export default {
     return {
       newSubCategory: "",
       searchParameter: {},
-      subCategoryList: []
+      subCategoryList: [],
     };
   },
   computed: {
     ...mapState({
-      admin: state => state.CurrentUser.admin
-    })
+      admin: (state) => state.CurrentUser.admin,
+    }),
   },
 
   async mounted() {
@@ -136,9 +136,9 @@ export default {
     this.subCategoryList = await this.$store.dispatch(
       "Category/getSubCategoryList"
     );
-    this.subCategoryList = this.subCategoryList.map(obj => ({
+    this.subCategoryList = this.subCategoryList.map((obj) => ({
       ...obj,
-      mode: 0
+      mode: 0,
     }));
   },
   methods: {
@@ -146,7 +146,7 @@ export default {
       try {
         await SubCategoryService.createSubCategory({
           name: this.newSubCategory,
-          CategoryId: this.searchParameter.categoryId
+          CategoryId: this.searchParameter.categoryId,
         });
         await this.$store.dispatch("Category/setSubCategoryList");
         window.location.reload();
@@ -172,8 +172,8 @@ export default {
       } catch (error) {
         console.log(error.response.data.error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

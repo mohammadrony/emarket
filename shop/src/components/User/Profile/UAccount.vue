@@ -33,12 +33,8 @@
       hide-footer
       id="delete-account-confirmation"
     >
-      <template #modal-title>
-        Are you sure you want to do this?
-      </template>
-      <p>
-        We'll also delete all of your activity from our server.
-      </p>
+      <template #modal-title> Are you sure you want to do this? </template>
+      <p>We'll also delete all of your activity from our server.</p>
 
       <label for="input-password">
         To be sure please enter your
@@ -89,7 +85,7 @@ export default {
       admin: false,
       modalAlert: null,
       deleteAccountError: "",
-      currentPassword: null
+      currentPassword: null,
     };
   },
   mounted() {
@@ -135,9 +131,9 @@ export default {
         this.$store.dispatch("Wishlist/clearWishlist");
         this.$router.push({ path: "/" });
       }
-    }
+    },
   },
-  computed: {}
+  computed: {},
 };
 </script>
 

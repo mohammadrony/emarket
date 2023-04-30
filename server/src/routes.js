@@ -101,6 +101,8 @@ module.exports = (app) => {
     ProductsController.getProductSales)
   app.get("/api/products/getProduct/:productId",
     ProductsController.getProduct)
+  app.get("/api/products/getProductId/:productTitle",
+    ProductsController.getProductId)
   app.get("/api/products/getProductRating/:productId",
     ProductsController.getProductRating)
   app.get("/api/products/getRecommendation/:subSubCategoryId/:limit",

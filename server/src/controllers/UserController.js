@@ -39,7 +39,7 @@ module.exports = {
             }
             else {
                 return res.status(403).send({
-                    error: "You don't have permits to do that."
+                    error: "You do not have that privilege to do that."
                 })
             }
         } catch (error) {

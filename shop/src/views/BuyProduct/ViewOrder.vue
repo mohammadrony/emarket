@@ -28,7 +28,7 @@
         routerLink="/"
       />
     </div>
-    <Footer class="mt-5" />
+    <MyFooter class="mt-5" />
   </div>
 </template>
 
@@ -39,7 +39,7 @@ import OrderItemService from "@/services/OrderItemService.js";
 import InvalidParameter from "@/components/NotFound/InvalidParameter.vue";
 import OrderDetails from "@/components/Order/OrderDetails.vue";
 import OrderItems from "@/components/Order/OrderItems.vue";
-import Footer from "@/components/Common/Footer.vue";
+import MyFooter from "@/components/Common/MyFooter.vue";
 export default {
   name: "Order",
   components: {
@@ -47,14 +47,14 @@ export default {
     InvalidParameter,
     OrderDetails,
     OrderItems,
-    Footer
+    MyFooter,
   },
   data() {
     return {
       orderInfo: {},
       orderItems: [],
       componentKey: 0,
-      validParam: true
+      validParam: true,
     };
   },
   async mounted() {
@@ -75,7 +75,7 @@ export default {
     }
   },
   computed: {},
-  methods: {}
+  methods: {},
 };
 </script>
 
