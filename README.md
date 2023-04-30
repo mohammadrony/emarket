@@ -109,16 +109,25 @@ To ensure that BootstrapVue runs smoothly and without any component issues, it i
 Please make sure to check and match the database configuration for user, password, and database information. You can find this configuration file at `server/src/config/config.js`.
 
 ### Feed Some Data to the Database for the Website
-To add some initial data to the database for the website, run the following command: `cd server && npm run seed`.
+To add some initial data to the database for the website, run the following command: 
+```
+cd server && npm run seed
+```
 
 ### Starting the Backend Server First
-Start the backend server first with the following command: `cd server && npm start`.
+Start the backend server first with the following command: 
+```
+cd server && npm start
+```
 
 ### Starting the Vue Application in Another Terminal
-To start the Vue application in another terminal window, run the following command: `cd shop && npm run serve`.
+To start the Vue application in another terminal window, run the following command: 
+```
+cd shop && npm run serve
+```
 
 ### Verify Your Application is Running
-Your application should be running locally on port 8080. Verify this by going to `http://localhost:8080` in your web browser.
+Your application should be running locally on port 8080. Verify this by going to http://localhost:8080 in your web browser.
 
 ### Have Any Problems or Suggestions?
 If you have any problems or suggestions, please feel free to open an issue. We will work on resolving it as soon as possible. Thank you for using our application.
