@@ -95,7 +95,7 @@ EMARKET_EMAIL=<your_email>
 EMARKET_PASSWORD=<your_app_password>
 ```
 
-For more information on generating app passwords, you can refer to this [Stack Overflow answer](https://stackoverflow.com/questions/45478293/username-and-password-not-accepted-when-using-nodemailer) and the required [steps to generate app passwords](https://www.getmailbird.com/gmail-app-password/) in a Google account. Additionally, you can also refer to the official Nodemailer package documentation on [using Gmail](https://nodemailer.com/usage/using-gmail/) to configure your Gmail account with Nodemailer.
+For more information on generating app passwords, you can refer to this [Stack Overflow answer](https://stackoverflow.com/questions/45478293/username-and-password-not-accepted-when-using-nodemailer) and the required [steps to generate app passwords](https://www.getmailbird.com/gmail-app-password/) in a Google account. Additionally, you can also refer to the official Nodemailer package documentation on [using Gmail](https://nodemailer.com/usage/using-gmail/) account.
 
 If you don't want to use a Gmail account to send emails, you can configure the transporter for sending email in the controller files located in `server/src/controllers/*`. Note that we do not publish the `.env` file to the public GitHub repository, as it contains secret information. You can check the `.gitignore` file located at the top of the directory to see what files are excluded from the repository. Here is what the `.env` file should look like in the `server` directory.
 

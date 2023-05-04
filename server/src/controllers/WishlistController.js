@@ -75,7 +75,6 @@ module.exports = {
   async deleteWishItemByProduct(req, res) {
     try {
       if (req.user && req.user.priority == 1) {
-        console.log("1");
         await Wishlist.destroy({
           where: {
             ProductId: req.params.productId,
@@ -88,7 +87,6 @@ module.exports = {
         });
       }
     } catch (err) {
-      console.log("3");
       res.status(500).send({
         error:
           "An error occured when trying to delete wishlist item by product.",
