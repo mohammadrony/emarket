@@ -16,7 +16,7 @@
             </b-button>
             <h3 class="mt-4">Payment Cancelled</h3>
             <h6>This payment can not be completed.</h6>
-            <b-card-footer class="mt-4"> emarket-bd.com </b-card-footer>
+            <b-card-footer class="mt-4"> emarket.website </b-card-footer>
           </b-card>
         </b-col>
       </b-row>

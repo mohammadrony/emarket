@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 const crypto = require("crypto")
 
-let emailFrom = `Emarket-BD <${process.env.EMARKET_EMAIL}>`
+let emailFrom = `Emarket <${process.env.EMARKET_EMAIL}>`
 
 function jwtSignUser(user) {
     const ONE_WEEK = 60 * 60 * 24 * 7
@@ -48,10 +48,10 @@ module.exports = {
                 to: req.body.email,
                 subject: "Email verification code to register",
                 text: 'Hi ' + user.firstName + ' ' + user.lastName + ',\n\n' +
-                    'Welcome to emarket-bd!\n\n' +
+                    'Welcome to emarket!\n\n' +
                     'Your email verification code is: ' + token + '\n\n' +
                     'Use this code to complete the registration process.\n\n' +
-                    'Enjoy using your emarket-bd account!\n'
+                    'Enjoy using your emarket account!\n'
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {
@@ -95,7 +95,7 @@ module.exports = {
                     from: emailFrom,
                     to: req.body.email,
                     subject: "Email verification code to login",
-                    text: 'hello ' + user.firstName + ' ' + user.lastName + ',\n\n' + 'Recently you\'ve requested to create an account on emarket-bd\n\n' +
+                    text: 'hello ' + user.firstName + ' ' + user.lastName + ',\n\n' + 'Recently you\'ve requested to create an account on emarket\n\n' +
                         'Please verify your email address first\n\n' +
                         'click on the following link, or paste it into your browser to complete this process\n\n' +
                         'http://' + 'localhost:8080' + '/user-verify/' + token + '\n\n' +
@@ -276,12 +276,12 @@ module.exports = {
                 var mailOptions = {
                     from: emailFrom,
                     to: req.body.email,
-                    subject: "Email Verification to register",
+                    subject: "Email Verification code to register",
                     text: 'Hi ' + user.firstName + ' ' + user.lastName + ',\n\n' +
-                        'Welcome to emarket-bd!\n\n' +
+                        'Welcome to emarket!\n\n' +
                         'Your email verification code is: ' + user.registerToken + '\n\n' +
                         'Use this code to complete the registration process.\n\n' +
-                        'Enjoy using you emarket-bd account!\n'
+                        'Enjoy using you emarket account!\n'
                 }
                 await transporter.sendMail(mailOptions, function (err) {
                     if (err) {
@@ -370,7 +370,7 @@ module.exports = {
                 to: req.body.email,
                 subject: "Password Update Acknowledgement",
                 text: 'Hello ' + req.body.name + '\n\n' +
-                    'We wanted to let you know that your emarket-bd password was reset.\n'
+                    'We wanted to let you know that your emarket password was reset.\n'
             }
             await transporter.sendMail(mailOptions, function (err) {
                 if (err) {
@@ -410,7 +410,7 @@ module.exports = {
                 to: req.body.email,
                 subject: "Email Address Verification Confirmed",
                 text: "Hello " + req.body.name + ",\n\n"
-                    + "Your email is now verified on emarket-bd.\n\n"
+                    + "Your email is now verified on emarket.\n\n"
                     + "Thank you.\n"
             }
             await transporter.sendMail(mailOptions, function (err) {

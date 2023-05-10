@@ -17,7 +17,7 @@ All features available to users without logging in and logged-in users are also 
 This project uses many good features of Vue.js(version 2). The web app features **state management with multiple modules** in the store directory. For the frontend, there's an authentication process with a reset password feature that includes email automation. By using Stripe's payment method, the web app can process different kinds of cards and currencies supported by Stripe. From the routing pages, you'll find detailed code about how to **restrict someone from visiting any route** and show a default page for an **unauthenticated request or any wrong URL** entered. There are also other features, including real-time updates without reloading the page, and more.
 
 #### Backend Description
-**RESTful APIs** and authentication management are the two most important parts of the backend. The **session middleware and JWT authentication** helped get data from the database securely. Most of the email automation is done in the backend. The payment session is generated, and **Sequelize ORM** is used to work with different types of databases. This project worked with the MySQL database here. **Media files are saved** and public URLs generated. Please refer to the repository for further information on these topics. I trust that you will find this project both useful and well-structured. If you still have any questions, create an issue or ask me anyway.
+**RESTful APIs** and authentication management are the two most important parts of the backend. The **session middleware and JWT authentication** helped get data from the database securely. Most of the **email automation** is done in the backend. The payment session is generated, and **Sequelize ORM** is used to work with different types of databases. This project worked with the MySQL database here. **Media files are saved** and public URLs generated. Please refer to the repository for further information on these topics. I trust that you will find this project both useful and well-structured. If you still have any questions, create an issue or ask me anyway.
 
 ### Topics included in the project
 #### Frontend
@@ -63,7 +63,12 @@ To configure MySQL server, use the following command:
 ```
 sudo apt-get install mysql-server
 ```
-You can follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04) to properly configure the MySQL database server. You can use the MySQL server password as `12345678`. If you use any other password, you need to change the password in the `server/src/config/config.js` file.
+To setup root user password
+```
+sudo mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
+```
+To properly configure the MySQL database server, you can refer to the tutorial available at [this link](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04). For the purpose of this project, make sure to set the MySQL server password as `12345678`. This will ensure consistency with the project requirements. However, if you decide to use a different password, you will need to update the password in the `server/src/config/config.js` file accordingly.
 
 To create a database called `mydb`, you can use the following command after logging into the MySQL shell as the root user:
 ```
@@ -100,6 +105,8 @@ For more information on generating app passwords, you can refer to this [Stack O
 If you don't want to use a Gmail account to send emails, you can configure the transporter for sending email in the controller files located in `server/src/controllers/*`. Note that we do not publish the `.env` file to the public GitHub repository, as it contains secret information. You can check the `.gitignore` file located at the top of the directory to see what files are excluded from the repository. Here is what the `.env` file should look like in the `server` directory.
 
 ```
+EMARKET_EMAIL=<your_email>
+EMARKET_PASSWORD=<your_app_password>
 STRIPE_SECRET_KEY=<your_stripe_secret_key>
 ```
 ### BootstrapVue Package Recommendation

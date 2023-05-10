@@ -3,14 +3,14 @@
     "id": 1,
     "name": "E Market BD",
     "icon": "",
-    "logo": "http://localhost:8084/public/company/emarket-bd/logo.png",
-    "code": "emarket-bd",
-    "email": "support@emarket-bd.com",
+    "logo": "http://localhost:8084/public/company/emarket/logo.png",
+    "code": "emarket",
+    "email": "support@emarket.com",
     "phoneNo": "+8801710000000",
-    "location": "29/A, greenroad<br/>Farmgate, Dhaka.<br/>",
+    "location": "45/A, New town<br/>Anywhere, Somewhere.<br/>",
     "header": "Find what you need here",
-    "motive": "emarket-bd is just a software project. It is developed to learn how to build a web application. I've included all these data from the internet from different kind of source. And this is not a real ecommerce site.",
-    "details": "Large text here. about the emarket-bd"
+    "motive": "emarket is just a software project. It is developed to learn how to build a web application. I've included all these data randomly from the internet from different source.",
+    "details": "Large text here. about the emarket"
   },
   {
     "id": 2,

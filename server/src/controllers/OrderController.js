@@ -1,7 +1,7 @@
 const { Order } = require('../models')
 const nodemailer = require('nodemailer')
 
-let emailFrom = `Emarket-BD <${process.env.EMARKET_EMAIL}>`
+let emailFrom = `Emarket <${process.env.EMARKET_EMAIL}>`
 
 module.exports = {
 	async getOrderList(req, res) {
@@ -62,7 +62,7 @@ module.exports = {
 					'Please follow the link to keep track on your order.\n\n' +
 					'http://' + 'localhost:8080' + '/order/' + order.checkoutSessionId + '\n\n' +
 					'Your session Id: ' + order.checkoutSessionId + '\n\n' +
-					'Thanks for using emarket-bd\n'
+					'Thanks for using emarket\n'
 			}
 			await transporter.sendMail(mailOptions, function (err) {
 				if (err) {

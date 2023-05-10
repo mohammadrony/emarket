@@ -17,7 +17,7 @@
             <h1 class="mt-4">You're all set!</h1>
             <h6>Thanks for your purchase!</h6>
             <h6>We'll deliver your order in few days.</h6>
-            <b-card-footer class="mt-4"> emarket-bd.com </b-card-footer>
+            <b-card-footer class="mt-4"> emarket.com </b-card-footer>
           </b-card>
         </b-col>
       </b-row>
