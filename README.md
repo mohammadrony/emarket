@@ -72,7 +72,7 @@ git clone https://github.com/mohammadrony/emarket.git
 
 ### Installing server dependencies
 
-To install server dependencies, navigate to the `server` directory using the following command:
+To install server dependencies, from `server` directory use this following command:
 
 ```bash
 cd server && npm install
@@ -80,10 +80,10 @@ cd server && npm install
 
 ### Installing shop dependencies
 
-To install shop dependencies, navigate to the `shop` directory using the following command:
+To install shop dependencies, from `shop` directory use this following command:
 
 ```bash
-cd ../shop && npm install
+cd shop && npm install
 ```
 
 ### Configuring MySQL Server
@@ -98,7 +98,7 @@ To setup root user password
 
 ```bash
 sudo mysql
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
+> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
 ```
 
 To properly configure the MySQL database server, you can refer to this [tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04). Using MySQL password as `12345678` will match the default configuration in `server/src/config/config.js` file.
