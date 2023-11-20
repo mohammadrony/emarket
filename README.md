@@ -8,15 +8,15 @@ This project is a complete web app with a frontend, backend, and database. It us
 
 #### For Users without Logging In
 
-This e-commerce system features three levels of **category system (category, sub-category, sub-sub-category)** and some products with different pieces of information in each category. You can also **search for products** with keywords and price ranges in a category. You can see other **customer reviews** for those products as well. Then, you can add as many **products to the cart and checkout**. To checkout with your product in your cart, you need to provide shipping information and some contact information. Then, you have to pay the bill with your card using the **Stripe checkout method**, and your order will be placed. A link will be sent to your email to monitor your order status with the contact information and the products you are buying. On the home screen, there is a promotion of products available for new and top selling products.
+This e-commerce system features **three levels of category system** (category, sub-category, sub-sub-category) and some products with different pieces of information in each category. You can also **search for products** with keywords and price ranges in a category. You can see other **customer reviews** for those products as well. Then, you can **add products to your cart and checkout**. To checkout with your product in your cart, you need to provide shipping information and some contact information. Then, you have to pay the bill with your card using the **Stripe checkout method**, and your order will be placed. A link will be sent to your email to **monitor your order status** with the contact information and the products you are buying. On the home screen, there is a **promotion of products** available for new and top selling products.
 
 #### For Users Logging In
 
-Including features from above. By logging in to the system or signing up, you can have a **wishlist to save products** in the database and find them later. You can also **add a review or rating to a product**. If you forget your password, you can reset it by **sending a verification code**. This web app also includes a **user profile**. You need to verify your email to create your account.
+Including features from above. By logging in to the system or signing up, you can use **wishlist to save products** for you and find them later. You can also **add a review and rating to any product**. You need to **verify your email** to create your account. If you forget your password, you can **reset password by sending a verification mail**. This web app also includes a **user profile with your activities**.
 
 #### For Admin Users
 
-Including features from above. As an admin, you have a custom way to **create or delete a product** from any category. You can also **create, edit, or delete a category**. You can also **delete any other customer's review** of a product. In the admin panel, you have a list of all registered users in your system, and you can **change their role** to give them admin access. You also have an **order list** with the user's contact information, shipping address, and product information.
+Including features from above. As an admin, you have a custom way to **create or delete a product** from any category. You can **create, edit, or delete any category** from the list. You can also **delete a users review** of any product. You can use the **admin panel**, with the list of all registered users in your system, and you can **change user role** in the application. You can also access the **order list** with the user's contact information, shipping address, and product information.
 
 ### Programming Overview
 
