@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project is a complete web app with a frontend, backend, and database. It uses the Vue.js framework for the frontend, the Express.js framework for the backend on a Node.js app, and a MySQL database. You can start setting up this project from [this link](https://github.com/mohammadrony/emarket#project-setup).
+This project is a complete web app with a frontend, backend, and database. It uses the Vue.js framework for the frontend, the Express.js framework for the backend on a Node.js app, and a MySQL database. You can start setting up this project from [here](https://github.com/mohammadrony/emarket#project-setup).
 
 ### Project UI Overview
 
@@ -64,46 +64,28 @@ This project uses many good features of Vue.js(version 2). The web app features 
 
 ### Cloning the repository
 
-To clone this repository, use the following command:
-
 ```bash
 git clone https://github.com/mohammadrony/emarket.git
 ```
 
-### Installing server dependencies
-
-To install server dependencies, from `server` directory use this following command:
-
-```bash
-cd server && npm install
-```
-
-### Installing shop dependencies
-
-To install shop dependencies, from `shop` directory use this following command:
-
-```bash
-cd shop && npm install
-```
-
 ### Configuring MySQL Server
 
-To configure MySQL server, use the following command:
+Install MySQL package
 
 ```bash
 sudo apt install -y mysql-server
 ```
 
-To setup root user password
+Setup root user password
 
 ```bash
 sudo mysql
 > ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
 ```
 
-To properly configure the MySQL database server, you can refer to this [tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04). Using MySQL password as `12345678` will match the default configuration in `server/src/config/config.js` file.
+To configure the MySQL database server, refer to [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04). And if you use any other credentials for MySQL, please update them in the `server/src/config/config.js` file.
 
-To create a database called `mydb`, you can use the following command after logging into the MySQL shell as the root user:
+Create a database called `mydb` by logging in to the MySQL shell:
 
 ```bash
 mysql -u root -p
@@ -115,31 +97,34 @@ mysql -u root -p
 
 #### Stripe Payment Integration
 
-To set up payment integration with Stripe, you need to follow these steps:
+Set up payment integration with Stripe:
 
 1. Rename the `.env.template` file in the `server` directory to `.env`.
-2. Create a Stripe account (if you haven't already).
-3. Find your Stripe secret key for the `server/.env` file on your [Stripe account dashboard](https://dashboard.stripe.com/test/apikeys).
-4. Update the Stripe publishable key in `shop/src/components/Checkout/BuyItem.vue` with the publishable key from your Stripe account.
 
-#### Email Automation Integration
+2. Find your Stripe secret key for the `server/.env` file on your [Stripe account dashboard](https://dashboard.stripe.com/test/apikeys).
 
-To send emails from a Google account using a program, you need to follow these steps:
+3. Update the Stripe publishable key in `shop/src/components/Checkout/BuyItem.vue` with the publishable key from your Stripe account.
+
+#### Email Automation
+
+Send emails from a Gmail account:
 
 1. Enable [2-step verification](https://myaccount.google.com/signinoptions/two-step-verification) for your account.
+
 2. Generate an [app password](https://myaccount.google.com/apppasswords) (a 16-digit password) for your account.
+
 3. Use this app password in the `.env` file located in the `server` directory as follows:
 
-```env
-EMARKET_EMAIL=<your_email>
-EMARKET_PASSWORD=<your_app_password>
-```
+   ```env
+   EMARKET_EMAIL=<your_email>
+   EMARKET_PASSWORD=<your_app_password>
+   ```
 
-For more detailed information on generating app passwords, you can refer to this [Stack Overflow answer](https://stackoverflow.com/questions/45478293/username-and-password-not-accepted-when-using-nodemailer) and the [steps to generate app passwords](https://www.getmailbird.com/gmail-app-password/) in a Google account.
+For more detailed information on generating app passwords, you can refer to this [Stack Overflow answer](https://stackoverflow.com/questions/45478293/username-and-password-not-accepted-when-using-nodemailer) and the [steps to generate app passwords](https://www.getmailbird.com/gmail-app-password/) in Google account.
 
-If you don't want to use a Gmail account to send emails, you can configure the transporter for sending email in the controller files located in `server/src/controllers/*`.
+If you want to use other account to send emails than Gmail, you need to configure the transporter in the controller files in `server/src/controllers/` directory.
 
-Here is what the `.env` file should look like in the `server` directory.
+This is a template of `.env` file in the `server` directory.
 
 ```env
 EMARKET_EMAIL=<your_email>
@@ -149,15 +134,31 @@ STRIPE_SECRET_KEY=<your_stripe_secret_key>
 
 ### BootstrapVue Package Recommendation
 
-To ensure that BootstrapVue runs smoothly and without any component issues, it is recommended to use the `vue@2.6.12` and `bootstrap@4.6.1` versions of the packages mentioned by [BootstrapVue](https://bootstrap-vue.org/docs).
+To ensure that BootstrapVue runs properly without any component issues, it is recommended to use the `vue@2.6.12` and `bootstrap@4.6.1` versions of the packages mentioned by [BootstrapVue](https://bootstrap-vue.org/docs).
 
-### Check Database Configuration for the application
+### Check Database Configuration
 
-Please make sure to check and match the database configuration for user, password, and database information. You can find this configuration file at `server/src/config/config.js`.
+Please make sure to check again to match the database configuration for user, password, and database information at `server/src/config/config.js` file.
 
-### Feed Some Data to the Database for the Website
+### Installing server dependencies
 
-To add some initial data to the database for the website, run the following command:
+Install server dependencies from `server` directory:
+
+```bash
+cd server && npm install
+```
+
+### Installing shop dependencies
+
+Install shop dependencies from `shop` directory:
+
+```bash
+cd shop && npm install
+```
+
+### Upload some data to the Database for the Website
+
+To have some initial data for the website, run the following command:
 
 ```bash
 cd server && npm run seed
@@ -165,15 +166,15 @@ cd server && npm run seed
 
 ### Starting the Backend Server First
 
-Start the backend server first with the following command:
+To start the backend server run the following command:
 
 ```bash
 cd server && npm start
 ```
 
-### Starting the Vue Application in Another Terminal
+### Starting the Vue Application
 
-To start the Vue application in another terminal window, run the following command:
+To start the Vue application run the following command:
 
 ```bash
 cd shop && npm run serve
@@ -181,6 +182,6 @@ cd shop && npm run serve
 
 ### Verify Your Application is Running
 
-Your application should be running locally on port 8080. Verify this by going to <http://localhost:8080> in your web browser.
+Your application should be running on <http://localhost:8080> and your private network.
 
 Thank you.
