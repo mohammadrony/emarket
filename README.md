@@ -83,7 +83,7 @@ sudo mysql
 > ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
 ```
 
-To configure the MySQL database server, refer to [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04). And if you use any other credentials for MySQL, please update them in the `server/src/config/config.js` file.
+You can follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04) to configure the MySQL server in Ubuntu. Also, consider updating `server/src/config/config.js` file if you use any other credentials for MySQL user.
 
 Create a database called `mydb` by logging in to the MySQL shell:
 
