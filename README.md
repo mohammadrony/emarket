@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project is a complete web app with a frontend, backend, and database. It uses the Vue.js framework for the frontend, the Express.js framework for the backend on a Node.js app, and a MySQL database. You can start setting up this project from [here](https://github.com/mohammadrony/emarket#project-setup).
+This is a e-commerce web application with a frontend, backend, and database. It uses the Vue.js framework for the frontend, the Express.js framework for the backend with Node.js, and a MySQL database. Instructions for the project setup are [here](https://github.com/mohammadrony/emarket#project-setup).
 
 ### Project UI Overview
 
@@ -68,7 +68,7 @@ This project uses many good features of Vue.js(version 2). The web app features 
 git clone https://github.com/mohammadrony/emarket.git
 ```
 
-### Configuring MySQL Server
+### Configuring MySQL server
 
 Install MySQL package
 
@@ -83,9 +83,9 @@ sudo mysql
 > ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
 ```
 
-You can follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04) to configure the MySQL server in Ubuntu. Also, consider updating `server/src/config/config.js` file if you use any other credentials for MySQL user.
+You can follow [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04) to configure the MySQL server in Ubuntu.
 
-Create a database called `mydb` by logging in to the MySQL shell:
+Create a new MySQL database
 
 ```bash
 mysql -u root -p
@@ -93,56 +93,54 @@ mysql -u root -p
 > exit
 ```
 
-### Setting Up Environment Variables
+### Setting up environment variables
 
-#### Stripe Payment Integration
-
-Set up payment integration with Stripe:
+#### Stripe payment Integration
 
 1. Rename the `.env.template` file in the `server` directory to `.env`.
 
 2. Find your Stripe secret key for the `server/.env` file on your [Stripe account dashboard](https://dashboard.stripe.com/test/apikeys).
 
-3. Update the Stripe publishable key in `shop/src/components/Checkout/BuyItem.vue` with the publishable key from your Stripe account.
-
-#### Email Automation
-
-Send emails from a Gmail account:
-
-1. Enable [2-step verification](https://myaccount.google.com/signinoptions/two-step-verification) for your account.
-
-2. Generate an [app password](https://myaccount.google.com/apppasswords) (a 16-digit password) for your account.
-
-3. Use this app password in the `.env` file located in the `server` directory as follows:
-
    ```env
-   EMARKET_EMAIL=<your_email>
-   EMARKET_PASSWORD=<your_app_password>
+   STRIPE_SECRET_KEY=<stripe_secret_key>
    ```
 
-For more detailed information on generating app passwords, you can refer to this [Stack Overflow answer](https://stackoverflow.com/questions/45478293/username-and-password-not-accepted-when-using-nodemailer) and the [steps to generate app passwords](https://www.getmailbird.com/gmail-app-password/) in Google account.
+3. Update the Stripe publishable key in `shop/src/components/Checkout/BuyItem.vue` from your Stripe account.
 
-If you want to use other account to send emails than Gmail, you need to configure the transporter in the controller files in `server/src/controllers/` directory.
+   ```env
+   const stripeInit = loadStripe(<stripe_publishable_key>);
+   ```
 
-This is a template of `.env` file in the `server` directory.
+#### Email automation
 
-```env
-EMARKET_EMAIL=<your_email>
-EMARKET_PASSWORD=<your_app_password>
-STRIPE_SECRET_KEY=<your_stripe_secret_key>
-```
+Sending emails from a gmail account
 
-### BootstrapVue Package Recommendation
+1. Enable [2-step verification](https://myaccount.google.com/signinoptions/two-step-verification) for your Google account.
+
+2. Generate an [app password](https://myaccount.google.com/apppasswords) (16-digit password) for your account.
+
+3. Use this app password in the `.env` file in the `server` directory in the following format:
+
+   ```env
+   EMARKET_EMAIL=<email_address>
+   EMARKET_PASSWORD=<app_password>
+   ```
+
+For more detailed information on generating app passwords, refer to this [Stack Overflow answer](https://stackoverflow.com/questions/45478293/username-and-password-not-accepted-when-using-nodemailer) and these [steps to generate app passwords](https://www.getmailbird.com/gmail-app-password/) in Google account.
+
+*If you use some other mail provider to send email, you will need to update the transporter configuration in `server/src/controllers/` files.*
+
+### BootstrapVue package recommendation
 
 To ensure that BootstrapVue runs properly without any component issues, it is recommended to use the `vue@2.6.12` and `bootstrap@4.6.1` versions of the packages mentioned by [BootstrapVue](https://bootstrap-vue.org/docs).
 
-### Check Database Configuration
+### Re-check database configuration
 
-Please make sure to check again to match the database configuration for user, password, and database information at `server/src/config/config.js` file.
+Please make sure to check and match the database configuration for user, password, and database information in `server/src/config/config.js` file.
 
 ### Installing server dependencies
 
-Install server dependencies from `server` directory:
+Install server dependencies from `server` directory
 
 ```bash
 cd server && npm install
@@ -150,37 +148,33 @@ cd server && npm install
 
 ### Installing shop dependencies
 
-Install shop dependencies from `shop` directory:
+Install shop dependencies from `shop` directory
 
 ```bash
 cd shop && npm install
 ```
 
-### Upload some data to the Database for the Website
+### Upload some data for the website
 
-To have some initial data for the website, run the following command:
+Populate the database with some dummy data
 
 ```bash
 cd server && npm run seed
 ```
 
-### Starting the Backend Server First
-
-To start the backend server run the following command:
+### Start backend server
 
 ```bash
 cd server && npm start
 ```
 
-### Starting the Vue Application
-
-To start the Vue application run the following command:
+### Start frontend application
 
 ```bash
 cd shop && npm run serve
 ```
 
-### Verify Your Application is Running
+### Browse the application
 
 Your application should be running on <http://localhost:8080> and your private network.
 
