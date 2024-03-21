@@ -3,7 +3,7 @@
     "id": 1,
     "name": "E Market BD",
     "icon": "",
-    "logo": "http://localhost:8084/public/company/emarket/logo.png",
+    "logo": "http://localhost:8081/public/company/emarket/logo.png",
     "code": "emarket",
     "email": "support@emarket.com",
     "phoneNo": "+8801710000000",

@@ -150,30 +150,30 @@ module.exports = {
   async createProduct(req, res) {
     try {
       if (req.files != undefined) {
-        req.body.image1 = "http://localhost:8084/" + req.files[0].path;
+        req.body.image1 = "http://localhost:8081/" + req.files[0].path;
         if (req.files[1] != undefined) {
-          req.body.image2 = "http://localhost:8084/" + req.files[1].path;
+          req.body.image2 = "http://localhost:8081/" + req.files[1].path;
           if (req.files[2] != undefined) {
-            req.body.image3 = "http://localhost:8084/" + req.files[2].path;
+            req.body.image3 = "http://localhost:8081/" + req.files[2].path;
             if (req.files[3] != undefined) {
-              req.body.image4 = "http://localhost:8084/" + req.files[3].path;
+              req.body.image4 = "http://localhost:8081/" + req.files[3].path;
               if (req.files[4] != undefined) {
-                req.body.image5 = "http://localhost:8084/" + req.files[4].path;
+                req.body.image5 = "http://localhost:8081/" + req.files[4].path;
                 if (req.files[5] != undefined) {
                   req.body.image6 =
-                    "http://localhost:8084/" + req.files[5].path;
+                    "http://localhost:8081/" + req.files[5].path;
                   if (req.files[6] != undefined) {
                     req.body.image7 =
-                      "http://localhost:8084/" + req.files[6].path;
+                      "http://localhost:8081/" + req.files[6].path;
                     if (req.files[7] != undefined) {
                       req.body.image8 =
-                        "http://localhost:8084/" + req.files[7].path;
+                        "http://localhost:8081/" + req.files[7].path;
                       if (req.files[8] != undefined) {
                         req.body.image9 =
-                          "http://localhost:8084/" + req.files[8].path;
+                          "http://localhost:8081/" + req.files[8].path;
                         if (req.files[9] != undefined) {
                           req.body.image10 =
-                            "http://localhost:8084/" + req.files[9].path;
+                            "http://localhost:8081/" + req.files[9].path;
                         }
                       }
                     }

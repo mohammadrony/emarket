@@ -9,7 +9,7 @@
               <b-card>
                 <b-img
                   height="125"
-                  src="http://localhost:8084/public/display-icons/fast-delivery-icon.png"
+                  src="http://localhost:8081/public/display-icons/fast-delivery-icon.png"
                 />
                 <br />
                 <h5 class="mt-1">
@@ -24,7 +24,7 @@
               <b-card>
                 <b-img
                   height="125"
-                  src="http://localhost:8084/public/display-icons/card-payment-icon.png"
+                  src="http://localhost:8081/public/display-icons/card-payment-icon.png"
                 />
                 <br />
                 <h5 class="mt-1">
@@ -39,7 +39,7 @@
               <b-card>
                 <b-img
                   height="125"
-                  src="http://localhost:8084/public/display-icons/online-support-icon.png"
+                  src="http://localhost:8081/public/display-icons/online-support-icon.png"
                 />
                 <br />
                 <h5 class="mt-1">
