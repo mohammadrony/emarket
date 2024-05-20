@@ -2,13 +2,13 @@
 
 ## Project Overview
 
-This is an e-commerce web application with a frontend, backend, and database. It uses the Vue.js framework for the frontend, the Express.js framework for the backend with Node.js, and a MySQL database. Instructions for the project setup are [here](https://github.com/mohammadrony/emarket#project-setup).
+This is an e-commerce web application with a frontend, backend, and database. It uses Vue.js framework for frontend, Express.js framework for the backend with Node.js, and MySQL database. Instructions for the project setup are [here](https://github.com/mohammadrony/emarket#project-setup).
 
 ### Project UI Overview
 
 #### For Users without Logging In
 
-This e-commerce system features **three levels of category system** (category, sub-category, sub-sub-category) and some products with different pieces of information in each category. You can also **search for products** with keywords and price ranges in a category. You can see other **customer reviews** for those products as well. Then, you can **add products to your cart and checkout**. To checkout with your product in your cart, you need to provide shipping information and some contact information. Then, you have to pay the bill with your card using the **Stripe checkout method**, and your order will be placed. A link will be sent to your email to **monitor your order status** with the contact information and the products you are buying. On the home screen, there is a **promotion of products** available for new and top selling products.
+This e-commerce system features **three levels of category system** (category, sub-category, sub-sub-category) and some products with necessary information in each category. You can also **search for products** with keywords and price ranges in a category. You can see other **customer reviews** for those products as well. Then, you can **add products to your cart and checkout**. To checkout with your product in your cart, you need to provide shipping information and some contact information. Then, you have to pay the bill with your card using the **Stripe checkout method**, and your order will be placed. A link will be sent to your email to **monitor your order status** with the contact information and the products you are buying. On the home screen, there is a **promotion of products** available for new and top selling products.
 
 #### For Users Logging In
 
@@ -22,7 +22,7 @@ Including features from above. As an admin, you have a custom way to **create or
 
 #### Frontend Description
 
-This project uses many good features of Vue.js(version 2). The web app features **state management with multiple modules** in the store directory. For the frontend, there's an authentication process with a **reset password** feature that includes email automation. By using **Stripe's payment method**, the web app can process different kinds of cards and currencies supported by Stripe. From the routing pages, you'll find detailed code about how to **restrict someone visiting a route** and show a default page for an **unauthenticated request or any wrong URL** entered. There are also other features, including real-time updates without reloading the page, and more.
+This project is implemented in Vue.js(version 2). The web app features **state management with multiple modules** in the store directory. For the frontend, there's an authentication process with a **reset password** feature that includes email automation. By using **Stripe's payment method**, the web app can process different kinds of cards and currencies supported by Stripe. From the routing pages, you'll find detailed code about how to **restrict someone visiting a route** and show a default page for an **unauthenticated request or any wrong URL** entered. There are also other features, including real-time updates without reloading the page, and more.
 
 #### Backend Description
 
