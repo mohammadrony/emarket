@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is an e-commerce web application with a frontend, backend, and database. It uses Vue.js framework for frontend, Express.js framework for the backend with Node.js, and MySQL database. Instructions for the project setup are [here](https://github.com/mohammadrony/emarket#project-setup).
+This is an e-commerce web application with a frontend, backend, and database. It uses Vue.js framework for frontend, Express.js framework for the backend with Node.js, and MySQL database. Here is the instructions for [project setup](#project-setup).
 
 ### Project UI Overview
 

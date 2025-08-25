@@ -1,4 +1,3 @@
-shop/node_modules/
-shop/dist
-server/node_modules/
-server/.env
+node_modules/
+dist
+.env
