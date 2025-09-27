@@ -177,5 +177,3 @@ cd shop && npm run serve
 ### Browse the application
 
 Your application should be running on <http://localhost:8080> and your private network.
-
-Thank you.

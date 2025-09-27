@@ -3,7 +3,8 @@ const Sequelize = require("sequelize");
 
 const sequelize = new Sequelize(config.db.database, config.db.user, config.db.password, {
   dialect:  config.db.dialect,
-  host:     config.db.host
+  host:     config.db.host,
+  port:     config.db.port
 })
 
 const db = {}
