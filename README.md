@@ -140,18 +140,30 @@ Please make sure to check and match the database configuration for user, passwor
 
 ### Installing server dependencies
 
+Set node version
+
+```bash
+cd shop && nvm use
+```
+
 Install server dependencies from `server` directory
 
 ```bash
-cd server && npm install
+npm install
 ```
 
 ### Installing shop dependencies
 
+Set node version
+
+```bash
+cd shop && nvm use
+```
+
 Install shop dependencies from `shop` directory
 
 ```bash
-cd shop && npm install
+npm install
 ```
 
 ### Upload some data for the website
