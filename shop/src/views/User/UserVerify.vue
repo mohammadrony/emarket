@@ -110,7 +110,7 @@ export default {
       try {
         user = (
           await AuthenticationService.verifyRegsToken({
-            userId: this.userId,
+            id: this.userId,
             registerToken: this.registerToken,
           })
         ).data;

@@ -146,6 +146,7 @@ export default {
           email: this.email,
           name: this.name,
           password: this.newPassword,
+          resetToken: this.$route.params.token,
         });
       } catch (error) {
         console.log(error.response.data.error);

@@ -7,8 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement:  true
     },
     name: {
-      type:           DataTypes.STRING,
-      unique:         true
+      type:           DataTypes.STRING
     }
   })
   return Category

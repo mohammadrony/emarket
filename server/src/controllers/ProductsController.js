@@ -113,8 +113,16 @@ module.exports = {
   async getProduct(req, res) {
     try {
       const product = await Product.findByPk(req.params.productId);
-      res.send(product);
+      
+      if (!product) {
+        return res.status(404).send({
+          error: "Product not found.",
+        });
+      }
+
+      res.status(200).send(product);
     } catch (err) {
+      console.error(err)
       res.status(500).send({
         error: "An error occured when trying to fetch a product.",
       });
@@ -149,6 +157,14 @@ module.exports = {
   },
   async createProduct(req, res) {
     try {
+      // Validate required fields
+      const requiredFields = ['title', 'amount', 'currency', 'CategoryId', 'SubCategoryId', 'SubSubCategoryId'];
+      for (const field of requiredFields) {
+        if (!req.body[field]) {
+          return res.status(403).send({ error: `Missing required field: ${field}` });
+        }
+      }
+      // Handle file uploads
       if (req.files != undefined) {
         req.body.image1 = "http://localhost:8081/" + req.files[0].path;
         if (req.files[1] != undefined) {
@@ -188,7 +204,7 @@ module.exports = {
       const product = await Product.create(req.body);
       res.send({ id: product.id });
     } catch (err) {
-      res.status(500).send({
+      res.status(403).send({
         error: "An error occured when trying to create a product.",
       });
     }

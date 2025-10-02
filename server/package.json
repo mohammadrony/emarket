@@ -6,7 +6,10 @@
   "scripts": {
     "start": "nodemon src/app.js --exec  \"npm run lint && node\"",
     "lint": "eslint src/**/*.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    
+    "test": "DB_NAME=emarket_test NODE_ENV=test jest --runInBand",
+    "test:watch": "DB_NAME=emarket_test NODE_ENV=test jest --runInBand --watch",
+    "test:coverage": "DB_NAME=emarket_test NODE_ENV=test jest --runInBand --coverage",
     "seed": "node ./seed"
   },
   "author": "",
@@ -32,6 +35,9 @@
   "devDependencies": {
     "dotenv": "^16.0.3",
     "eslint": "^8.39.0",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3",
+    "@types/jest": "^29.5.0"
   }
 }

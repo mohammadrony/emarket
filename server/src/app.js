@@ -16,7 +16,21 @@ app.use('/public', express.static('public'));
 
 require('./passport')
 require("./routes")(app)
-sequelize.sync({ force: false })
-	.then(() => {
-		app.listen(config.port, () => console.log(`Express server running on port ${config.port}`));
-	})
+
+// Catch all for 404
+app.use((req, res, next) => {
+  res.status(404).send({ error: 'Not found' });
+});
+
+// In test environment, export the app without starting the server
+if (process.env.NODE_ENV !== 'test') {
+  sequelize.authenticate()
+    .then(() => {
+      app.listen(config.port, () => console.log(`Express server running on port ${config.port}`));
+    })
+    .catch(err => {
+      console.error('Unable to connect to the database:', err);
+    });
+}
+
+module.exports = app
